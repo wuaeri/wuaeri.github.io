@@ -1,0 +1,45 @@
+# 定时抓热点区的讯息，写回 hotspot/<topic>.json 并提交。
+#
+# 为什么要在服务器端抓：浏览器里直接抓 RSS 会被 CORS 挡死。
+# 抓一次、写成同源的 JSON，页面只读自己站上的文件 ——
+# 这是静态站做"实时"的唯一正路。
+#
+# ⚠️ 提交这一步是必须的：Action 跑完不提交，下次跑还是从零开始，
+#    页面上的"更新于"也永远不动。
+
+name: hotspot
+
+on:
+  schedule:
+    # 每两小时一次。**避开整点** —— 整点是全世界的默认值，
+    # 挤在一起排队反而更慢，错开几分钟对我们没有任何代价。
+    - cron: '7 */2 * * *'
+  workflow_dispatch:          # 也能手动点一下跑
+
+permissions:
+  contents: write             # 提交需要写权限
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 只用标准库，没有 pip install 这一步。
+      # 抓不到源不算失败 —— 脚本会把每个源的状态如实写进 JSON，
+      # **页面要看得见"哪个源挂了"，而不是静默显示"暂无讯息"。**
+      - name: 抓取
+        run: python3 scripts/fetch_hotspot.py
+
+      - name: 提交
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hotspot/*.json
+          # 没变化就不提交（`git diff --cached --quiet` 返回 0 表示无差异）
+          git diff --cached --quiet || git commit -m "热点区：自动更新 $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

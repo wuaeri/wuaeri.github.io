@@ -144,7 +144,7 @@ export function createHeadHero(container, opts = {}) {
   controls.dampingFactor = 0.07;
   controls.enableZoom = false;
   controls.enablePan = false;
-  controls.autoRotate = T.auto;
+  controls.autoRotate = false;   // 姿态改由模型自己走（setPose），相机不动 —— 节奏要精确控制就得自己拿着时间轴
   controls.autoRotateSpeed = 0.55;
   controls.enabled = opts.draggable !== false;
 
@@ -163,7 +163,8 @@ export function createHeadHero(container, opts = {}) {
     uTurns:    { value: 0.42 },
     uUp:       { value: 0.95 },
     uTime:     { value: 0 },
-    uHolo:     { value: T.holo }
+    uHolo:     { value: T.holo },
+    uShear:    { value: 0 }   // 层间绕竖直轴的错开（只在转动时不为 0）
   };
 
   const group = new THREE.Group();
@@ -203,7 +204,7 @@ export function createHeadHero(container, opts = {}) {
         Object.assign(sh.uniforms, G, u);
         sh.vertexShader = sh.vertexShader
           .replace('#include <common>', `#include <common>
-            uniform float uShell, uProgress, uGap, uSpread, uUp, uTurns, uTime, uPhase;
+            uniform float uShell, uProgress, uGap, uSpread, uUp, uTurns, uTime, uPhase, uShear;
             uniform vec3  uMin, uMax, uCenter;
             varying float vUp; varying vec3 vN, vV;`)
           .replace('#include <begin_vertex>', `#include <begin_vertex>
@@ -225,6 +226,16 @@ export function createHeadHero(container, opts = {}) {
               float rise = (uShell - 0.5) * 2.0;
               vec3 dir = normalize(vec3(cos(ang), rise * uUp, sin(ang)));
               P += dir * uSpread * uProgress * (0.35 + uShell * 0.65);
+
+              /* 层间错位：每层绕**模型自身的竖直轴**（局部 Z）多转一点点。
+                 静止时 uShear 是 0，六层严格重合、看不出有层；
+                 一转起来才拉开几度，层与层的边缘错开，
+                 出现一圈彩色的位移 —— 全息质感就是从这儿来的。
+                 这就是 anime.js 那个 stagger 的用法：
+                 **差别不在幅度，在相位**。 */
+              float sh = uShell * uShear;
+              float cs = cos(sh), sn = sin(sh);
+              P.xy = vec2(P.x * cs - P.y * sn, P.x * sn + P.y * cs);
 
               transformed = P;
             }`)
@@ -267,7 +278,84 @@ export function createHeadHero(container, opts = {}) {
     }
   }
 
-  const ORIENTS_ROT = [Math.PI / 2, 0, 0];   // 量出来的：绕 X 转 +90° = 正立朝前
+  /* ═══ 朝向 + 节奏 ═══
+     朝向：绕 X 转 +90°（量出来的：模型头朝 -Z、脸朝 +Y）。
+
+     节奏：做法直接抄 anime.js 首屏那段 bob ——
+         y:[{to:'+=.03', ease:'inQuad',  duration:500},
+            {to:'-=.03', ease:'outQuad', duration:1000}]
+       上去 500ms、下来 1000ms：**两段不等长、缓动也不同**。
+       不对称才是节奏；等长等缓动的往复只是机械摆动。
+
+       所以转头做成三段：
+         去程 → 快（占周期 30%）
+         顶端 → 定住一拍（6%）
+         回程 → 慢（剩下 64%）
+       "停一拍"是额外的：没有它，转头只是来回晃；有了它才像"看过去、
+       停一下、再收回来"。
+
+       再叠一层不同周期的呼吸浮动（7.5s 转头 / 5.3s 上下），
+       两个周期互质 —— 永远不同步，看久了也找不到循环的接缝。 */
+  const QX = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
+  const QZ = new THREE.Quaternion();
+  const QP = new THREE.Quaternion();
+  const QC = new THREE.Quaternion();
+  const AXIS_X = new THREE.Vector3(1, 0, 0);
+  const AXIS_Z = new THREE.Vector3(0, 0, 1);
+
+  /* 摆姿势 = 俯仰 × 转头，都用四元数合成而不是写 Euler：
+     要的是"先在模型空间里抬/转，再摆正到世界"，Euler 的默认顺序给不了这个。
+     乘法从右往左作用到顶点上，所以顺序是：先 pitch，再 spin，最后摆正。 */
+  function setPose(spin, pitch) {
+    QZ.setFromAxisAngle(AXIS_Z, spin);
+    QP.setFromAxisAngle(AXIS_X, pitch);
+    QC.copy(QX).multiply(QZ).multiply(QP);
+    group.quaternion.copy(QC);
+    // 居中跟着一起算：世界 = R·v + pos，要让它等于 R·(v − c)，所以 pos = −(R·c)
+    group.position.copy(modelCenter).applyQuaternion(QC).negate();
+  }
+
+  /* ── 转头：每一轮的参数都重新抽一次 ──
+     固定周期是最容易被看穿的 —— 两轮之后脑子就抓住节奏了，
+     剩下的只是"在循环"。一旦看出循环，再顺的动作也变成机械。
+     这就是"算不上动画"的来源。
+
+     anime.js 那页给形状用的是
+         rotate: random(-180,180), duration: random(500,1000)
+     —— **每一轮重新抽参数**。照抄这个。
+
+     用确定性伪随机（hash）而不是 Math.random()：
+     同一时刻永远得到同一组参数，画面可复现 ——
+     回头要按某一帧截图对参数的时候不会错位。 */
+  const easeInOutQuad = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+  const hash = (n) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  const pick = (i, k, a, b) => a + (b - a) * hash(i * 7.13 + k * 3.71);
+
+  function cycleParams(i) {
+    return {
+      period: pick(i, 1, 5.0, 11.5),        // 每轮长短不一
+      amp:    pick(i, 2, 0.55, 1.30),       // 幅度约 32°~75°
+      go:     pick(i, 3, 0.20, 0.44),       // 去程占整轮的比例
+      hold:   pick(i, 4, 0.02, 0.16),       // 顶端停多久
+      dir:    pick(i, 5, 0, 1) < 0.5 ? -1 : 1   // 往左转还是往右转
+    };
+  }
+
+  let seg = cycleParams(0), segStart = 0, segIdx = 0;
+  function turnAt(t) {
+    while (t >= segStart + seg.period) { segStart += seg.period; seg = cycleParams(++segIdx); }
+    const p = (t - segStart) / seg.period;
+    const GO = seg.go, HOLD = seg.hold;
+    let v;
+    if (p < GO)             v = easeInOutQuad(p / GO);
+    else if (p < GO + HOLD) v = 1;
+    else                    v = 1 - easeInOutQuad((p - GO - HOLD) / (1 - GO - HOLD));
+    return v * seg.amp * seg.dir;   // 每轮结尾都回到 0，所以接得上下一次
+  }
+
+  /* 呼吸用两个**不可通约**的频率叠（0.83 / 1.31，比值接近黄金比）——
+     永远不重合，所以也读不出周期。固定周期的问题跟转头是同一个。 */
+  const bobAt = (t) => (Math.sin(t * 0.83) * 0.6 + Math.sin(t * 1.31) * 0.4) * 0.011;
 
   new GLTFLoader().load(modelURL, (gltf) => {
     if (dead) return;
@@ -286,9 +374,7 @@ export function createHeadHero(container, opts = {}) {
     G.uSpread.value = maxDim * 0.52;
     G.uCenter.value.copy(modelCenter);
 
-    group.rotation.set(ORIENTS_ROT[0], ORIENTS_ROT[1], ORIENTS_ROT[2]);
-    // 居中必须在**旋转之后**算：three 的矩阵是 T·R·S，旋转先做。
-    group.position.copy(modelCenter).applyEuler(group.rotation).negate();
+    setPose(0, 0);
 
     rebuild(T.layers);
     modelR = maxDim * 0.5;
@@ -328,6 +414,34 @@ export function createHeadHero(container, opts = {}) {
     if (dead) return;
     requestAnimationFrame(tick);
     G.uTime.value = performance.now() * 0.001;
+    const t = G.uTime.value;
+
+    /* ── 节奏（全部由这一个时间轴推出来，不另开计时器）──
+       转头幅度约 54°，叠在每 19 秒一圈的慢漂上 ——
+       慢漂保证"它一直在动"，转头保证"它有时候动得明显"。
+       两者叠加才是活的；只有前一个是转盘，只有后一个是点头。 */
+    /* ═══ 俯仰：跟着滚动走 ═══
+       光有水平转头，角度是死的 —— 从任何滚动位置看都是同一个"平视"。
+       这里让头随着向下滚**微微上仰**（满程约 11°），滚回去自己抬回来。
+       注意它绑的是**滚动位置**（cur），不是另开一条时间轴 ——
+       所以它是"你滚到哪、它抬到哪"，不是一个自己播的动画。
+
+       符号：模型自身的上是 -Z、脸是 +Y。绕 +X 正转会把 +Y 推向 +Z
+       （模型自己的"下"），所以**要上仰得用负角**。 */
+    setPose(t * 0.055 + turnAt(t), -cur * 0.19);
+    group.position.y += bobAt(t);
+
+    /* ═══ 层间错位：试过，撤了 ═══
+       本想"静止时六层严丝合缝、转起来才错开几度出彩边"，
+       但**头不是旋转对称的** —— 两层相对转哪怕 2.8°，
+       脸颊、耳朵、头发这些地方就会互相捅穿，
+       出来的是大片金色从蓝色里冒出来，不是干净的彩边。
+       这跟 gap 是同一个坑的另一种形式：**任何层间的相对位移，
+       在非旋转对称的形体上都会变成插穿。**
+       嘉豪用 gap=0 把这个问题从参数上关掉了，这里别再打开。
+       （着色器里的 uShear 留着但恒为 0，真要试把下面这行放回来。）
+       G.uShear.value = Math.min(1, Math.abs(turnCurve(t + 1 / 60) - tc) * 60) * 0.055;
+       ─────────────────────────────────────────────────────────── */
 
     // 进度从外面读，内部平滑 —— 外部给的是"位置"，不是"事件"
     const raw = Math.max(0, Math.min(1, readProg() || 0));
@@ -338,7 +452,6 @@ export function createHeadHero(container, opts = {}) {
     // 相机归 OrbitControls 管，每帧动它会跟阻尼打架）
     group.scale.setScalar(1 / (1 + cur * 0.85));
 
-    controls.autoRotateSpeed = 0.35 + cur * 1.3;
     controls.update();
     renderer.render(scene, camera);
   }

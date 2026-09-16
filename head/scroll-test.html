@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>onScroll 最小复现</title>
+<style>
+  html,body{margin:0;background:#050506;color:#eee;font:13px/1.6 ui-monospace,Menlo,monospace}
+  .pad{height:100vh;display:grid;place-items:center;color:#444}
+  #tgt{height:60vh;margin:0 20px;border:1px solid #333;display:grid;place-items:center}
+  #box{width:260px;height:120px;background:#9fd8ff;color:#050506;
+       display:grid;place-items:center;font-size:16px}
+  #log{position:fixed;left:8px;top:8px;z-index:99;background:#000c;padding:6px 9px;
+       white-space:pre;font-size:12px;color:#0f0}
+</style>
+<script type="importmap">
+{"imports":{"animejs":"https://cdn.jsdelivr.net/npm/animejs@4/+esm"}}
+</script>
+</head><body>
+
+<div id="log">init…</div>
+<div class="pad">A · 滚下去</div>
+<div id="tgt"><div id="box">BOX</div></div>
+<div class="pad">B · 结尾</div>
+
+<script type="module">
+import { createTimeline, onScroll, utils } from 'animejs';
+
+const log = document.getElementById('log');
+const box = document.getElementById('box');
+const seen = [];
+
+function say(k, v) { seen.push(k + '=' + v); log.textContent = seen.slice(-6).join('\n'); }
+
+say('anim', !!createTimeline);
+
+try {
+  utils.set(box, { opacity: 0.15, y: 60, scale: 0.8 });
+  say('set', 'ok');
+
+  const obs = onScroll({
+    target: '#tgt',
+    enter: 'bottom bottom',
+    leave: 'top top',
+    sync: 0.5,
+    onUpdate: (s) => say('p', (+s.progress).toFixed(3)),
+    onEnter: () => say('enter', '!'),
+    onLeave: () => say('leave', '!'),
+    onSyncComplete: () => say('syncDone', '!')
+  });
+  say('obs', obs ? 'made' : 'null');
+
+  const tl = createTimeline({ autoplay: obs })
+    .add(box, { opacity: 1, y: 0, scale: 1, duration: 600, ease: 'outExpo' });
+  say('tl', tl ? 'made' : 'null');
+} catch (e) { say('ERR', e.message); }
+
+/* 对照组：最朴素的 scroll 监听。
+   如果连它都不响，说明是无头环境根本不发滚动事件，不是 anime 的问题。 */
+var raw = 0;
+addEventListener('scroll', function () { raw++; say('rawScroll', raw + ' y=' + Math.round(scrollY)); }, { passive: true });
+
+const q = new URLSearchParams(location.search);
+setTimeout(function () {
+  say('尺寸', 'vh=' + innerHeight + ' docH=' + document.documentElement.scrollHeight);
+}, 400);
+if (q.has('goto')) setTimeout(function () {
+  scrollTo(0, +q.get('goto'));
+  say('滚了', 'y=' + Math.round(scrollY));
+  /* 无头 Chrome 在 --virtual-time-budget 下**不派发 scroll 事件**
+     （上面那个 rawScroll 对照一次都没响）。手动补一个合成事件，
+     看观察器是不是只要"被叫醒"就能算对。 */
+  if (q.has('synth')) {
+    for (var i = 0; i < 6; i++) {
+      setTimeout(function () { window.dispatchEvent(new Event('scroll')); }, i * 120);
+    }
+  }
+}, 700);
+</script>
+</body></html>

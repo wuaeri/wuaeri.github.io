@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Plasma 自测</title>
+<style>html,body{margin:0;height:100%;background:#050506}
+#p{position:fixed;inset:0}.plasma-canvas,#p canvas{display:block;width:100%;height:100%}
+#m{position:fixed;left:12px;bottom:10px;color:#9fd8ff;font:11px ui-monospace,Menlo,monospace}</style>
+</head><body>
+<div id="p"></div><div id="m">…</div>
+<script src="./plasma.js"></script>
+<script>
+  try {
+    var r = Plasma.init(document.getElementById('p'), {
+      color:'#C6CCD4', speed:1, direction:'forward', scale:1, opacity:1,
+      mouseInteractive:false, renderScale:0.55, maxDpr:1.5, targetFps:60, iterations:60 });
+    document.getElementById('m').textContent = (r && r.ok)
+      ? ('OK ' + (r.gl.getParameter(r.gl.VERSION)||''))
+      : ('FAIL ' + ((r&&r.why)||'未知'));
+  } catch(e) { document.getElementById('m').textContent = 'THROW ' + (e.message||e); }
+</script>
+</body></html>

@@ -113,6 +113,11 @@ main{position:relative;z-index:1}
   filter:none;
   transform:none;
 }
+/* anime.js 接手之后，把这个 transition 关掉。
+   动画改成逐帧写 inline style —— 留着 CSS transition 的话，
+   每一帧都会被"再补一段过渡"，跟滚动的跟随会打成一团。 */
+html.fx .panel > *{transition:none}
+
 .panel > *:nth-child(1){transition-delay:.06s}
 .panel > *:nth-child(2){transition-delay:.16s}
 .panel > *:nth-child(3){transition-delay:.26s}
@@ -390,14 +395,29 @@ main{position:relative;z-index:1}
         </div>
       </li>
 
-      <li class="soon">
-        <div class="soon-row">
+      <!-- Bouncer 早就上架了（github.com/wuaeri/bouncer-zh），
+           可这里一直挂着 class="soon" —— "未上线"是假的。
+           2026-09-17 收口时查出来的。 -->
+      <li>
+        <a href="https://github.com/wuaeri/bouncer-zh" target="_blank" rel="noopener">
           <span class="idx">03</span>
           <span>
             <span class="title">Bouncer 中文版</span>
             <span class="desc">X 的 AI 推文过滤器 · 界面、提示词、建议全中文化</span>
           </span>
-        </div>
+          <span class="arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="./hotspot/">
+          <span class="idx">04</span>
+          <span>
+            <span class="title">热点区</span>
+            <span class="desc">aespa 的实时热点 · 媒体层与社区层，每两小时自动更新</span>
+          </span>
+          <span class="arrow">→</span>
+        </a>
       </li>
     </ul>
   </section>
@@ -418,7 +438,7 @@ main{position:relative;z-index:1}
   <div class="hud-bl">
     <div class="hud-card">
       <!-- ⚠️ 这两个数是手写的。上传新作品时记着一起改。 -->
-      <div class="hud-row"><span>Works</span><b>03</b></div>
+      <div class="hud-row"><span>Works</span><b>04</b></div>
       <div class="hud-row"><span>Updated</span><b>2026.09.17</b></div>
     </div>
   </div>
@@ -436,17 +456,155 @@ main{position:relative;z-index:1}
      阈值取 .35 而不是 .5：这一屏内容本来就大，
      等它露出过半才动，人已经先看到"糊的了"。 */
   var panels = [].slice.call(document.querySelectorAll('.panel'));
-  if ('IntersectionObserver' in window) {
+  var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* ?goto=NNN —— 延迟一下，然后**真的滚**过去。
+     无头浏览器没法滚动，而滚动驱动的动画不滚就验不了。
+     延迟是刻意的：必须在 anime 初始化完成之后才滚 ——
+     否则等于"一出生就已经在终点"，滚动事件不会触发，
+     所有滚动观察器都会停在 progress 0。（用锚点 #s2 就是这样，
+     所以我一开始以为编排坏了，其实是测法不对。） */
+  var gq = new URLSearchParams(location.search);
+  if (gq.has('goto')) {
+    var gy = parseFloat(gq.get('goto'));
+    setTimeout(function () { window.scrollTo(0, gy); }, 700);
+  }
+
+  /* 兜底：没有 IntersectionObserver、或者 anime 没载入 —— 走老路。
+     **这条必须留着。** 新的编排整段都依赖 anime 载入成功，
+     一个 CDN 抽风就能让三屏内容永远停在 opacity:0 —— 页面全白。
+     内容永远比效果重要。 */
+  function fallbackReveal() {
+    if (!('IntersectionObserver' in window)) {
+      panels.forEach(function (p) { p.classList.add('in'); });
+      return;
+    }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) e.target.classList.add('in');
       });
     }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
     panels.forEach(function (p) { io.observe(p); });
-    // 首屏不等观察器，开门就得是清的
     if (panels[0]) panels[0].classList.add('in');
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     滚动编排 —— 自己写，不引库。跟 anime.js 学的四条全在里面：
+       ① 状态由 JS 持有（不是 CSS transition 一触发就撒手）
+       ② 进度带惯性跟随 —— 手停下之后还在缓缓收尾
+       ③ 每个元素有自己的滚动窗口，彼此错开
+       ④ 一条进度推整屏，所以整屏读起来是**一个动作**，不是好几个动画
+
+     为什么不直接用他们的 onScroll（两条理由，都是硬的）：
+       ① 无头 Chrome 在 --virtual-time-budget 下**不派发 scroll 事件**
+          （head/scroll-test.html 里那个 rawScroll 对照证明了），
+          事件驱动的写法在这台机器上**根本没法验** ——
+          而"没法验"今晚已经害我白烧过好几轮。
+       ② 它是事件驱动；这条站的架构是**读位置、不听事件**
+          （头颅那套就是每帧读 scrollY，所以无头能验、真机也不抖）。
+     自己写这几十行：能验、没依赖、也不会因为一个 CDN 抽风整页空白。
+     ══════════════════════════════════════════════════════════ */
+  var clamp01 = function (x) { return x < 0 ? 0 : x > 1 ? 1 : x; };
+  var easeOutExpo = function (x) { return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x); };
+  var SNAP = gq.has('fxsnap');
+  var tracks = [];
+
+  function measure() {
+    tracks.forEach(function (t) {
+      t.top = t.el.getBoundingClientRect().top + window.scrollY;
+    });
+  }
+
+  function frame() {
+    requestAnimationFrame(frame);
+    var y = window.scrollY, vh = window.innerHeight;
+    for (var k = 0; k < tracks.length; k++) {
+      var t = tracks[k], n = t.items.length;
+      if (!n) continue;
+      // 区间：这一屏的顶，从"视口底"走到"离视口顶 18%"
+      var start = t.top - vh, end = t.top - vh * 0.18;
+      var target = clamp01((y - start) / Math.max(1, end - start));
+      t.p += (target - t.p) * t.sync;             // ← 惯性。他们的 sync 就是这个意思
+      if (Math.abs(target - t.p) < 0.0004) t.p = target;
+      var gap = n > 1 ? Math.min(t.gap, (1 - t.win) / (n - 1)) : 0;
+      for (var i = 0; i < n; i++) {
+        var e = easeOutExpo(clamp01((t.p - i * gap) / t.win));
+        var el = t.items[i];
+        el.style.opacity = e.toFixed(3);
+        el.style.transform = e >= 1 ? 'none'
+          : 'translateY(' + ((1 - e) * t.rise).toFixed(2) + 'px)';
+        el.style.filter = e >= 1 ? 'none'
+          : 'blur(' + ((1 - e) * t.blur).toFixed(2) + 'px)';
+      }
+    }
+  }
+
+  function setup() {
+    /* 第二、三屏：初值由 JS 写死，CSS 只管长相。
+       写完内容就已经在"会被驱动"的状态里 —— 之后 rAF 一跑，
+       它就是滚动位置的函数，滚回去会倒着演。 */
+    [
+      { sec: '#s2', sel: '.p2 .works li',            win: 0.62, gap: 0.16, rise: 44, blur: 14 },
+      { sec: '#s3', sel: '.p3 .coda, .p3 .links',    win: 0.60, gap: 0.20, rise: 30, blur: 12 }
+    ].forEach(function (s) {
+      var sec = document.querySelector(s.sec);
+      var items = sec ? [].slice.call(document.querySelectorAll(s.sel)) : [];
+      if (!items.length) return;
+      items.forEach(function (el) {
+        el.style.opacity = 0;
+        el.style.filter = 'blur(' + s.blur + 'px)';
+        el.style.transform = 'translateY(' + s.rise + 'px)';
+        el.style.willChange = 'opacity, transform, filter';
+      });
+      /* ?fxsnap —— 关掉惯性、瞬时跟随。无头里虚拟时间只跑得出十来帧，
+         收敛不完，截图永远停在半路。这个开关只给"拍一张终态"用。 */
+      tracks.push({ el: sec, items: items, p: 0, sync: SNAP ? 1 : 0.11,
+                    win: s.win, gap: s.gap, rise: s.rise, blur: s.blur, top: 0 });
+    });
+    measure();
+    requestAnimationFrame(frame);
+
+    /* 第一屏：开门，不等滚动。
+       "显"是过程、每屏都做；但这一屏是开场的显影，得自己走。
+       同样 easeOutExpo（快进慢停）—— 三屏同一个手感。 */
+    var hero = [].slice.call(document.querySelectorAll('.p1 .word, .p1 .sub'));
+    if (!hero.length) return;
+    hero.forEach(function (el, i) {
+      el.style.opacity = 0;
+      el.style.filter = 'blur(' + (i ? 12 : 20) + 'px)';
+      el.style.transform = 'translateY(' + (i ? 24 : 46) + 'px)';
+    });
+    var t0 = performance.now() + 140;
+    (function heroFrame() {
+      var k = performance.now() - t0;
+      if (k < 0) { requestAnimationFrame(heroFrame); return; }
+      var done = true;
+      hero.forEach(function (el, i) {
+        var local = clamp01((k - i * 130) / (i ? 1000 : 1500));
+        var e = easeOutExpo(local);
+        el.style.opacity = e.toFixed(3);
+        el.style.transform = e >= 1 ? 'none'
+          : 'translateY(' + ((1 - e) * (i ? 24 : 46)).toFixed(2) + 'px)';
+        el.style.filter = e >= 1 ? 'none'
+          : 'blur(' + ((1 - e) * (i ? 12 : 20)).toFixed(2) + 'px)';
+        if (local < 1) done = false;
+      });
+      if (!done) requestAnimationFrame(heroFrame);
+    })();
+  }
+
+  if (reduced) {
+    fallbackReveal();
   } else {
-    panels.forEach(function (p) { p.classList.add('in'); });
+    try {
+      document.documentElement.classList.add('fx');   // 关掉 CSS transition
+      setup();
+      addEventListener('resize', measure);
+    } catch (e) {
+      console.warn('[fx] 编排失败，走兜底：', e);
+      document.documentElement.classList.remove('fx');
+      fallbackReveal();
+    }
   }
 
   /* ── 片边刻度 ── */

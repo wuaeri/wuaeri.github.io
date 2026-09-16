@@ -371,7 +371,7 @@
 .sig-details {
   width: 100%;
   position: absolute;
-  top: 2.1em;
+  top: 1.5em;
   display: flex;
   flex-direction: column;
 }
@@ -467,6 +467,7 @@
 }
 
 .sig-contact-btn {
+  position: relative;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 12px 16px;
@@ -482,6 +483,18 @@
   /* 上面 .sig-card * 那条 pointer-events: none 是直接命中所有后代的，
      会一路盖到按钮和气泡头上（它不是继承，是硬命中）。必须显式救回来。 */
   pointer-events: auto;
+}
+
+/* 触碰热区：视觉尺寸不动，四周把可点范围撑开。
+   手机上按钮只有约 40×22px（<=480px 断点 padding 5px 10px、字号 10px），
+   远低于 Apple 推荐的 44pt，所以老点不中。
+   只向左、右、下扩，不向上 —— 上面 10px 处就是微信号气泡，
+   往上扩会和「点气泡复制」抢手。父级 .sig-user-info 没有 overflow:hidden，
+   扩出去的部分不会被裁。 */
+.sig-contact-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0 -14px -12px -14px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -565,7 +578,7 @@
 
 @media (max-width: 768px) {
   .sig-card { height: 70svh; max-height: 450px; }
-  .sig-details { top: 1.3em; }
+  .sig-details { top: 0.7em; }
   .sig-details h3 { font-size: min(4svh, 2.5em); }
   .sig-details p { font-size: 14px; }
   .sig-user-info { --ui-inset: 15px; padding: 10px 12px; }
@@ -578,9 +591,9 @@
 
 @media (max-width: 480px) {
   .sig-card { height: 60svh; max-height: 380px; }
-  .sig-details { top: 1em; }
+  .sig-details { top: 0.5em; }
   .sig-details h3 { font-size: min(3.5svh, 2em); }
-  .sig-details p { font-size: 12px; top: -8px; }
+  .sig-details p { font-size: 12px; top: 0; }
   .sig-user-info { --ui-inset: 12px; padding: 8px 10px; }
   .sig-mini-avatar { width: 24px; height: 24px; }
   .sig-user-details { gap: 8px; }

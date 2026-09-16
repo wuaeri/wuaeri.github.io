@@ -1,0 +1,50 @@
+/* ============================================================
+   Waves —— 波纹背景容器
+   配色和透明度在 waves.js 的 DEFAULTS 里，这里只管摆放和遮罩。
+   ============================================================ */
+
+.sig-waves {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  /* 背景层不该吃指针事件 —— 卡片和按钮都在它上面 */
+  pointer-events: none;
+
+  /* 上下边缘虚化。
+     这一条是这个背景能不能复用的关键：有了它，
+     放进任何高度的容器里都不用为那个容器单独调尺寸或裁切。
+     默认各留 18%，由 --waves-fade-top / -bottom 覆盖。
+     ⚠️ Safari 认 -webkit- 那份，两份都要写。 */
+  --waves-fade-top: 18%;
+  --waves-fade-bottom: 18%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 var(--waves-fade-top),
+    #000 calc(100% - var(--waves-fade-bottom)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 var(--waves-fade-top),
+    #000 calc(100% - var(--waves-fade-bottom)),
+    transparent 100%
+  );
+}
+
+.sig-waves-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 尊重"减少动态效果"的系统设置 —— 这个背景纯装饰，关掉不损失信息 */
+@media (prefers-reduced-motion: reduce) {
+  .sig-waves-canvas {
+    opacity: 0.5;
+  }
+}
