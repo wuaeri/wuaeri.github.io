@@ -479,10 +479,10 @@
 <section class="sig-credits" id="credits">
   <div class="sig-credits-label">— 创作者 —</div>
 
-  <dl class="sig-credits-list">
-    <div class="sig-credits-row"><dt>wuaeri</dt><dd>内容 · 审美 · 判断</dd></div>
-    <div class="sig-credits-row"><dt>老 C</dt><dd>结构 · 代码 · 实现</dd></div>
-  </dl>
+  <div class="sig-credits-list">
+    <span class="sig-credits-name">wuaeri</span>
+    <span class="sig-credits-name">老 C</span>
+  </div>
 
   <div class="sig-wrap">
     <div class="sig-behind"></div>
@@ -499,7 +499,7 @@
                 <div class="sig-mini-avatar" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1b2436,#0d1018);color:rgba(255,255,255,.72);font-size:17px">W</div>
                 <div class="sig-user-text">
                   <span class="sig-handle">@wuaeri</span>
-                  <span class="sig-status">状态一句话</span>
+                  <span class="sig-status">在线</span>
                 </div>
               </div>
               <button class="sig-contact-btn" type="button">联系</button>
@@ -514,7 +514,7 @@
           <div class="sig-content">
             <div class="sig-details">
               <h3>wuaeri</h3>
-              <p>改这里 · 一句话</p>
+              <p>耀眼的拉康派（吴嘉豪）</p>
             </div>
           </div>
         </div>
@@ -542,16 +542,12 @@
   }
   .sig-credits-list {
     margin: 0 0 90px; display: flex; flex-direction: column;
-    gap: 20px; align-items: center; list-style: none;
+    gap: 16px; align-items: center;
   }
-  .sig-credits-row { display: flex; align-items: baseline; gap: 22px; }
-  .sig-credits-row dt {
-    font-size: 14px; font-weight: 500; letter-spacing: .08em;
-    color: rgba(255,255,255,.82); min-width: 120px; text-align: right;
-  }
-  .sig-credits-row dd {
-    margin: 0; font-size: 12px; font-weight: 300;
-    letter-spacing: .14em; color: rgba(255,255,255,.34);
+  .sig-credits-name {
+    font-size: 15px; font-weight: 500;
+    letter-spacing: .18em; text-indent: .18em;
+    color: rgba(255,255,255,.82);
   }
   .sig-credits .sig-wrap { flex: 0 0 auto; }
   .sig-credits-foot {

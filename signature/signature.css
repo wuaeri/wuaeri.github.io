@@ -358,7 +358,9 @@
 .sig-details p {
   font-weight: 600;
   position: relative;
-  top: -12px;
+  /* 原版 -12px 是给 `Member` 这类短词用的负间距，让两行咬合成一个整体。
+     h3 按嘉豪要求放大到 3.7em、p 又换成六个中文字之后，咬合就成了糊团。 */
+  top: -1px;
   white-space: nowrap;
   font-size: 16px;
   margin: 0 auto;
