@@ -98,12 +98,26 @@
     var check = document.getElementById('check');
     if (grid) check.classList.add('scanning');
 
-    fetch(DATA, { cache: 'no-store' })
+    /* ═══ 两道兜底：绝不允许空白 ═══
+       ① fetch 加超时 —— 没超时的话网络一挂，检查点会永远转下去；
+       ② 6 秒还没进门就强制放人 —— 跟首页那条同一个道理：
+          **内容永远比效果重要**。 */
+    var ctl = window.AbortController ? new AbortController() : null;
+    var to = setTimeout(function () { if (ctl) ctl.abort(); }, 5000);
+    setTimeout(function () {
+      if (!document.body.classList.contains('in')) {
+        console.warn('[hotspot] 检查点没走完，强制放人');
+        enter();
+      }
+    }, 6000);
+
+    fetch(DATA, { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
       })
       .then(function (d) {
+        clearTimeout(to);
         state.items = d.items || [];
         var srcs = d.sources || [];
         var okN = srcs.filter(function (s) { return s.ok; }).length;
@@ -145,6 +159,7 @@
           });
       })
       .catch(function (e) {
+        clearTimeout(to);
         // **抓不到也放人**，但要说清楚。挡在门外解决不了问题。
         row('r-net', '✗ 连不上站内数据', 'bad')
           .then(function () {

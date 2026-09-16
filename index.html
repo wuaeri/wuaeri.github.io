@@ -593,6 +593,27 @@ html.fx .panel > *{transition:none}
     })();
   }
 
+  /* ═══ 兜底：绝不允许空白 ═══
+     这一屏的内容是"CSS 先藏、JS 再放"。JS 任何一环出岔子（文件缓存不一致、
+     某个 API 不支持、模块加载失败…），整页就是一片黑 ——
+     2026-09-17 上线当晚嘉豪就报了一次"网页内什么都没有了"。
+     **内容永远比效果重要**：2.6 秒还没显示出来的，一律强制显示。 */
+  function rescue() {
+    ['word', 'sub'].forEach(function (c) {
+      [].forEach.call(document.querySelectorAll('.p1 .' + c), function (el) {
+        el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
+      });
+    });
+    [].forEach.call(document.querySelectorAll('.p2 .works li, .p3 .coda, .p3 .links'),
+      function (el) {
+        el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
+      });
+    [].forEach.call(document.querySelectorAll('.panel'), function (el) {
+      el.classList.add('in');
+    });
+    document.documentElement.classList.remove('fx');   // 让 CSS 的 .in 那条路也生效
+  }
+
   if (reduced) {
     fallbackReveal();
   } else {
@@ -600,6 +621,14 @@ html.fx .panel > *{transition:none}
       document.documentElement.classList.add('fx');   // 关掉 CSS transition
       setup();
       addEventListener('resize', measure);
+      // 开场动画 1.5 秒内该到位；2.6 秒还没到位就是出事了
+      setTimeout(function () {
+        var w = document.getElementById('word');
+        if (w && parseFloat(w.style.opacity || 0) < 0.9) {
+          console.warn('[fx] 开场动画没跑起来，强制显示');
+          rescue();
+        }
+      }, 2600);
     } catch (e) {
       console.warn('[fx] 编排失败，走兜底：', e);
       document.documentElement.classList.remove('fx');
