@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>wuaeri</title>
 <meta name="description" content="wuaeri 的作品">
+
+<!-- three 的裸名映射。head/head-hero.js 里写的是 import ... from 'three'，
+     没有这张表浏览器解析不了裸名，模块会在加载那一步就死掉 ——
+     而且是静默死：画布根本不会被创建，页面上什么都不会发生。
+     必须放在 <head> 里、早于任何模块加载。 -->
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+}}
+</script>
 <style>
 :root{
   --bg:      #050506;
@@ -14,9 +25,17 @@
   --line:    rgba(255,255,255,0.10);
   --pulse:   #9fd8ff;
   --warm:    #e8c9a0;
+  --ease:    cubic-bezier(.22,1,.36,1);
+  --pad:     clamp(22px,4vw,44px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
+
+/* 一屏一格 —— 滚轮一次过一片，像胶片走一格。
+   proximity 而不是 mandatory：卡得太死会让人烦，
+   这里只要"靠近边界时自己吸附过去"就够了。 */
+html{scroll-snap-type:y proximity}
+
 body{
   background:var(--bg);
   color:var(--fg);
@@ -33,7 +52,7 @@ body::before{
   z-index:9;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-/* 顶部一层极淡的冷光，只在屏幕最上方 */
+/* 顶部一层极淡的冷光 */
 body::after{
   content:"";
   position:fixed; top:0; left:0; right:0; height:48vh;
@@ -42,143 +61,516 @@ body::after{
     rgba(159,216,255,.055) 0%, rgba(159,216,255,0) 68%);
 }
 
-main{
-  position:relative; z-index:1;
-  max-width:760px;
-  margin:0 auto;
-  padding:clamp(72px,16vh,168px) 28px 96px;
+/* ══════════ 首屏头颅 ══════════
+   单独一层固定在底层垫在 <main> 后面。
+   ⚠️ 绝不能放进 .panel 里 —— .panel > <em> 挂着"显影"那套
+   opacity/blur/translate，画布一旦成了它的子元素就会被一起糊掉。
+   也不会挡操作：pointer-events:none，滚轮永远归页面。 */
+.head-layer{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.6s var(--ease);
+}
+/* 中间压一层暗。不是"把画面调暗"，是让名字浮出来 ——
+   头是背景，字是主角，两者的明度得拉开，否则白字压在米白的脸上读不动。 */
+.head-layer::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(ellipse 66% 54% at 50% 47%,
+    rgba(5,5,6,.58) 0%, rgba(5,5,6,.30) 52%, rgba(5,5,6,0) 100%);
+}
+main{position:relative;z-index:1}
+
+/* ══════════ 屏 ══════════
+   每屏占满一整个视口。用 svh 不用 vh ——
+   手机上地址栏一收一放，vh 会跳，svh 不会。 */
+.panel{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  padding:clamp(96px,14vh,150px) var(--pad);
+  scroll-snap-align:start;
 }
 
-/* ── 抬头 ── */
-.head{margin-bottom:clamp(64px,11vh,116px)}
-.mark{
-  font-size:clamp(30px,5.6vw,44px);
+/* ══════════ 显影 ══════════
+   这一屏进视口时，内容从模糊里浮出来 —— 像照片在显影液里。
+   是「曝光」这件事最安静的翻译：不闪、不吵、不打断阅读。
+   （进场那一下的白线扫描是"闪"，是事件；
+     这里是"显"，是过程。两种都要有，但用量差很远。） */
+.panel > *{
+  opacity:0;
+  filter:blur(16px);
+  transform:translateY(30px);
+  transition:
+    opacity   1.05s var(--ease),
+    filter    1.05s var(--ease),
+    transform 1.05s var(--ease);
+}
+.panel.in > *{
+  opacity:1;
+  filter:none;
+  transform:none;
+}
+.panel > *:nth-child(1){transition-delay:.06s}
+.panel > *:nth-child(2){transition-delay:.16s}
+.panel > *:nth-child(3){transition-delay:.26s}
+.panel > *:nth-child(4){transition-delay:.36s}
+
+/* ══════════ 一 · 门 ══════════ */
+.p1 .word{
+  font-size:clamp(72px,12.5vw,190px);
   font-weight:500;
-  letter-spacing:-.022em;
-  line-height:1;
+  letter-spacing:-.045em;
+  line-height:.92;
+  text-align:center;
+  will-change:transform;
 }
-.mark em{
-  font-style:normal;
-  color:var(--fg-3);
-  font-weight:300;
-}
-.tag{
-  margin-top:20px;
+.p1 .sub{
+  margin-top:clamp(22px,3.4vh,40px);
+  text-align:center;
   font-size:11px;
-  letter-spacing:.52em;
+  letter-spacing:.62em;
   text-transform:uppercase;
   color:var(--fg-3);
+  /* 字距会把整行的视觉重心往左拽，补回来一点 */
+  text-indent:.62em;
 }
 
-/* ── 作品列表 ── */
-.works{list-style:none;border-top:1px solid var(--line)}
-.works li{border-bottom:1px solid var(--line)}
-.works a{
+/* ══════════ 二 · 作品 ══════════ */
+.p2 .works{
+  list-style:none;
+  width:100%;
+  max-width:940px;
+  border-top:1px solid var(--line);
+}
+.p2 .works li{border-bottom:1px solid var(--line)}
+.p2 .works a,
+.p2 .works .soon-row{
+  position:relative;
   display:grid;
-  grid-template-columns:38px 1fr auto;
-  align-items:baseline;
-  gap:0 18px;
-  padding:26px 2px 24px;
+  grid-template-columns:clamp(56px,7vw,96px) 1fr auto;
+  align-items:center;
+  gap:0 clamp(18px,3vw,34px);
+  padding:clamp(26px,4.6vh,46px) 4px;
   text-decoration:none;
   color:inherit;
-  transition:padding-left .42s cubic-bezier(.16,1,.3,1);
+  overflow:hidden;
+  transition:padding-left .5s var(--ease),background .5s ease;
 }
-.works a:hover{padding-left:14px}
+.p2 .works a:hover{padding-left:20px;background:rgba(255,255,255,.014)}
+
+/* 掠过的那道光。非 hover 时 transition 是 0s ——
+   松开就在左侧瞬间归位（在框外，看不见），
+   再移回来才是又扫一次。它永远只朝一个方向走。 */
+.p2 .works a::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:linear-gradient(100deg,
+    transparent 22%,
+    rgba(255,255,255,.05) 46%,
+    rgba(255,255,255,.09) 50%,
+    rgba(255,255,255,.05) 54%,
+    transparent 78%);
+  transform:translateX(-100%);
+  transition:transform 0s;
+}
+.p2 .works a:hover::before{
+  transform:translateX(100%);
+  transition:transform 760ms var(--ease);
+}
 
 .idx{
-  font-size:11px;
+  font-size:clamp(26px,3.4vw,46px);
+  font-weight:200;
   font-variant-numeric:tabular-nums;
-  letter-spacing:.1em;
+  letter-spacing:-.02em;
   color:var(--fg-3);
-  transition:color .3s ease;
+  transition:color .35s ease;
+  line-height:1;
 }
-.works a:hover .idx{color:var(--pulse)}
+.p2 .works a:hover .idx{color:var(--pulse)}
 
 .title{
-  font-size:clamp(21px,3.1vw,27px);
+  font-size:clamp(24px,3.4vw,42px);
   font-weight:500;
-  letter-spacing:-.012em;
-  line-height:1.25;
+  letter-spacing:-.014em;
+  line-height:1.2;
 }
 .desc{
   display:block;
-  margin-top:7px;
-  font-size:13.5px;
+  margin-top:9px;
+  font-size:clamp(12.5px,1.2vw,14px);
   line-height:1.6;
   color:var(--fg-2);
   font-weight:400;
-  letter-spacing:.004em;
-}
-@media (max-width:520px){
-  .works a{grid-template-columns:30px 1fr;gap:0 12px;padding:22px 2px 20px}
-  .arrow{display:none}
 }
 .arrow{
-  font-size:15px;
+  font-size:clamp(16px,1.6vw,21px);
   color:var(--fg-3);
-  transform:translateX(-4px);
+  transform:translateX(-6px);
   opacity:0;
-  transition:transform .42s cubic-bezier(.16,1,.3,1),opacity .3s ease,color .3s ease;
+  transition:transform .5s var(--ease),opacity .35s ease,color .35s ease;
 }
-.works a:hover .arrow{transform:translateX(0);opacity:1;color:var(--warm)}
+.p2 .works a:hover .arrow{transform:translateX(0);opacity:1;color:var(--warm)}
 
 /* 未上线的条目：不假装能点 */
 .soon .title,.soon .desc{color:var(--fg-3)}
 .soon{cursor:default}
 
-/* ── 脚 ── */
-footer{
-  margin-top:clamp(72px,13vh,132px);
-  font-size:11.5px;
-  letter-spacing:.06em;
-  color:var(--fg-3);
+/* ══════════ 三 · 尾 ══════════ */
+.p3{text-align:center}
+.p3 .coda{
+  font-size:clamp(15px,1.6vw,19px);
+  letter-spacing:.02em;
+  color:var(--fg-2);
   line-height:2;
 }
-footer a{color:var(--fg-2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;transition:color .25s ease,border-color .25s ease}
-footer a:hover{color:var(--pulse);border-color:var(--pulse)}
+.p3 .links{
+  margin-top:clamp(30px,5vh,52px);
+  display:flex; gap:clamp(20px,3vw,34px);
+  justify-content:center;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.p3 .links a{
+  color:var(--fg-3);
+  text-decoration:none;
+  padding-bottom:3px;
+  border-bottom:1px solid transparent;
+  transition:color .3s ease,border-color .3s ease;
+}
+.p3 .links a:hover{color:var(--pulse);border-color:rgba(159,216,255,.4)}
+
+/* ══════════ 四角仪表 ══════════
+   不随内容滚 —— 是贴在屏幕上的铭牌，不是页面里的东西。 */
+.hud-layer{
+  position:fixed; inset:0; z-index:20;
+  pointer-events:none;
+  display:grid;
+  grid-template-columns:1fr auto;
+  grid-template-rows:auto 1fr auto;
+  padding:var(--pad);
+}
+.hud-layer a{pointer-events:auto}
+.hud-tr{grid-column:2;grid-row:1;justify-self:end;align-self:start}
+.hud-bl{grid-column:1;grid-row:3;justify-self:start;align-self:end}
+
+.clock{
+  font-size:11px; letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+  color:var(--fg-3);
+}
+.hud-card{
+  position:relative;
+  border:1px solid var(--line);
+  padding:15px 15px 12px;
+  min-width:184px;
+}
+.hud-card::before{
+  content:"status";
+  position:absolute; top:0; left:12px;
+  transform:translateY(-50%);
+  background:var(--bg);
+  padding:0 7px;
+  font-size:9px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--fg-3);
+}
+.hud-row{
+  display:flex; justify-content:space-between; gap:22px;
+  font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--fg-3); line-height:2.15;
+}
+.hud-row b{
+  font-weight:400; color:var(--fg-2);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ══════════ 片边刻度 ══════════
+   右边一条极细的竖线，走到哪填到哪。
+   诺里斯那种站给的是"实时数据"，我给的是"你现在在片子的第几格" ——
+   同样是"活着"的信号，但这个不需要维护。 */
+.rail{
+  position:fixed; right:var(--pad); top:50%;
+  transform:translateY(-50%);
+  width:1px; height:clamp(110px,20vh,200px);
+  background:rgba(255,255,255,.075);
+  z-index:20; pointer-events:none;
+}
+.rail i{
+  display:block; width:100%; height:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.12));
+  transition:height .1s linear;
+}
+
+/* ══════════ 入场那一下曝光 ══════════
+   一道极薄的白线从上扫到下，整页只跑一次。
+   这不是装饰 —— 是「瞬」在页面上的第一次出现。
+   事件色是过曝的白，不是荧光色：一闪即走，不留痕。 */
+.flash{
+  position:fixed; left:0; right:0; top:0; height:1px; z-index:99;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:sweep 860ms var(--ease) 160ms both;
+}
+@keyframes sweep{
+  0%  { transform:translateY(0);      opacity:0 }
+  12% { opacity:1 }
+  88% { opacity:1 }
+  100%{ transform:translateY(100vh);  opacity:0 }
+}
+
+/* ══════════ 窄屏 ══════════ */
+@media (max-width:760px){
+  .hud-layer{
+    position:static; inset:auto;
+    display:block;
+    padding:0 var(--pad) clamp(48px,8vh,72px);
+  }
+  .hud-tr{display:none}
+  .hud-card{min-width:0}
+  .rail{display:none}
+  .panel{padding-left:var(--pad);padding-right:var(--pad)}
+}
+@media (max-width:520px){
+  .p2 .works a,
+  .p2 .works .soon-row{grid-template-columns:auto 1fr;gap:0 16px;padding:22px 2px}
+  .arrow{display:none}
+  .idx{font-size:22px}
+}
+
+/* 尊重减弱动效 —— 这些都是纯装饰，关掉不损失任何信息 */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-snap-type:none}
+  .flash{display:none}
+  .panel > *{opacity:1; filter:none; transform:none; transition:none}
+  .p2 .works a::before{display:none}
+  .p2 .works a{transition:none}
+  .rail i{transition:none}
+}
 </style>
 </head>
 <body>
 
+<!-- 首屏头颅。垫在正文后面，滚过首屏自己退场。 -->
+<div class="head-layer" id="headLayer" aria-hidden="true"></div>
+
 <main>
-  <header class="head">
-    <div class="mark">wuaeri</div>
-    <div class="tag">Works</div>
-  </header>
 
-  <ul class="works">
-    <li>
-      <a href="./shun/">
-        <span class="idx">01</span>
-        <span>
-          <span class="title">瞬</span>
-          <span class="desc">丽弦 OSHUN · 一副耳机的声音志</span>
-        </span>
-        <span class="arrow">→</span>
-      </a>
-    </li>
+  <!-- ═══ 一 · 门 ═══ -->
+  <section class="panel p1" id="s1">
+    <h1 class="word" id="word">wuaeri</h1>
+    <div class="sub">Works</div>
+  </section>
 
-    <li class="soon">
-      <span class="idx">02</span>
-      <span>
-        <span class="title">aemy</span>
-        <span class="desc">Mac 视频动态壁纸引擎 · 桌面层渲染，界面即 HTML</span>
-      </span>
-    </li>
+  <!-- ═══ 二 · 作品 ═══ -->
+  <section class="panel p2" id="s2">
+    <ul class="works">
+      <li>
+        <a href="./shun/">
+          <span class="idx">01</span>
+          <span>
+            <span class="title">瞬</span>
+            <span class="desc">丽弦 OSHUN · 一副耳机的声音志</span>
+          </span>
+          <span class="arrow">→</span>
+        </a>
+      </li>
 
-    <li class="soon">
-      <span class="idx">03</span>
-      <span>
-        <span class="title">Bouncer 中文版</span>
-        <span class="desc">X 的 AI 推文过滤器 · 界面、提示词、建议全中文化</span>
-      </span>
-    </li>
-  </ul>
+      <li class="soon">
+        <div class="soon-row">
+          <span class="idx">02</span>
+          <span>
+            <span class="title">aemy</span>
+            <span class="desc">Mac 视频动态壁纸引擎 · 桌面层渲染，界面即 HTML</span>
+          </span>
+        </div>
+      </li>
 
-  <footer>
-    <a href="https://github.com/wuaeri" target="_blank" rel="noopener">GitHub</a>
-  </footer>
+      <li class="soon">
+        <div class="soon-row">
+          <span class="idx">03</span>
+          <span>
+            <span class="title">Bouncer 中文版</span>
+            <span class="desc">X 的 AI 推文过滤器 · 界面、提示词、建议全中文化</span>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ═══ 三 · 尾 ═══ -->
+  <section class="panel p3" id="s3">
+    <p class="coda">往下就没有了。</p>
+    <nav class="links">
+      <a href="https://github.com/wuaeri" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </section>
+
 </main>
+
+<!-- 四角仪表层 -->
+<div class="hud-layer">
+  <div class="hud-tr"><span class="clock" id="clock">--:--</span></div>
+  <div class="hud-bl">
+    <div class="hud-card">
+      <!-- ⚠️ 这两个数是手写的。上传新作品时记着一起改。 -->
+      <div class="hud-row"><span>Works</span><b>03</b></div>
+      <div class="hud-row"><span>Updated</span><b>2026.09.17</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- 片边刻度 -->
+<div class="rail"><i id="rail"></i></div>
+
+<!-- 入场扫描线 -->
+<div class="flash"></div>
+
+<script>
+(function () {
+  /* ── 显影：哪一屏进视口，哪一屏的内容才浮出来 ──
+     阈值取 .35 而不是 .5：这一屏内容本来就大，
+     等它露出过半才动，人已经先看到"糊的了"。 */
+  var panels = [].slice.call(document.querySelectorAll('.panel'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
+    panels.forEach(function (p) { io.observe(p); });
+    // 首屏不等观察器，开门就得是清的
+    if (panels[0]) panels[0].classList.add('in');
+  } else {
+    panels.forEach(function (p) { p.classList.add('in'); });
+  }
+
+  /* ── 片边刻度 ── */
+  var rail = document.getElementById('rail');
+  var ticking = false;
+  function paintRail() {
+    ticking = false;
+    if (!rail) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    rail.style.height = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(paintRail);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  paintRail();
+
+  /* ── 首屏那个字跟着鼠标挪一点点 ──
+     幅度压得很小（14px / 10px）：它该是"这页是活的"，
+     不该是"这个字在乱跑"。挂在 .word 上而不是它的父层，
+     因为父层的 transform 归显影那条 transition 管，会打架。 */
+  var word = document.getElementById('word');
+  if (word && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    var raf = null, mx = 0, my = 0;
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX / window.innerWidth - .5;
+      my = e.clientY / window.innerHeight - .5;
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = null;
+        word.style.transform =
+          'translate3d(' + (mx * 14).toFixed(2) + 'px,' + (my * 10).toFixed(2) + 'px,0)';
+      });
+    }, { passive: true });
+  }
+
+  /* ── file:// 下的目录链接 ──
+     ⚠️ 这是个只在本地冒头的坑，线上永远看不到。
+     浏览器不渲染 file:// 的目录列表，而 Safari 遇到 "…/shun/" 这种
+     以斜杠结尾的本地地址时也不自己兜着 —— 它把地址甩给系统，
+     系统用访达打开。于是点一下作品，弹出的不是网页，是一个文件夹窗口。
+     线上没这回事：GitHub Pages 的服务器会把 /shun/ 解析成 index.html。
+     所以只在 file: 协议下，把这种目录链接补成明确的 index.html。
+     （href 里保留 "./shun/" 原样，是为了线上地址栏干净。） */
+  if (location.protocol === 'file:') {
+    [].slice.call(document.querySelectorAll('a[href]')).forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (!h || h.indexOf('http') === 0 || h.charAt(0) === '#') return;
+      if (h.charAt(h.length - 1) === '/') a.setAttribute('href', h + 'index.html');
+    });
+  }
+
+  /* ══════════ 首屏头颅 ══════════
+     两个数，别混：
+       ratio()    —— 滚过首屏多少（可以 >1，用来算退场）
+       progress() —— 给组件的 0..1，就是拆解程度
+     组件每帧问一次 progress，不是我们推给它 —— 滚动事件在移动端会被
+     节流、惯性滚动还会延迟，推着走一定会抖；读变量则永远跟得上。
+     （跟课室游戏那条"世界是时间的函数"是同一件事。） */
+  (function () {
+    var layer = document.getElementById('headLayer');
+    var s1 = document.getElementById('s1');
+    if (!layer || !s1) return;
+    // 减弱动效就直接不要它 —— 这东西是纯装饰，关掉不损失信息
+    if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+    /* ?scroll=NNN —— 假装已经滚了这么多像素。
+       无头浏览器截不了"滚动之后"的样子，没有这个口子就只能靠肉眼验，
+       而这个站最要紧的恰恰就是滚动那一段。线上没有任何影响。 */
+    var q = new URLSearchParams(location.search);
+    var FAKE = q.has('scroll') ? parseFloat(q.get('scroll')) : null;
+    function sy() { return FAKE === null ? window.scrollY : FAKE; }
+
+    function ratio() {
+      var h = s1.offsetHeight || window.innerHeight;
+      return sy() / (h * 0.92);
+    }
+    function progress() {
+      return Math.min(1, Math.max(0, ratio()));
+    }
+    function paint() {
+      // 首屏内一直满着；滚过首屏之后再花 0.4 屏淡出，
+      // 不然后面作品列表背后糊着一颗头。
+      var r = ratio();
+      var vis = r < 1 ? 1 : Math.max(0, 1 - (r - 1) / 0.4);
+      layer.style.opacity = vis.toFixed(3);
+    }
+    window.addEventListener('scroll', paint, { passive: true });
+    window.addEventListener('resize', paint);
+    paint();
+
+    /* three 和模型都走网络。拿不到就当没这回事 —— 页面本身是完整的，
+       首屏那个字自己站得住。**加载失败绝不能变成白屏。** */
+    import('./head/head-hero.js').then(function (m) {
+      m.createHeadHero(layer, {
+        progress: progress,
+        fit: 1.5,          // 留白倍数：1.0 = 正好撑满视口，越大头越小
+        onReady: paint,
+        onError: function (e) { console.warn('[head] 没载入：', e); }
+      });
+    }).catch(function (e) { console.warn('[head] 模块没载入：', e); });
+  })();
+
+  /* ── 时钟：每秒查一次，只在分钟真的翻过去时才写 DOM ──
+     不跳秒。这里要的是「此刻」那个气氛，不是一块电子表。 */
+  var clock = document.getElementById('clock');
+  if (clock) {
+    var last = '';
+    setInterval(function () {
+      var d = new Date();
+      var s = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+      if (s !== last) { last = s; clock.textContent = s; }
+    }, 1000);
+    (function init() {
+      var d = new Date();
+      last = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+      clock.textContent = last;
+    })();
+  }
+})();
+</script>
 
 </body>
 </html>

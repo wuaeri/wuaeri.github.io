@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>head-hero 组件自测</title>
+<style>
+  html,body{margin:0;height:100%;background:#050506;overflow:hidden}
+  #head{position:fixed;inset:0}
+  #msg{position:fixed;left:12px;bottom:10px;color:#9fd8ff;
+       font:10px/1.5 ui-monospace,Menlo,monospace;letter-spacing:.08em}
+</style>
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+}}
+</script>
+</head>
+<body>
+<div id="head"></div>
+<div id="msg">载入中…</div>
+<script type="module">
+import { createHeadHero, tier } from './head-hero.js';
+
+const q = new URLSearchParams(location.search);
+const p = parseFloat(q.get('p') ?? '0.29');
+document.getElementById('msg').textContent = 'tier=' + (q.get('tier') || tier()) + '  progress=' + p;
+
+createHeadHero(document.querySelector('#head'), {
+  progress: () => p,
+  tier: q.get('tier') || undefined,
+  onReady: () => { document.getElementById('msg').textContent =
+    '✓ 组件就绪   tier=' + (q.get('tier') || tier()) + '   progress=' + p; },
+  onError: (e) => { document.getElementById('msg').textContent = '✗ 出错: ' + e; }
+});
+</script>
+</body>
+</html>

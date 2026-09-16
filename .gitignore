@@ -3,6 +3,10 @@
 /wallpaper-prototype/
 /dsh-web.command
 
+# head-demo：头颅的工作台。里面有 .venv 和混元原始档（好几百 MB），
+# 上线用的是 head/ 里那个 280KB 处理过的。整个目录都不进仓库。
+/head-demo/
+
 # shun：未引用的旧副本 + 备份
 shun/avatar/
 shun/*.bak-*
