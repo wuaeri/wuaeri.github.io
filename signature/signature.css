@@ -76,9 +76,20 @@
   transition: opacity 200ms ease;
 }
 
-.sig-wrap:hover,
+/* ⚠️ 触摸设备上 :hover 是个陷阱。
+   iOS Safari 手指点一下就给元素挂上 :hover，抬手也不摘，要点页面别处才转移。
+   于是 hover 态被永久钉死：--card-opacity 停在 1（背后辉光不褪）、
+   animation-play-state 停在 paused（光效定格）—— 这就是"点联系后光效僵住"。
+   所以 :hover 一律关进只给鼠标用的媒体查询，触摸端只认 JS 控制的 .active。 */
+
 .sig-wrap.active {
   --card-opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sig-wrap:hover {
+    --card-opacity: 1;
+  }
 }
 
 .sig-card {
@@ -103,10 +114,16 @@
   clip-path: inset(0 round var(--card-radius));
 }
 
-.sig-card:hover,
 .sig-card.active {
   transition: none;
   transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sig-card:hover {
+    transition: none;
+    transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+  }
 }
 
 .sig-card-shell.entering .sig-card {
@@ -209,17 +226,26 @@
   transition: opacity 0.8s ease;
 }
 
-.sig-card:hover .sig-shine,
 .sig-card.active .sig-shine {
   filter: brightness(0.85) contrast(1.5) saturate(0.5);
   animation-play-state: paused;
 }
 
-.sig-card:hover .sig-shine::before,
 .sig-card.active .sig-shine::before,
-.sig-card:hover .sig-shine::after,
 .sig-card.active .sig-shine::after {
   opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sig-card:hover .sig-shine {
+    filter: brightness(0.85) contrast(1.5) saturate(0.5);
+    animation-play-state: paused;
+  }
+
+  .sig-card:hover .sig-shine::before,
+  .sig-card:hover .sig-shine::after {
+    opacity: 1;
+  }
 }
 
 .sig-shine::before {
@@ -452,10 +478,12 @@
   pointer-events: auto;
 }
 
-.sig-contact-btn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-1px);
-  transition: all 0.2s ease;
+@media (hover: hover) and (pointer: fine) {
+  .sig-contact-btn:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
 }
 
 /* 微信号气泡：点「联系」从底栏上沿浮出来。
