@@ -75,15 +75,11 @@
     wrap.addEventListener('touchend', reset);
     wrap.addEventListener('touchcancel', reset);
 
-    /* 兜底：触摸端 .active 一旦漏摘就永久定格流光。
-       pointerleave 在触摸上靠不住 —— 手指抬起时指针"位置"没变，
-       浏览器不认为它离开了元素，那条 reset 就未必来。
-       所以触摸的收尾按 pointer 事件自己再兜一层。 */
-    function resetIfTouch(e) {
-      if (e.pointerType === 'touch') reset();
-    }
-    wrap.addEventListener('pointerup', resetIfTouch);
-    wrap.addEventListener('pointercancel', resetIfTouch);
+    /* 这里一开始还挂了 pointerup / pointercancel 兜底，是错的：
+       触摸的事件顺序是 pointerdown → touchstart → pointerup → touchend → click，
+       pointerup 跑在 click 前面，在它里面改 .active 会让卡片 transform 跟着变，
+       iOS 据此判定"元素移动了"，直接把 click 取消 —— 表现就是点「联系」没反应。
+       .active 漏摘的风险改由 CSS 兜（触摸端不暂停流光，见 signature.css）。 */
 
     // 入场时归位一次，避免继承上一页残留的变量
     reset();
