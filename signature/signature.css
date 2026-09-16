@@ -226,9 +226,12 @@
   transition: opacity 0.8s ease;
 }
 
+/* 触摸端：.active 只负责提亮流光，不暂停它。
+   手指按住的时候本来就看不见卡面（手挡着），暂停毫无意义；
+   而一旦 .active 因为某个事件没来而漏摘，暂停就变成永久定格。
+   暂停这个动作只留给鼠标 —— 那边 :hover 有 has-hover 兜着，不会漏。 */
 .sig-card.active .sig-shine {
   filter: brightness(0.85) contrast(1.5) saturate(0.5);
-  animation-play-state: paused;
 }
 
 .sig-card.active .sig-shine::before,
@@ -237,13 +240,16 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .sig-card:hover .sig-shine {
+  .sig-card:hover .sig-shine,
+  .sig-card.active .sig-shine {
     filter: brightness(0.85) contrast(1.5) saturate(0.5);
     animation-play-state: paused;
   }
 
   .sig-card:hover .sig-shine::before,
-  .sig-card:hover .sig-shine::after {
+  .sig-card:hover .sig-shine::after,
+  .sig-card.active .sig-shine::before,
+  .sig-card.active .sig-shine::after {
     opacity: 1;
   }
 }

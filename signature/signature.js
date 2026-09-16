@@ -73,6 +73,17 @@
       if (e.touches[0]) set(e.touches[0]);
     }, { passive: true });
     wrap.addEventListener('touchend', reset);
+    wrap.addEventListener('touchcancel', reset);
+
+    /* 兜底：触摸端 .active 一旦漏摘就永久定格流光。
+       pointerleave 在触摸上靠不住 —— 手指抬起时指针"位置"没变，
+       浏览器不认为它离开了元素，那条 reset 就未必来。
+       所以触摸的收尾按 pointer 事件自己再兜一层。 */
+    function resetIfTouch(e) {
+      if (e.pointerType === 'touch') reset();
+    }
+    wrap.addEventListener('pointerup', resetIfTouch);
+    wrap.addEventListener('pointercancel', resetIfTouch);
 
     // 入场时归位一次，避免继承上一页残留的变量
     reset();
