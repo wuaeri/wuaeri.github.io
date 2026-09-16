@@ -1,0 +1,566 @@
+/* ============================================================
+   落款卡 · 全息名片
+   数值全部照搬 React Bits 的 ProfileCard，一个没动。
+   唯一改动：类名前缀 pc- → sig-，避免和页面里已有样式打架。
+
+   上一版我自作聪明加了保底层（mix-blend-mode:screen）和自调配色，
+   结果 screen 跟 color-dodge 叠在一起分母趋零，光标一进卡片直接曝成纯白。
+   已全部撤掉。
+   ============================================================ */
+
+.sig-wrap {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --pointer-from-center: 0;
+  --pointer-from-top: 0.5;
+  --pointer-from-left: 0.5;
+  --card-opacity: 0;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --background-x: 50%;
+  --background-y: 50%;
+  /* 这两个原版都是 none，真值由外链给：官网 demo 始终传 grainUrl（噪点颗粒，
+     让全息层有质感），图标纹理由「Show Icon Pattern」开关控制。
+     两张图是 React Bits 自己的资源，已下到 signature/assets/。
+     注意 url() 相对样式表自身解析，所以 shun 那边引同一份 CSS 也找得到。 */
+  --grain: url(assets/grain.webp);
+  /* 图标纹理绝不能和 grain 一起开！--icon 是挂在 .sig-shine 上的 mask-image，
+     而 .sig-shine::before（grain 颗粒就铺在它上面）是它的伪元素 —— 遮罩一开，
+     整片颗粒被裁得只剩箭头形状，观感就是"光效几乎为零"。
+     原版做成开关是有道理的：颗粒 / 图案，二选一。默认跟官网一样：关。 */
+  --icon: none;
+  --behind-gradient: none;
+  --behind-glow-color: rgba(125, 190, 255, 0.67);
+  /* 官方 CSS 的 :root 写 25%，但组件 JS 在运行时用 50% 覆盖它
+     （见 ProfileCard.jsx 的 cardStyle）。照 CSS 抄 25% 会让光晕收成一团、
+     又集中又扎眼——嘉豪说的"曝光太大"就是这个。以 JS 真值为准。 */
+  --behind-glow-size: 50%;
+  /* 卡面渐变。原版由 JS 注入，默认值是 React Bits 源码里的
+     DEFAULT_INNER_GRADIENT。不补这一行，.sig-inside 就只剩纯黑，
+     而全息层走 color-dodge 在纯黑上恒等于黑 —— 整张卡会死黑一片。 */
+  --inner-gradient: linear-gradient(145deg, #60496e8c 0%, #71C4FF44 100%);
+  --sunpillar-1: hsl(2, 100%, 73%);
+  --sunpillar-2: hsl(53, 100%, 69%);
+  --sunpillar-3: hsl(93, 100%, 69%);
+  --sunpillar-4: hsl(176, 100%, 76%);
+  --sunpillar-5: hsl(228, 100%, 74%);
+  --sunpillar-6: hsl(283, 100%, 73%);
+  --sunpillar-clr-1: var(--sunpillar-1);
+  --sunpillar-clr-2: var(--sunpillar-2);
+  --sunpillar-clr-3: var(--sunpillar-3);
+  --sunpillar-clr-4: var(--sunpillar-4);
+  --sunpillar-clr-5: var(--sunpillar-5);
+  --sunpillar-clr-6: var(--sunpillar-6);
+  --card-radius: 30px;
+}
+
+.sig-wrap {
+  perspective: 500px;
+  transform: translate3d(0, 0, 0.1px);
+  position: relative;
+  touch-action: none;
+}
+
+.sig-behind {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    var(--behind-glow-color) 0%,
+    transparent var(--behind-glow-size)
+  );
+  filter: blur(50px) saturate(1.1);
+  opacity: calc(0.8 * var(--card-opacity));
+  transition: opacity 200ms ease;
+}
+
+.sig-wrap:hover,
+.sig-wrap.active {
+  --card-opacity: 1;
+}
+
+.sig-card {
+  height: 80svh;
+  max-height: 540px;
+  display: grid;
+  aspect-ratio: 0.718;
+  border-radius: var(--card-radius);
+  position: relative;
+  background-blend-mode: color-dodge, normal, normal, normal;
+  animation: sig-glow-bg 12s linear infinite;
+  box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px)
+    calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
+  transition: transform 1s ease;
+  transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+  background: rgba(0, 0, 0, 0.9);
+  backface-visibility: hidden;
+  overflow: hidden;
+  /* Safari 在 3D 变换进行中，会把 "overflow:hidden + border-radius" 的圆角裁剪
+     退化成矩形裁剪 —— 所以一转就露方角。clip-path 是几何裁剪，跟得住变换。 */
+  -webkit-clip-path: inset(0 round var(--card-radius));
+  clip-path: inset(0 round var(--card-radius));
+}
+
+.sig-card:hover,
+.sig-card.active {
+  transition: none;
+  transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+}
+
+.sig-card-shell.entering .sig-card {
+  transition: transform 180ms ease-out;
+}
+
+.sig-card-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.sig-card * {
+  display: grid;
+  grid-area: 1/-1;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+}
+
+.sig-inside {
+  inset: 0;
+  position: absolute;
+  background-image: var(--inner-gradient);
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: none;
+}
+
+.sig-shine {
+  /* Safari 走的是 -webkit- 那份，官方源码两套都写了，我先前漏了前缀 */
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  mask-mode: luminance;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 150%;
+  mask-size: 150%;
+  -webkit-mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
+  mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
+  transition: filter 0.8s ease;
+  filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
+  animation: sig-holo-bg 18s linear infinite;
+  animation-play-state: running;
+  mix-blend-mode: color-dodge;
+}
+
+.sig-shine,
+.sig-shine::after {
+  --space: 5%;
+  --angle: -45deg;
+  transform: translate3d(0, 0, 1px);
+  overflow: hidden;
+  z-index: 3;
+  background: transparent;
+  background-size: cover;
+  background-position: center;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      var(--sunpillar-clr-1) calc(var(--space) * 1),
+      var(--sunpillar-clr-2) calc(var(--space) * 2),
+      var(--sunpillar-clr-3) calc(var(--space) * 3),
+      var(--sunpillar-clr-4) calc(var(--space) * 4),
+      var(--sunpillar-clr-5) calc(var(--space) * 5),
+      var(--sunpillar-clr-6) calc(var(--space) * 6),
+      var(--sunpillar-clr-1) calc(var(--space) * 7)
+    ),
+    repeating-linear-gradient(
+      var(--angle),
+      #0e152e 0%,
+      hsl(180, 10%, 60%) 3.8%,
+      hsl(180, 29%, 66%) 4.5%,
+      hsl(180, 10%, 60%) 5.2%,
+      #0e152e 10%,
+      #0e152e 12%
+    ),
+    radial-gradient(
+      farthest-corner circle at var(--pointer-x) var(--pointer-y),
+      hsla(0, 0%, 0%, 0.1) 12%,
+      hsla(0, 0%, 0%, 0.15) 20%,
+      hsla(0, 0%, 0%, 0.25) 120%
+    );
+  background-position:
+    0 var(--background-y),
+    var(--background-x) var(--background-y),
+    center;
+  background-blend-mode: color, hard-light;
+  background-size:
+    500% 500%,
+    300% 300%,
+    200% 200%;
+  background-repeat: repeat;
+}
+
+.sig-shine::before,
+.sig-shine::after {
+  content: '';
+  background-position: center;
+  background-size: cover;
+  grid-area: 1/1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.sig-card:hover .sig-shine,
+.sig-card.active .sig-shine {
+  filter: brightness(0.85) contrast(1.5) saturate(0.5);
+  animation-play-state: paused;
+}
+
+.sig-card:hover .sig-shine::before,
+.sig-card.active .sig-shine::before,
+.sig-card:hover .sig-shine::after,
+.sig-card.active .sig-shine::after {
+  opacity: 1;
+}
+
+.sig-shine::before {
+  background-image:
+    linear-gradient(
+      45deg,
+      var(--sunpillar-4),
+      var(--sunpillar-5),
+      var(--sunpillar-6),
+      var(--sunpillar-1),
+      var(--sunpillar-2),
+      var(--sunpillar-3)
+    ),
+    radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(0, 0%, 70%) 0%, hsla(0, 0%, 30%, 0.2) 90%),
+    var(--grain);
+  background-size:
+    250% 250%,
+    100% 100%,
+    220px 220px;
+  background-position:
+    var(--pointer-x) var(--pointer-y),
+    center,
+    calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
+  background-blend-mode: color-dodge;
+  filter: brightness(calc(2 - var(--pointer-from-center))) contrast(calc(var(--pointer-from-center) + 2))
+    saturate(calc(0.5 + var(--pointer-from-center)));
+  mix-blend-mode: luminosity;
+}
+
+.sig-shine::after {
+  background-position:
+    0 var(--background-y),
+    calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5),
+    center;
+  background-size:
+    200% 300%,
+    700% 700%,
+    100% 100%;
+  mix-blend-mode: difference;
+  filter: brightness(0.8) contrast(1.5);
+}
+
+.sig-glare {
+  transform: translate3d(0, 0, 1.1px);
+  overflow: hidden;
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    hsl(248, 25%, 80%) 12%,
+    hsla(207, 40%, 30%, 0.8) 90%
+  );
+  mix-blend-mode: overlay;
+  filter: brightness(0.8) contrast(1.2);
+  z-index: 4;
+}
+
+.sig-avatar-content {
+  /* 两条定案，都是嘉豪拍的：
+     ① 人像浮在光效层上面 —— 脸不能被颗粒糊住。z-index 压过 .sig-shine(3)，
+        同级 + DOM 在后 = 盖在上面；抠像的透明区域照旧透出卡面的光效。
+     ② 色调照抄官网 —— 用回原版的 mix-blend-mode: luminosity：
+        人像只留自己的明暗，色相饱和度全取卡片底色，于是自动变成卡片的冷色调。
+        他的原话："单色调比较贴合卡片"。 */
+  mix-blend-mode: luminosity;
+  z-index: 3;
+  overflow: visible;
+  transform: translateZ(2);
+  backface-visibility: hidden;
+}
+
+/* 人像：从卡片底边长出来，不裁切。
+   指针左右移 → 整个人像跟着平移几像素；上下移 → 纵向轻微拉伸，
+   做出"呼吸"的感觉。这一段我之前照搬时漏了，补回来。 */
+.sig-avatar-content .avatar {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform-origin: 50% 100%;
+  transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0)
+    scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
+    scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
+  /* 回到原版的 -1px。
+     我之前为了让人名不压额头把它改成 -60px，照片底部因此溢出卡片 59px，
+     只能靠 .sig-card 的 overflow:hidden 去裁 —— 而卡片上挂着 3D 变换
+     (translateZ/rotateX)，Safari 对"合成层 + 圆角 + 溢出裁剪"会退化成
+     矩形裁剪，于是卡片下端两个角变直角、转动时还会闪出棱角。
+     这笔账是我的，撤销。人像怎么避开人名另想办法，不能拿裁剪换。 */
+  bottom: -1px;
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform 120ms ease-out;
+}
+
+.sig-avatar-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+.sig-content:not(.sig-avatar-content) {
+  max-height: 100%;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  transform: translate3d(
+    calc(var(--pointer-from-left) * -6px + 3px),
+    calc(var(--pointer-from-top) * -6px + 3px),
+    0.1px
+  );
+  z-index: 5;
+  mix-blend-mode: luminosity;
+}
+
+.sig-details {
+  width: 100%;
+  position: absolute;
+  top: 3em;
+  display: flex;
+  flex-direction: column;
+}
+
+.sig-details h3 {
+  font-weight: 600;
+  margin: 0;
+  font-size: min(6.2svh, 3.7em);
+  background-image: linear-gradient(to bottom, #fff, #6f6fbe);
+  background-size: 1em 1.5em;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.sig-details p {
+  font-weight: 600;
+  position: relative;
+  top: -12px;
+  white-space: nowrap;
+  font-size: 16px;
+  margin: 0 auto;
+  width: min-content;
+  background-image: linear-gradient(to bottom, #fff, #4a4ac0);
+  background-size: 1em 1.5em;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.sig-user-info {
+  position: absolute;
+  --ui-inset: 20px;
+  --ui-radius-bias: 6px;
+  bottom: var(--ui-inset);
+  left: var(--ui-inset);
+  right: var(--ui-inset);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)));
+  padding: 12px 14px;
+  pointer-events: auto;
+}
+
+.sig-user-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sig-mini-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.sig-mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sig-user-text {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sig-handle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+.sig-status {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1;
+}
+
+.sig-contact-btn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: transparent;
+  font-family: inherit;
+  /* 上面 .sig-card * 那条 pointer-events: none 是直接命中所有后代的，
+     会一路盖到按钮和气泡头上（它不是继承，是硬命中）。必须显式救回来。 */
+  pointer-events: auto;
+}
+
+.sig-contact-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* 微信号气泡：点「联系」从底栏上沿浮出来。
+   毛玻璃沿用底栏那一套，不另起配色 —— 另起就成两张皮了。
+   进场 300ms 走 expo-out、退场 180ms，进慢出快。 */
+.sig-contact-pop {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(18, 20, 28, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transform-origin: 100% 100%;
+  transition: opacity 180ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.sig-contact-pop.on {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.sig-contact-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.sig-contact-id {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.sig-contact-tip {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.28);
+  transition: color 200ms ease;
+}
+
+.sig-contact-pop.done .sig-contact-tip {
+  color: #9fd8ff;
+}
+
+@keyframes sig-glow-bg {
+  0% { --bgrotate: 0deg; }
+  100% { --bgrotate: 360deg; }
+}
+
+@keyframes sig-holo-bg {
+  0% {
+    background-position: 0 var(--background-y), 0 0, center;
+  }
+  100% {
+    background-position: 0 var(--background-y), 90% 90%, center;
+  }
+}
+
+@media (max-width: 768px) {
+  .sig-card { height: 70svh; max-height: 450px; }
+  .sig-details { top: 2em; }
+  .sig-details h3 { font-size: min(4svh, 2.5em); }
+  .sig-details p { font-size: 14px; }
+  .sig-user-info { --ui-inset: 15px; padding: 10px 12px; }
+  .sig-mini-avatar { width: 28px; height: 28px; }
+  .sig-user-details { gap: 10px; }
+  .sig-handle { font-size: 13px; }
+  .sig-status { font-size: 10px; }
+  .sig-contact-btn { padding: 6px 12px; font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .sig-card { height: 60svh; max-height: 380px; }
+  .sig-details { top: 1.5em; }
+  .sig-details h3 { font-size: min(3.5svh, 2em); }
+  .sig-details p { font-size: 12px; top: -8px; }
+  .sig-user-info { --ui-inset: 12px; padding: 8px 10px; }
+  .sig-mini-avatar { width: 24px; height: 24px; }
+  .sig-user-details { gap: 8px; }
+  .sig-handle { font-size: 12px; }
+  .sig-status { font-size: 9px; }
+  .sig-contact-btn { padding: 5px 10px; font-size: 10px; border-radius: 50px; }
+}
+
+@media (max-width: 320px) {
+  .sig-card { height: 55svh; max-height: 320px; }
+  .sig-details h3 { font-size: min(3svh, 1.5em); }
+  .sig-details p { font-size: 11px; }
+  .sig-user-info { padding: 6px 8px; }
+  .sig-mini-avatar { width: 20px; height: 20px; }
+  .sig-user-details { gap: 6px; }
+  .sig-handle { font-size: 11px; }
+  .sig-status { font-size: 8px; }
+  .sig-contact-btn { padding: 4px 8px; font-size: 9px; border-radius: 50px; }
+}

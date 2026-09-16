@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瞬 · 丽弦 OSHUN</title>
+<style>
+  /* ============================================================
+     瞬 · 丽弦 OSHUN
+     视觉母题：脉冲 → 衰减
+     一个声音的生命：起 → 爆 → 落 → 散。整页动效都从这一个物理事实长出来。
+     ============================================================ */
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --bg:        #050506;
+    --bg-2:      #0b0b0d;
+    --fg:        rgba(255,255,255,0.94);
+    --fg-2:      rgba(255,255,255,0.55);
+    --fg-3:      rgba(255,255,255,0.28);
+    --line:      rgba(255,255,255,0.10);
+    --pulse:     #9fd8ff;          /* 电光蓝白 —— "瞬"的冷 */
+    --warm:      #e8c9a0;          /* 钛金 —— 球顶的暖 */
+  }
+
+  html { scroll-behavior:smooth; }
+
+  body {
+    background:var(--bg);
+    color:var(--fg);
+    font-family:-apple-system,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* 全局细噪点 —— 让纯黑不死板 */
+  body::before {
+    content:"";
+    position:fixed; inset:0; z-index:9999; pointer-events:none;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============================================================
+     一、开场：脉冲
+     ============================================================ */
+
+  .hero {
+    position:relative;
+    height:100vh; min-height:600px;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+
+  .hero canvas {
+    position:absolute; inset:0; width:100%; height:100%;
+  }
+
+  .hero-inner {
+    position:relative; z-index:2; text-align:center;
+  }
+
+  /* 「瞬」字：本体极细，靠光晕和外环撑出重量 */
+  .shun {
+    font-size:clamp(140px, 26vw, 340px);
+    font-weight:200;
+    line-height:0.92;
+    letter-spacing:0.04em;
+    position:relative;
+    display:inline-block;
+    /* 字本身透明，用渐变描边 —— 让光从字里透出来 */
+    background:linear-gradient(180deg,
+      rgba(255,255,255,0.98) 0%,
+      rgba(255,255,255,0.72) 42%,
+      rgba(255,255,255,0.14) 100%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 0 60px rgba(159,216,255,0.20));
+    opacity:0;
+    transform:scale(1.08);
+    animation:shunIn 2.4s cubic-bezier(0.16,1,0.30,1) 0.15s forwards;
+  }
+  @keyframes shunIn {
+    to { opacity:1; transform:scale(1); }
+  }
+
+  /* 字底下那道光 —— 脉冲留下的余晖 */
+  .shun-glow {
+    position:absolute; left:50%; top:52%;
+    width:60vw; height:60vw; max-width:820px; max-height:820px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:radial-gradient(circle,
+      rgba(159,216,255,0.13) 0%,
+      rgba(159,216,255,0.05) 32%,
+      transparent 68%);
+    pointer-events:none;
+    opacity:0;
+    animation:glowIn 3.2s ease-out 0.5s forwards;
+  }
+  @keyframes glowIn {
+    0%   { opacity:0; transform:translate(-50%,-50%) scale(0.55); }
+    40%  { opacity:1; }
+    100% { opacity:0.75; transform:translate(-50%,-50%) scale(1); }
+  }
+
+  .hero-sub {
+    margin-top:clamp(22px,4vh,48px);
+    font-size:clamp(11px,1.1vw,14px);
+    font-weight:300;
+    letter-spacing:0.52em;
+    text-indent:0.52em;
+    color:var(--fg-3);
+    opacity:0;
+    animation:fadeUp 1.6s cubic-bezier(0.16,1,0.30,1) 1.5s forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(14px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* 滚动提示：一条会呼吸的细线 */
+  .scroll-hint {
+    position:absolute; bottom:44px; left:50%; transform:translateX(-50%);
+    width:1px; height:52px;
+    background:linear-gradient(to bottom, transparent, var(--fg-3));
+    opacity:0;
+    animation:fadeUp 1.2s ease-out 2.6s forwards;
+  }
+  .scroll-hint::after {
+    content:"";
+    position:absolute; left:50%; top:0;
+    width:1px; height:16px; margin-left:-0.5px;
+    background:var(--pulse);
+    animation:drip 2.6s cubic-bezier(0.5,0,0.5,1) infinite;
+  }
+  @keyframes drip {
+    0%   { transform:translateY(-16px); opacity:0; }
+    30%  { opacity:1; }
+    100% { transform:translateY(52px); opacity:0; }
+  }
+
+  /* ============================================================
+     通用：区块
+     ============================================================ */
+
+  .section {
+    position:relative;
+    max-width:900px;
+    margin:0 auto;
+    padding:clamp(90px,14vh,170px) 32px;
+  }
+
+  .eyebrow {
+    font-size:11px; font-weight:400;
+    letter-spacing:0.42em; text-indent:0.42em;
+    color:var(--fg-3);
+    margin-bottom:26px;
+  }
+
+  .lede {
+    font-size:clamp(19px,2.3vw,27px);
+    font-weight:300;
+    line-height:1.95;
+    letter-spacing:0.02em;
+    color:var(--fg);
+  }
+  .lede em {
+    font-style:normal;
+    color:var(--pulse);
+    /* 底下衬一条会发光的线 */
+    background:linear-gradient(to top, rgba(159,216,255,0.16) 34%, transparent 34%);
+    padding:0 2px;
+  }
+
+  .body-text {
+    font-size:clamp(14px,1.5vw,16.5px);
+    font-weight:300;
+    line-height:2.25;
+    letter-spacing:0.015em;
+    color:var(--fg-2);
+  }
+
+  /* 滚动揭示：模糊 → 清晰，位移很小但能感觉到 */
+  .reveal {
+    opacity:0;
+    transform:translateY(26px);
+    filter:blur(6px);
+    transition:opacity 1.15s cubic-bezier(0.16,1,0.30,1),
+               transform 1.15s cubic-bezier(0.16,1,0.30,1),
+               filter 1.15s cubic-bezier(0.16,1,0.30,1);
+  }
+  .reveal.in {
+    opacity:1; transform:translateY(0); filter:blur(0);
+  }
+
+  /* ============================================================
+     二、名字：瞬的两层意思
+     ============================================================ */
+
+  .meaning { display:grid; gap:clamp(48px,7vw,86px); }
+
+  .meaning-item { position:relative; padding-left:clamp(0px,4vw,54px); }
+  .meaning-item::before {
+    content:"";
+    position:absolute; left:0; top:8px; bottom:8px;
+    width:1px; background:var(--line);
+  }
+  .meaning-num {
+    font-size:11px; font-weight:400; letter-spacing:0.3em;
+    color:var(--fg-3);
+    margin-bottom:12px;
+  }
+  .meaning-title {
+    font-size:clamp(22px,3vw,34px);
+    font-weight:300; letter-spacing:0.04em;
+    margin-bottom:16px;
+  }
+  .meaning-title span { color:var(--fg-3); font-size:0.62em; margin-left:14px; letter-spacing:0.16em; }
+
+  /* ============================================================
+     三、参数：数字本身就是画面
+     ============================================================ */
+
+  .specs {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:52px;
+  }
+
+  .spec {
+    background:var(--bg);
+    padding:clamp(26px,3.6vw,42px) clamp(22px,2.6vw,30px);
+    position:relative;
+    overflow:hidden;
+    transition:background 0.6s ease-out;
+  }
+  .spec:hover { background:var(--bg-2); }
+
+  /* 悬停时，一条光从底部扫上来 */
+  .spec::after {
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--pulse), transparent);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.85s cubic-bezier(0.16,1,0.30,1);
+  }
+  .spec:hover::after { transform:scaleX(1); }
+
+  .spec-val {
+    font-size:clamp(38px,5.4vw,62px);
+    font-weight:200;
+    line-height:1;
+    letter-spacing:-0.02em;
+    font-variant-numeric:tabular-nums;
+    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.42));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .spec-val .unit {
+    font-size:0.34em; font-weight:300; margin-left:7px;
+    letter-spacing:0.06em;
+    -webkit-text-fill-color:var(--fg-3);
+  }
+  .spec-key {
+    margin-top:16px;
+    font-size:12.5px; font-weight:300;
+    letter-spacing:0.14em;
+    color:var(--fg-3);
+  }
+
+  /* ============================================================
+     四、声音：三段波形
+     低频宽而沉 / 中频密而实 / 高频细而快
+     ============================================================ */
+
+  .waves { margin-top:56px; display:grid; gap:clamp(44px,6vw,72px); }
+
+  .wave-row { display:grid; gap:18px; }
+
+  .wave-head {
+    display:flex; align-items:baseline; gap:16px;
+  }
+  .wave-name { font-size:15px; font-weight:400; letter-spacing:0.16em; }
+  .wave-note {
+    font-size:12.5px; font-weight:300; letter-spacing:0.05em; color:var(--fg-3);
+  }
+
+  .wave-box { position:relative; height:96px; }
+  .wave-box canvas { width:100%; height:100%; display:block; }
+
+  /* ============================================================
+     五、收尾
+     ============================================================ */
+
+  .outro {
+    position:relative;
+    height:78vh; min-height:520px;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .outro canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+  .outro-inner { position:relative; z-index:2; text-align:center; }
+
+  .outro-shun {
+    font-size:clamp(72px,13vw,168px);
+    font-weight:200;
+    line-height:1;
+    letter-spacing:0.06em;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,0.42);   /* 只剩轮廓 —— 声音散尽之后 */
+    opacity:0;
+    transition:opacity 2s ease-out;
+  }
+  .outro-shun.in { opacity:1; }
+
+  .outro-line {
+    margin-top:34px;
+    font-size:clamp(11px,1.1vw,13px);
+    font-weight:300;
+    letter-spacing:0.46em; text-indent:0.46em;
+    color:var(--fg-3);
+    opacity:0;
+    transition:opacity 1.6s ease-out 0.5s;
+  }
+  .outro-line.in { opacity:1; }
+
+  .page-foot {
+    padding:34px 32px 46px;
+    text-align:center;
+    font-size:11px; font-weight:300;
+    letter-spacing:0.3em; text-indent:0.3em;
+    color:rgba(255,255,255,0.18);
+    border-top:1px solid var(--line);
+  }
+
+  /* ---------- 尊重减弱动效偏好 ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+    }
+    .reveal { opacity:1; transform:none; filter:none; }
+  }
+</style>
+<link rel="stylesheet" href="../signature/signature.css?v=0916e">
+</head>
+<body>
+
+<!-- ============ 一、开场 ============ -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="shun-glow"></div>
+  <div class="hero-inner">
+    <div class="shun">瞬</div>
+    <div class="hero-sub">丽弦 OSHUN</div>
+  </div>
+  <div class="scroll-hint"></div>
+</section>
+
+<!-- ============ 二、名字 ============ -->
+<section class="section meaning">
+  <div class="reveal">
+    <div class="eyebrow">名字</div>
+    <p class="lede">
+      一个声音的生命很短。<em>起、爆、落、散</em>——它还没被听清，就已经过去了。
+    </p>
+  </div>
+
+  <div class="meaning-item reveal">
+    <div class="meaning-num">01</div>
+    <div class="meaning-title">瞬间<span>INSTANT</span></div>
+    <p class="body-text">
+      所有声音都在时间里发生，而时间是线性的、单向的。
+      一段旋律过去之后，只剩下对它的记忆。
+    </p>
+  </div>
+
+  <div class="meaning-item reveal">
+    <div class="meaning-num">02</div>
+    <div class="meaning-title">瞬态<span>TRANSIENT</span></div>
+    <p class="body-text">
+      音频工程里，瞬态指声音起始那一下的爆发——鼓槌落在鼓皮上、弦被拨动、
+      空气被推动的瞬间。瞬态快不快，决定了一段声音是"糊"还是"清楚"。
+      这是这副耳机名字真正的出处。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 三、参数 ============ -->
+<section class="section">
+  <div class="reveal">
+    <div class="eyebrow">构成</div>
+    <p class="lede">
+      单动圈。<em>8.3 毫米</em>，钛金球顶配全碳素悬边。
+      一副不愿意让你先换前端的耳机。
+    </p>
+  </div>
+
+  <div class="specs reveal">
+    <div class="spec">
+      <div class="spec-val"><span data-count="8.3" data-dec="1">0</span><span class="unit">mm</span></div>
+      <div class="spec-key">动圈单元</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val"><span data-count="26">0</span><span class="unit">Ω</span></div>
+      <div class="spec-key">阻抗</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val"><span data-count="110">0</span><span class="unit">dB</span></div>
+      <div class="spec-key">灵敏度 / mW</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val"><span data-count="6.8" data-dec="1">0</span><span class="unit">g</span></div>
+      <div class="spec-key">单边重量</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val"><span data-count="20">0</span><span class="unit">Hz</span></div>
+      <div class="spec-key">频响下限</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val"><span data-count="4.4">0</span><span class="unit">mm</span></div>
+      <div class="spec-key">平衡插头</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 四、声音 ============ -->
+<section class="section">
+  <div class="reveal">
+    <div class="eyebrow">声音</div>
+    <p class="lede">
+      低频宽而沉，中频密而实，高频细而快。<em>三种波形，三种性格。</em>
+    </p>
+  </div>
+
+  <div class="waves">
+    <div class="wave-row reveal">
+      <div class="wave-head">
+        <div class="wave-name">低频</div>
+        <div class="wave-note">量感充沛 · 下潜扎实 · 不轰头</div>
+      </div>
+      <div class="wave-box"><canvas class="wave" data-wave="low"></canvas></div>
+    </div>
+
+    <div class="wave-row reveal">
+      <div class="wave-head">
+        <div class="wave-name">中频</div>
+        <div class="wave-note">人声靠前 · 结像清晰 · 温润有韵</div>
+      </div>
+      <div class="wave-box"><canvas class="wave" data-wave="mid"></canvas></div>
+    </div>
+
+    <div class="wave-row reveal">
+      <div class="wave-head">
+        <div class="wave-name">高频</div>
+        <div class="wave-note">顺滑自然 · 无毛刺 · 久听不累</div>
+      </div>
+      <div class="wave-box"><canvas class="wave" data-wave="high"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 五、收尾 ============ -->
+<section class="outro">
+  <canvas id="outroCanvas"></canvas>
+  <div class="outro-inner">
+    <div class="outro-shun" id="outroShun">瞬</div>
+    <div class="outro-line" id="outroLine">起 · 爆 · 落 · 散</div>
+  </div>
+</section>
+
+<!-- ============ 片尾 · 落款 ============ -->
+<section class="sig-credits" id="credits">
+  <div class="sig-credits-label">— 创作者 —</div>
+
+  <dl class="sig-credits-list">
+    <div class="sig-credits-row"><dt>wuaeri</dt><dd>内容 · 审美 · 判断</dd></div>
+    <div class="sig-credits-row"><dt>老 C</dt><dd>结构 · 代码 · 实现</dd></div>
+  </dl>
+
+  <div class="sig-wrap">
+    <div class="sig-behind"></div>
+    <div class="sig-card-shell">
+      <div class="sig-card">
+        <div class="sig-inside">
+          <div class="sig-shine"></div>
+          <div class="sig-glare"></div>
+
+          <div class="sig-content sig-avatar-content">
+            <img class="avatar" src="../signature/avatar/me.png" alt="">
+            <div class="sig-user-info">
+              <div class="sig-user-details">
+                <div class="sig-mini-avatar" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1b2436,#0d1018);color:rgba(255,255,255,.72);font-size:17px">W</div>
+                <div class="sig-user-text">
+                  <span class="sig-handle">@wuaeri</span>
+                  <span class="sig-status">状态一句话</span>
+                </div>
+              </div>
+              <button class="sig-contact-btn" type="button">联系</button>
+              <div class="sig-contact-pop" aria-hidden="true">
+                <span class="sig-contact-label">微信</span>
+                <span class="sig-contact-id">kaaeri_thanss</span>
+                <span class="sig-contact-tip">点击复制</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sig-content">
+            <div class="sig-details">
+              <h3>wuaeri</h3>
+              <p>改这里 · 一句话</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sig-credits-foot">2026</div>
+</section>
+
+<style>
+  /* 片尾：整块黑场，给它自己的留白 */
+  .sig-credits {
+    position: relative;
+    background: #050506;
+    padding: 14vh 24px 16vh;
+    display: flex; flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  .sig-credits-label {
+    font-size: 12px; letter-spacing: .5em; text-indent: .5em;
+    color: rgba(255,255,255,.3);
+    margin-bottom: 54px;
+  }
+  .sig-credits-list {
+    margin: 0 0 90px; display: flex; flex-direction: column;
+    gap: 20px; align-items: center; list-style: none;
+  }
+  .sig-credits-row { display: flex; align-items: baseline; gap: 22px; }
+  .sig-credits-row dt {
+    font-size: 14px; font-weight: 500; letter-spacing: .08em;
+    color: rgba(255,255,255,.82); min-width: 120px; text-align: right;
+  }
+  .sig-credits-row dd {
+    margin: 0; font-size: 12px; font-weight: 300;
+    letter-spacing: .14em; color: rgba(255,255,255,.34);
+  }
+  .sig-credits .sig-wrap { flex: 0 0 auto; }
+  .sig-credits-foot {
+    margin-top: 90px; font-size: 11px;
+    letter-spacing: .4em; color: rgba(255,255,255,.18);
+  }
+</style>
+
+<div class="page-foot">丽弦 OSHUN · 瞬　·　4.4mm 平衡</div>
+
+<script>
+/* ============================================================
+   1. 开场脉冲
+   一次脉冲从中心扩散，然后衰减 —— 整页动效的母题
+   ============================================================ */
+
+(function heroPulse() {
+  const cv = document.getElementById('heroCanvas');
+  const ctx = cv.getContext('2d');
+  let W, H, dpr;
+  const rings = [];
+  let t0 = performance.now();
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // 开场先来一次大脉冲，然后每隔几秒补一次小的
+  function spawn(strength) {
+    rings.push({ r: 0, max: Math.min(W, H) * (0.42 + strength * 0.3), a: strength, born: performance.now() });
+  }
+  setTimeout(() => spawn(1), 320);
+  setTimeout(() => spawn(0.45), 1600);
+  setInterval(() => spawn(0.28), 5200);
+
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2;
+
+    for (let i = rings.length - 1; i >= 0; i--) {
+      const g = rings[i];
+      const age = (now - g.born) / 1000;
+      const life = 3.4;
+      if (age > life) { rings.splice(i, 1); continue; }
+
+      // 缓出扩散 + 幂次衰减 —— 这才是"瞬态"的形状
+      const p = age / life;
+      const eased = 1 - Math.pow(1 - p, 3.2);
+      g.r = g.max * eased;
+      const alpha = g.a * Math.pow(1 - p, 2.6);
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, g.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(159,216,255,${alpha * 0.30})`;
+      ctx.lineWidth = 1 + (1 - p) * 1.1;
+      ctx.stroke();
+
+      // 内圈：一层更淡更慢的
+      ctx.beginPath();
+      ctx.arc(cx, cy, g.r * 0.82, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,255,255,${alpha * 0.10})`;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   2. 滚动揭示
+   ============================================================ */
+
+(function revealOnScroll() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (!e.isIntersecting) return;
+      // 同批出现时错开，避免"整块砸下来"
+      setTimeout(() => e.target.classList.add('in'), i * 110);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ============================================================
+   3. 数字计数
+   ============================================================ */
+
+(function counters() {
+  const els = document.querySelectorAll('[data-count]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      io.unobserve(el);
+      const target = parseFloat(el.dataset.count);
+      const dec = parseInt(el.dataset.dec || '0', 10);
+      const dur = 1500;
+      const start = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 4);       // easeOutQuart
+        el.textContent = (target * eased).toFixed(dec);
+        if (p < 1) requestAnimationFrame(tick);
+      })(start);
+    });
+  }, { threshold: 0.6 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ============================================================
+   4. 三段波形
+   低频宽而慢 / 中频密而稳 / 高频细而快
+   ============================================================ */
+
+(function waves() {
+  const configs = {
+    low:  { freq: 1.6,  amp: 60, speed: 0.55, decay: 0.16, color: '159,216,255', lw: 1.6 },
+    mid:  { freq: 5.2,  amp: 34, speed: 1.0,  decay: 0.30, color: '232,201,160', lw: 1.3 },
+    high: { freq: 13.5, amp: 17, speed: 1.9,  decay: 0.52, color: '255,255,255', lw: 0.9 },
+  };
+
+  document.querySelectorAll('.wave').forEach(cv => {
+    const cfg = configs[cv.dataset.wave];
+    const ctx = cv.getContext('2d');
+    let W, H, dpr, t = 0, active = false, progress = 0;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // 进入视野才开始跑 —— 省电，也让"开始"这件事有重量
+    const io = new IntersectionObserver(es => {
+      if (es[0].isIntersecting) { active = true; io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(cv);
+
+    function draw() {
+      requestAnimationFrame(draw);
+      if (!active) return;
+
+      progress = Math.min(progress + 0.014, 1);
+      const grow = 1 - Math.pow(1 - progress, 3);   // 波形从无到有"长"出来
+
+      t += cfg.speed * 0.016;
+      const mid = H / 2;
+      ctx.clearRect(0, 0, W, H);
+
+      // 中轴线
+      ctx.beginPath();
+      ctx.moveTo(0, mid); ctx.lineTo(W, mid);
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // 主波形：两端衰减，中间饱满 —— 像一段真实的声音
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 2) {
+        const u = x / W;
+        const env = Math.pow(Math.sin(Math.PI * u), 1.4);              // 包络
+        const y = mid
+          + Math.sin(u * Math.PI * 2 * cfg.freq + t) * cfg.amp * env * grow
+          + Math.sin(u * Math.PI * 2 * cfg.freq * 2.13 - t * 1.7) * cfg.amp * 0.22 * env * grow;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(${cfg.color},0.72)`;
+      ctx.lineWidth = cfg.lw;
+      ctx.lineJoin = 'round';
+      ctx.shadowColor = `rgba(${cfg.color},0.45)`;
+      ctx.shadowBlur = 12;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+    draw();
+  });
+})();
+
+/* ============================================================
+   5. 收尾：声音散尽，只剩轮廓
+   ============================================================ */
+
+(function outro() {
+  const cv = document.getElementById('outroCanvas');
+  const ctx = cv.getContext('2d');
+  const shun = document.getElementById('outroShun');
+  const line = document.getElementById('outroLine');
+  let W, H, dpr, on = false, t = 0;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const io = new IntersectionObserver(es => {
+    if (es[0].isIntersecting) {
+      on = true;
+      shun.classList.add('in');
+      setTimeout(() => line.classList.add('in'), 300);
+      io.disconnect();
+    }
+  }, { threshold: 0.4 });
+  io.observe(cv);
+
+  // 背景：极淡的粒子向上飘散 —— "散"
+  const parts = Array.from({ length: 44 }, (_, i) => ({
+    x: Math.random(), y: 0.5 + Math.random() * 0.5,
+    v: 0.00006 + Math.random() * 0.00016,
+    r: 0.5 + Math.random() * 1.3,
+    a: 0.06 + Math.random() * 0.24,
+  }));
+
+  function draw() {
+    requestAnimationFrame(draw);
+    if (!on) return;
+    t += 0.016;
+    ctx.clearRect(0, 0, W, H);
+
+    parts.forEach(p => {
+      p.y -= p.v * 16;
+      if (p.y < -0.05) { p.y = 1.05; p.x = Math.random(); }
+      const y = p.y * H;
+      ctx.beginPath();
+      ctx.arc(p.x * W, y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(159,216,255,${p.a * 0.6})`;
+      ctx.fill();
+    });
+  }
+  draw();
+})();
+</script>
+<script src="../signature/signature.js?v=0916e"></script>
+</body>
+</html>
