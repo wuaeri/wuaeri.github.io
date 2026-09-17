@@ -1,0 +1,39 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>CRTWarp 自测</title>
+<!-- 只给无头截图用的一张裸页：不加站内任何样式，好确认"画面是着色器出的"
+     而不是被别的东西衬出来的。 -->
+<style>
+  html,body{margin:0;height:100%;background:#05010a;overflow:hidden}
+  #c{position:fixed;inset:0}
+  #msg{position:fixed;left:14px;bottom:12px;z-index:9;
+       font:12px/1.6 ui-monospace,Menlo,monospace;color:#9fd8ff}
+</style>
+<div id="c"></div>
+<div id="msg">载入中…</div>
+<script type="module">
+  import { createCRTWarp } from './crt-warp.js';
+
+  /* ?fps=2&time=8 —— 无头里 SwiftShader 是 CPU 在跑 17 次 plasma/像素，
+     按 30fps 跑满会等到天荒地老。把帧数压到个位数才验得动。
+     ?t=8 是**假装时间已经走了 8 秒**，省得等它慢慢涨。 */
+  var q = new URLSearchParams(location.search);
+  var cfg = {
+    color: '#c755f7', backgroundColor: '#05010a',
+    speed: 0.5, curvature: 0.25,
+    scanlineStrength: 0.25, scanlineFrequency: 200,
+    waveAmplitude: 0.3, waveFrequency: 2.5,
+    bloom: 1.5, bloomRadius: 1, noise: 0.1, vignette: 0,
+    brightness: 1.25, pixelation: 1, rgbShift: 0.015,
+    mouseReact: true, mouseStrength: 0.5, dpr: 1, fps: 30
+  };
+  ['fps', 'speed', 'bloom', 'curvature', 'dpr', 'brightness'].forEach(function (k) {
+    if (q.has(k)) cfg[k] = Number(q.get(k));
+  });
+  if (q.has('t')) cfg.startTime = Number(q.get('t'));
+
+  var r = createCRTWarp(document.getElementById('c'), cfg);
+  document.getElementById('msg').textContent =
+    r.ok ? '✓ 组件就绪' : ('✗ ' + r.why);
+  window.__crt = r;
+</script>

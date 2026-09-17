@@ -18,3 +18,6 @@ signature/demo*.html
 signature/snippet.html
 signature/assets/person.webp
 signature/assets/iconpattern.png
+
+# 本地开发用的无缓存服务器（跟 head-demo/serve.py 同一个东西）
+/serve.py

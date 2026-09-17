@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRTWarp 调参台</title>
+<!--
+  ⚠️ 这个页面存在的理由：**我没有眼睛。**
+
+  无头浏览器在这台机器上跑不出这个 shader（SwiftShader 要 CPU
+  模拟每像素 17 次 plasma，出不来画面），所以"它到底长什么样"
+  只能由嘉豪的眼睛回答。与其我改一版他看一眼、来回猜，
+  不如给他一套旋钮，**在真实的底上直接拖**。
+
+  底下这套东西是**照着首页首屏复刻的**：同样的大字、同样的 Works、
+  同样的 ENTER、同一个径向暗角 —— 少了哪样，拖出来的数都不作数。
+-->
+<style>
+  :root{
+    --fg:rgba(255,255,255,.94);
+    --fg-3:rgba(255,255,255,.34);
+    --pulse:#9fd8ff;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#050506;color:var(--fg);overflow:hidden;
+       font-family:-apple-system,"SF Pro Display","PingFang SC",sans-serif;
+       -webkit-font-smoothing:antialiased}
+
+  #crt{position:fixed;inset:0;z-index:0;pointer-events:none}
+  /* 跟首页那条同一个暗角 —— 少了它，调出来的亮度会偏暗一档 */
+  #crt::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse 66% 54% at 50% 47%,
+      rgba(5,5,6,.58) 0%,rgba(5,5,6,.30) 52%,rgba(5,5,6,0) 100%)}
+
+  .stage{position:fixed;inset:0;z-index:1;display:grid;place-items:center;
+         pointer-events:none}
+  .word{font-size:clamp(72px,12.5vw,190px);font-weight:500;
+        letter-spacing:-.045em;line-height:.92}
+  .sub{margin-top:clamp(22px,3.4vh,40px);text-align:center;font-size:11px;
+       letter-spacing:.62em;text-indent:.62em;text-transform:uppercase;
+       color:var(--fg-3)}
+  .hero{display:grid;justify-items:center}
+  .enter{position:absolute;left:50%;bottom:34px;width:160px;margin-left:-80px;
+         display:flex;flex-direction:column;align-items:center;color:rgba(255,255,255,.58)}
+  .enter i{display:block;width:1px;height:44px;
+    background:linear-gradient(180deg,rgba(159,216,255,0),rgba(159,216,255,.42) 58%,rgba(159,216,255,.92))}
+  .enter span{margin-top:14px;font-size:10px;letter-spacing:.62em;
+              text-indent:.62em;text-transform:uppercase}
+
+  /* ── 调参面板 ── */
+  .panel{position:fixed;right:16px;top:16px;z-index:9;width:280px;
+         padding:16px 16px 12px;border:1px solid rgba(255,255,255,.12);
+         border-radius:10px;background:rgba(10,10,12,.82);
+         backdrop-filter:blur(14px);font-size:11px}
+  .panel h2{font-size:10px;letter-spacing:.34em;text-transform:uppercase;
+            color:rgba(255,255,255,.42);font-weight:400;margin-bottom:14px}
+  .row{display:grid;grid-template-columns:76px 1fr 42px;align-items:center;
+       gap:8px;margin-bottom:9px}
+  .row label{color:rgba(255,255,255,.62);letter-spacing:.04em}
+  .row b{font-weight:400;text-align:right;color:var(--pulse);
+         font-variant-numeric:tabular-nums;font-size:10px}
+  input[type=range]{-webkit-appearance:none;width:100%;height:14px;background:none}
+  input[type=range]::-webkit-slider-runnable-track{height:1px;background:rgba(255,255,255,.22)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;
+    margin-top:-4px;border-radius:50%;background:#fff;cursor:grab}
+  .out{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1);
+       font:10px/1.65 ui-monospace,Menlo,monospace;color:rgba(255,255,255,.5);
+       word-break:break-all;user-select:all;cursor:text}
+  .presets{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+  .presets button{font:10px/1 inherit;padding:6px 9px;border-radius:5px;cursor:pointer;
+    border:1px solid rgba(255,255,255,.16);background:none;color:rgba(255,255,255,.66)}
+  .presets button:hover{border-color:rgba(255,255,255,.4);color:#fff}
+</style>
+</head>
+<body>
+
+<div id="crt"></div>
+
+<div class="stage">
+  <div class="hero">
+    <h1 class="word">wuaeri</h1>
+    <div class="sub">Works</div>
+  </div>
+  <div class="enter"><i></i><span>Enter</span></div>
+</div>
+
+<div class="panel">
+  <h2>CRT 调参</h2>
+  <div id="rows"></div>
+  <div class="presets">
+    <button data-p="draft">给的参数</button>
+    <button data-p="subtle">压暗</button>
+    <button data-p="ghost">幽灵</button>
+    <button data-p="reset">原始默认</button>
+  </div>
+  <div class="out" id="out"></div>
+</div>
+
+<script type="module">
+  import { createCRTWarp } from './crt-warp.js';
+
+  /* 出厂值 = 嘉豪给的那一组，一个没改。 */
+  var SPEC = [
+    ['brightness',  0,    2,   1.25, 0.01],
+    ['bloom',       0,    2,   1.50, 0.01],
+    ['speed',       0,    2,   0.50, 0.01],
+    ['curvature',   0.05, 1,   0.25, 0.01],
+    ['scanline',    0,    1,   0.25, 0.01],
+    ['waveAmp',     0.05, 1,   0.30, 0.01],
+    ['noise',       0,    0.4, 0.10, 0.005]
+  ];
+  var UMAP = { scanline:'scanStrength', waveAmp:'waveAmp' };
+
+  var cfg = {
+    color:'#c755f7', backgroundColor:'#05010a',
+    speed:.5, curvature:.25, scanlineStrength:.25, scanlineFrequency:200,
+    waveAmplitude:.3, waveFrequency:2.5, bloom:1.5, bloomRadius:1,
+    noise:.1, vignette:0, brightness:1.25,
+    pixelation:1, rgbShift:.015,
+    mouseReact:true, mouseStrength:.5, dpr:1, fps:30
+  };
+
+  var crt = createCRTWarp(document.getElementById('crt'), cfg);
+
+  var rows = document.getElementById('rows');
+  var inputs = {};
+  SPEC.forEach(function (s) {
+    var k = s[0];
+    var d = document.createElement('div');
+    d.className = 'row';
+    d.innerHTML = '<label>' + k + '</label>' +
+                  '<input type="range" min="' + s[1] + '" max="' + s[2] +
+                  '" step="' + s[4] + '" value="' + s[3] + '">' +
+                  '<b>' + s[3].toFixed(2) + '</b>';
+    rows.appendChild(d);
+    var inp = d.querySelector('input'), out = d.querySelector('b');
+    inputs[k] = inp;
+    inp.addEventListener('input', function () {
+      var v = Number(inp.value);
+      out.textContent = v.toFixed(2);
+      var o = {}; o[UMAP[k] || k] = v;
+      if (crt.set) crt.set(o);
+      dump();
+    });
+  });
+
+  function dump() {
+    if (!crt.set) return;
+    var o = {};
+    SPEC.forEach(function (s) { o[s[0]] = Number(inputs[s[0]].value); });
+    document.getElementById('out').textContent =
+      'brightness ' + o.brightness.toFixed(2) +
+      ' · bloom ' + o.bloom.toFixed(2) +
+      ' · speed ' + o.speed.toFixed(2) +
+      ' · curvature ' + o.curvature.toFixed(2) +
+      ' · scanline ' + o.scanline.toFixed(2) +
+      ' · waveAmp ' + o.waveAmp.toFixed(2) +
+      ' · noise ' + o.noise.toFixed(3);
+  }
+  dump();
+
+  function apply(p) {
+    SPEC.forEach(function (s) {
+      inputs[s[0]].value = p[s[0]];
+      inputs[s[0]].nextElementSibling.textContent = Number(p[s[0]]).toFixed(2);
+    });
+    var o = {};
+    SPEC.forEach(function (s) {
+      var k = s[0];
+      var v = Number(p[k]);
+      o[UMAP[k] || k] = v;
+    });
+    if (crt.set) crt.set(o);
+    dump();
+  }
+  var PRESETS = {
+    // 我压的第一版
+    draft:  { brightness:1.25, bloom:1.50, speed:0.50, curvature:0.25, scanline:0.25, waveAmp:0.30, noise:0.10 },
+    // 还要更退后一档：让字先读得出来，波纹只剩一点"底下有东西在动"
+    subtle: { brightness:0.22, bloom:0.30, speed:0.38, curvature:0.25, scanline:0.45, waveAmp:0.22, noise:0.06 },
+    // 几乎只剩气息。首屏要极干净的时候用这档
+    ghost:  { brightness:0.12, bloom:0.18, speed:0.30, curvature:0.20, scanline:0.60, waveAmp:0.16, noise:0.04 },
+    reset:  { brightness:1.25, bloom:1.50, speed:0.50, curvature:0.25, scanline:0.25, waveAmp:0.30, noise:0.10 }
+  };
+  [].forEach.call(document.querySelectorAll('.presets button'), function (b) {
+    b.addEventListener('click', function () { apply(PRESETS[b.dataset.p]); });
+  });
+</script>
+</body>
+</html>

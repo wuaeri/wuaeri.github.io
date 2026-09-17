@@ -12,10 +12,16 @@
      必须放在 <head> 里、早于任何模块加载。 -->
 <script type="importmap">
 {"imports":{
-  "three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
-  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  "three":"./head/vendor/three.module.js",
+  "three/addons/":"./head/vendor/jsm/"
 }}
 </script>
+<!-- 原先是 cdn.jsdelivr.net 上的同一份。改本地有两个原因：
+     ① 国内直连 jsdelivr 一个文件就要 3.8 秒，而 three + GLTFLoader +
+        OrbitControls 是**串行**下的 → 首屏那颗头要等十几秒才出来；
+     ② 整站一直是"零外部依赖"，就 three 这一处例外。
+     依赖链查过：GLTFLoader 另外要 ../utils/BufferGeometryUtils.js，
+     已一并下到 head/vendor/jsm/ 里，相对路径对得上。 -->
 <style>
 :root{
   --bg:      #050506;
@@ -59,6 +65,22 @@ body::after{
   pointer-events:none; z-index:0;
   background:radial-gradient(ellipse 70% 100% at 50% 0%,
     rgba(159,216,255,.055) 0%, rgba(159,216,255,0) 68%);
+}
+
+/* ══════════ 首屏底：CRT 扭曲波 ══════════
+   React Bits <CRTWarp> 的原生版（见 crt/crt-warp.js）。
+
+   它和 .head-layer 有一个关键区别：**它自己有底**。
+   着色器最后是 mix(backgroundColor, …) 且 alpha = 1，
+   等于把整屏铺满 #05010a —— 它不是贴图，是首屏真正的地板。
+   所以它必须在最底：压在任何东西下面都行，唯独不能盖住内容。
+
+   入场 1.8s，比头颅的 1.6s 慢半拍 —— 让它像"屏幕先亮起来"。 */
+.crt-layer{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.8s var(--ease);
 }
 
 /* ══════════ 首屏头颅 ══════════
@@ -117,6 +139,9 @@ main{position:relative;z-index:1}
    动画改成逐帧写 inline style —— 留着 CSS transition 的话，
    每一帧都会被"再补一段过渡"，跟滚动的跟随会打成一团。 */
 html.fx .panel > *{transition:none}
+/* 例外：门那个口的 hover 变色是"交互反馈"，不是"显影"，
+   别被上面那条一起关掉 —— 关掉的话鼠标移上去是硬切。 */
+html.fx .p1 .enter{transition:color .55s var(--ease)}
 
 .panel > *:nth-child(1){transition-delay:.06s}
 .panel > *:nth-child(2){transition-delay:.16s}
@@ -141,6 +166,76 @@ html.fx .panel > *{transition:none}
   color:var(--fg-3);
   /* 字距会把整行的视觉重心往左拽，补回来一点 */
   text-indent:.62em;
+}
+
+/* ── 门上的口 ──
+   ⚠️ 这一块换过一版，起因就一个字：**看不见**。
+
+   第一版是"一根 1px 的竖线（上半还全透明）+ 10px 的大写字"，
+   走的还是 HUD 那套。那套在**静止的暗底**上成立 ——
+   可它现在压在 CRT 上，底是亮的、还会动。
+   **1px 和 10px 在这种底上就等于不存在。**
+   嘉豪的原话是「能盲点，但就是没有图标」：
+   热区在、点得到，可屏幕上什么都没有。
+
+   教训记下来：**"细"是相对于底的。底一亮一動，细就不再是克制，
+   是消失。** 现在给一个真有形的东西：细线圆环 + 向下箭头。
+
+   ⚠️ 另外两个位置上的坑（第一版栽过，仍然成立）：
+   ① **挂底边、脱离 grid 流。** 留在流里它就是第三个居中元素，
+      落在画面 63% 那一带 —— 正好压在头的下巴上。
+   ② **居中不能用 transform。** 显影那几帧往 transform 里写
+      translateY，会把 translateX(-50%) 一起盖掉
+      （靠 width + 负 margin 居中，transform 留给动画用）。 */
+.p1 .enter{
+  position:absolute;
+  left:50%;
+  bottom:clamp(30px,6.4vh,56px);
+  width:160px;
+  margin-left:-80px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  /* 热区：看着是一小块，点得到的是一整块。手机上尤其要紧。 */
+  padding:14px 20px 8px;
+  text-decoration:none;
+  color:rgba(255,255,255,.78);
+  transition:color .55s var(--ease);
+}
+.p1 .enter:hover,
+.p1 .enter:focus-visible{color:#fff}
+.p1 .enter:focus-visible{outline:none}
+
+.p1 .enter-ico{
+  display:block;
+  width:clamp(32px,4.2vh,40px);
+  height:clamp(32px,4.2vh,40px);
+  color:rgba(255,255,255,.92);
+  /* 亮底 + 会动 → 得给它一层自己的光，才从紫里浮得出来 */
+  filter:drop-shadow(0 0 9px rgba(159,216,255,.55));
+  animation:enterBob 3s var(--ease) infinite;
+  transition:color .45s var(--ease);
+}
+.p1 .enter-ico svg{display:block;width:100%;height:100%}
+.p1 .enter:hover .enter-ico{color:#fff}
+
+/* 轻轻往下走。指向用动作说，不用第二个箭头说。 */
+@keyframes enterBob{
+  0%,100%{transform:translateY(0)}
+  50%    {transform:translateY(5px)}
+}
+
+.p1 .enter-txt{
+  margin-top:11px;
+  font-size:10px;
+  letter-spacing:.62em;
+  text-indent:.62em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.62);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .p1 .enter-ico{animation:none}
 }
 
 /* ══════════ 二 · 作品 ══════════ */
@@ -360,6 +455,9 @@ html.fx .panel > *{transition:none}
 </head>
 <body>
 
+<!-- 首屏底：CRT 扭曲波。垫在头颅**后面**（DOM 更前、层叠级相同）。 -->
+<div class="crt-layer" id="crtLayer" aria-hidden="true"></div>
+
 <!-- 首屏头颅。垫在正文后面，滚过首屏自己退场。 -->
 <div class="head-layer" id="headLayer" aria-hidden="true"></div>
 
@@ -369,6 +467,21 @@ html.fx .panel > *{transition:none}
   <section class="panel p1" id="s1">
     <h1 class="word" id="word">wuaeri</h1>
     <div class="sub">Works</div>
+    <!-- 门上的口。
+         这一屏原来只有字和一颗头，屏幕上**没有任何能点的地方** ——
+         访客得自己猜到"要往下滚"才知道底下有东西。带"门"的注释
+         写了三天，门本身却不在。补上。 -->
+    <a class="enter" id="enter" href="#s2">
+      <span class="enter-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10.5"/>
+          <path d="M12 7.3v8.8"/>
+          <path d="M8.1 12.4l3.9 3.9 3.9-3.9"/>
+        </svg>
+      </span>
+      <span class="enter-txt">Enter</span>
+    </a>
   </section>
 
   <!-- ═══ 二 · 作品 ═══ -->
@@ -567,26 +680,45 @@ html.fx .panel > *{transition:none}
     /* 第一屏：开门，不等滚动。
        "显"是过程、每屏都做；但这一屏是开场的显影，得自己走。
        同样 easeOutExpo（快进慢停）—— 三屏同一个手感。 */
-    var hero = [].slice.call(document.querySelectorAll('.p1 .word, .p1 .sub'));
+    /* ?fxdone —— 显影直接落到终态。
+       无头 Chrome 在虚拟时间下只跑得出十来帧，这条逐帧动画永远
+       停在半路（实测 9 秒时 Enter 还卡在 opacity .92），
+       **截图就永远验不了"长什么样"**。这个开关只给拍图用。 */
+    if (gq.has('fxdone')) return;
+
+    /* 拍子：字 → Works → Enter，三下。
+       入口是这一屏的落点，慢半拍单独落下来 ——
+       和前两样挤在一起出来，就不像一个"可以按"的东西了。 */
+    var HERO = [
+      { sel: '.p1 .word',  delay:   0, dur: 1500, blur: 20, rise: 46 },
+      { sel: '.p1 .sub',   delay: 130, dur: 1000, blur: 12, rise: 24 },
+      { sel: '.p1 .enter', delay: 430, dur: 1150, blur: 10, rise: 20 }
+    ];
+    var hero = [];
+    HERO.forEach(function (h) {
+      var el = document.querySelector(h.sel);
+      if (el) hero.push({ el: el, c: h });
+    });
     if (!hero.length) return;
-    hero.forEach(function (el, i) {
-      el.style.opacity = 0;
-      el.style.filter = 'blur(' + (i ? 12 : 20) + 'px)';
-      el.style.transform = 'translateY(' + (i ? 24 : 46) + 'px)';
+    hero.forEach(function (o) {
+      o.el.style.opacity = 0;
+      o.el.style.filter = 'blur(' + o.c.blur + 'px)';
+      o.el.style.transform = 'translateY(' + o.c.rise + 'px)';
     });
     var t0 = performance.now() + 140;
     (function heroFrame() {
       var k = performance.now() - t0;
       if (k < 0) { requestAnimationFrame(heroFrame); return; }
       var done = true;
-      hero.forEach(function (el, i) {
-        var local = clamp01((k - i * 130) / (i ? 1000 : 1500));
+      hero.forEach(function (o) {
+        var c = o.c;
+        var local = clamp01((k - c.delay) / c.dur);
         var e = easeOutExpo(local);
-        el.style.opacity = e.toFixed(3);
-        el.style.transform = e >= 1 ? 'none'
-          : 'translateY(' + ((1 - e) * (i ? 24 : 46)).toFixed(2) + 'px)';
-        el.style.filter = e >= 1 ? 'none'
-          : 'blur(' + ((1 - e) * (i ? 12 : 20)).toFixed(2) + 'px)';
+        o.el.style.opacity = e.toFixed(3);
+        o.el.style.transform = e >= 1 ? 'none'
+          : 'translateY(' + ((1 - e) * c.rise).toFixed(2) + 'px)';
+        o.el.style.filter = e >= 1 ? 'none'
+          : 'blur(' + ((1 - e) * c.blur).toFixed(2) + 'px)';
         if (local < 1) done = false;
       });
       if (!done) requestAnimationFrame(heroFrame);
@@ -599,7 +731,7 @@ html.fx .panel > *{transition:none}
      2026-09-17 上线当晚嘉豪就报了一次"网页内什么都没有了"。
      **内容永远比效果重要**：2.6 秒还没显示出来的，一律强制显示。 */
   function rescue() {
-    ['word', 'sub'].forEach(function (c) {
+    ['word', 'sub', 'enter'].forEach(function (c) {
       [].forEach.call(document.querySelectorAll('.p1 .' + c), function (el) {
         el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
       });
@@ -620,6 +752,7 @@ html.fx .panel > *{transition:none}
     try {
       document.documentElement.classList.add('fx');   // 关掉 CSS transition
       setup();
+      if (gq.has('fxdone')) rescue();                 // 见 setup() 里那段注释
       addEventListener('resize', measure);
       // 开场动画 1.5 秒内该到位；2.6 秒还没到位就是出事了
       setTimeout(function () {
@@ -634,6 +767,37 @@ html.fx .panel > *{transition:none}
       document.documentElement.classList.remove('fx');
       fallbackReveal();
     }
+  }
+
+  /* ══ 门上的口 ══
+     点了滚到作品屏。不用 CSS 的 scroll-behavior:smooth ——
+     它跟 scroll-snap 一起用会互相打架，自己发更可控。 */
+  function goWorks() {
+    var s2 = document.getElementById('s2');
+    // 拿不到就什么都不做，让浏览器自己跳 href="#s2" 那个锚点
+    if (s2 && typeof s2.scrollIntoView === 'function') {
+      s2.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    }
+  }
+  var enter = document.getElementById('enter');
+  if (enter) {
+    enter.addEventListener('click', function (e) {
+      e.preventDefault();
+      goWorks();
+    });
+  }
+
+  /* 首屏是"门"，而门上除了那个口没有别的可交互对象 ——
+     与其让人瞄准一根细线，不如**整屏都算数**。
+     只给鼠标设备：触屏上滚动手势结束时会补一个 click，
+     整屏可点会变成"滑一下就跳走"。 */
+  var s1 = document.getElementById('s1');
+  if (s1 && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    s1.style.cursor = 'pointer';
+    s1.addEventListener('click', function (e) {
+      if (e.target && e.target.closest && e.target.closest('a')) return;  // 口子自己处理
+      goWorks();
+    });
   }
 
   /* ── 片边刻度 ── */
@@ -698,8 +862,11 @@ html.fx .panel > *{transition:none}
      （跟课室游戏那条"世界是时间的函数"是同一件事。） */
   (function () {
     var layer = document.getElementById('headLayer');
+    var crtLayer = document.getElementById('crtLayer');
     var s1 = document.getElementById('s1');
     if (!layer || !s1) return;
+    var head = null, crt = null;
+    var headReady = false, crtReady = false, shown = true;
     // 减弱动效就直接不要它 —— 这东西是纯装饰，关掉不损失信息
     if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
@@ -717,27 +884,85 @@ html.fx .panel > *{transition:none}
     function progress() {
       return Math.min(1, Math.max(0, ratio()));
     }
+    /* ══ 两层退场的节奏不一样，这是"过渡"最花心思的地方 ══
+       头颅是**演员**：滚过首屏立刻开始走，0.40 屏走完。
+       CRT 是**屏幕**：晚一拍（1.06 屏）才开始灭，而且灭得更快（0.30 屏）。
+       于是滚下去看到的是"人先撤、屏再黑"，不是一个整体慢慢化开；
+       等第二屏的作品列表升上来时，底下已经干净了 ——
+       不然一层紫等离子糊在作品后面，读都读不动。 */
     function paint() {
-      // 首屏内一直满着；滚过首屏之后再花 0.4 屏淡出，
-      // 不然后面作品列表背后糊着一颗头。
       var r = ratio();
-      var vis = r < 1 ? 1 : Math.max(0, 1 - (r - 1) / 0.4);
-      layer.style.opacity = vis.toFixed(3);
+      var headVis = r < 1 ? 1 : Math.max(0, 1 - (r - 1) / 0.40);
+      var crtVis  = r < 1 ? 1 : Math.max(0, 1 - (r - 1.06) / 0.30);
+      layer.style.opacity = (headReady ? headVis : 0).toFixed(3);
+      if (crtLayer) crtLayer.style.opacity = (crtReady ? crtVis : 0).toFixed(3);
+
+      /* 眼睛看不见了就别再算。⚠️ 这两层都是 fixed 全屏 ——
+         IntersectionObserver 对它们**永远**返回"在视口里"，
+         它压根不会滚出视口，所以 IO 在这件事上帮不上忙。
+         省电只能自己按透明度叫停（这台机器今天在跑电池）。 */
+      var onScreen = Math.max(headVis, crtVis) > 0.004;
+      if (onScreen !== shown) {
+        shown = onScreen;
+        if (head && head.setPaused) head.setPaused(!onScreen);
+        if (crt && crt.setPaused) crt.setPaused(!onScreen);
+      }
     }
     window.addEventListener('scroll', paint, { passive: true });
     window.addEventListener('resize', paint);
     paint();
 
-    /* three 和模型都走网络。拿不到就当没这回事 —— 页面本身是完整的，
-       首屏那个字自己站得住。**加载失败绝不能变成白屏。** */
-    import('./head/head-hero.js').then(function (m) {
-      m.createHeadHero(layer, {
-        progress: progress,
-        fit: 1.5,          // 留白倍数：1.0 = 正好撑满视口，越大头越小
-        onReady: paint,
-        onError: function (e) { console.warn('[head] 没载入：', e); }
-      });
-    }).catch(function (e) { console.warn('[head] 模块没载入：', e); });
+    /* ══ 底：CRT 扭曲波 ══
+       参数是嘉豪 2026-09-17 给的那一组，原样。
+       它比头颅先就绪（不用下模型），所以"屏幕先亮"是自然发生的，
+       不用再手动错开 —— CSS 那边 1.8s 比头颅的 1.6s 慢半拍只是保险。
+
+       跟头颅同一个道理：拿不到就当没这回事，底黑了页面照样完整。 */
+    if (crtLayer && !q.has('nocrt')) {
+      import('./crt/crt-warp.js').then(function (m) {
+        /* 参数就是嘉豪给的那一组，原样。 */
+        crt = m.createCRTWarp(crtLayer, {
+          color: '#c755f7',
+          backgroundColor: '#05010a',
+          speed: 0.5,
+          curvature: 0.25,
+          scanlineStrength: 0.25,
+          scanlineFrequency: 200,
+          waveAmplitude: 0.3,
+          waveFrequency: 2.5,
+          bloom: 1.5,
+          bloomRadius: 1,
+          noise: 0.1,
+          vignette: 0,
+          brightness: 1.25,
+          pixelation: 1,
+          rgbShift: 0.015,
+          mouseReact: true,
+          mouseStrength: 0.5,
+          dpr: 1,
+          fps: 30
+        });
+        if (crt.ok) { crtReady = true; paint(); }
+        else console.warn('[crt] 没起来：', crt.why);
+      }).catch(function (e) { console.warn('[crt] 模块没载入：', e); });
+    }
+
+    /* ══ 头颅 ══
+       2026-09-17 嘉豪："去掉吧，有些突兀" —— 于是默认不加载。
+       **代码留着，不再删。** 头颅本身没问题（拆解动画那一整晚都是好的），
+       是"它和 CRT 底叠在一起"这件事不成：两层都在抢画面的中心。
+       哪天底换了、或者想法变了，地址后面加 ?head=1 就回来。
+       （拿不到也不影响什么 —— 页面本身是完整的，绝不变白屏。） */
+    if (q.has('head')) {
+      import('./head/head-hero.js').then(function (m) {
+        head = m.createHeadHero(layer, {
+          progress: progress,
+          fit: 1.5,          // 留白倍数：1.0 = 正好撑满视口，越大头越小
+          onReady: function () { headReady = true; paint(); },
+          onError: function (e) { console.warn('[head] 没载入：', e); }
+        });
+      }).catch(function (e) { console.warn('[head] 模块没载入：', e); });
+    }
   })();
 
   /* ── 时钟：每秒查一次，只在分钟真的翻过去时才写 DOM ──
