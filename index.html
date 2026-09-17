@@ -6,6 +6,19 @@
 <title>wuaeri</title>
 <meta name="description" content="wuaeri 的作品">
 
+<!-- 刷新回门口。
+     不写这一行，浏览器就用默认的 auto —— **刷新时恢复上次的滚动位置**。
+     而这一页有 scroll-snap，恢复出来的位置会被吸附到最近的一屏，
+     于是"刷新"落到哪儿取决于上次停在哪儿，而不是每次都从门口开始。
+     这一页只有三屏、门在第一屏，所以刷新就该回门口，没有别的答案。
+
+     必须放在 <head> 里、早于任何渲染 —— scrollRestoration 只在
+     导航开始前设才有用，等 DOM 建完再设已经晚了。（跟上面那张
+     importmap 一个道理：都要早。） -->
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+</script>
+
 <!-- three 的裸名映射。head/head-hero.js 里写的是 import ... from 'three'，
      没有这张表浏览器解析不了裸名，模块会在加载那一步就死掉 ——
      而且是静默死：画布根本不会被创建，页面上什么都不会发生。
