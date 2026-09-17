@@ -121,14 +121,31 @@ main{position:relative;z-index:1}
    是「曝光」这件事最安静的翻译：不闪、不吵、不打断阅读。
    （进场那一下的白线扫描是"闪"，是事件；
      这里是"显"，是过程。两种都要有，但用量差很远。） */
+/* ⚠️ 默认是**可见的**。这一条是拿一上午换来的。
+
+   原来这里写的是 `.panel > *{opacity:0}` —— 先藏、再由 JS 放。
+   看着合理，其实是把内容的可见性**押在 JS 上**：JS 有一环没跑，
+   整页就是一片空白。2026-09-17 上午嘉豪连撞三次，症状都是
+   "CRT 底在动，字和图标一个都没有"。
+
+   正着写：**要藏，得由 JS 主动给自己挂 `html.fx` 来申请。**
+   JS 没跑、跑一半、或者被打断，页面都是完整可见的。
+
+   为什么会被打断：**Safari 会暂停后台标签页的 requestAnimationFrame。**
+   他在终端里跟我说话，Safari 在后台 → 显影动画一帧没走 →
+   文字永远停在初始的 opacity 0。（CSS 不受影响，所以 CRT 那个
+   底照跑 —— 这正是"底在动、字没有"的来源。） */
 .panel > *{
-  opacity:0;
-  filter:blur(16px);
-  transform:translateY(30px);
   transition:
     opacity   1.05s var(--ease),
     filter    1.05s var(--ease),
     transform 1.05s var(--ease);
+}
+html.fx .panel > *{
+  opacity:0;
+  filter:blur(16px);
+  transform:translateY(30px);
+  transition:none;
 }
 .panel.in > *{
   opacity:1;
@@ -570,6 +587,8 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
      等它露出过半才动，人已经先看到"糊的了"。 */
   var panels = [].slice.call(document.querySelectorAll('.panel'));
   var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* 显影动画的紧急刹车。到点由兜底置真，逼它停手、把内容按到位。 */
+  var heroStop = false;
 
   /* ?goto=NNN —— 延迟一下，然后**真的滚**过去。
      无头浏览器没法滚动，而滚动驱动的动画不滚就验不了。
@@ -707,6 +726,7 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
     });
     var t0 = performance.now() + 140;
     (function heroFrame() {
+      if (heroStop) return;      // 兜底已经接手，别再往 inline style 里写了
       var k = performance.now() - t0;
       if (k < 0) { requestAnimationFrame(heroFrame); return; }
       var done = true;
@@ -754,13 +774,14 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
       setup();
       if (gq.has('fxdone')) rescue();                 // 见 setup() 里那段注释
       addEventListener('resize', measure);
-      // 开场动画 1.5 秒内该到位；2.6 秒还没到位就是出事了
+      /* 2.6 秒**无条件**收口，不判断"跑没跑完"。
+         上一版这里是个 if：只有 #word 的 opacity 不到 0.9 才救。
+         于是 sub 和 enter 卡住的时候它压根不动手 ——
+         兜底"检查过了"，却什么都没做。
+         **判断本身就会出错；到点就按下去，已经到位的再按一次无害。** */
       setTimeout(function () {
-        var w = document.getElementById('word');
-        if (w && parseFloat(w.style.opacity || 0) < 0.9) {
-          console.warn('[fx] 开场动画没跑起来，强制显示');
-          rescue();
-        }
+        heroStop = true;
+        rescue();
       }, 2600);
     } catch (e) {
       console.warn('[fx] 编排失败，走兜底：', e);
