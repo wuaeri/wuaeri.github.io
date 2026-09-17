@@ -277,14 +277,17 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 .p1 .enter{
   position:absolute;
   left:50%;
-  bottom:clamp(30px,6.4vh,56px);
+  /* 去掉 Enter 那行字之后这个盒子矮了约 24px，而它是按底边定位的 ——
+     所以底边得跟着往上收一点，不然口会自己往下掉一截。 */
+  bottom:clamp(38px,7.2vh,64px);
   width:160px;
   margin-left:-80px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  /* 热区：看着是一小块，点得到的是一整块。手机上尤其要紧。 */
-  padding:14px 20px 8px;
+  /* 热区：看着是一小块，点得到的是一整块。手机上尤其要紧。
+     （下面那 8px 原来是给文字留的，字没了就跟着去掉。） */
+  padding:14px 20px;
   text-decoration:none;
   color:rgba(255,255,255,.78);
   transition:color .55s var(--ease);
@@ -312,14 +315,11 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   50%    {transform:translateY(5px)}
 }
 
-.p1 .enter-txt{
-  margin-top:11px;
-  font-size:10px;
-  letter-spacing:.62em;
-  text-indent:.62em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.62);
-}
+/* 这里原来写着「Enter」，2026-09-17 嘉豪说"有些俗"，去掉了。
+   俗在哪儿：① "Enter / Enter Site / Scroll Down" 是模板站的语言；
+   ② 更要紧的是它把**门**这个隐喻说破了 —— 门上贴一个"请进"，
+   门就变成了商场自动门。
+   上面那条注释当时就写着"指向用动作说"，字却是反着做的。现在一致了。 */
 
 @media (prefers-reduced-motion:reduce){
   .p1 .enter-ico{animation:none}
@@ -706,7 +706,9 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
          这一屏原来只有字和一颗头，屏幕上**没有任何能点的地方** ——
          访客得自己猜到"要往下滚"才知道底下有东西。带"门"的注释
          写了三天，门本身却不在。补上。 -->
-    <a class="enter" id="enter" href="#s2">
+    <!-- aria-label 是**必须的**：那个字去掉之后，这个链接里面只剩一个
+         对读屏隐藏的箭头 —— 没有它，读屏用户只会听到一个光秃秃的"链接"。 -->
+    <a class="enter" id="enter" href="#s2" aria-label="进入作品">
       <span class="enter-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
@@ -715,7 +717,6 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
           <path d="M8.1 12.4l3.9 3.9 3.9-3.9"/>
         </svg>
       </span>
-      <span class="enter-txt">Enter</span>
     </a>
   </section>
 
