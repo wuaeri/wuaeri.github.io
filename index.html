@@ -312,9 +312,19 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   .p1 .enter-ico{animation:none}
 }
 
-/* ══════════ 二 · 作品 ══════════ */
+/* ══════════ 二 · 作品 ══════════
+   这一屏现在有两个块（列表 + 切片），要它们**作为一个整体**居中。
+   原来只有列表，.panel 的 place-items 就够了；两个块时 grid 会把
+   间距交给行距，等于每加一个元素就要重调一次。 */
+.p2{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
 .p2 .works{
   list-style:none;
+  flex-shrink:0;
   width:100%;
   max-width:940px;
   border-top:1px solid var(--line);
@@ -327,7 +337,11 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   grid-template-columns:clamp(56px,7vw,96px) 1fr auto;
   align-items:center;
   gap:0 clamp(18px,3vw,34px);
-  padding:clamp(26px,4.6vh,46px) 4px;
+  /* 4.6vh→3.2vh：这一屏底下多了一条切片，得从行距里让出位置。
+     让行距而不是让字号 —— 行距是呼吸，字号是内容。
+     仍然用 vh：窗口矮的时候整屏一起收，不是靠某一个断点兜。
+     （实测 900px 高的窗口下，改前整屏 912、改后 633，装得下。） */
+  padding:clamp(19px,3.2vh,36px) 4px;
   text-decoration:none;
   color:inherit;
   overflow:hidden;
@@ -393,6 +407,140 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 /* 未上线的条目：不假装能点 */
 .soon .title,.soon .desc{color:var(--fg-3)}
 .soon{cursor:default}
+
+/* ══════════ 二 · 切片 · 热点区 ══════════
+   上面四行是"我做了什么" —— 每一行点出去之前都是死的。
+   这一条是整站**唯一自己会动的东西**，也是唯一每次刷新都不一样的。
+
+   形态上要压得比作品行矮一档：作品行的字号是 clamp(24px,3.4vw,42px)，
+   这里 13px。它不抢戏的方式不是变暗，是**变细** ——
+   暗的东西会被当成禁用，细的东西才会被当成注释。 */
+.p2 .live-band{
+  position:relative;
+  flex-shrink:0;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:0 clamp(14px,2.2vw,26px);
+  width:100%;
+  max-width:940px;
+  margin-top:clamp(14px,2vh,26px);
+  padding:clamp(10px,1.4vh,14px) 4px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  color:inherit;
+  overflow:hidden;
+  transition:border-color .5s ease,background .5s ease;
+}
+.p2 .live-band:hover{
+  background:rgba(255,255,255,.014);
+  border-color:rgba(255,255,255,.16);
+}
+
+/* 左边的标签：一个呼吸的点 + LIVE + "多久以前"。
+   呼吸点是这里最要紧的一个元素 —— 它一个字都不说，
+   但把"这条带是活的"这件事直接送到眼睛里。 */
+.live-tag{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:9.5px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--pulse);
+  white-space:nowrap;
+}
+.live-dot{
+  position:relative;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:currentColor;
+  flex-shrink:0;
+}
+.live-dot::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:50%;
+  border:1px solid currentColor;
+  animation:breathe 2.6s var(--ease) infinite;
+}
+@keyframes breathe{
+  0%  { transform:scale(1);   opacity:.7 }
+  70% { transform:scale(3.6); opacity:0 }
+  100%{ transform:scale(3.6); opacity:0 }
+}
+.live-t{
+  color:var(--fg-3);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.1em;
+}
+.live-t:not(:empty)::before{content:"·";margin-right:7px;opacity:.55}
+
+/* 轨道。两件事：
+     · min-width:0 —— grid 里 1fr 那一列默认 min-width:auto，
+       会被内容撑开，整条带就跟着被撑出去（老坑）
+     · 两端 mask 虚化 —— 横向滚动最要紧的是"看不出头尾"，
+       露一个硬边就等于告诉人"这是从左边推进来的" */
+.live-track{
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  height:1.55em;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.live-row{
+  position:absolute;
+  left:0; top:0;
+  display:flex;
+  align-items:center;
+  white-space:nowrap;
+  will-change:transform;
+}
+.live-i{
+  display:inline-flex;
+  align-items:baseline;
+  gap:8px;
+  padding-right:clamp(30px,3.6vw,52px);
+  font-size:clamp(11.5px,1.05vw,13px);
+  line-height:1.55;
+  color:var(--fg-2);
+}
+.live-src{
+  flex-shrink:0;
+  font-size:9px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--fg-3);
+}
+/* 拉不到数据时露出来的那句话。不是"加载失败" ——
+   对访客来说"今天没转"比一个错误码体面，也仍然说明了这是什么。 */
+.live-fallback{
+  font-size:clamp(11.5px,1.05vw,13px);
+  color:var(--fg-3);
+}
+
+.live-go{
+  font-size:clamp(14px,1.4vw,18px);
+  color:var(--fg-3);
+  transform:translateX(-6px);
+  opacity:0;
+  transition:transform .5s var(--ease),opacity .35s ease,color .35s ease;
+}
+.p2 .live-band:hover .live-go{transform:translateX(0);opacity:1;color:var(--warm)}
+
+/* 数据馊了（Action 挂了 / 源全灭时）。**看起来活着但其实死了
+   是这里最坏的情况** —— 一条优雅滚动着的带子，底下是十小时前的
+   东西，比直接停住更会骗人。所以超时就把心跳换成暖色、内容压暗。 */
+.p2 .live-band.is-stale .live-tag{color:var(--warm)}
+.p2 .live-band.is-stale .live-row,
+.p2 .live-band.is-stale .live-fallback{opacity:.45}
+.p2 .live-band.is-stale .live-dot::after{animation:none;opacity:0}
+
+@media (prefers-reduced-motion:reduce){
+  .live-dot::after{animation:none;opacity:0}
+}
 
 /* ══════════ 三 · 尾 ══════════ */
 .p3{text-align:center}
@@ -607,6 +755,27 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
         </a>
       </li>
     </ul>
+
+    <!-- 切片 · 热点区。
+         整条是一个链接，指向完整页 —— 里面的标题**故意不做成可点的**：
+         这条带只有 40px 高，标题还在横向走，想精确点中某一条是折磨。
+         它的职责是"让你看见它在动，然后进去读"，不是读的地方。
+         （另外 <a> 里套 <a> 本来就是非法 HTML。）
+
+         下面那句静态说明是**兜底**：JS 没跑、JSON 没拉到、file:// 打开
+         这三种情况露出来的就是它 —— 不是空白，也不是"加载失败"。 -->
+    <a class="live-band" id="liveBand" href="./hotspot/"
+       aria-label="aespa 实时热点，进入完整页">
+      <span class="live-tag">
+        <i class="live-dot" aria-hidden="true"></i>
+        <span>Live</span>
+        <span class="live-t" id="liveT"></span>
+      </span>
+      <span class="live-track" id="liveTrack">
+        <span class="live-fallback">aespa 的实时热点 · 媒体层与社区层，每两小时自动更新</span>
+      </span>
+      <span class="live-go" aria-hidden="true">→</span>
+    </a>
   </section>
 
   <!-- ═══ 三 · 尾 ═══ -->
@@ -733,7 +902,9 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
        写完内容就已经在"会被驱动"的状态里 —— 之后 rAF 一跑，
        它就是滚动位置的函数，滚回去会倒着演。 */
     [
-      { sec: '#s2', sel: '.p2 .works li',            win: 0.62, gap: 0.16, rise: 44, blur: 14 },
+      /* 切片跟作品行走同一条编排 —— 它要是自己冒出来，
+         在这一屏就是个"没参与显影的异类"，看起来像没接好。 */
+      { sec: '#s2', sel: '.p2 .works li, .p2 .live-band', win: 0.62, gap: 0.16, rise: 44, blur: 14 },
       { sec: '#s3', sel: '.p3 .coda, .p3 .links',    win: 0.60, gap: 0.20, rise: 30, blur: 12 }
     ].forEach(function (s) {
       var sec = document.querySelector(s.sec);
@@ -813,7 +984,7 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
         el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
       });
     });
-    [].forEach.call(document.querySelectorAll('.p2 .works li, .p3 .coda, .p3 .links'),
+    [].forEach.call(document.querySelectorAll('.p2 .works li, .p2 .live-band, .p3 .coda, .p3 .links'),
       function (el) {
         el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
       });
@@ -877,6 +1048,125 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
       goWorks();
     });
   }
+
+  /* ══ 切片 · 热点区 ══
+     整站唯一自己会动的东西，也是唯一每次刷新都不一样的。
+     数据是 Action 每两小时重写的 hotspot/latest.json ——
+     瘦身版（约 4K），不是完整页那份 300K 的。
+
+     四条都是踩过的：
+     ① 内容押在 JS 上要留后路 —— HTML 里那句静态说明就是后路，
+        不是"加载失败"。这也是 9-17 那晚"网页里什么都没有"的教训。
+     ② 位移用 rAF 写，不用 CSS animation：要能 hover 减速；
+        而且无头 Chrome 在虚拟时间下只跑得出十来帧，CSS 动画的
+        中途状态根本验不了（滚动编排那段的注释里记着同一件事）。
+     ③ 不进视口就不跑 —— 它挂在第二屏，人在首屏待着的时候
+        它不该在那儿烧电。
+     ④ **别信"数据是新的"**：超时就把心跳换成暖色。一条优雅滚动着的
+        带子底下是十小时前的东西，比直接停住更会骗人。 */
+  (function () {
+    var band  = document.getElementById('liveBand');
+    var track = document.getElementById('liveTrack');
+    var stamp = document.getElementById('liveT');
+    if (!band || !track || reduced) return;
+
+    var SPEED = 34;            // px/秒。慢 —— 跑马灯之所以低俗是因为它快
+    var STALE = 8 * 3600e3;    // 超过 8 小时没更新 = Action 挂了（它是每 2 小时）
+
+    var row = null, unit = 0, x = 0, v = SPEED, last = 0, held = false, raf = 0;
+
+    function ago(iso) {
+      var t = Date.parse(iso);
+      if (!t) return '';
+      var m = Math.round((Date.now() - t) / 60000);
+      if (m < 1)  return '刚刚';
+      if (m < 60) return m + ' 分钟前';
+      var h = Math.round(m / 60);
+      return h < 24 ? h + ' 小时前' : Math.round(h / 24) + ' 天前';
+    }
+
+    /* 两份内容首尾相接，位移走到 -unit 就跳回 0 ——
+       第二份的开头正好接上第一份，看不出接缝。
+       这是无缝 marquee 的全部原理，没有别的。 */
+    function measure() {
+      if (row) unit = (row.scrollWidth || 0) / 2;
+    }
+
+    function tick(now) {
+      raf = requestAnimationFrame(tick);
+      var dt = last ? Math.min(64, now - last) / 1000 : 0;
+      last = now;
+      if (!unit) { measure(); return; }
+      v += ((held ? 0 : SPEED) - v) * 0.07;   // 停是渐停，不是"啪"一下
+      x -= v * dt;
+      if (x <= -unit) x += unit;
+      row.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+    }
+
+    function start() { if (!raf) { last = 0; raf = requestAnimationFrame(tick); } }
+    function stop()  { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    /* 鼠标悬停和键盘 tab 进来都算"人在看"，都停下。
+       想读某一条的人不用抢时间。 */
+    ['pointerenter', 'focus'].forEach(function (t) {
+      band.addEventListener(t, function () { held = true; });
+    });
+    ['pointerleave', 'blur'].forEach(function (t) {
+      band.addEventListener(t, function () { held = false; });
+    });
+    addEventListener('resize', measure);
+
+    fetch('./hotspot/latest.json')
+      .then(function (r) {
+        // 抓不到就如实抛，让 catch 去处理 —— 不要拿一个半成品渲染
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (d) {
+        var items = (d && d.items) || [];
+        if (!items.length) return;
+
+        var one = document.createElement('div');
+        items.forEach(function (it) {
+          var s   = document.createElement('span'); s.className = 'live-i';
+          var src = document.createElement('span'); src.className = 'live-src';
+          src.textContent = it.source || '';
+          var ttl = document.createElement('span');
+          ttl.textContent = it.title || '';
+          s.appendChild(src); s.appendChild(ttl);
+          one.appendChild(s);
+        });
+
+        row = document.createElement('div');
+        row.className = 'live-row';
+        row.appendChild(one);
+        row.appendChild(one.cloneNode(true));   // 第二份给无缝用，读屏不必念
+
+        track.innerHTML = '';                   // 撤掉兜底那句静态说明
+        track.appendChild(row);
+        measure();
+
+        if (stamp) stamp.textContent = ago(d.updated);
+
+        /* 馊了。Date.parse 失败会是 NaN，`!(NaN < STALE)` 为真 ——
+           解析不出来就当它馊了，这个方向是安全的。 */
+        var age = d.updated ? Date.now() - Date.parse(d.updated) : NaN;
+        if (!(age < STALE) || !d.ok) band.classList.add('is-stale');
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (es) {
+            if (es[0].isIntersecting) start(); else stop();
+          }, { rootMargin: '120px' }).observe(band);
+        } else {
+          start();
+        }
+      })
+      .catch(function (e) {
+        // 保持 HTML 里那句静态说明。**不写"加载失败"** ——
+        // 对访客来说"今天没转"比一个错误码体面，也仍然说明了这是什么。
+        console.warn('[live] 切片没起来，留着静态那句：', e);
+      });
+  })();
 
   /* ── 片边刻度 ── */
   var rail = document.getElementById('rail');

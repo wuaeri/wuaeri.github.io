@@ -35,6 +35,13 @@ jobs:
       - name: 抓取
         run: python3 scripts/fetch_hotspot.py
 
+      # 第二屏底下那条切片读的是 latest.json（瘦身版），不是完整页那份 300K。
+      # **这一步不能省** —— 省了的话切片会永远停在今天。
+      # 而且它坏得很安静：文件本身是"正常的旧数据"，页面上看不出异常，
+      # 只有那条带左边写着"3 天前"。紧跟抓取、同一次生成，两份才对得上。
+      - name: 生成切片用的瘦身版
+        run: python3 scripts/make_latest.py
+
       - name: 提交
         run: |
           git config user.name  "github-actions[bot]"
