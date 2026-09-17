@@ -1,0 +1,129 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ASCIIText 自测</title>
+<!-- 裸页：只放了组件，没挂站里任何样式。
+     为的是确认"画面是组件自己出的"，而不是被别的东西衬出来的。
+     底故意做成 CRT 那种紫 —— pre 挂着 difference，底色不同结果不一样，
+     拿纯黑验等于没验。
+
+     跑：cd ~/Desktop/项目 && python3 serve.py
+         → http://127.0.0.1:8767/ascii/test.html
+     ?w=1100&h=260   容器尺寸
+     ?t=wuaeri       文字
+     ?fps=4          降帧（SwiftShader 太慢时用）
+     ?nowaves=1      关波纹
+     ?raw=1          把离屏那张 gl 画布摆出来对照（看"平滑的字"长什么样） -->
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#05010a}
+  body::before{
+    content:"";position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 42%, rgba(199,85,247,.30) 0%, rgba(199,85,247,0) 70%),
+      radial-gradient(ellipse 90% 70% at 50% 50%, rgba(90,40,160,.25) 0%, rgba(5,1,10,0) 75%);
+  }
+  /* 舞台：把容器摆在视口正中，跟首屏的位置一致 */
+  #stage{
+    position:fixed;inset:0;display:grid;place-items:center;
+  }
+  #host{position:relative}
+
+  /* ══════════ 组件本体 ══════════
+     这一段是从 React Bits 原版的内联 CSS 抄过来的，只改了类名
+     （原版靠 .ascii-text-container 后代选择器，这里给每个元素单独挂了类）。 */
+  .ascii-box{position:absolute;inset:0;overflow:hidden}
+
+  /* 极小画布被拉满。pixelated 要写在最后 —— 前面几条是旧名字，
+     老浏览器认哪条算哪条，新的认最后那条。 */
+  .ascii-box canvas{
+    position:absolute;left:0;top:0;width:100%;height:100%;
+    image-rendering:optimizeSpeed;
+    image-rendering:-moz-crisp-edges;
+    image-rendering:-o-crisp-edges;
+    image-rendering:-webkit-optimize-contrast;
+    image-rendering:optimize-contrast;
+    image-rendering:crisp-edges;
+    image-rendering:pixelated;
+  }
+
+  /* 字符层。三件事凑成那个"彩虹字符画"：
+       · background-image + background-clip:text ⇒ 给字符灌渐变
+       · background-attachment:fixed          ⇒ 渐变钉在视口上，不随元素走
+       · mix-blend-mode:difference            ⇒ 跟底下的马赛克咬在一起 */
+  .ascii-pre{
+    margin:0;padding:0;
+    position:absolute;left:0;top:0;z-index:9;
+    line-height:1em;text-align:left;white-space:pre;
+    user-select:none;
+    background-image:radial-gradient(circle,#ff6188 0%,#fc9867 50%,#ffd866 100%);
+    background-attachment:fixed;
+    -webkit-text-fill-color:transparent;
+    -webkit-background-clip:text;
+    background-clip:text;
+    mix-blend-mode:difference;
+  }
+
+  /* 真文字：视觉上藏掉，但读屏读得到、复制复制得到 */
+  .ascii-sr{
+    position:absolute;width:1px;height:1px;overflow:hidden;
+    clip-path:inset(50%);white-space:nowrap;
+  }
+
+  #msg{
+    position:fixed;left:14px;bottom:12px;z-index:99;
+    font:12px/1.6 ui-monospace,Menlo,monospace;color:#9fd8ff;
+  }
+</style>
+
+<div id="stage"><div id="host"></div></div>
+<div id="msg">载入中…</div>
+
+<script type="module">
+  import { createAsciiText } from './ascii-text.js';
+
+  var q = new URLSearchParams(location.search);
+  var W = Number(q.get('w') || 1100);
+  var H = Number(q.get('h') || 260);
+
+  var host = document.getElementById('host');
+  host.style.width = W + 'px';
+  host.style.height = H + 'px';
+
+  var cfg = {
+    text: q.get('t') || 'wuaeri',
+    fps: Number(q.get('fps') || 30),
+    enableWaves: !q.has('nowaves'),
+    textFontSize: 200,
+    asciiFontSize: Number(q.get('af') || 8),
+    hue: !q.has('nohue')
+  };
+
+  /* 拆层用的开关：?hide=pre 把字符层藏掉（该看见马赛克）
+                    ?hide=px  把马赛克藏掉（该看见纯渐变字符）
+                    ?noblend=1 摘掉 difference */
+  if (q.get('hide') === 'pre') { var s1 = document.createElement('style'); s1.textContent = '.ascii-pre{display:none}'; document.head.appendChild(s1); }
+  if (q.get('hide') === 'px')  { var s2 = document.createElement('style'); s2.textContent = '.ascii-px{display:none}'; document.head.appendChild(s2); }
+  if (q.has('noblend'))        { var s3 = document.createElement('style'); s3.textContent = '.ascii-pre{mix-blend-mode:normal}'; document.head.appendChild(s3); }
+  if (q.has('scrollbg'))       { var s4 = document.createElement('style'); s4.textContent = '.ascii-pre{background-attachment:scroll}'; document.head.appendChild(s4); }
+
+  var r = createAsciiText(host, cfg);
+
+  /* ?raw=1 —— 把那张离屏的 gl 画布摆到台面上来，
+     看看"不做字符化"的那一版长什么样。对照组。 */
+  if (q.has('raw')) {
+    setTimeout(function () {
+      var g = host.querySelector('.ascii-gl');
+      if (!g) return;
+      g.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:99';
+      host.appendChild(g);
+      document.getElementById('msg').textContent = '⚠️ raw：这是离屏那张，正常不该出现';
+    }, 1500);
+  }
+
+  document.getElementById('msg').textContent = r.ok
+    ? ('✓ 起来了 · ' + W + '×' + H + ' · cols=' +
+       (host.querySelector('.ascii-px') || {}).width + ' rows=' +
+       (host.querySelector('.ascii-px') || {}).height)
+    : ('✗ ' + r.why);
+
+  window.__ascii = r;
+</script>

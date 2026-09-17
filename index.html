@@ -83,6 +83,49 @@ body::after{
   transition:opacity 1.8s var(--ease);
 }
 
+/* ══════════ 首屏那个大字：ASCII 字符画 ══════════
+   React Bits <ASCIIText /> 的原生版（组件见 ascii/ascii-text.js，
+   那边文件头写了它是什么、以及跟原版的五处偏离）。
+
+   两块画布的叠法跟原版一致，**这一条最容易搞错**：
+     · .ascii-px  是 cols×rows 的极小画布，拉成 100% + pixelated ⇒ 马赛克
+     · .ascii-pre 是字符层，z-index:9 压在马赛克上面
+     · WebGL 那张画布**不进 DOM**，只当离屏源
+   味道 = 马赛克打底 + 字符压上去做 difference，两层咬在一起。
+
+   ⚠️ pre 的 background-clip:text 不能省，也不能换写法 ——
+   字符的粉/橙/黄是靠一条 radial-gradient 灌进去的，
+   而 `hue()` 每帧在 .ascii-box 上转 hue-rotate，正是靠这个才转得出颜色。
+   没有它，hue-rotate 作用在一堆白字上，什么都看不出来。 */
+.ascii-box{position:absolute;inset:0;overflow:hidden}
+.ascii-box canvas{
+  position:absolute;left:0;top:0;width:100%;height:100%;
+  image-rendering:optimizeSpeed;
+  image-rendering:-moz-crisp-edges;
+  image-rendering:-o-crisp-edges;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:optimize-contrast;
+  image-rendering:crisp-edges;
+  image-rendering:pixelated;        /* 必须最后写，前面几条是旧名字 */
+}
+.ascii-pre{
+  margin:0;padding:0;user-select:none;
+  position:absolute;left:0;top:0;z-index:9;
+  line-height:1em;text-align:left;white-space:pre;
+  background-image:radial-gradient(circle,#ff6188 0%,#fc9867 50%,#ffd866 100%);
+  background-attachment:fixed;
+  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  mix-blend-mode:difference;
+}
+/* 组件自带的那份"藏起来的真文字"。站里这个 <h1> 本来就有 "wuaeri"，
+   所以挂载时传了 sr:false 不生成它 —— 这条留给别的页面复用。 */
+.ascii-sr{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;
+}
+
 /* ══════════ 首屏头颅 ══════════
    单独一层固定在底层垫在 <main> 后面。
    ⚠️ 绝不能放进 .panel 里 —— .panel > <em> 挂着"显影"那套
@@ -166,7 +209,18 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 .panel > *:nth-child(4){transition-delay:.36s}
 
 /* ══════════ 一 · 门 ══════════ */
+/* ⚠️ 这个盒子的尺寸是给 ASCII 组件用的，不是给文字用的。
+   组件内部全是绝对定位，容器不给明确尺寸会塌成 0。
+
+   下面那串 font-size / letter-spacing / line-height 是**兜底**：
+   WebGL 拿不到、模块载入失败、`?noascii` —— 三种情况下露出来的
+   都还是原来那个大字，位置和大小跟从前一样。 */
 .p1 .word{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:min(88vw,1180px);
+  height:clamp(150px,23vh,240px);
   font-size:clamp(72px,12.5vw,190px);
   font-weight:500;
   letter-spacing:-.045em;
@@ -174,6 +228,9 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   text-align:center;
   will-change:transform;
 }
+/* 挂上了才染透明 —— **文本节点一个字都不动**，
+   所以读屏念的还是 h1 自己那句话，复制出来也还是 "wuaeri"。 */
+.p1 .word.has-ascii{color:transparent}
 .p1 .sub{
   margin-top:clamp(22px,3.4vh,40px);
   text-align:center;
@@ -984,6 +1041,47 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
         });
       }).catch(function (e) { console.warn('[head] 模块没载入：', e); });
     }
+  })();
+
+  /* ══════════ 首屏那个大字：ASCII 字符画 ══════════
+     2026-09-17。"将我们的网页 wuaeri 那串大名改为这个设计"。
+
+     **大字本身不换。** `<h1 id="word">wuaeri</h1>` 原样留在 DOM 里，
+     组件只是挂到它里面，挂成功之后把 h1 的字染成透明（.has-ascii）。
+     这么做的三个好处：
+       · 读屏念的还是 h1 自己的文字，一个字都没动过
+       · WebGL 拿不到 / 模块载入失败 / ?noascii —— 页面还是完整那个大字
+       · 不用给 <h1> 换标签，SEO 和无障碍都干净
+     传 sr:false 就是因为 h1 自己已经有这句话了，不然读屏会念两遍。 */
+  (function () {
+    var word = document.getElementById('word');
+    if (!word) return;
+    var q = new URLSearchParams(location.search);
+    if (q.has('noascii')) return;
+    // 纯装饰，减弱动效就直接不上
+    if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+    import('./ascii/ascii-text.js').then(function (m) {
+      var r = m.createAsciiText(word, {
+        text: 'wuaeri',
+        textFontSize: 200,
+        asciiFontSize: 8,
+        textColor: '#fdf9f3',
+        /* 大字用站里那套显示字体（跟别处的字是一家人），
+           ASCII 网格仍走等宽 —— 列宽是拿 measureText('A') 除出来的，不等宽会散。 */
+        textFontFamily: '-apple-system,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif',
+        fit: true, fitH: .92, fitW: .96,
+        enableWaves: true,
+        fps: 30,
+        sr: false
+      });
+      if (r.ok) {
+        word.classList.add('has-ascii');
+        window.__ascii = r;          // 调试口子，跟 window.__crt 一个路子
+      } else {
+        console.warn('[ascii] 没起来：', r.why);
+      }
+    }).catch(function (e) { console.warn('[ascii] 模块没载入：', e); });
   })();
 
   /* ── 时钟：每秒查一次，只在分钟真的翻过去时才写 DOM ──
