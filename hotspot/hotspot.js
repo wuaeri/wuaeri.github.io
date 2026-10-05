@@ -42,6 +42,18 @@
     var t = Date.parse(iso);
     return isNaN(t) ? null : (Date.now() - t) / 3600000;
   }
+  /* 把小时数说成人话。**过一天必须换成「天」** ——
+     这个函数是补的一个洞：线上挂了 11 天，检查点就理直气壮地写
+     「267 小时前更新」。267 这个数没有任何人能一眼读出是多久，
+     于是"馊了"这件事反而被一个精确的数字盖住了。
+     精确不等于看得懂。 */
+  function agoText(h) {
+    if (h == null) return '时间未知';
+    if (h < 1) return '刚刚';
+    if (h < 24) return Math.round(h) + ' 小时前';
+    var d = Math.round(h / 24);
+    return d === 1 ? '昨天' : d + ' 天前';
+  }
 
   var state = { items: [], filter: 'all' };
 
@@ -129,7 +141,7 @@
 
         return row('r-net', '✓ 通', 'ok')
           .then(function () {
-            var txt = h == null ? '时间未知' : (h < 1 ? '刚刚更新' : Math.round(h) + ' 小时前更新');
+            var txt = (h == null) ? '时间未知' : agoText(h) + '更新';
             var cls = (h != null && h > 24) ? 'bad' : 'ok';
             return row('r-fresh', txt, cls);
           })
@@ -190,7 +202,7 @@
     var h = hoursAgo(d.updated);
     $('#meta').innerHTML =
       '更新于 <b>' + (d.updated ? d.updated.slice(0, 16).replace('T', ' ') + ' UTC' : '未知') + '</b>' +
-      (h == null ? '' : '　·　<b>' + (h < 1 ? '刚刚' : Math.round(h) + ' 小时前') + '</b>') +
+      (h == null ? '' : '　·　<b>' + agoText(h) + '</b>') +
       '<br>共 <b>' + state.items.length + '</b> 条　·　来源 <b>' + okN + '/' + srcs.length + '</b>' +
       (failN ? '　·　<span class="warn">' + failN + ' 个挂了</span>' : '');
 

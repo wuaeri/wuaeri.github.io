@@ -1085,7 +1085,13 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
     if (!band || !track || reduced) return;
 
     var SPEED = 34;            // px/秒。慢 —— 跑马灯之所以低俗是因为它快
-    var STALE = 8 * 3600e3;    // 超过 8 小时没更新 = Action 挂了（它是每 2 小时）
+    /* 超过 12 小时没更新 = Action 真挂了。
+       ⚠️ 名义上 cron 是每 2 小时，但 GitHub 对公开仓库的 scheduled run 会
+       合并/丢弃 —— 实测一天只跑成 4-5 次，间隔 4-6 小时，偶尔 8-10 小时。
+       原来写 8 小时，等于天天擦着这条线走，隔一两天就误报一次"馊了"，
+       看起来像更新断了，其实是六小时前的数据。
+       12 小时：容忍正常波动，真挂半天以上照样抓得出来。 */
+    var STALE = 12 * 3600e3;
 
     var row = null, unit = 0, x = 0, v = SPEED, last = 0, held = false, raf = 0;
 
