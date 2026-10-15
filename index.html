@@ -40,10 +40,23 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   --bg:      #050506;
   --fg:      rgba(255,255,255,0.94);
   --fg-2:    rgba(255,255,255,0.58);
-  --fg-3:    rgba(255,255,255,0.34);
+  /* 0.34→0.46，2026-09-17 audit：0.34 合成出来是 #5a5a5b，
+     对比度只有 **2.96:1** —— 小字要 4.5:1、大字要 3:1，它两头都不够。
+     0.46 是 4.62:1，过 AA，而跟 --fg-2 的 6.89:1 仍差着一档，
+     层级还在。 */
+  --fg-3:    rgba(255,255,255,0.46);
+  /* 只给"故意要显得不可用"的地方用 —— 目前只有 .soon（未上线的条目）。
+     0.34 的对比度不合格，所以它不能当通用色用，只能当**语义色**用：
+     这里的"读不清"是设计意图，不是疏忽。 */
+  --fg-4:    rgba(255,255,255,0.34);
   --line:    rgba(255,255,255,0.10);
   --pulse:   #9fd8ff;
   --warm:    #e8c9a0;
+  /* 两个区的颜色。2026-09-28 开「两扇门」时从 MusicLab 带过来的 ——
+     那边早就定了这条规矩：**框架统一，色调各留**。仪器是暖的，影院是冷的，
+     把两个区染成一个色，是抹掉它们的性格。品牌（wuaeri 那个蓝）不参与。 */
+  --music:   #ffa42b;
+  --film:    #8fd6b8;
   --ease:    cubic-bezier(.22,1,.36,1);
   --pad:     clamp(22px,4vw,44px);
 }
@@ -239,7 +252,9 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   letter-spacing:-.045em;
   line-height:.92;
   text-align:center;
-  will-change:transform;
+  /* 这里原来挂着 will-change:transform。撤了 —— 那是"我马上要动"的
+     提示，不是常驻配置，而这个字只在开屏那 1.5 秒的入场里动过一次
+     （audit 2026-09-17）。常驻只会让浏览器一直替它留着一个合成层。 */
 }
 /* 挂上了才染透明 —— **文本节点一个字都不动**，
    所以读屏念的还是 h1 自己那句话，复制出来也还是 "wuaeri"。 */
@@ -294,7 +309,16 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 }
 .p1 .enter:hover,
 .p1 .enter:focus-visible{color:#fff}
+/* 键盘焦点。原来这儿只有一句 outline:none，理由是"Safari 那个蓝色方框
+   会破坏画面" —— 代价是**键盘用户完全看不出焦点落在哪**（WCAG 2.4.7）。
+   现在不是删掉指示，是换成跟这个口同一个语言的东西：drop-shadow
+   **跟着圆的形状走**，方框不会。用 :focus-visible 而不是 :focus ——
+   鼠标点它不该亮，Tab 过来才亮。 */
 .p1 .enter:focus-visible{outline:none}
+.p1 .enter:focus-visible .enter-ico{
+  filter:drop-shadow(0 0 3px rgba(255,255,255,.95))
+         drop-shadow(0 0 16px rgba(159,216,255,.85));
+}
 
 .p1 .enter-ico{
   display:block;
@@ -358,9 +382,13 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   text-decoration:none;
   color:inherit;
   overflow:hidden;
-  transition:padding-left .5s var(--ease),background .5s ease;
+  /* 原来是 transition:padding-left —— 动布局属性，每次 hover 触发一次
+     重排（audit 2026-09-17 抓到的）。改成 transform：观感一样（都是
+     整块右移 20px），但走合成层，不碰布局。
+     <a> 自己的 transform 是空的 —— 滚动显影写的是外层 <li> 的。 */
+  transition:transform .5s var(--ease),background .5s ease;
 }
-.p2 .works a:hover{padding-left:20px;background:rgba(255,255,255,.014)}
+.p2 .works a:hover{transform:translateX(20px);background:rgba(255,255,255,.014)}
 
 /* 掠过的那道光。非 hover 时 transition 是 0s ——
    松开就在左侧瞬间归位（在框外，看不见），
@@ -418,38 +446,35 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 .p2 .works a:hover .arrow{transform:translateX(0);opacity:1;color:var(--warm)}
 
 /* 未上线的条目：不假装能点 */
-.soon .title,.soon .desc{color:var(--fg-3)}
+.soon .title,.soon .desc{color:var(--fg-4)}
 .soon{cursor:default}
 
-/* ══════════ 二 · 切片 · 热点区 ══════════
-   上面四行是"我做了什么" —— 每一行点出去之前都是死的。
-   这一条是整站**唯一自己会动的东西**，也是唯一每次刷新都不一样的。
+/* ══════════ 三 · 热点区 ══════════
+   2026-09-17 从作品列表里**拿出来单独占一屏**。它原来是第 04 项作品，
+   嘉豪说「它更应该是一个功能区而不是作品」—— 说得准。
 
-   形态上要压得比作品行矮一档：作品行的字号是 clamp(24px,3.4vw,42px)，
-   这里 13px。它不抢戏的方式不是变暗，是**变细** ——
-   暗的东西会被当成禁用，细的东西才会被当成注释。 */
-.p2 .live-band{
+   区别在这儿：作品是**完成的**（瞬、aemy、Bouncer 都不会自己变了），
+   它是**还在跑的**（每两小时自己变一次，没人看的时候也在变）。
+   把它排成"作品 04"，等于把一个活的东西做成标本，还跟三个标本并排
+   放在同一个柜子里。
+
+   所以形态也跟着变：不再是"挂在列表底下的一条脚注"，
+   而是**这一屏本身就是那个东西**。字号回到跟作品同级 ——
+   它不再是注释了，它是这一屏的主角。 */
+.p3 .live-panel{
   position:relative;
-  flex-shrink:0;
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  align-items:center;
-  gap:0 clamp(14px,2.2vw,26px);
+  display:flex;
+  flex-direction:column;
   width:100%;
   max-width:940px;
-  margin-top:clamp(14px,2vh,26px);
-  padding:clamp(10px,1.4vh,14px) 4px;
+  padding:clamp(20px,3vh,32px) 4px clamp(18px,2.6vh,28px);
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
   text-decoration:none;
   color:inherit;
-  overflow:hidden;
-  transition:border-color .5s ease,background .5s ease;
+  transition:border-color .5s ease;
 }
-.p2 .live-band:hover{
-  background:rgba(255,255,255,.014);
-  border-color:rgba(255,255,255,.16);
-}
+.p3 .live-panel:hover{border-color:rgba(255,255,255,.2)}
 
 /* 左边的标签：一个呼吸的点 + LIVE + "多久以前"。
    呼吸点是这里最要紧的一个元素 —— 它一个字都不说，
@@ -458,8 +483,10 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   display:flex;
   align-items:center;
   gap:9px;
-  font-size:9.5px;
-  letter-spacing:.18em;
+  /* 9.5→10.5px（audit 2026-09-17：9.5px 低于可读底线）。
+     字号提了就把字距收回一点，宽度不至于变。 */
+  font-size:10.5px;
+  letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--pulse);
   white-space:nowrap;
@@ -495,6 +522,44 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
        会被内容撑开，整条带就跟着被撑出去（老坑）
      · 两端 mask 虚化 —— 横向滚动最要紧的是"看不出头尾"，
        露一个硬边就等于告诉人"这是从左边推进来的" */
+/* 标题。回到跟作品列表 .title 同一个尺度 —— 它不再是脚注了，
+   这一屏就是它自己。 */
+.live-head{display:block;margin:clamp(13px,1.9vh,19px) 0 clamp(16px,2.4vh,24px)}
+.live-title{
+  display:block;
+  font-size:clamp(30px,4.4vw,54px);
+  font-weight:500;
+  letter-spacing:-.022em;
+  line-height:1.08;
+}
+.live-sub{
+  display:block;
+  margin-top:10px;
+  font-size:clamp(12.5px,1.2vw,14px);
+  line-height:1.6;
+  color:var(--fg-2);
+}
+
+/* 底部的读数。**这两个数是这一屏的内容，不是装饰** ——
+   别处的数字（01 02 03）是序号，这里的数字是"它现在什么状态"。
+   所以用 --fg-2 而不是 --fg-3：它得真的读得出来。
+   （audit 2026-09-17：--fg-3 只有 2.96:1，不合格。） */
+.live-foot{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:20px;
+  margin-top:clamp(16px,2.4vh,24px);
+  padding-top:clamp(13px,1.9vh,19px);
+  border-top:1px solid var(--line);
+}
+.live-nums{
+  font-size:clamp(11.5px,1.02vw,13px);
+  letter-spacing:.05em;
+  color:var(--fg-2);
+  font-variant-numeric:tabular-nums;
+}
+
 .live-track{
   position:relative;
   overflow:hidden;
@@ -534,36 +599,125 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   color:var(--fg-3);
 }
 
+/* 入口。原来是 opacity:0、悬停才浮出来 —— 那是"脚注"的做法。
+   现在是功能区，**入口必须一直看得见**，不然这一屏只是块展示牌。
+   颜色用 --pulse 不用 --fg-3：后者 2.96:1，读不出来。 */
 .live-go{
-  font-size:clamp(14px,1.4vw,18px);
-  color:var(--fg-3);
-  transform:translateX(-6px);
-  opacity:0;
-  transition:transform .5s var(--ease),opacity .35s ease,color .35s ease;
+  flex-shrink:0;
+  font-size:clamp(12px,1.08vw,13.5px);
+  letter-spacing:.06em;
+  color:var(--pulse);
+  transition:transform .5s var(--ease),color .35s ease;
 }
-.p2 .live-band:hover .live-go{transform:translateX(0);opacity:1;color:var(--warm)}
+.p3 .live-panel:hover .live-go{transform:translateX(5px);color:var(--warm)}
 
 /* 数据馊了（Action 挂了 / 源全灭时）。**看起来活着但其实死了
    是这里最坏的情况** —— 一条优雅滚动着的带子，底下是十小时前的
    东西，比直接停住更会骗人。所以超时就把心跳换成暖色、内容压暗。 */
-.p2 .live-band.is-stale .live-tag{color:var(--warm)}
-.p2 .live-band.is-stale .live-row,
-.p2 .live-band.is-stale .live-fallback{opacity:.45}
-.p2 .live-band.is-stale .live-dot::after{animation:none;opacity:0}
+.p3 .live-panel.is-stale .live-tag{color:var(--warm)}
+.p3 .live-panel.is-stale .live-row,
+.p3 .live-panel.is-stale .live-fallback{opacity:.45}
+.p3 .live-panel.is-stale .live-dot::after{animation:none;opacity:0}
 
 @media (prefers-reduced-motion:reduce){
   .live-dot::after{animation:none;opacity:0}
 }
 
-/* ══════════ 三 · 尾 ══════════ */
-.p3{text-align:center}
-.p3 .coda{
+/* ══════════ 四 · 两个区（两扇门）══════════
+   2026-09-28：这一屏从"放映厅一块 panel"改成**两扇门** ——
+   音乐 / 影视各一扇，**对等**，不是"主入口 + 一个链接"。
+
+   跟第三屏共用的是**同一套语法**（tag / 大标题 / 一条铺开的东西 / 底栏），
+   不是同一块模板。区别还在那条东西上：热点区是"在走的字"，
+   MusicLab 那边放映厅是"摆着的封面" —— 而门这一屏**不做那条带子**：
+   门是入口，不是展柜。展柜在门后面（./screening/ 那一页里）。
+
+   ★ 两扇门各留各的色，跟 MusicLab 那边一条规矩：
+     音乐是琥珀（那台仪器的 VU 表），影视是冷绿（影院那点光）。
+
+   底栏用 margin-top:auto 压到底 —— 两边字数不一样长，
+   不压的话两扇门的"进入 →"会错开一行，一眼就看出不是一对。 */
+.p4 .doors{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  width:100%;
+  max-width:940px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.p4 .door{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:clamp(20px,3vh,32px) clamp(18px,2.6vw,34px) clamp(18px,2.6vh,28px);
+  text-decoration:none;
+  color:inherit;
+  transition:background .5s ease;
+}
+/* 中间那道竖线是"两扇门"唯一的建筑构件 —— 少了它，
+   两段文字看着像一段排错了版。 */
+.p4 .door + .door{border-left:1px solid var(--line)}
+.p4 .door:hover{background:rgba(255,255,255,.022)}
+
+.door-tag{
+  display:flex; align-items:center; gap:9px;
+  font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  white-space:nowrap;
+}
+.door.music .door-tag{color:var(--music)}
+.door.film  .door-tag{color:var(--film)}
+.door-tag .dt{color:var(--fg-3); letter-spacing:.14em}
+/* 数字还没拉到的时候不留一个空格在那儿 */
+.door-tag .dt:empty{display:none}
+
+.door-head{display:block;margin:clamp(13px,1.9vh,19px) 0 clamp(16px,2.4vh,24px)}
+.door-title{
+  display:block;
+  font-size:clamp(26px,3.4vw,42px);
+  font-weight:500; letter-spacing:-.022em; line-height:1.08;
+}
+.door-sub{
+  display:block; margin-top:10px;
+  font-size:clamp(12.5px,1.2vw,14px); line-height:1.6; color:var(--fg-2);
+}
+
+.door-foot{
+  display:flex; align-items:baseline; justify-content:space-between; gap:18px;
+  margin-top:auto;
+  padding-top:clamp(13px,1.9vh,19px);
+  border-top:1px solid var(--line);
+}
+.door-nums{
+  font-size:clamp(11.5px,1.02vw,13px);
+  letter-spacing:.05em; color:var(--fg-2); font-variant-numeric:tabular-nums;
+}
+.door-go{
+  flex-shrink:0;
+  font-size:clamp(12px,1.08vw,13.5px);
+  letter-spacing:.06em;
+  transition:transform .5s var(--ease);
+}
+.door.music .door-go{color:var(--music)}
+.door.film  .door-go{color:var(--film)}
+.p4 .door:hover .door-go{transform:translateX(5px)}
+.p4 .door:active .door-go{transform:none}
+
+/* 窄屏叠起来，竖线换横线 —— 不叠的话每扇只剩半屏宽，
+   大标题会挤成两行，两扇门看着就不"对等"了。 */
+@media (max-width:720px){
+  .p4 .doors{grid-template-columns:1fr}
+  .p4 .door + .door{border-left:none; border-top:1px solid var(--line)}
+}
+
+/* ══════════ 五 · 尾 ══════════ */
+.p5{text-align:center}
+.p5 .coda{
   font-size:clamp(15px,1.6vw,19px);
   letter-spacing:.02em;
   color:var(--fg-2);
   line-height:2;
 }
-.p3 .links{
+.p5 .links{
   margin-top:clamp(30px,5vh,52px);
   display:flex; gap:clamp(20px,3vw,34px);
   justify-content:center;
@@ -571,14 +725,24 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   letter-spacing:.14em;
   text-transform:uppercase;
 }
-.p3 .links a{
+.p5 .links a{
+  position:relative;
   color:var(--fg-3);
   text-decoration:none;
   padding-bottom:3px;
   border-bottom:1px solid transparent;
   transition:color .3s ease,border-color .3s ease;
 }
-.p3 .links a:hover{color:var(--pulse);border-color:rgba(159,216,255,.4)}
+/* 热区撑到 44px 高（WCAG 2.5.8，audit 2026-09-17）。
+   用 ::after 向外扩，**视觉位置一点都不动** —— 跟首屏那个口是同一个
+   手法（"看着是一小块，点得到的是一整块"）。桌面有鼠标，感觉不到；
+   触屏上这是"能不能点中"的区别。 */
+.p5 .links a::after{
+  content:"";
+  position:absolute;
+  inset:-15px -11px;
+}
+.p5 .links a:hover{color:var(--pulse);border-color:rgba(159,216,255,.4)}
 
 /* ══════════ 四角仪表 ══════════
    不随内容滚 —— 是贴在屏幕上的铭牌，不是页面里的东西。 */
@@ -616,7 +780,8 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 }
 .hud-row{
   display:flex; justify-content:space-between; gap:22px;
-  font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+  /* 9.5→10.5px（audit）。字距跟着收，宽度不至于变。 */
+  font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
   color:var(--fg-3); line-height:2.15;
 }
 .hud-row b{
@@ -635,10 +800,16 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   background:rgba(255,255,255,.075);
   z-index:20; pointer-events:none;
 }
+/* 高度改用 scaleY。原来每帧写 height —— 那是布局属性，等于每帧一次重排
+   （audit 2026-09-17）。scaleY 是合成属性。元素只有 1px 宽，缩放的观感
+   跟改高度完全一样 —— 连渐变的表现都一致，因为原来看起来本来就是
+   "这条线在变长"。 */
 .rail i{
-  display:block; width:100%; height:0;
+  display:block; width:100%; height:100%;
+  transform-origin:top center;
+  transform:scaleY(0);
   background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.12));
-  transition:height .1s linear;
+  transition:transform .1s linear;
 }
 
 /* ══════════ 入场那一下曝光 ══════════
@@ -758,42 +929,110 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
         </a>
       </li>
 
-      <li>
-        <a href="./hotspot/">
-          <span class="idx">04</span>
-          <span>
-            <span class="title">热点区</span>
-            <span class="desc">aespa 的实时热点 · 媒体层与社区层，每两小时自动更新</span>
-          </span>
-          <span class="arrow">→</span>
-        </a>
-      </li>
     </ul>
+  </section>
 
-    <!-- 切片 · 热点区。
-         整条是一个链接，指向完整页 —— 里面的标题**故意不做成可点的**：
-         这条带只有 40px 高，标题还在横向走，想精确点中某一条是折磨。
-         它的职责是"让你看见它在动，然后进去读"，不是读的地方。
-         （另外 <a> 里套 <a> 本来就是非法 HTML。）
+  <!-- ═══ 三 · 热点 ═══
+       这一屏跟前面两屏**不是一类东西**，2026-09-17 嘉豪指出来的：
+       「它更应该是一个功能区而不是作品」。
 
-         下面那句静态说明是**兜底**：JS 没跑、JSON 没拉到、file:// 打开
-         这三种情况露出来的就是它 —— 不是空白，也不是"加载失败"。 -->
-    <a class="live-band" id="liveBand" href="./hotspot/"
-       aria-label="aespa 实时热点，进入完整页">
+       他是对的。第二屏回答的是"我做过什么" —— 瞬、aemy、Bouncer，
+       全是**完成的、静止的**东西，摆在那里给人看。
+       而热点区是**还在跑的**东西：它每两小时自己变一次，
+       平时没有人看它也在变。把它排成"作品 04"，等于把一个活着的东西
+       做成了标本，而且是跟三个标本并排放在柜子里。
+
+       所以它自己占一屏。这一屏的气质也跟别处不一样 ——
+       别处是"看"（字、头颅、列表），这里是"读数"（心跳、条数、源）。
+       它不是给人欣赏的，是给人知道"那边还有东西在动"的。 -->
+  <section class="panel p3" id="s3">
+    <!-- 整块一个链接。里面的条目标题仍然不可点 —— 理由跟之前一样：
+         它们在横向走，想精确点中某一条是折磨。这一屏的职责是
+         "让你看见它在动，然后进去读"，不是读的地方。 -->
+    <a class="live-panel" id="liveBand" href="./hotspot/"
+       aria-label="进入热点区完整页">
+
       <span class="live-tag">
         <i class="live-dot" aria-hidden="true"></i>
         <span>Live</span>
         <span class="live-t" id="liveT"></span>
       </span>
-      <span class="live-track" id="liveTrack">
-        <span class="live-fallback">aespa 的实时热点 · 媒体层与社区层，每两小时自动更新</span>
+
+      <span class="live-head">
+        <span class="live-title">热点区</span>
+        <span class="live-sub">aespa 的实时热点 · 媒体层与社区层</span>
       </span>
-      <span class="live-go" aria-hidden="true">→</span>
+
+      <!-- 下面那句静态说明是**兜底**：JS 没跑、JSON 没拉到、
+           file:// 直接打开 —— 这三种情况露出来的就是它，
+           不是空白，也不是"加载失败"。 -->
+      <span class="live-track" id="liveTrack">
+        <span class="live-fallback">每两小时自动更新 · 点进去看全部</span>
+      </span>
+
+      <span class="live-foot">
+        <span class="live-nums" id="liveNums"></span>
+        <span class="live-go" aria-hidden="true">进入 →</span>
+      </span>
     </a>
   </section>
 
-  <!-- ═══ 三 · 尾 ═══ -->
-  <section class="panel p3" id="s3">
+  <!-- ═══ 四 · 两个区（两扇门）═══
+       2026-09-28：这一屏原来是"放映厅一块 panel"，改成**两扇门**。
+
+       改的理由跟 2026-09-17 那一次是同一个：这一屏回答的不是
+       "我做过什么"（第二屏那三件是完成的、静止的、摆在柜子里的），
+       而是"那边还有什么" —— 这两个区**都还在长**，曲库和片单以后
+       都还会往里加。所以它们不是作品 04、05，是自己占一屏的两个入口。
+
+       ★ 两扇门**对等**。原来是"放映厅一块 panel + 音乐一个链接"，
+         那不是对等，那是"主入口 + 一个脚注"。现在两扇门一样大、
+         一样的语法、各留各的色（音乐琥珀 / 影视冷绿）。
+
+       门的数字全是 fetch 出来的真数据，不是写死的文案 ——
+       拉不到就留下面那句静态的，**不写"加载失败"**。 -->
+  <section class="panel p4" id="s4">
+    <div class="doors">
+
+      <a class="door music" id="doorMusic" href="./music/"
+         aria-label="进入音乐播放器">
+        <span class="door-tag">
+          <span>音乐区</span>
+          <span class="dt" id="doorSongs"></span>
+        </span>
+        <span class="door-head">
+          <span class="door-title">声学显微镜</span>
+          <span class="door-sub">把一首歌翻过来看 · 频谱、声学画像、六种视图</span>
+        </span>
+        <span class="door-foot">
+          <span class="door-nums" id="doorViews">数据全部现算 · 不编一个数</span>
+          <span class="door-go" aria-hidden="true">进入播放器 →</span>
+        </span>
+      </a>
+
+      <a class="door film" id="doorFilm" href="./screening/"
+         aria-label="进入放映厅">
+        <span class="door-tag">
+          <span>影视区</span>
+          <span class="dt" id="reelT">1931–1953</span>
+        </span>
+        <span class="door-head">
+          <span class="door-title">放映厅</span>
+          <span class="door-sub">黑色电影与希区柯克 · 挑片只看结构</span>
+        </span>
+        <span class="door-foot">
+          <!-- 兜底：JS 没跑、JSON 没拉到、file:// 直接打开 ——
+               露出来的是这句，而且这句本身也是真的。 -->
+          <span class="door-nums" id="doorFilms">十三部 · 十二部点开就能看</span>
+          <span class="door-go" aria-hidden="true">进入 →</span>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ 五 · 尾 ═══ -->
+  <section class="panel p5" id="s5">
     <p class="coda">往下就没有了。</p>
     <nav class="links">
       <a href="https://github.com/wuaeri" target="_blank" rel="noopener">GitHub</a>
@@ -807,8 +1046,9 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
   <div class="hud-tr"><span class="clock" id="clock">--:--</span></div>
   <div class="hud-bl">
     <div class="hud-card">
-      <!-- ⚠️ 这两个数是手写的。上传新作品时记着一起改。 -->
-      <div class="hud-row"><span>Works</span><b>04</b></div>
+      <!-- ⚠️ 这两个数是手写的。上传新作品时记着一起改。
+           （04→03：热点区从作品里拿出去了，它现在自己占一屏，不再算作品。） -->
+      <div class="hud-row"><span>Works</span><b>03</b></div>
       <div class="hud-row"><span>Updated</span><b>2026.09.17</b></div>
     </div>
   </div>
@@ -883,8 +1123,36 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
 
   function measure() {
     tracks.forEach(function (t) {
-      t.top = t.el.getBoundingClientRect().top + window.scrollY;
+      var r = t.el.getBoundingClientRect();
+      t.top = r.top + window.scrollY;
+      t.h = r.height || window.innerHeight;
     });
+  }
+
+  /* 注册一屏。
+     noHide=true 的屏（目前只有首屏）不写初始隐藏样式 —— 它已经由
+     自己那套一次性入场演完了，再"隐藏"一下会闪。 */
+  function addTrack(s, noHide) {
+    var sec = document.querySelector(s.sec);
+    if (!sec) return;
+    var items = [].slice.call(sec.querySelectorAll(s.sel));
+    if (!items.length) return;
+    if (!noHide) {
+      items.forEach(function (el) {
+        el.style.opacity = 0;
+        el.style.filter = 'blur(' + s.blur + 'px)';
+        el.style.transform = 'translateY(' + s.rise + 'px)';
+        el.style.willChange = 'opacity, transform, filter';
+      });
+    }
+    /* ?fxsnap —— 关掉惯性、瞬时跟随。无头里虚拟时间只跑得出十来帧，
+       收敛不完，截图永远停在半路。这个开关只给"拍一张终态"用。
+       fresh —— 第一帧直接落到位、不走惯性，否则刚注册的屏会从
+       p=0（全透明）往上爬，看起来像闪了一下。 */
+    tracks.push({ el: sec, items: items, p: 0, fresh: true,
+                  sync: SNAP ? 1 : 0.11,
+                  win: s.win, gap: s.gap, rise: s.rise,
+                  exitRise: s.exitRise, blur: s.blur, top: 0, h: 0 });
   }
 
   function frame() {
@@ -893,48 +1161,76 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
     for (var k = 0; k < tracks.length; k++) {
       var t = tracks[k], n = t.items.length;
       if (!n) continue;
-      // 区间：这一屏的顶，从"视口底"走到"离视口顶 18%"
+
+      /* ⭐ 这一屏的中心离视口中心多远，单位是"屏"：
+           +1 = 整屏还在下面；0 = 正好占满；-1 = 整屏已经在上面。
+         一个值同时管进和出，所以往上滚就是倒着演 —— 不需要第二套代码。
+         完全看不见的屏直接跳过：别给视口外的元素白写样式，
+         更别给它们白算 blur（那个很贵）。 */
+      var off = (t.top + t.h / 2 - (y + vh / 2)) / vh;
+      if (off > 1.2 || off < -1.2) continue;
+
+      // 进入：区间是这一屏的顶从"视口底"走到"离视口顶 18%"
       var start = t.top - vh, end = t.top - vh * 0.18;
       var target = clamp01((y - start) / Math.max(1, end - start));
-      t.p += (target - t.p) * t.sync;             // ← 惯性。他们的 sync 就是这个意思
-      if (Math.abs(target - t.p) < 0.0004) t.p = target;
+      if (t.fresh) { t.p = target; t.fresh = false; }
+      else {
+        t.p += (target - t.p) * t.sync;           // ← 惯性
+        if (Math.abs(target - t.p) < 0.0004) t.p = target;
+      }
+
+      /* 出去：off 走到 -0.35 才起步，到 -0.85 走完。
+         不从 0 就开始淡 —— 屏还有一半在视口里的时候不该先淡掉。
+         **出去是整屏一起的，不逐条** —— 人往下滚的时候，上一屏
+         本来就该整块让开，而不是一条一条撤退。 */
+      var ex = clamp01((-off - 0.35) / 0.5);
+      var lift = -ex * t.exitRise;
+      var fade = 1 - ex;
+
       var gap = n > 1 ? Math.min(t.gap, (1 - t.win) / (n - 1)) : 0;
       for (var i = 0; i < n; i++) {
         var e = easeOutExpo(clamp01((t.p - i * gap) / t.win));
+        var vis = e * fade;
         var el = t.items[i];
-        el.style.opacity = e.toFixed(3);
-        el.style.transform = e >= 1 ? 'none'
-          : 'translateY(' + ((1 - e) * t.rise).toFixed(2) + 'px)';
-        el.style.filter = e >= 1 ? 'none'
-          : 'blur(' + ((1 - e) * t.blur).toFixed(2) + 'px)';
+        var ty = (1 - e) * t.rise + lift;
+        el.style.opacity = vis.toFixed(3);
+        el.style.transform = Math.abs(ty) < 0.02 ? 'none'
+          : 'translateY(' + ty.toFixed(2) + 'px)';
+        el.style.filter = vis >= 0.999 ? 'none'
+          : 'blur(' + ((1 - vis) * t.blur).toFixed(2) + 'px)';
+        /* will-change 是"我马上要动"的提示，到位了就该撤 ——
+           常驻等于让浏览器一直替它留一个合成层（audit 2026-09-17）。
+           只在值真的变了才写，省掉每帧的 style 比对。 */
+        var wc = vis >= 0.999 ? 'auto' : 'opacity, transform, filter';
+        if (el.__wc !== wc) { el.__wc = wc; el.style.willChange = wc; }
       }
     }
   }
 
+  /* 首屏交给滚动接管 —— 但要等它自己那套一次性入场（HERO）演完，
+     两套东西同时往同一个 style 里写会打架。
+     rise 给 0：它已经入过场了，不该在滚动时**再**从下面浮一次；
+     它只需要"出去"那半边 —— 往下滚的时候，门要让开。 */
+  function trackHero() {
+    addTrack({ sec: '#s1', sel: '.p1 .word, .p1 .sub, .p1 .enter',
+               win: 0.62, gap: 0.16, rise: 0, exitRise: 96, blur: 10 }, true);
+    measure();
+  }
+
   function setup() {
-    /* 第二、三屏：初值由 JS 写死，CSS 只管长相。
-       写完内容就已经在"会被驱动"的状态里 —— 之后 rAF 一跑，
-       它就是滚动位置的函数，滚回去会倒着演。 */
+    /* 各屏的性格全在参数里：
+         rise      进入时从下面浮起多少
+         exitRise  离开时往上走多少
+         blur      没到位时糊多少（越大越"重"）
+         win/gap   逐条错落的窗口与间距
+       三屏给三套数字，不是复制粘贴 —— 三屏共用一个参数表，
+       读起来就是"同一个动作做了三遍"，那正是"简陋"的来源。 */
     [
-      /* 切片跟作品行走同一条编排 —— 它要是自己冒出来，
-         在这一屏就是个"没参与显影的异类"，看起来像没接好。 */
-      { sec: '#s2', sel: '.p2 .works li, .p2 .live-band', win: 0.62, gap: 0.16, rise: 44, blur: 14 },
-      { sec: '#s3', sel: '.p3 .coda, .p3 .links',    win: 0.60, gap: 0.20, rise: 30, blur: 12 }
-    ].forEach(function (s) {
-      var sec = document.querySelector(s.sec);
-      var items = sec ? [].slice.call(document.querySelectorAll(s.sel)) : [];
-      if (!items.length) return;
-      items.forEach(function (el) {
-        el.style.opacity = 0;
-        el.style.filter = 'blur(' + s.blur + 'px)';
-        el.style.transform = 'translateY(' + s.rise + 'px)';
-        el.style.willChange = 'opacity, transform, filter';
-      });
-      /* ?fxsnap —— 关掉惯性、瞬时跟随。无头里虚拟时间只跑得出十来帧，
-         收敛不完，截图永远停在半路。这个开关只给"拍一张终态"用。 */
-      tracks.push({ el: sec, items: items, p: 0, sync: SNAP ? 1 : 0.11,
-                    win: s.win, gap: s.gap, rise: s.rise, blur: s.blur, top: 0 });
-    });
+      { sec: '#s2', sel: '.p2 .works li',         win: 0.62, gap: 0.16, rise: 44, exitRise: 46, blur: 14 },
+      { sec: '#s3', sel: '.p3 .live-panel > *',   win: 0.60, gap: 0.18, rise: 34, exitRise: 42, blur: 12 },
+      { sec: '#s4', sel: '.p4 .door > *',   win: 0.60, gap: 0.18, rise: 34, exitRise: 42, blur: 12 },
+      { sec: '#s5', sel: '.p5 .coda, .p5 .links', win: 0.60, gap: 0.20, rise: 30, exitRise: 34, blur: 12 }
+    ].forEach(function (s) { addTrack(s); });
     measure();
     requestAnimationFrame(frame);
 
@@ -998,7 +1294,8 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
         el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
       });
     });
-    [].forEach.call(document.querySelectorAll('.p2 .works li, .p2 .live-band, .p3 .coda, .p3 .links'),
+    [].forEach.call(document.querySelectorAll(
+        '.p2 .works li, .p3 .live-panel > *, .p4 .door > *, .p5 .coda, .p5 .links'),
       function (el) {
         el.style.opacity = 1; el.style.filter = 'none'; el.style.transform = 'none';
       });
@@ -1014,7 +1311,7 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
     try {
       document.documentElement.classList.add('fx');   // 关掉 CSS transition
       setup();
-      if (gq.has('fxdone')) rescue();                 // 见 setup() 里那段注释
+      if (gq.has('fxdone')) { rescue(); trackHero(); } // 见 setup() 里那段注释
       addEventListener('resize', measure);
       /* 2.6 秒**无条件**收口，不判断"跑没跑完"。
          上一版这里是个 if：只有 #word 的 opacity 不到 0.9 才救。
@@ -1024,6 +1321,7 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
       setTimeout(function () {
         heroStop = true;
         rescue();
+        trackHero();      // 首屏从这里起交给滚动驱动 —— 门要学会让开
       }, 2600);
     } catch (e) {
       console.warn('[fx] 编排失败，走兜底：', e);
@@ -1082,6 +1380,7 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
     var band  = document.getElementById('liveBand');
     var track = document.getElementById('liveTrack');
     var stamp = document.getElementById('liveT');
+    var nums  = document.getElementById('liveNums');
     if (!band || !track || reduced) return;
 
     var SPEED = 34;            // px/秒。慢 —— 跑马灯之所以低俗是因为它快
@@ -1167,6 +1466,10 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
         measure();
 
         if (stamp) stamp.textContent = ago(d.updated);
+        /* 这一屏底部的读数。**这两个数是这一屏的内容，不是装饰** ——
+           别处的数字（01 02 03）是序号，这里的数字回答的是
+           "它现在什么状态"。所以源挂了要如实写出来。 */
+        if (nums) nums.textContent = d.total + ' 条 · ' + d.ok + '/' + d.sources + ' 源可用';
 
         /* 馊了。Date.parse 失败会是 NaN，`!(NaN < STALE)` 为真 ——
            解析不出来就当它馊了，这个方向是安全的。 */
@@ -1188,6 +1491,47 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
       });
   })();
 
+  /* ── 两扇门：门上的数字 ──────────────────────────────────
+     门里放的都是**真数据**（曲数、片数、年份跨度），不是写死的文案 ——
+     所以这两个数要 fetch。拉不到就留着 HTML 里那句静态的，
+     **不写"加载失败"**：对访客来说「十三部 · 十二部点开就能看」
+     比一个错误码体面，而且那句话本身也是真的。 */
+  (function () {
+    function num(id, txt) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = txt;
+    }
+    function shelfOf(url, tag) {
+      return fetch(url, { cache: 'no-cache' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (d) { return (d && d.shelf) || []; })
+        .catch(function (e) {
+          console.warn('[doors] ' + tag + ' 没起来，留着静态那句：', e);
+          return [];
+        });
+    }
+
+    /* 音乐区：曲数。曲库有几个就是几个，不写死。 */
+    shelfOf('./music/library.json', '曲库').then(function (shelf) {
+      if (shelf.length) num('doorSongs', shelf.length + ' 首');
+    });
+
+    /* 影视区：片数 / 在库数 / 年份跨度 */
+    shelfOf('./screening/library.json', '片单').then(function (shelf) {
+      if (!shelf.length) return;
+      var can = shelf.filter(function (x) { return x.play; }).length;
+      var ys  = shelf.map(function (x) { return x.year; }).filter(Boolean);
+      var span = ys.length
+        ? Math.min.apply(null, ys) + '–' + Math.max.apply(null, ys) : '';
+      num('doorFilms', shelf.length + ' 部 · ' + can + ' 部能直接看' +
+                       (span ? ' · ' + span : ''));
+      if (span) num('reelT', span);
+    });
+  })();
+
   /* ── 片边刻度 ── */
   var rail = document.getElementById('rail');
   var ticking = false;
@@ -1195,7 +1539,8 @@ html.fx .p1 .enter{transition:color .55s var(--ease)}
     ticking = false;
     if (!rail) return;
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    rail.style.height = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+    // scaleY 不是 height —— 见 .rail i 那条注释（每帧写布局属性会重排）
+    rail.style.transform = 'scaleY(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
   }
   function onScroll() {
     if (ticking) return;
