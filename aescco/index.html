@@ -1,0 +1,360 @@
+<!doctype html><html lang="zh"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aescco · 任务中控</title>
+<style>
+:root{
+  /* 紫的暗部 → 紫，一个色族走到底。
+     #0f0c14 是偏紫的暗（R15 G12 B20），不是 #0b0b0b 那种「中性近黑冒充黑」 */
+  color-scheme:dark;
+  --void:#0f0c14; --edge:rgba(162,115,255,.14);
+  /* 板块色阶 —— 明度即重要性。越亮 = 此刻越该看 */
+  --p1:#1b1526;   /* ① 现在（主体，浮起来） */
+  --p2:#161120;   /* ② 历史 */
+  --p3:#151121;   /* ③ 面板（退到最后）—— 原来 #130f1c 跟底色只差 1.5% 明度，退成了看不见 */
+  --well:#0c0912;  /* 板块内部的「井」：凹下去的地方（如调用流的底） */
+  /* --dim 原来 #5d5769，对五种底色全是 2.57–2.85:1，而它承的是时钟/标题/脚注这些正文字号。
+     提到 #8a8296 后最差一组（在 --p1 上）也有 4.8:1，过 AA。 */
+  --ink:#ebe8f0; --ghost:#85808f; --dim:#8a8296; --hair:#5d5769;
+  --trace:#a273ff; --wake:#4a3d66;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+/* all:unset 把 UA 的 outline 一起抹了 —— 键盘用户在全页没有任何焦点指示 */
+:focus-visible{outline:2px solid var(--trace); outline-offset:3px; border-radius:4px}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important}
+}
+body{
+  background:var(--void); color:var(--ink); min-height:100vh;
+  font-family:"Maple Mono NF CN","Maple Mono",ui-monospace,Menlo,monospace;
+  font-size:13px; line-height:1.8; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:0 clamp(18px,4vw,40px) 130px}
+
+/* ── 顶栏：只有身份和时间，没有统计数字 ─────────────────────── */
+header{display:flex; align-items:baseline; padding:34px 0 30px}
+.brand{font-size:14px}
+.brand em{color:var(--dim); font-style:normal; margin:0 5px}
+.clock{margin-left:auto; color:var(--dim); font-size:12px}
+
+/* ── 现在这块：活的 ─────────────────────────────────────────── */
+.slab{position:relative; background:var(--p1);
+  /* 边框有方向：上沿最亮 → 下沿最暗。光从上面来，框才立得住 */
+  border:1px solid;
+  border-color:rgba(162,115,255,.28) rgba(162,115,255,.11) rgba(162,115,255,.07) rgba(162,115,255,.11);
+  border-radius:20px; padding:34px 42px 32px 42px;
+  box-shadow:inset 0 1px 0 rgba(196,158,255,.10), 0 20px 48px -30px rgba(0,0,0,.95)}
+.slab::before{
+  content:""; position:absolute; left:0; top:38px; bottom:36px; width:2px;
+  background:var(--trace); border-radius:2px;
+  box-shadow:0 0 10px rgba(162,115,255,.3);
+}
+.scream{display:flex; align-items:baseline; gap:16px; margin-bottom:22px}
+.scream h1{font-size:19px; font-weight:500}
+.scream .seg{color:var(--dim); font-size:12px}
+.scream .live{margin-left:auto; color:var(--trace); font-size:11.5px}
+.scream .live.idle{color:var(--dim)}
+
+/* 调用流的「井」—— 凹下去。
+   凸的（板块）上沿亮、下沿暗；凹的正相反：上沿压一道暗、下沿透一点光。
+   同一束光，两种受光方式 —— 这才叫「凹」而不只是换了个底色 */
+.stream{background:var(--well); border-radius:12px; padding:16px 24px 14px;
+  font-size:12.5px; line-height:2.0; border:1px solid;
+  border-color:rgba(0,0,0,.6) rgba(162,115,255,.05) rgba(162,115,255,.09) rgba(162,115,255,.05);
+  box-shadow:inset 0 4px 12px -8px rgba(0,0,0,1)}
+.stream .key{text-align:right; color:var(--dim); font-size:11.5px;
+  line-height:1.7; margin-top:8px}
+.ln{display:flex; gap:15px; white-space:nowrap}
+.lt{color:var(--dim); flex:none; font-variant-numeric:tabular-nums}
+.lk{flex:none; width:15px; text-align:center}
+.lnm{flex:none; width:112px}
+.la{color:var(--ghost); overflow:hidden; text-overflow:ellipsis}
+
+/* ── 提醒 ───────────────────────────────────────────────────── */
+.warn{margin:26px 0 4px; display:flex; align-items:center; gap:14px;
+  padding:13px 18px; border-radius:10px; font-size:12.5px;
+  border-left:2px solid var(--trace); background:rgba(162,115,255,.075)}
+.warn .wi{color:var(--trace); flex:none}
+.warn .wt{color:var(--ghost)}
+.warn button{all:unset; cursor:pointer; margin-left:auto; flex:none; font-size:11.5px;
+  color:var(--trace); padding:3px 12px; border-radius:6px; border:1px solid var(--edge);
+  transition:background .14s,color .14s; font-family:inherit}
+.warn button:hover{background:rgba(162,115,255,.14)}
+.warn button.done{color:var(--dim); border-color:transparent; cursor:default}
+
+/* ── 段底 ───────────────────────────────────────────────────── */
+.foot{display:flex; align-items:center; gap:20px; margin-top:20px; padding-top:16px;
+  border-top:1px solid rgba(162,115,255,.10); color:var(--ghost); font-size:12px;
+  font-variant-numeric:tabular-nums}
+.gears{margin-left:auto; display:flex; border:1px solid var(--edge);
+  border-radius:8px; overflow:hidden}
+.gears button{all:unset; cursor:pointer; padding:4px 15px; font-size:12px;
+  color:var(--dim); transition:background .13s,color .13s; font-family:inherit}
+.gears button:hover{background:rgba(162,115,255,.08); color:var(--ink)}
+.gears button.on{background:var(--trace); color:#150f22; font-weight:500}
+.gears button+button{border-left:1px solid var(--edge)}
+.gt{color:var(--dim); font-size:11.5px; transition:color .2s}
+.gt.sent{color:var(--trace)}
+
+/* ── 历史：一条带 ───────────────────────────────────────────── */
+.hist{margin-top:20px; background:var(--p2);
+  border:1px solid;
+  border-color:rgba(162,115,255,.15) rgba(162,115,255,.065) rgba(162,115,255,.045) rgba(162,115,255,.065);
+  border-radius:16px; padding:28px 42px 28px 42px;
+  box-shadow:inset 0 1px 0 rgba(196,158,255,.055)}
+.hh{color:var(--dim); font-size:11.5px; margin-bottom:10px;
+  display:flex; align-items:baseline; gap:16px}
+.hmax{margin-left:auto; color:var(--dim); font-size:11.5px}
+.strip{display:flex; gap:2px; height:26px}
+/* 条带是唯一用颜色传意的元件，默认却压暗 45% —— 改成默认就看得清，hover 只是再加一点 */
+.strip span{display:block; border-radius:3px; opacity:.82; cursor:default;
+  transition:opacity .14s}
+.strip span:hover{opacity:1}
+.list{margin-top:14px; border-top:1px solid var(--edge); padding-top:10px}
+.li{display:flex; align-items:baseline; gap:13px; padding:6px 2px; font-size:12px;
+  color:var(--ghost)}
+.li .n{color:var(--dim); flex:none; width:22px}
+.li .k{flex:none; width:66px}
+.li .a{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  color:var(--dim)}
+.li .m{flex:none; color:var(--dim); font-size:11px}
+
+/* ── 底部两栏：退到后面 ─────────────────────────────────────── */
+.panels{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px}
+/* 窄屏必须落单列 —— 原来两栏硬撑，页面最小宽度被顶到 445px，420 的屏直接切掉右缘 */
+@media (max-width:860px){
+  .panels{grid-template-columns:1fr}
+  .hh{flex-wrap:wrap; gap:2px 16px}
+  .hmax{margin-left:0}
+  .foot{flex-wrap:wrap}
+  .gears{margin-left:0}
+  .scream{flex-wrap:wrap}
+  .scream .live{margin-left:0; width:100%}
+  .orb{right:16px; bottom:16px; padding:9px 15px}
+  .drawer{right:16px; bottom:62px; width:min(292px,calc(100vw - 32px))}
+}
+/* 窄屏的调用流改两行式：时间+动作+工具名一行，参数另起一行缩进。
+   原来横着排会横向撑破（一行 nowrap 的长度就是页面最小宽度） */
+@media (max-width:640px){
+  .slab{padding:26px 20px 24px 24px}
+  .stream{padding:14px 16px 12px}
+  .ln{display:block}
+  .la{display:block; padding-left:38px; color:var(--dim)}
+}
+.panel{background:var(--p3);
+  border:1px solid;
+  border-color:rgba(162,115,255,.13) rgba(162,115,255,.06) rgba(162,115,255,.055) rgba(162,115,255,.06);
+  border-radius:13px; padding:28px 34px 26px;
+  box-shadow:inset 0 1px 0 rgba(196,158,255,.045)}
+.panel h2{font-size:11.5px; color:var(--dim); font-weight:400; margin-bottom:18px}
+.big{font-size:26px; font-weight:300; margin-bottom:18px;
+  font-variant-numeric:tabular-nums}
+.big i{font-style:normal; font-size:11.5px; color:var(--dim); margin-left:9px}
+/* JEV：一根 100% 堆叠条 —— 两个互斥的部分合起来就是全部 */
+.split{display:flex; height:11px; border-radius:6px; overflow:hidden;
+  margin:22px 0 13px; background:var(--well);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+.split i{display:block; height:100%}
+.split .sa{background:rgba(162,115,255,.26)}
+.split .sb{background:var(--trace)}
+.lgd{display:flex; flex-wrap:wrap; gap:8px 24px; font-size:11.5px;
+  color:var(--ghost); margin-bottom:4px}
+.lgd b{color:var(--ink); font-weight:500; margin-left:7px;
+  font-variant-numeric:tabular-nums}
+.lgd em{font-style:normal; color:var(--dim); margin-left:7px}
+.lgd .dot{display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:8px}
+.lgd .dot.a{background:rgba(162,115,255,.26)}
+.lgd .dot.b{background:var(--trace)}
+.note-p{color:var(--dim); font-size:11.5px; line-height:1.75; margin-top:14px}
+.note-p b{color:var(--ink); font-weight:500}
+.jr{display:flex; gap:12px; font-size:11.5px; padding:3px 0; color:var(--ghost)}
+.jc{width:34px; text-align:right; color:var(--dim); flex:none;
+  font-variant-numeric:tabular-nums}
+.jk{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+/* ── 收纳 ───────────────────────────────────────────────────── */
+details.fold>summary{list-style:none; cursor:pointer; color:var(--dim); font-size:11.5px;
+  padding:4px 0; user-select:none; transition:color .13s}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary:hover{color:var(--ghost)}
+details.fold>summary::before{content:"▸ "; font-size:9px}
+details.fold[open]>summary::before{content:"▾ "}
+details.fold[open]>summary{margin-bottom:6px}
+
+/* ── 抽屉 ───────────────────────────────────────────────────── */
+.orb{position:fixed; right:30px; bottom:26px; display:flex; align-items:center; gap:8px;
+  padding:10px 18px; border-radius:24px; cursor:pointer; font-size:12.5px;
+  background:rgba(23,19,31,.92); backdrop-filter:blur(16px);
+  border:1px solid var(--edge); color:var(--ink); font-family:inherit;
+  box-shadow:0 12px 34px -10px rgba(0,0,0,.9);
+  transition:border-color .14s,transform .14s; z-index:20}
+.orb:hover{border-color:var(--trace); transform:translateY(-1px)}
+.orb b{color:var(--trace); font-weight:400}
+.drawer{position:fixed; right:30px; bottom:74px; width:292px; max-height:58vh;
+  overflow-y:auto; background:rgba(23,19,31,.975); backdrop-filter:blur(20px);
+  border:1px solid var(--edge); border-radius:13px; padding:14px; z-index:19;
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.95);
+  opacity:0; transform:translateY(7px) scale(.985); pointer-events:none;
+  transition:opacity .16s ease,transform .16s ease}
+.drawer.on{opacity:1; transform:none; pointer-events:auto}
+.dsearch{width:100%; background:rgba(162,115,255,.06); border:1px solid var(--edge);
+  border-radius:8px; padding:7px 11px; color:var(--ink); font-size:12.5px; outline:none;
+  font-family:inherit; margin-bottom:4px}
+.dsearch:focus{border-color:var(--trace)}
+.dsearch::placeholder{color:var(--dim)}
+.dgrp{color:var(--dim); font-size:11.5px; margin:16px 4px 7px}
+.ditem{padding:6px 9px; border-radius:7px; font-size:12px; color:var(--ghost);
+  cursor:pointer; display:flex; gap:10px; align-items:baseline}
+.ditem:hover{background:rgba(162,115,255,.09); color:var(--ink)}
+.ditem b{font-weight:400; flex:none; color:var(--ink); opacity:.85; font-size:11.5px}
+.ditem b.hot{color:var(--trace); opacity:1}
+.ditem small{color:var(--dim); font-size:11px; overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap}
+.dcold{margin-left:auto; color:var(--dim); font-size:11.5px; flex:none}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">aes<em>/</em>console</div>
+    <div class="clock">21:39:01</div>
+  </header>
+
+  <div class="slab">
+    <div class="scream">
+      <h1>在跑东西</h1>
+      <span class="seg">第 33 段</span>
+      <span class="live">● 正在写</span>
+    </div>
+
+    <div class="stream"><div class="ln" style="opacity:1.000"><span class="lt">21:39:00</span><span class="lk" style="color:#ae89eb">跑</span><span class="lnm">Bash</span><span class="la">python3 - &lt;&lt;&#x27;PY&#x27;</span></div><div class="ln" style="opacity:0.850"><span class="lt">21:38:52</span><span class="lk" style="color:#ae89eb">跑</span><span class="lnm">Bash</span><span class="la">python3 -c &quot;</span></div><div class="ln" style="opacity:0.700"><span class="lt">21:38:47</span><span class="lk" style="color:#ae89eb">跑</span><span class="lnm">Bash</span><span class="la">python3 -c &quot;</span></div><div class="ln" style="opacity:0.550"><span class="lt">21:38:09</span><span class="lk" style="color:#ae89eb">跑</span><span class="lnm">Bash</span><span class="la">node probe.mjs 1200 1600 2&gt;&amp;1 | tail -8; echo &quot;── 检测器&quot;; &quot;~/.claude/s</span></div><div class="key">↓ 往下越旧，也越暗</div></div>
+
+    <div class="warn"><span class="wi">⚑</span><span class="wt">[console.py 改了 23 次]</span><button id="push" data-text="[console.py 改了 23 次]">推给模型</button></div>
+
+    <div class="foot">
+      <span>4 次调用</span>
+      <span>51 秒</span>
+      <span class="gt" id="gnote">这一段的思考深度</span>
+      <div class="gears">
+        <button data-d="停">停</button><button data-d="想少">想少</button>
+        <button class="on" data-d="正常">正常</button><button data-d="想透">想透</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hist">
+    <div class="hh">已完成 32 段 · 左新右旧 · 条宽 = 调用数
+      <span class="hmax">最宽 39 次</span></div>
+    <div class="strip"><span style="flex:23;background:#9878ce" title="#32  在改东西 · 23 次 · 4 分"></span><span style="flex:15;background:#9878ce" title="#31  在改东西 · 15 次 · 2 分"></span><span style="flex:24;background:#ae89eb" title="#30  在跑东西 · 24 次 · 15 分"></span><span style="flex:8;background:#5e4c81" title="#29  在做 · 8 次 · 33 秒"></span><span style="flex:6;background:#ae89eb" title="#28  在跑东西 · 6 次 · 1 分"></span><span style="flex:6;background:#ae89eb" title="#27  在跑东西 · 6 次 · 1 分"></span><span style="flex:8;background:#ae89eb" title="#26  在跑东西 · 8 次 · 1 分"></span><span style="flex:8;background:#9878ce" title="#25  在改东西 · 8 次 · 8 分"></span><span style="flex:5;background:#5e4c81" title="#24  在做 · 5 次 · 7 秒"></span><span style="flex:12;background:#ae89eb" title="#23  在跑东西 · 12 次 · 9.3 小时"></span><span style="flex:13;background:#9878ce" title="#22  在改东西 · 13 次 · 8 分"></span><span style="flex:19;background:#ae89eb" title="#21  在跑东西 · 19 次 · 27 分"></span><span style="flex:4;background:#9878ce" title="#20  在改东西 · 4 次 · 6 分"></span><span style="flex:11;background:#9878ce" title="#19  在改东西 · 11 次 · 3 分"></span><span style="flex:14;background:#9878ce" title="#18  在改东西 · 14 次 · 3 分"></span><span style="flex:14;background:#9878ce" title="#17  在改东西 · 14 次 · 5 分"></span><span style="flex:15;background:#ae89eb" title="#16  在跑东西 · 15 次 · 17 分"></span><span style="flex:9;background:#ae89eb" title="#15  在跑东西 · 9 次 · 12 分"></span><span style="flex:13;background:#ae89eb" title="#14  在跑东西 · 13 次 · 19 分"></span><span style="flex:10;background:#ae89eb" title="#13  在跑东西 · 10 次 · 26 分"></span><span style="flex:5;background:#ae89eb" title="#12  在跑东西 · 5 次 · 4 分"></span><span style="flex:13;background:#a17fda" title="#11  在查网 · 13 次 · 13 分"></span><span style="flex:31;background:#ae89eb" title="#10  在跑东西 · 31 次 · 9.5 小时"></span><span style="flex:19;background:#ae89eb" title="#9  在跑东西 · 19 次 · 37 分"></span><span style="flex:5;background:#ae89eb" title="#8  在跑东西 · 5 次 · 4 分"></span><span style="flex:30;background:#ae89eb" title="#7  在跑东西 · 30 次 · 26 分"></span><span style="flex:12;background:#ae89eb" title="#6  在跑东西 · 12 次 · 2 分"></span><span style="flex:20;background:#ae89eb" title="#5  在跑东西 · 20 次 · 9 分"></span><span style="flex:39;background:#ae89eb" title="#4  在跑东西 · 39 次 · 5 分"></span><span style="flex:27;background:#ae89eb" title="#3  在跑东西 · 27 次 · 32 分"></span><span style="flex:9;background:#ae89eb" title="#2  在跑东西 · 9 次 · 1 分"></span><span style="flex:8;background:#ae89eb" title="#1  在跑东西 · 8 次 · 11 秒"></span></div>
+    <details class="fold"><summary>展开每一段</summary><div class="list"><div class="li"><span class="n">01</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">grep -ril &quot;jev&quot; ~/.claude/projects/-Us</span><span class="m">8 次 · 11 秒</span></div><div class="li"><span class="n">02</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">/opt/homebrew/bin/python3 - &lt;&lt;&#x27;PY&#x27;</span><span class="m">9 次 · 1 分</span></div><div class="li"><span class="n">03</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">grep -c &quot;sk-&quot; ~/jev-approve.log; echo &quot;--- 日志</span><span class="m">27 次 · 32 分</span></div><div class="li"><span class="n">04</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">L=~/Library/Application\ Support/Code/logs; echo &quot;=== 最</span><span class="m">39 次 · 5 分</span></div><div class="li"><span class="n">05</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">echo &quot;=== 他的 keybindings.json ===&quot;; cat &quot;$HOM</span><span class="m">20 次 · 9 分</span></div><div class="li"><span class="n">06</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">A=&quot;/Applications/Visual Studio Code.app/Contents/Resour</span><span class="m">12 次 · 2 分</span></div><div class="li"><span class="n">07</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">/opt/homebrew/bin/python3 - &lt;&lt;&#x27;PY&#x27;</span><span class="m">30 次 · 26 分</span></div><div class="li"><span class="n">08</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">/opt/homebrew/bin/python3 - &lt;&lt;&#x27;PY&#x27;</span><span class="m">5 次 · 4 分</span></div><div class="li"><span class="n">09</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">/opt/homebrew/bin/python3 - &lt;&lt;&#x27;PY&#x27;</span><span class="m">19 次 · 37 分</span></div><div class="li"><span class="n">10</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">G=&quot;$HOME/Library/Application Support/Code/User&quot;; /</span><span class="m">31 次 · 9.5 小时</span></div><div class="li"><span class="n">11</span><span class="k" style="color:#a17fda">在查网</span><span class="a">new AI model release October 14 2026</span><span class="m">13 次 · 13 分</span></div><div class="li"><span class="n">12</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">cd ~/.claude/projects/-Users-wuaeri/memory</span><span class="m">5 次 · 4 分</span></div><div class="li"><span class="n">13</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">cd ~/.claude/projects/-Users-wuaeri</span><span class="m">10 次 · 26 分</span></div><div class="li"><span class="n">14</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">echo &quot;=== skills-manager 结构 ===&quot;</span><span class="m">13 次 · 19 分</span></div><div class="li"><span class="n">15</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">export PATH=&quot;$PATH:/opt/homebrew/bin&quot;</span><span class="m">9 次 · 12 分</span></div><div class="li"><span class="n">16</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">export PATH=&quot;$PATH:$HOME/.local/bin&quot;</span><span class="m">15 次 · 17 分</span></div><div class="li"><span class="n">17</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">14 次 · 5 分</span></div><div class="li"><span class="n">18</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">14 次 · 3 分</span></div><div class="li"><span class="n">19</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">11 次 · 3 分</span></div><div class="li"><span class="n">20</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">4 次 · 6 分</span></div><div class="li"><span class="n">21</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">cd ~/Projects/aes-console</span><span class="m">19 次 · 27 分</span></div><div class="li"><span class="n">22</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">13 次 · 8 分</span></div><div class="li"><span class="n">23</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">wc -l console.py &amp;&amp; sed -n &#x27;455,520p&#x27; cons</span><span class="m">12 次 · 9.3 小时</span></div><div class="li"><span class="n">24</span><span class="k" style="color:#5e4c81">在做</span><span class="a">TaskCreate</span><span class="m">5 次 · 7 秒</span></div><div class="li"><span class="n">25</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">serve.py</span><span class="m">8 次 · 8 分</span></div><div class="li"><span class="n">26</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">cd ~/Projects/aes-console &amp;&amp; time python</span><span class="m">8 次 · 1 分</span></div><div class="li"><span class="n">27</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">chmod +x inbox-hook.sh &amp;&amp; mkdir -p ~/.claude/console</span><span class="m">6 次 · 1 分</span></div><div class="li"><span class="n">28</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">pkill -f &quot;python3 serve.py&quot; ; sleep 0.5; nohup pyt</span><span class="m">6 次 · 1 分</span></div><div class="li"><span class="n">29</span><span class="k" style="color:#5e4c81">在做</span><span class="a">TaskUpdate</span><span class="m">8 次 · 33 秒</span></div><div class="li"><span class="n">30</span><span class="k" style="color:#ae89eb">在跑东西</span><span class="a">printf &#x27;%s\n%s\n&#x27; &#x27;{&quot;ts&quot;: &quot;1&q</span><span class="m">24 次 · 15 分</span></div><div class="li"><span class="n">31</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">15 次 · 2 分</span></div><div class="li"><span class="n">32</span><span class="k" style="color:#9878ce">在改东西</span><span class="a">console.py</span><span class="m">23 次 · 4 分</span></div></div></details>
+  </div>
+
+  <div class="panels">
+    <section class="panel">
+      <h2>JEV 决策</h2>
+      <div class="big">1294<i>次判定</i></div>
+      <div class="split">
+        <i class="sa" style="width:87.6%"></i><i class="sb" style="width:12.4%"></i>
+      </div>
+      <div class="lgd">
+        <span><i class="dot a"></i>本地闸门 <b>1133</b><em>87.6%</em></span>
+        <span><i class="dot b"></i>真·Jev <b>161</b><em>12.4%</em></span>
+      </div>
+      <p class="note-p">Jev 模型真正过目 <b>161</b> 次；其中放行 <b>46</b> 次。
+        其余被本地闸门挡在门外。全部 dry-run。</p>
+      <details class="fold"><summary>挡下的理由 · 52 种</summary><div class="jr"><span class="jc">455</span><span class="jk">empty or too long</span></div><div class="jr"><span class="jc">240</span><span class="jk">multi-line</span></div><div class="jr"><span class="jc">221</span><span class="jk">hard-no pattern</span></div><div class="jr"><span class="jc">139</span><span class="jk">mode auto</span></div><div class="jr"><span class="jc">35</span><span class="jk">mode plan</span></div><div class="jr"><span class="jc">21</span><span class="jk">Jev: read-only p=0.97</span></div><div class="jr"><span class="jc">17</span><span class="jk">Jev: p=0.01 below 0.95</span></div><div class="jr"><span class="jc">16</span><span class="jk">jev error: TimeoutError</span></div><div class="jr"><span class="jc">15</span><span class="jk">mode dontAsk</span></div></details>
+    </section>
+    <section class="panel">
+      <h2>SKILL 调用</h2>
+      <div class="big">1<i>本会话</i></div>
+      <div class="jr"><span class="jc">1</span><span class="jk">impeccable</span></div>
+      <p class="note-p">装着 17 个，
+        全历史真调用过 4 次。看得见，才会想起来用。</p>
+    </section>
+  </div>
+</div>
+
+<button class="orb" id="orb" aria-expanded="false" aria-controls="drawer"><b>+</b> skill</button>
+<div class="drawer" id="drawer" role="dialog" aria-label="skill 抽屉">
+  <input class="dsearch" id="dsearch" aria-label="搜索 skill"
+         placeholder="搜索 skill…" autocomplete="off">
+  <div id="dlist"><div class="dgrp">写作 · 一条流水线</div><div class="ditem"><b class="">writing-fragments</b><small>攒碎片，不定结构</small><span class="dcold">从未</span></div><div class="ditem"><b class="">writing-shape</b><small>逐段成形</small><span class="dcold">从未</span></div><div class="ditem"><b class="">writing-beats</b><small>按 beat 组装</small><span class="dcold">从未</span></div><div class="dgrp">拷问 · 一个东西三个档</div><div class="ditem"><b class="">grilling</b><small>拷问计划 / 决定</small><span class="dcold">从未</span></div><div class="ditem"><b class="">grill-me</b><small>同上，不出文档</small><span class="dcold">从未</span></div><div class="ditem"><b class="">grill-with-docs</b><small>同上，顺产 ADR + 术语表</small><span class="dcold">从未</span></div><div class="dgrp">设计</div><div class="ditem"><b class="hot">impeccable</b><small>设计 / 重塑 / 打磨</small><span class="dcold">本会话 1 · 共 2</span></div><div class="ditem"><b class="">ui-motion</b><small>动效 · 不要 AI 味</small><span class="dcold">1 次</span></div><div class="ditem"><b class="">frontend-design</b><small>视觉方向 + 反 AI 味清单</small><span class="dcold">从未</span></div><div class="dgrp">教学 · 元</div><div class="ditem"><b class="">teach</b><small>讲清一个概念</small><span class="dcold">从未</span></div><div class="ditem"><b class="">find-skills</b><small>找 / 装 skill</small><span class="dcold">从未</span></div><div class="ditem"><b class="">domain-modeling</b><small>钉术语 + ADR</small><span class="dcold">从未</span></div><div class="dgrp">中控自己要用的（本项目装的那批）</div><div class="ditem"><b class="">hook-development</b><small>写 hook · 注入通道</small><span class="dcold">从未</span></div><div class="ditem"><b class="">plugin-structure</b><small>插件骨架</small><span class="dcold">从未</span></div><div class="ditem"><b class="">mcp-integration</b><small>本地服务</small><span class="dcold">从未</span></div><div class="ditem"><b class="">observability-and-instrumentation</b><small>埋点方法论</small><span class="dcold">从未</span></div><div class="ditem"><b class="">agent-pulse</b><small>现成的观测层</small><span class="dcold">从未</span></div><div class="dgrp">全历史 —— 装着 5 组，真调用过 4 次</div></div>
+</div>
+
+<script>
+/* ── 投递：页面里只有这一条真通道。档位和提醒都走它 ─────────────
+   详见 README 不变式 3：进模型的措辞一律名词短语，不带动词不带问号 */
+const ONLINE = location.protocol === 'http:';
+async function push(text) {
+  if (!ONLINE) return false;
+  try {
+    const r = await fetch('/push', {method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text})});
+    return !!(await r.json()).ok;
+  } catch (e) { return false; }
+}
+
+/* ── 档位：不再是个只换高亮的死开关。点一下 = 往邮箱投一条 [深度=…] */
+const gnote = document.getElementById('gnote');
+const gtext = gnote ? gnote.textContent : '';
+document.querySelectorAll('.gears button').forEach(b => b.addEventListener('click', async () => {
+  b.parentNode.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  const payload = '[深度=' + b.dataset.d + ']';
+  const ok = await push(payload);
+  if (gnote) {
+    gnote.textContent = ok ? '已投递 ' + payload + ' · 模型下一次工具调用时读到'
+                           : (ONLINE ? '投递失败' : '档位要接邮箱，得先跑 serve.py');
+    gnote.classList.toggle('sent', ok);
+    setTimeout(() => { gnote.textContent = gtext; gnote.classList.remove('sent'); }, 3200);
+  }
+}));
+const orb = document.getElementById('orb'), dw = document.getElementById('drawer');
+function toggleDrawer(v) {
+  const on = v === undefined ? !dw.classList.contains('on') : v;
+  dw.classList.toggle('on', on);
+  orb.setAttribute('aria-expanded', on ? 'true' : 'false');
+}
+orb.addEventListener('click', e => { e.stopPropagation(); toggleDrawer(); });
+document.addEventListener('click', e => {
+  if (!dw.contains(e.target) && !orb.contains(e.target)) toggleDrawer(false);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleDrawer(false); });
+document.getElementById('dsearch').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('#dlist .ditem').forEach(el => {
+    el.style.display = el.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+/* ── 提醒那条：投递成功后自锁，不给二次投递的机会 ─────────────── */
+const pb = document.getElementById('push');
+if (pb) pb.addEventListener('click', async () => {
+  if (pb.disabled) return;
+  if (!ONLINE) { pb.textContent = '得先跑 serve.py'; return; }
+  pb.textContent = '投递中';
+  const ok = await push(pb.dataset.text || '');
+  pb.textContent = ok ? '已投进邮箱' : '投递失败';
+  if (ok) { pb.classList.add('done'); pb.disabled = true; }
+});
+
+/* ── 自刷新：盯 /rev，段数或末次调用一变就重载 ──────────────────
+   两个例外：正在选中文字时不重载（不然选中态被 DOM 换掉清零），
+   抽屉开着时也不重载（不然读 skill 读到一半被打断） */
+if (ONLINE) {
+  let rev = null;
+  setInterval(async () => {
+    try {
+      const t = await (await fetch('/rev')).text();
+      if (rev === null) { rev = t; return; }
+      if (t === rev) return;
+      if (String(window.getSelection()) .length) return;
+      if (dw.classList.contains('on')) return;
+      rev = t;
+      sessionStorage.setItem('aes-scroll', String(window.scrollY));
+      location.reload();
+    } catch (e) {}
+  }, 2500);
+  const sy = sessionStorage.getItem('aes-scroll');
+  if (sy) { window.scrollTo(0, +sy); sessionStorage.removeItem('aes-scroll'); }
+}
+</script>
+<div style="position:fixed;right:16px;bottom:14px;z-index:9999;font:11px -apple-system,PingFang SC,sans-serif;letter-spacing:.12em;color:#8a8296;background:rgba(15,12,20,.72);border:1px solid rgba(162,115,255,.18);border-radius:999px;padding:6px 12px;pointer-events:none">静态快照 · 2026-10-17</div></html>

@@ -21,3 +21,7 @@ signature/assets/iconpattern.png
 
 # 本地开发用的无缓存服务器（跟 head-demo/serve.py 同一个东西）
 /serve.py
+
+# 大件与本地备份
+/music/library.json.bak-*
+.DS_Store

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aes · 本机员工群</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#050506;
+  --fg:#ece9e4;
+  --fg-2:rgba(236,233,228,.66);
+  --fg-3:rgba(236,233,228,.46);
+  --line:rgba(255,255,255,.10);
+  --pulse:#9fd8ff;
+  --warm:#e8c9a0;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --pad:clamp(22px,6vw,84px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:-apple-system,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.028; z-index:9;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after{
+  content:""; position:fixed; top:0; left:0; right:0; height:46vh; pointer-events:none; z-index:0;
+  background:radial-gradient(ellipse 72% 100% at 50% 0%, rgba(159,216,255,.055) 0%, rgba(159,216,255,0) 68%);
+}
+.wrap{position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 var(--pad)}
+a{color:inherit}
+.back{
+  position:fixed; left:18px; top:16px; z-index:10;
+  font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--fg-3); text-decoration:none;
+  transition:color .3s var(--ease);
+}
+.back:hover{color:var(--pulse)}
+header{padding:clamp(96px,16vh,170px) 0 clamp(44px,7vh,72px)}
+.kicker{
+  font-size:10.5px; letter-spacing:.52em; text-transform:uppercase;
+  color:var(--fg-3); margin-bottom:26px;
+}
+h1{
+  font-size:clamp(46px,9vw,92px); font-weight:200; letter-spacing:-.02em;
+  line-height:1.02; margin-bottom:30px;
+}
+h1 .thin{color:var(--fg-3)}
+.lede{
+  font-size:clamp(16px,2.2vw,19px); color:var(--fg-2); max-width:38em;
+}
+.lede strong{color:var(--warm); font-weight:400}
+section{padding:clamp(38px,7vh,74px) 0; border-top:1px solid var(--line)}
+h2{
+  font-size:11px; font-weight:500; letter-spacing:.4em; text-transform:uppercase;
+  color:var(--pulse); margin-bottom:30px;
+}
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(22px,4vw,44px)}
+.card h3{font-size:16.5px; font-weight:500; margin-bottom:10px; letter-spacing:.01em}
+.card p{font-size:14px; color:var(--fg-2); line-height:1.95}
+.mono{
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:12px; color:var(--fg-2);
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--line); border-radius:12px;
+  padding:22px 24px; overflow-x:auto; line-height:2;
+  white-space:pre;
+}
+.mono .c{color:var(--fg-3)}
+.mono .k{color:var(--pulse)}
+ul.notes{list-style:none}
+ul.notes li{
+  position:relative; padding-left:20px; margin-bottom:16px;
+  font-size:14px; color:var(--fg-2);
+}
+ul.notes li::before{
+  content:""; position:absolute; left:0; top:.8em; width:8px; height:1px; background:var(--fg-3);
+}
+ul.notes strong{color:var(--fg); font-weight:500}
+footer{
+  padding:clamp(44px,8vh,90px) 0 clamp(60px,10vh,120px);
+  border-top:1px solid var(--line);
+  font-size:12px; color:var(--fg-3); letter-spacing:.12em;
+}
+footer a{color:var(--fg-2); text-decoration:none; border-bottom:1px solid var(--line)}
+@media (max-width:720px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a class="back" href="../">← wuaeri</a>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Work · 04</p>
+    <h1>aes<span class="thin"> · 员工群</span></h1>
+    <p class="lede">
+      一群有<strong>独立人格、独立岗位、独立上下文</strong>的员工，
+      坐在同一块群板上开会。单聊是「同事」，不是「每次重新认识的客服」。
+      整个系统零依赖：只用 Python 标准库。
+    </p>
+  </header>
+
+  <section>
+    <h2>为什么是「群板」</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>共享一块板，不互发消息</h3>
+        <p>员工之间不是点对点聊天，所有的发言落在同一块板上。开会就是往板上写，各自读。</p>
+      </div>
+      <div class="card">
+        <h3>员工只吃切片</h3>
+        <p>上下文按岗切成固定片（默认 6000 字符），而不是让每个人重读全史。
+        成本结构决定了会议能不能开得久。</p>
+      </div>
+      <div class="card">
+        <h3>进度就是工具调用</h3>
+        <p>LLM 没有中间状态可汇报。界面上看到的「进度」，
+        是它此刻在调用什么 —— 观测已经发生过的事，不让模型预测。</p>
+      </div>
+      <div class="card">
+        <h3>硬预算，到线下班</h3>
+        <p>单次开会与每日花费都有上限。超了中止并如实记账，不静默继续。
+        值班是无人看管账单的唯一刹车。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>手和网都被收着</h2>
+    <ul class="notes">
+      <li><strong>工具只读。</strong>读文件、列目录、搜内容；路径锁死在白名单根目录里，没有写、没有删。</li>
+      <li><strong>网只出。</strong>只 GET、只 http/https、只公网；重定向逐跳过闸。</li>
+      <li><strong>SSRF 闸不是假想防护。</strong>禁打本机、内网、链路本地 ——
+          员工是模型驱动的，它可能被某份网页里的指令骗着去撞本机的服务。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>怎么跑</h2>
+    <pre class="mono"><span class="c"># 谁在岗</span>
+python3 run.py list
+
+<span class="c"># 开会</span>
+python3 run.py meet "任务描述" --rounds 2
+
+<span class="c"># 基站：常驻服务 + 界面</span>
+python3 run.py station   <span class="c"># → 127.0.0.1:8848</span></pre>
+    <p class="lede" style="margin-top:26px;font-size:14.5px">
+      另有一个 macOS 桌面壳 <span style="color:var(--warm)">aes.app</span>：
+      WKWebView 打开本机界面，基站没起来就自己拉起来，
+      窗口关了壳退、基站继续值班。
+    </p>
+  </section>
+
+  <footer>
+    Python 标准库 · sqlite3 · DeepSeek API · Swift/WKWebView 壳
+    &nbsp;·&nbsp; <a href="../">回到作品索引</a>
+  </footer>
+</div>
+</body>
+</html>
