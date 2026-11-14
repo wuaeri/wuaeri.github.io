@@ -1,33 +1,33 @@
 {
   "topic": "aespa",
-  "updated": "2026-11-13T23:29:13+00:00",
+  "updated": "2026-11-14T03:23:35+00:00",
   "rsshub": false,
-  "total": 623,
+  "total": 607,
   "sources": [
     {
       "name": "GNews 英",
       "url": "https://news.google.com/rss/search?q=aespa&hl=en-US&gl=US&ceid=US:en",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 95,
+      "count": 94,
       "error": ""
     },
     {
       "name": "GNews 韩",
       "url": "https://news.google.com/rss/search?q=aespa&hl=ko&gl=KR&ceid=KR:ko",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 92,
+      "count": 98,
       "error": ""
     },
     {
       "name": "GNews 中",
       "url": "https://news.google.com/rss/search?q=aespa&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
@@ -37,7 +37,7 @@
     {
       "name": "GNews 日",
       "url": "https://news.google.com/rss/search?q=aespa&hl=ja&gl=JP&ceid=JP:ja",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
@@ -47,67 +47,67 @@
     {
       "name": "GNews 近两日",
       "url": "https://news.google.com/rss/search?q=aespa%20when%3A2d&hl=en-US&gl=US&ceid=US:en",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 28,
+      "count": 26,
       "error": ""
     },
     {
       "name": "GNews 成员",
       "url": "https://news.google.com/rss/search?q=aespa%20%28Karina%20OR%20Winter%20OR%20Giselle%20OR%20Ningning%29&hl=en-US&gl=US&ceid=US:en",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 71,
+      "count": 70,
       "error": ""
     },
     {
       "name": "GNews 에스파",
       "url": "https://news.google.com/rss/search?q=%EC%97%90%EC%8A%A4%ED%8C%8C&hl=ko&gl=KR&ceid=KR:ko",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 101,
+      "count": 100,
       "error": ""
     },
     {
       "name": "GNews 에스파·成员",
       "url": "https://news.google.com/rss/search?q=%EC%97%90%EC%8A%A4%ED%8C%8C%20%28%EC%B9%B4%EB%A6%AC%EB%82%98%20OR%20%EC%9C%88%ED%84%B0%20OR%20%EC%A7%80%EC%A0%A4%20OR%20%EB%8B%9D%EB%8B%9D%29&hl=ko&gl=KR&ceid=KR:ko",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 96,
+      "count": 97,
       "error": ""
     },
     {
       "name": "GNews 近一日",
       "url": "https://news.google.com/rss/search?q=%EC%97%90%EC%8A%A4%ED%8C%8C%20when%3A1d&hl=ko&gl=KR&ceid=KR:ko",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 45,
+      "count": 27,
       "error": ""
     },
     {
       "name": "YouTube · aespa",
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC9GtSLeksfK4yuJ_g1lgQbg",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": false,
       "skipped": false,
-      "ok": true,
-      "count": 15,
-      "error": ""
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 404: Not Found"
     },
     {
       "name": "Reddit r/aespa",
       "url": "https://www.reddit.com/r/aespa/.rss",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
@@ -117,7 +117,7 @@
     {
       "name": "Naver 뉴스",
       "url": "naver search",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
@@ -127,17 +127,17 @@
     {
       "name": "Naver 카페",
       "url": "naver search",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": true,
       "skipped": false,
       "ok": true,
-      "count": 28,
+      "count": 29,
       "error": ""
     },
     {
       "name": "Soompi",
       "url": "https://www.soompi.com/feed",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": false,
       "skipped": false,
       "ok": true,
@@ -147,7 +147,7 @@
     {
       "name": "Billboard",
       "url": "https://www.billboard.com/feed/",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": false,
       "skipped": false,
       "ok": true,
@@ -157,7 +157,7 @@
     {
       "name": "体育东亚",
       "url": "https://sports.donga.com/rss/",
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "trust": false,
       "skipped": false,
       "ok": true,
@@ -167,7 +167,7 @@
     {
       "name": "Naver 新闻",
       "trust": true,
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "skipped": true,
       "ok": false,
       "count": 0,
@@ -177,7 +177,7 @@
     {
       "name": "YouTube API",
       "trust": true,
-      "checked": "2026-11-13T23:29:13+00:00",
+      "checked": "2026-11-14T03:23:35+00:00",
       "skipped": true,
       "ok": false,
       "count": 0,
@@ -186,6 +186,125 @@
     }
   ],
   "items": [
+    {
+      "title": "[스포츠한길] 26년11월14일 중국vs말레이시아 결장자 라인업 정보 라이브스코어 라스",
+      "url": "https://cafe.naver.com/drawhangil/26060",
+      "date": "2026-11-14T02:35:44+00:00",
+      "excerpt": "스포츠한길 공식카페 - 토토 프로토 스포츠분석고배당 토프세이 48분 전 [스포츠한길] 26년11월14일 중국vs말레이시아 결장자 라인업 정보 라이브스코어 라스 분석,해축,여자농구,여자배구,남자배구,남자농구,코보,KOVO,골프,마핸,플핸,언더,오버,적특,승무패,승1패,스페셜,축구토토스페셜,야구토토스페셜,축구토토,야구토토,승5패,농구토토,농구토토스페셜,기록식,손흥민,이강인,김민재,황희찬,장현석,홍명보,신태용,양민혁,음바페,김연경,홀란드,아스널,아스날,맨시티,토트넘,아틀레티코마드리드,AT마드리드,인터밀",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "루시·NCT DREAM→에스파 캐롤까지…11월 2주 추천곡 [이주의 신곡.zip]",
+      "url": "http://m.celuvmedia.com/article.php?aid=1794623507530869007",
+      "date": "2026-11-14T02:30:43+00:00",
+      "excerpt": "루시의 '다시!', NCT DREAM의 'Boogie Woogie', 있지 채령의 'Lovesick', 지바노프의 '샴푸의 요정',  에스파 의 'Santa Baby'까지. 쌀쌀한 11월, 일상에 기분 좋은... ◆ 에스파  'Santa Baby' (전예슬 기자) 앨범: Santa Baby 발매: 2026.11.13 장르: 캐롤  에스파 의 'Santa Baby'를 처음 듣자마자 크리스마스가 성큼 다가왔다는...",
+      "source": "Naver 뉴스"
+    },
+    {
+      "title": "박재범 롱샷, 스포티파이 '레이더 코리아' 선정…타임스퀘어 장식",
+      "url": "https://m.entertain.naver.com/article/003/0014321921",
+      "date": "2026-11-14T02:30:43+00:00",
+      "excerpt": "앞서 르세라핌· 에스파 를 비롯해 더 키드 라로이, 라우브, 타일라 등이 이 프로그램을 거쳐 글로벌 시장에서 입지를 넓혔다. 오율·률·우진·루이로 구성된 롱샷은 지난 1월 첫 미니음반(EP) '샷 콜러스(SHOT CALLERS)'로 데뷔했다. R&amp;B와 힙합 기반의 사운드를 앞세워 스포티파이 누적 스트리밍...",
+      "source": "Naver 뉴스"
+    },
+    {
+      "title": "카리나 팔뚝이 되기 위한 팔뚝 지방추출주사 전후",
+      "url": "https://cafe.naver.com/fox5282/5004531",
+      "date": "2026-11-14T02:23:44+00:00",
+      "excerpt": "A+여우야공식카페 헬스·뷰티·의료l성형·시술·피부·질환병원 1시간 전 카리나 팔뚝이 되기 위한 팔뚝 지방추출주사 전후 15 제 팔뚝 어쩌죠,,,필라테스 해도 팔뚝은 안 빠지더라고요. 거기다가 부유방까지 신경 쓰여서 고민하다가 이번에 큰 맘 먹고 강남에서 팔뚝 지방추출주사를 받고 왔고 현재 엄청 만족중입니다. 주사기로 24통 정도 팔뚝에서 지방 뽑아냈고 일주일만에 3cm 이상 팔뚝이 줄어서 다들 날씬해졌다고 난리네요. 며칠전까지만 해도 무 같던 제 팔뚝에서 에스파 카리나처럼 얇은 팔뚝이 되었어요!!",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "[스포츠한길] 26년11월14일 쇼난벨마레vs요코하마FC 결장자 라인업 정보 라이브스코어 라스",
+      "url": "https://cafe.naver.com/drawhangil/26051",
+      "date": "2026-11-14T01:23:44+00:00",
+      "excerpt": "스포츠한길 공식카페 - 토토 프로토 스포츠분석고배당 토프세이 2시간 전 [스포츠한길] 26년11월14일 쇼난벨마레vs요코하마FC 결장자 라인업 정보 라이브스코어 라스 티원 # 에스파 #t1 #소문의낙원 #서인영 #영미터 #봉준 #투어스 #포스코홀딩스 #웃소 #장추자 #캐치캐치 #빠더너스 #로버트기요사키 #이상화 #아이패드 #김혜수 #본회의 #전원주 #백진희 #카리나 #김상욱 #총파업 #여군 #테슬라모델y #양정원 #아랍에미리트 #최양락 #다니엘 #상장 #커피 #졸음운전 #정선민 #에코프로비엠 #심",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "오늘 MMA 어디서 봐요? 5시 레드카펫·6시 본식, 보기 전 3가지",
+      "url": "https://cafe.naver.com/blueqr6me/381",
+      "date": "2026-11-14T01:23:44+00:00",
+      "excerpt": "알뜰생활 경제노트 2시간 전 오늘 MMA 어디서 봐요? 5시 레드카펫·6시 본식, 보기 전 3가지 내가 보려는 팀은 오늘 나오나요? 아이오아이· 에스파 ·NCT DREAM은 14일, 아이브·플레이브·NCT 127은 15일이에요. NCT WISH도 15일입니다. 2. 몇 시에 틀어 두면 되나요? 레드카펫부터 보고 싶으면 5시, 시상식과 무대를 보려면 6시를 기억하세요. 두 날짜에 같은 시작 시각이 적용됩니다. 14일·15일 라인업 비교 ▶ 3. 국내에서 어디로 들어가나요? 멜론의 공식 LIVE 안내",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "aespa、CORTIS、HANAなど出演決定！U-NEXT独占生配信の『MMA2026』、特別賞「Japan Favorite Artist by U-NEXT」を今年も実施！ - USENの音楽情報サイト",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQSDhmZW92SlY4VTF0M2VFS2JhaThWQnhFTVFQbUozX0dQNVhxZTRMblFEczNmZ2ZOTkdEdDdjOGZpdnRiTXFBN0pUR3hGci00eGZkSUpYclhsa2hLdlAyQUNtdlVYTHhSNFhTSjVPaVJGelBWN3pmUlhlYXZleUlhWUI4TzdFdGRKNXluM1MwcERZU3dZR1I2M1VMcDRlMjEw?oc=5",
+      "date": "2026-11-14T01:23:26+00:00",
+      "excerpt": "aespa、CORTIS、HANAなど出演決定！U-NEXT独占生配信の『MMA2026』、特別賞「Japan Favorite Artist by U-NEXT」を今年も実施！ &nbsp;&nbsp; USENの音楽情報サイト",
+      "source": "GNews 日"
+    },
+    {
+      "title": "MMA 2026 토요일·일요일 라인업, 에스파와 아이브는 언제 보세요?",
+      "url": "https://cafe.naver.com/autoitkorea/2350",
+      "date": "2026-11-14T00:23:44+00:00",
+      "excerpt": "오토잇 신차견적 3시간 전 MMA 2026 토요일·일요일 라인업, 에스파 와 아이브는 언제 보세요? 3 14일 토요일 출연진에는 에스파 , 아이오아이, NCT DREAM, 에이티즈, 라이즈, 투어스, 최예나, 하츠투하츠 등이 포함됩니다. 아이오아이의 재결합 무대도 이날 예정돼 있습니다. 무대 순서와 수상 결과는 공연 중 공식 중계를 확인해야 합니다. 15일 일요일에는 아이브, 플레이브, 아일릿, 키키, NCT 127 등이 포함됩니다. NCT DREAM과 NCT 127은 날짜가 다릅니다. 에스콰이어",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "에스파 닝닝 붉은색 꽃 자주 비키니 몸매.jpg",
+      "url": "https://cafe.naver.com/issue18/382",
+      "date": "2026-11-14T00:23:44+00:00",
+      "excerpt": "오늘 이슈는? (방송/연예/속보/유머/뉴스/수다) 3시간 전 에스파 닝닝 붉은색 꽃 자주 비키니 몸매.jpg 꽃 자수 포인트가 좋네~~ 평소 몸매 관리도 엄청 열심히 하나보네..ㅋㅋ",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "미스코리아 출신 방송인이 딸에게 에스파 메이크업을 받았다가 벌어진 일",
+      "url": "https://cafe.naver.com/shoppingsuny/614",
+      "date": "2026-11-14T00:23:44+00:00",
+      "excerpt": "다다다 사고 싶어 3시간 전 미스코리아 출신 방송인이 딸에게 에스파 메이크업을 받았다가 벌어진 일 2 딸은 에스파 닝닝과 지젤의 메이크업을 참고했다며 본격적인 변신에 나섰는데요. 밝은 파운데이션부터 컨실러, 쉐딩과 블러셔까지 평소와는 다른 화장법을 선보였다고 합니다. 그런데 화장이 완성된 후 모녀의 반응이 완전히 달랐어요. 딸은 결과물을 보면서 너무 예쁘다며 만족했지만, 장윤정은 낯선 자신의 모습에 당황했다고 해요. 결국 빨리 화장을 지우고 싶다는 솔직한 말까지 나와 웃음을 자아냈습니다. 그래도 ",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "에스파 닝닝, 눈부신 비키니 자태",
+      "url": "https://www.bntnews.co.kr/article/view/bnt202611140064",
+      "date": "2026-11-14T00:23:43+00:00",
+      "excerpt": "에스파  닝닝, 눈부신 비키니 자태 (출처:  에스파  닝닝 인스타그램) 그룹  에스파  닝닝이 각기 다른 스타일을 소화하며 패션 감각을 자랑했다. 닝닝은 지난 13일 자신의 SNS에 별다른 설명 없이 여러 장의 사진을 공개했다. 리조트 수영장과 옷 가게 피팅룸, 매장 등 장소는 달랐지만 사진마다 블랙...",
+      "source": "Naver 뉴스"
+    },
+    {
+      "title": "겨울 아우터부터 방한화까지…한파 맞이 기능성 경쟁[패션·뷰티 HOT신상]",
+      "url": "https://n.news.naver.com/article/003/0014321845?sid=101",
+      "date": "2026-11-14T00:23:43+00:00",
+      "excerpt": "K2는 독자적인 발열 보온 기술을 적용한 중헤비 다운을 선보이고, 디스커버리 익스페디션은 그룹  에스파  멤버 닝닝과 함께 겨울 여행 스타일을... ▲디스커버리,  에스파  닝닝과 상하이 겨울 여행 콘텐츠 공개 F&amp;F가 전개하는 프리미엄 액티브 웰니스 라이프스타일 브랜드 디스커버리 익스페디션은...",
+      "source": "Naver 뉴스"
+    },
+    {
+      "title": "‘숨길 수 없는 볼륨감’… 에스파 닝닝, 비키니 자태로 시선 올킬",
+      "url": "https://m.entertain.naver.com/article/468/0001280848",
+      "date": "2026-11-14T00:23:43+00:00",
+      "excerpt": "그룹  에스파 (aespa) 닝닝이 시선을 강탈하는 비키니 자태를 뽐냈다. 닝닝은 14일 자신의 SNS를 통해 별다른 문구 없이 여러 장의 사진을 게재했다.... 한편, 닝닝이 소속된  에스파 는 지난 13일 전설적인 아티스트 어사 키트(Eartha Kitt)의 오리지널 보컬이 담긴 클래식 캐럴 리메이크 싱글 ‘Santa...",
+      "source": "Naver 뉴스"
+    },
+    {
+      "title": "해외 취업 갔더니 &quot;전쟁터였다&quot;...러시아군 외국인 1만명 사망",
+      "url": "https://n.news.naver.com/article/008/0005441029?sid=104",
+      "date": "2026-11-14T00:23:43+00:00",
+      "excerpt": "카를로스  에스파  페루 외무장관은 11월 9일 모스크바에서 세르게이 라브로프 러시아 외무장관을 만나 유해 송환과 부상자 지원을 요청했다. 케냐와 가나는 지난달 모스크바에서 열린 러시아·아프리카 정상회의를 계기로 러시아로부터 자국민을 더 이상 군에 모집하지 않겠다는 약속을...",
+      "source": "Naver 뉴스"
+    },
+    {
+      "title": "에스파 닝닝, 가녀린 몸매와 이목구비...인형 비주얼 - 데일리메이커",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1rMXFUMlNpYXRoZGRpMGNidjFXUEpqbHFVVTQ3R3FQRTJUQW9ZMXRLVFZOaF9keE5DWk9jREI1MmpJdUZrem95bDhCaFVTTjZPdEdKLW9Fc0tHSmIwa2lVSy1vSnJzQQ?oc=5",
+      "date": "2026-11-14T00:15:19+00:00",
+      "excerpt": "에스파 닝닝, 가녀린 몸매와 이목구비...인형 비주얼 &nbsp;&nbsp; 데일리메이커",
+      "source": "GNews 에스파"
+    },
+    {
+      "title": "에스파 닝닝, 눈부신 비키니 자태 - BNT뉴스",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1vdUR6eHhod281VmJvemNEX2pXd2YzZ1lNdDB0bnNYOHFMSlhUUGFPSk9WOFZ4bG94OXI4WmU5UGgxRUdaODhaMF9odXpNRVlQNkdkY3hMUkh5QzNqVWxZMmd0ZXY?oc=5",
+      "date": "2026-11-14T00:10:22+00:00",
+      "excerpt": "에스파 닝닝, 눈부신 비키니 자태 &nbsp;&nbsp; BNT뉴스",
+      "source": "GNews 에스파"
+    },
+    {
+      "title": "닝닝, 폭스퍼 달린 숏패딩으로 겨울 멋냈다…상하이 도심 누빈 여행룩 - 스타패션",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE8tbFZsT1RsOHhYb0tRS25wNmM2dEtEc2owbWNBWnZET2ZyNzZic2hmbVJrQnNmS3VQV29YdHd5QUNHd1pSaC16aHZjbnVGOU00RnNBWk42b1Ruc2hvMjhR?oc=5",
+      "date": "2026-11-13T23:26:00+00:00",
+      "excerpt": "닝닝, 폭스퍼 달린 숏패딩으로 겨울 멋냈다…상하이 도심 누빈 여행룩 &nbsp;&nbsp; 스타패션",
+      "source": "GNews 近一日"
+    },
     {
       "title": "‘숨길 수 없는 볼륨감’… 에스파 닝닝, 비키니 자태로 시선 올킬 - 스포츠서울",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE00ZXZYNjV4RDRmWlRQU212aDNzOERiN2Vxd3JGeXo1YmJqcVNpNWtaTEs2cEtOdVNlS0NQZDVScEZMV2t6VldFc3JKVzFJeU44dkN6Mjg4TGg?oc=5",
@@ -215,6 +334,13 @@
       "source": "GNews 近两日"
     },
     {
+      "title": "Even in the swimming pool and fitting room, there was only one color. Ning Ning, a member of the gro.. - 매일경제",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9SNUpUN2JKM1JFdjZoaW9CMHFyU2pZcy1RSlNWcjZzbHpSbTE0T200V0U0LXNEOTZhbmNjdThuTzQ0TjI1QTJWN3h5RU0tamhxZ1dabQ?oc=5",
+      "date": "2026-11-13T22:56:35+00:00",
+      "excerpt": "Even in the swimming pool and fitting room, there was only one color. Ning Ning, a member of the gro.. &nbsp;&nbsp; 매일경제",
+      "source": "GNews 英"
+    },
+    {
       "title": "에스파 닝닝, 비키니가 작아보여…뼈말라인데 압도적 볼륨감 '워너비' - Chosunbiz",
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNNlc3SmlzMDN3aTJPVVh1WTJIVVBfUVNUYVAwV3Zob2NBS0V1SjZIUVJsSE9KMTdmQ1Iza1l2RkVwMms4UDFhaGRlRjBpdExBSzAzTlVsdXJheWJhRDJQWC01eTVhdjdEVDRqS1Nkdm00RVRwaGlONGtTRDBIbExoUnE1YW03Yi1qNzFTWXVlc2JXczDSAacBQVVfeXFMT3Zad3hhSGQ0TU1nTl9GcHVhTjZOczBUSVBlWjB4RUR1ckF3cUZEQjhxVGhUMmFOeEtoSFNITDFuSnZpZldyTHlGNWJVaWZESmdZZm1nbmx5bkYyTGNFMWtvM1ZXVWZkTXA4Z1dzdVhqa0dNc2hOTmFZUUM4U3pUUXhSQnFXMm9HLWx2U2EwOHBPR3ViVHNYcGxSZzdSLTB2V2RIN0xwbzA?oc=5",
       "date": "2026-11-13T22:37:00+00:00",
@@ -222,59 +348,59 @@
       "source": "GNews 韩"
     },
     {
+      "title": "에스파 닝닝, 비키니가 작아보여…뼈말라인데 압도적 볼륨감 '워너비' - 픽콘",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFA2ZjlHUVBzdy1pSWo2dEhadG1Ma0ZnakgzbGlxRW1laFpjWnJRUUVGRFB1emR5RE9DRHlqZ3NraUowWHYwak0xWU00d1Y3ZktrUGVrdDV0SVZKd1BUYUpPZGhEams4VVVIZ0FVTW9obmVxaHZvaW9BUEdR?oc=5",
+      "date": "2026-11-13T22:37:00+00:00",
+      "excerpt": "에스파 닝닝, 비키니가 작아보여…뼈말라인데 압도적 볼륨감 '워너비' &nbsp;&nbsp; 픽콘",
+      "source": "GNews 近一日"
+    },
+    {
       "title": "에스파 지젤 닝닝 비키니 근황ㄷㄷㄷㄷㄷ.jpg",
       "url": "https://cafe.naver.com/olyounglounge/8097",
-      "date": "2026-11-13T22:29:22+00:00",
-      "excerpt": "올영라운지 [올리브영//화장품/다이소/다이어트/유머] 1시간 전 에스파 지젤 닝닝 비키니 근황ㄷㄷㄷㄷㄷ.jpg 카리나 어디가쒀~~ -------------------------- 요즘 많이 찾는 뷰티 꿀템을 따로 정리해두었어요! 올리브영과 쿠팡에서 구매할 수 있는 제품 위주로 수시로 업데이트하고 있으니, 필요하신 분들은 함께 확인해보세요. 회원 비회원 모두 확인가능합니다~!! 요즘 인기 있는 뷰티 꿀템 모음 https://cafe.naver.com/olyounglounge/2178",
+      "date": "2026-11-13T22:23:44+00:00",
+      "excerpt": "올영라운지 [올리브영//화장품/다이소/다이어트/유머] 5시간 전 에스파 지젤 닝닝 비키니 근황ㄷㄷㄷㄷㄷ.jpg 카리나 어디가쒀~~ -------------------------- 요즘 많이 찾는 뷰티 꿀템을 따로 정리해두었어요! 올리브영과 쿠팡에서 구매할 수 있는 제품 위주로 수시로 업데이트하고 있으니, 필요하신 분들은 함께 확인해보세요. 회원 비회원 모두 확인가능합니다~!! 요즘 인기 있는 뷰티 꿀템 모음 https://cafe.naver.com/olyounglounge/2178",
       "source": "Naver 카페"
     },
     {
       "title": "에스파 닝닝 희안한 비키니 근황ㄷㄷㄷㄷㄷ.jpg",
       "url": "https://cafe.naver.com/olyounglounge/8096",
-      "date": "2026-11-13T22:29:22+00:00",
-      "excerpt": "올영라운지 [올리브영//화장품/다이소/다이어트/유머] 1시간 전 에스파 닝닝 희안한 비키니 근황ㄷㄷㄷㄷㄷ.jpg 수영복 좀 유별난데요.ㅋㅋㅋ -------------------------- 요즘 많이 찾는 뷰티 꿀템을 따로 정리해두었어요! 올리브영과 쿠팡에서 구매할 수 있는 제품 위주로 수시로 업데이트하고 있으니, 필요하신 분들은 함께 확인해보세요. 회원 비회원 모두 확인가능합니다~!! 요즘 인기 있는 뷰티 꿀템 모음 https://cafe.naver.com/olyounglounge/2178",
+      "date": "2026-11-13T22:23:44+00:00",
+      "excerpt": "올영라운지 [올리브영//화장품/다이소/다이어트/유머] 5시간 전 에스파 닝닝 희안한 비키니 근황ㄷㄷㄷㄷㄷ.jpg 수영복 좀 유별난데요.ㅋㅋㅋ -------------------------- 요즘 많이 찾는 뷰티 꿀템을 따로 정리해두었어요! 올리브영과 쿠팡에서 구매할 수 있는 제품 위주로 수시로 업데이트하고 있으니, 필요하신 분들은 함께 확인해보세요. 회원 비회원 모두 확인가능합니다~!! 요즘 인기 있는 뷰티 꿀템 모음 https://cafe.naver.com/olyounglounge/2178",
       "source": "Naver 카페"
     },
     {
       "title": "삼천당제약 R&amp;D 투자 3배 확대, 경구용 치료제 승부수",
       "url": "http://www.newsmp.com/news/articleView.html?idxno=259301",
-      "date": "2026-11-13T22:29:20+00:00",
+      "date": "2026-11-13T22:23:43+00:00",
       "excerpt": "일본에서는 이달 SCD411 독점판매 계약을 체결한 다이이찌산쿄 에스파 와 앞서 지난 1월 경구용 세마글루타이드의 공동개발ㆍ상업화 계약도 맺었다. 유럽 11개국과 미국에서도 독점 라이선스ㆍ상업화 계약을 체결했으며, 계약 규모는 각각 3000만 유로와 1억 달러다. 한편 삼천당제약은...",
       "source": "Naver 뉴스"
     },
     {
       "title": "티니핑 시즌7, 아이돌 '티니즈' 등장…플레이브 OST 참여",
       "url": "https://n.news.naver.com/article/421/0009288742?sid=103",
-      "date": "2026-11-13T22:29:20+00:00",
+      "date": "2026-11-13T22:23:43+00:00",
       "excerpt": "장 감독은 &quot;영화 '사랑의 하츄핑'에는  에스파  윈터가, 시즌6에는 아이브 리즈와 NCT WISH가 함께했다&quot;며 &quot;이번에는 플레이브와 만나 기존 시청자와 다른 팬들에게도 작품을 알릴 기회가 생겼다&quot;고 했다. 새로운 모험에서는 사라진 레전드티니핑들이 겪는 뜻밖의 어려움을 풀어가는 과정이 이야기의...",
       "source": "Naver 뉴스"
     },
     {
       "title": "[단독] 바다·엑소 카이 오작교, 알고보니 백구영이었다…&quot;8년 전 첫 만남, 개인 레슨 부탁&quot; [인터뷰]",
       "url": "https://m.entertain.naver.com/article/312/0000784360",
-      "date": "2026-11-13T22:29:20+00:00",
+      "date": "2026-11-13T22:23:43+00:00",
       "excerpt": "이후 NCT 드림과 텐,  에스파 의 '넥스트 레벨'(Next Level) 등을 작업하면서 K팝 안무가이자 디렉터로서 기대를 많이 받았다&quot;며 &quot;그때 이 일을 정말 열심히 해봐야겠다고 생각했다&quot;고 밝혔다. 이어 &quot;내 입으로 말하기는 그렇지만, '스우파2'에 출연하기 전부터 댄스계에서는 매우 유명했다&quot;고 너스레를...",
       "source": "Naver 뉴스"
     },
     {
       "title": "지젤, '블랙 비키니+극세사 핫보디'…'11월 한파' 녹였다 ^^",
       "url": "https://m.entertain.naver.com/article/117/0004124883",
-      "date": "2026-11-13T22:29:20+00:00",
+      "date": "2026-11-13T22:23:43+00:00",
       "excerpt": "에스파 (aespa) 지젤이 11월의 추위를 단숨에 녹이는 매혹적인 비키니 자태를 공개했다. 지젤은 지난 10일 자신의 공식 SNS 계정에 &quot;beam ahhhhhhhh... 한편, 지젤이 소속된  에스파 는 전설적인 아티스트 어사 키트(Eartha Kitt)와 협업한 캐럴 '산타 베이비(Santa Baby)'를 13일 0시 각종 음원 사이트에...",
       "source": "Naver 뉴스"
     },
     {
-      "title": "aespa、CORTIS、HANAなど出演決定！U-NEXT独占生配信の『MMA2026』、特別賞「Japan Favorite Artist by U-NEXT」を今年も実施！ - USENの音楽情報サイト",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQSDhmZW92SlY4VTF0M2VFS2JhaThWQnhFTVFQbUozX0dQNVhxZTRMblFEczNmZ2ZOTkdEdDdjOGZpdnRiTXFBN0pUR3hGci00eGZkSUpYclhsa2hLdlAyQUNtdlVYTHhSNFhTSjVPaVJGelBWN3pmUlhlYXZleUlhWUI4TzdFdGRKNXluM1MwcERZU3dZR1I2M1VMcDRlMjEw?oc=5",
-      "date": "2026-11-13T22:02:19+00:00",
-      "excerpt": "aespa、CORTIS、HANAなど出演決定！U-NEXT独占生配信の『MMA2026』、特別賞「Japan Favorite Artist by U-NEXT」を今年も実施！ &nbsp;&nbsp; USENの音楽情報サイト",
-      "source": "GNews 日"
-    },
-    {
       "title": "픽업&호핑투어 예약",
       "url": "https://cafe.naver.com/cheepboracay/863952",
-      "date": "2026-11-13T21:29:22+00:00",
-      "excerpt": "보자무싸-필리핀 보라카이 보홀 여행 보라카이 투어 보홀 호핑 2시간 전 픽업&호핑투어 예약 각 투어별 원하시는 날짜 1순위 : 1/5 2순위 : 1/7 9. 마사지샵, 날짜, 시간, 종류, 마사지 시간 : 10. 과거 보자무싸 이용횟수 : 1회 (재방문시 예약환율우대 혜택을 드립니다.) 11. 기타사항 : 달러 환전 금액은 나중에 말씀드리겠습니다 ^.^ [예약가능 시간] 보라스파 12시30분, 3시, 5시, 8시 루나스파 : 12:00 ~ 20:30(마지막 타임) 타이거 풋스파 : 13:00 ~ ",
+      "date": "2026-11-13T21:23:44+00:00",
+      "excerpt": "보자무싸-필리핀 보라카이 보홀 여행 보라카이 투어 보홀 호핑 6시간 전 픽업&호핑투어 예약 각 투어별 원하시는 날짜 1순위 : 1/5 2순위 : 1/7 9. 마사지샵, 날짜, 시간, 종류, 마사지 시간 : 10. 과거 보자무싸 이용횟수 : 1회 (재방문시 예약환율우대 혜택을 드립니다.) 11. 기타사항 : 달러 환전 금액은 나중에 말씀드리겠습니다 ^.^ [예약가능 시간] 보라스파 12시30분, 3시, 5시, 8시 루나스파 : 12:00 ~ 20:30(마지막 타임) 타이거 풋스파 : 13:00 ~ ",
       "source": "Naver 카페"
     },
     {
@@ -294,22 +420,29 @@
     {
       "title": "대박 소식! 한국의 그 '워터밤(WATERBOMB)'이 2027년 토론토에 상륙합니다!",
       "url": "https://cafe.naver.com/wonderfultoronto/6189",
-      "date": "2026-11-13T20:29:22+00:00",
-      "excerpt": "알쓸토잡 3시간 전 대박 소식! 한국의 그 '워터밤(WATERBOMB)'이 2027년 토론토에 상륙합니다! 2 역대 출연진 클래스: 그동안 서울 및 아시아 투어에서는 에스파 카리나, 트와이스 나연, 권은비, 전소미, 박진영(J.Y. Park), 2NE1 등 초호화 아티스트들이 무대를 찢어놓으며 엄청난 화제를 모았죠. 2. 토론토 개최 정보 (현재까지 공개된 내용) 일정 및 장소: 2027년 개최 확정 (정확한 날짜와 토론토 내 행사장은 추후 발표 예정) 라인업: 토론토 공식 라인업은 아직 공개 전",
+      "date": "2026-11-13T20:23:44+00:00",
+      "excerpt": "알쓸토잡 7시간 전 대박 소식! 한국의 그 '워터밤(WATERBOMB)'이 2027년 토론토에 상륙합니다! 2 역대 출연진 클래스: 그동안 서울 및 아시아 투어에서는 에스파 카리나, 트와이스 나연, 권은비, 전소미, 박진영(J.Y. Park), 2NE1 등 초호화 아티스트들이 무대를 찢어놓으며 엄청난 화제를 모았죠. 2. 토론토 개최 정보 (현재까지 공개된 내용) 일정 및 장소: 2027년 개최 확정 (정확한 날짜와 토론토 내 행사장은 추후 발표 예정) 라인업: 토론토 공식 라인업은 아직 공개 전",
       "source": "Naver 카페"
+    },
+    {
+      "title": "닝닝, 여자들의 워너비 몸매 다 가졌네…비키니 한 장에 시선 집중 [★해시태그] - www.xportsnews.com",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5qcTJ5aUh6VURXSm9FUjhWQ2k2SmtaYVJWblUzY0lnR0pNbnFxVXNzM1JZLXlGeHFtb09vOFlLdzEta3RPRDczcUVvMGhEVnhFVUQ1SQ?oc=5",
+      "date": "2026-11-13T19:02:01+00:00",
+      "excerpt": "닝닝, 여자들의 워너비 몸매 다 가졌네…비키니 한 장에 시선 집중 [★해시태그] &nbsp;&nbsp; www.xportsnews.com",
+      "source": "GNews 近一日"
     },
     {
       "title": "MMA2026 최초 이틀간 개최…11월 14일·15일 고척돔 26팀 라인업과 생중계 시간 총정리 : 네이버 블로그 - Naver Blog",
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPQW1WNExkVXdrVDZuY0JURmItMmxUTk1QQTBhdVljeW5UVFVQeGktUmhEVFJXZFRVdE9XSkpUMWJEeFZaemJiRWlqejVGX2pqM2pkRjhaaGI1b2haS1NyRDRhZTJMdVNld1BHLUJFbXdhdUoxTHhIdlhDTXg5dzUwaUk0N3FxYVJQS0FMVHYyWTQ?oc=5",
-      "date": "2026-11-13T18:39:03+00:00",
+      "date": "2026-11-13T18:40:03+00:00",
       "excerpt": "MMA2026 최초 이틀간 개최…11월 14일·15일 고척돔 26팀 라인업과 생중계 시간 총정리 : 네이버 블로그 &nbsp;&nbsp; Naver Blog",
       "source": "GNews 近一日"
     },
     {
       "title": "담깅이의 일본여행 추천템",
       "url": "https://cafe.naver.com/sudam0404/838",
-      "date": "2026-11-13T18:29:22+00:00",
-      "excerpt": "잡 담 5시간 전 담깅이의 일본여행 추천템 21 알약 에스파 지젤 님 추천템이라 유명한 거긴 한데 전 이거 없으면 죽어서 걍 올렷어요 담님 가끔 작업실에서 뭐 드실 때 다먹고 먹우면 좋을 듯 하네여 알약 먹는것처럼 물이랑 걍 삼키면 됨 복숭아맛도 있고 민트맛도 있는데 복숭아는 효과 그닥이여서 민트 추천 오른쪽 사진은 실제 제가 들고다니는 통인데여 민트맛만 현저히 양이 적죠? 그만큼 민트가 효과가 더 좋습니다...민트사셈 여섯번째 템 - 고바야시 쇼슈겐 요놈도 아주 유명하죠 이것도 없으면 죽어서 올",
+      "date": "2026-11-13T18:23:44+00:00",
+      "excerpt": "잡 담 9시간 전 담깅이의 일본여행 추천템 21 알약 에스파 지젤 님 추천템이라 유명한 거긴 한데 전 이거 없으면 죽어서 걍 올렷어요 담님 가끔 작업실에서 뭐 드실 때 다먹고 먹우면 좋을 듯 하네여 알약 먹는것처럼 물이랑 걍 삼키면 됨 복숭아맛도 있고 민트맛도 있는데 복숭아는 효과 그닥이여서 민트 추천 오른쪽 사진은 실제 제가 들고다니는 통인데여 민트맛만 현저히 양이 적죠? 그만큼 민트가 효과가 더 좋습니다...민트사셈 여섯번째 템 - 고바야시 쇼슈겐 요놈도 아주 유명하죠 이것도 없으면 죽어서 올",
       "source": "Naver 카페"
     },
     {
@@ -336,8 +469,8 @@
     {
       "title": "레진 기다리다 지쳐서 윈터존 소개 +_+",
       "url": "https://cafe.naver.com/figurenoliter/45638",
-      "date": "2026-11-13T16:29:22+00:00",
-      "excerpt": "피규어 놀이터 7시간 전 레진 기다리다 지쳐서 윈터존 소개 +_+ 9 노트북 배경화면은 당연히 윈터 +_+ 노트북 덮개도 윈터 +_+ 키보드 LED 조명은 에스파 를 상징하는 보라색 +_+ 그리고 책장 옆 공간은 POP MART 에스파 피규어 풀세트로 채워봤습니다 ㅎㅎ 다음은 앨범존! 에스파 활동 때마다 하나둘씩 모으다 보니 어느새 앨범들도 제법 쌓였네요 ㅎㅎ 앨범마다 콘셉트와 분위기가 달라서 하나씩 모으는 재미도 쏠쏠하답니다 그리고 개인적으로 애정이 가는 잡지존! 윈터가 표지 모델로 등장한 잡지",
+      "date": "2026-11-13T16:23:44+00:00",
+      "excerpt": "피규어 놀이터 11시간 전 레진 기다리다 지쳐서 윈터존 소개 +_+ 9 노트북 배경화면은 당연히 윈터 +_+ 노트북 덮개도 윈터 +_+ 키보드 LED 조명은 에스파 를 상징하는 보라색 +_+ 그리고 책장 옆 공간은 POP MART 에스파 피규어 풀세트로 채워봤습니다 ㅎㅎ 다음은 앨범존! 에스파 활동 때마다 하나둘씩 모으다 보니 어느새 앨범들도 제법 쌓였네요 ㅎㅎ 앨범마다 콘셉트와 분위기가 달라서 하나씩 모으는 재미도 쏠쏠하답니다 그리고 개인적으로 애정이 가는 잡지존! 윈터가 표지 모델로 등장한 잡",
       "source": "Naver 카페"
     },
     {
@@ -348,25 +481,25 @@
       "source": "GNews 에스파"
     },
     {
-      "title": "11/14 출석!",
-      "url": "https://cafe.naver.com/smgirls/127900",
-      "date": "2026-11-13T15:29:22+00:00",
-      "excerpt": "에스파 (aespa) 대표 팬카페 'SPACE' 8시간 전 11/14 출석! 오늘도 출석합니다!",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "빨리 뜯어보고 싶은데...",
-      "url": "https://cafe.naver.com/re5cene/108886",
-      "date": "2026-11-13T15:29:22+00:00",
-      "excerpt": "리센느 (RESCENE) 대표 팬카페 '리시안셔스' 8시간 전 빨리 뜯어보고 싶은데... 3 그냥 제대로된 언빡싱 위해 참아봅니다 뜯게되면 에스파 앨범 처럼 펼쳐서 전시가 될꺼고~ 파일은 MP3 한곳으로 옮겨질겁니다 아마 앨범이랑 잘어울릴 흰색 MP3가 될것 같네요 이게 스탠다드를 구매한 가장 큰 이유입니다 리센느 네이버 팬카페 '리시안셔스' © SINCE 2024.02.22 cafe.naver.com/re5cene #원이 #리브 #미나미 #메이 #제나",
-      "source": "Naver 카페"
-    },
-    {
       "title": "Photos: aespa Releases “Santa Baby” Single Featuring Eartha Kitt’s Original Vocals - BroadwayWorld",
       "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPejBDM3RQNkQzTTNWYmx3YkR2aVJnU2dQUHdGQW9NY3pjbUNiR3BqbDRUYnJ1djVQSmRzUFBNOUFYNDcwMjZOeS1mci1WaUlWVEQ5Y2RXTGU2U2tjTzVidjB1ZEtfYmhIM0FiRFZxQlE2MTZMRWJWRDRlMkpnMzd1OEh6NkVUaGNmMGdTVVpCeDJXUno4VlliOFM4ajZJamprcE9TTndqWXpzTXNUTnBkdWFVSklxQXE2eWNJd0pmTDRBOHVtOWt5LWQ0NmZ0R2M?oc=5",
       "date": "2026-11-13T15:27:05+00:00",
       "excerpt": "Photos: aespa Releases “Santa Baby” Single Featuring Eartha Kitt’s Original Vocals &nbsp;&nbsp; BroadwayWorld",
       "source": "GNews 英"
+    },
+    {
+      "title": "11/14 출석!",
+      "url": "https://cafe.naver.com/smgirls/127900",
+      "date": "2026-11-13T15:23:44+00:00",
+      "excerpt": "에스파 (aespa) 대표 팬카페 'SPACE' 12시간 전 11/14 출석! 오늘도 출석합니다!",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "빨리 뜯어보고 싶은데...",
+      "url": "https://cafe.naver.com/re5cene/108886",
+      "date": "2026-11-13T15:23:44+00:00",
+      "excerpt": "리센느 (RESCENE) 대표 팬카페 '리시안셔스' 12시간 전 빨리 뜯어보고 싶은데... 3 그냥 제대로된 언빡싱 위해 참아봅니다 뜯게되면 에스파 앨범 처럼 펼쳐서 전시가 될꺼고~ 파일은 MP3 한곳으로 옮겨질겁니다 아마 앨범이랑 잘어울릴 흰색 MP3가 될것 같네요 이게 스탠다드를 구매한 가장 큰 이유입니다 리센느 네이버 팬카페 '리시안셔스' © SINCE 2024.02.22 cafe.naver.com/re5cene #원이 #리브 #미나미 #메이 #제나",
+      "source": "Naver 카페"
     },
     {
       "title": "K-pop aespa Announces ‘SYNK : COMPLæXITY’ World Tour Dates - TicketNews",
@@ -385,8 +518,22 @@
     {
       "title": "[가을 시즌, 11주차 / 팬마케팅 zip 파트 / 마감 알림_정아인]",
       "url": "https://cafe.naver.com/encreclub/44501",
-      "date": "2026-11-13T14:29:22+00:00",
-      "excerpt": "[엔터테인먼트 클럽] 엥크레 9시간 전 [가을 시즌, 11주차 / 팬마케팅 zip 파트 / 마감 알림_정아인] 에스파 참여형 프로모션 기획안 작성 ㄴ. 에스파 참여형 프로모션 블로그 제작 ㄷ. Fan Issue ㄹ. Hit Contents 2. 주차 진행 상 어렵다고 느꼈거나 문의 사항이 필요한 부분 : 해당 사항 없음 3. 주차 진행 확인 : 팬마케팅팀 정아인, 가을 시즌 11주차 진행 이상 없이... 포트폴리오에 기재될 사항(300자 내) : 에스파 데뷔 6주년을 기념한 오프라인 참여형 팝업 ",
+      "date": "2026-11-13T14:23:44+00:00",
+      "excerpt": "[엔터테인먼트 클럽] 엥크레 13시간 전 [가을 시즌, 11주차 / 팬마케팅 zip 파트 / 마감 알림_정아인] 에스파 참여형 프로모션 기획안 작성 ㄴ. 에스파 참여형 프로모션 블로그 제작 ㄷ. Fan Issue ㄹ. Hit Contents 2. 주차 진행 상 어렵다고 느꼈거나 문의 사항이 필요한 부분 : 해당 사항 없음 3. 주차 진행 확인 : 팬마케팅팀 정아인, 가을 시즌 11주차 진행 이상 없이... 포트폴리오에 기재될 사항(300자 내) : 에스파 데뷔 6주년을 기념한 오프라인 참여형 팝업",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "내일부터 2026 멜론뮤직어워드 MMA2026 고척돔 이틀, 레드카펫 5시 본식 6시 집에서 보는법.jpg",
+      "url": "https://cafe.naver.com/silver0989/17954",
+      "date": "2026-11-13T14:23:44+00:00",
+      "excerpt": "네이버판 이슈 연예 엔터 스포츠 뉴스 경제 댓글 추천 연예인 13시간 전 내일부터 2026 멜론뮤직어워드 MMA2026 고척돔 이틀, 레드카펫 5시 본식 6시 집에서 보는법.jpg 2 내일부터 2026 멜론뮤직어워드 MMA2026 고척돔 이틀, 레드카펫 5시 본식 6시 집에서 보는법.jpg 2026 멜론 뮤직 어워드 출연가수 TUIDE IDID Dragon Pony 에스파 AEN 아이오아이 TWS NCT DREAM 에이티즈 최예나 리센느 하츠투하츠 라이즈 KiiiKiii IVE hrtz.wav C",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "(분석) 모델링 문제가 무엇인지 생각해봤습니다.",
+      "url": "https://cafe.naver.com/playbattlegrounds/6308150",
+      "date": "2026-11-13T14:23:44+00:00",
+      "excerpt": "배틀그라운드 공식카페 - PUBG: BATTLEGROUNDS 대표 13시간 전 (분석) 모델링 문제가 무엇인지 생각해봤습니다. 5 손에 반지들도 귀엽게 나온 것 같고 ㅇㅇ 근데 머리에 리본 안 떼어지는 거랑 저번부터 자꾸 의상 한벌 옷 멀티슬롯으로 내는게 열 받는 포인트 ㅋㅋ 6. 제일 큰 문제는 이렇게 성의 없이 내도 자꾸 사주니까 퀄리티가 갈 수록 떨어지는 것 같음. 그리고 에스파 때도 그렇고 GD때도 그렇고 펍지 얘네들 외형 절대 안바꿔주는데 왜 자꾸 사놓고 외형 바꿔달라하는지 이해가 좀 안",
       "source": "Naver 카페"
     },
     {
@@ -404,38 +551,38 @@
       "source": "GNews 韩"
     },
     {
-      "title": "내일부터 2026 멜론뮤직어워드 MMA2026 고척돔 이틀, 레드카펫 5시 본식 6시 집에서 보는법.jpg",
-      "url": "https://cafe.naver.com/silver0989/17954",
-      "date": "2026-11-13T13:29:22+00:00",
-      "excerpt": "네이버판 이슈 연예 엔터 스포츠 뉴스 경제 댓글 추천 연예인 10시간 전 내일부터 2026 멜론뮤직어워드 MMA2026 고척돔 이틀, 레드카펫 5시 본식 6시 집에서 보는법.jpg 2 내일부터 2026 멜론뮤직어워드 MMA2026 고척돔 이틀, 레드카펫 5시 본식 6시 집에서 보는법.jpg 2026 멜론 뮤직 어워드 출연가수 TUIDE IDID Dragon Pony 에스파 AEN 아이오아이 TWS NCT DREAM 에이티즈 최예나 리센느 하츠투하츠 라이즈 KiiiKiii IVE hrtz.wav C",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "(분석) 모델링 문제가 무엇인지 생각해봤습니다.",
-      "url": "https://cafe.naver.com/playbattlegrounds/6308150",
-      "date": "2026-11-13T13:29:22+00:00",
-      "excerpt": "배틀그라운드 공식카페 - PUBG: BATTLEGROUNDS 대표 10시간 전 (분석) 모델링 문제가 무엇인지 생각해봤습니다. 5 손에 반지들도 귀엽게 나온 것 같고 ㅇㅇ 근데 머리에 리본 안 떼어지는 거랑 저번부터 자꾸 의상 한벌 옷 멀티슬롯으로 내는게 열 받는 포인트 ㅋㅋ 6. 제일 큰 문제는 이렇게 성의 없이 내도 자꾸 사주니까 퀄리티가 갈 수록 떨어지는 것 같음. 그리고 에스파 때도 그렇고 GD때도 그렇고 펍지 얘네들 외형 절대 안바꿔주는데 왜 자꾸 사놓고 외형 바꿔달라하는지 이해가 좀 안",
-      "source": "Naver 카페"
+      "title": "[속보] 닝닝, 비키니 사진 공개…뼈말라 몸매가 화제 - 스페셜타임스",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9vTWZzUDA3ZFp4RlNpZVI2TlY2NDVraDduZE51dUR3N3hRVlN2b2NBMEdoZU05Tm1fWENTSk5BaXU0SnRfeG1meG9PYnFlcndJLXJBUkxXeVF2MVAxOVpuelhIQk5rTktDNS1rdkVseFR4Zw?oc=5",
+      "date": "2026-11-13T13:37:58+00:00",
+      "excerpt": "[속보] 닝닝, 비키니 사진 공개…뼈말라 몸매가 화제 &nbsp;&nbsp; 스페셜타임스",
+      "source": "GNews 近一日"
     },
     {
       "title": "픽업샌딩 + 써니요트호핑 2인",
       "url": "https://cafe.naver.com/cheepboracay/863940",
-      "date": "2026-11-13T13:29:22+00:00",
-      "excerpt": "보자무싸-필리핀 보라카이 보홀 여행 보라카이 투어 보홀 호핑 10시간 전 픽업샌딩 + 써니요트호핑 2인 각 투어별 원하시는 날짜 1순위 : 12.20 (오후) 2순위 : 9. 마사지샵, 날짜, 시간, 종류, 마사지 시간 : 10. 과거 보자무싸 이용횟수 : 1회 재방문함 (재방문시 예약환율우대 혜택을 드립니다.) 11. 기타사항 : 환전금액 바뀔수도있어요 [예약가능 시간] 보라스파 12시30분, 3시, 5시, 8시 루나스파 : 12:00 ~ 20:30(마지막 타임) 타이거 풋스파 : 13:00 ~",
+      "date": "2026-11-13T13:23:44+00:00",
+      "excerpt": "보자무싸-필리핀 보라카이 보홀 여행 보라카이 투어 보홀 호핑 14시간 전 픽업샌딩 + 써니요트호핑 2인 각 투어별 원하시는 날짜 1순위 : 12.20 (오후) 2순위 : 9. 마사지샵, 날짜, 시간, 종류, 마사지 시간 : 10. 과거 보자무싸 이용횟수 : 1회 재방문함 (재방문시 예약환율우대 혜택을 드립니다.) 11. 기타사항 : 환전금액 바뀔수도있어요 [예약가능 시간] 보라스파 12시30분, 3시, 5시, 8시 루나스파 : 12:00 ~ 20:30(마지막 타임) 타이거 풋스파 : 13:00 ~",
       "source": "Naver 카페"
     },
     {
       "title": "지젤이랑 닝닝 사진 보니 올리기 전 확인하게 될 듯",
       "url": "https://cafe.naver.com/scalpelbabo/1293",
-      "date": "2026-11-13T13:29:22+00:00",
-      "excerpt": "육아로운 [임신 출산 육아 맘카페 공동구매 체험단 생활정보] 10시간 전 지젤이랑 닝닝 사진 보니 올리기 전 확인하게 될 듯 에스파 지젤이랑 닝닝이 같이 찍은 휴양지 사진 보니까 친구랑 사진 찍을 때 생각나네요. 둘 다 잘 나온 사진이면 올리고 싶긴 한데, 공개 범위는 서로 괜찮은지 확인하는 게 마음 편할 것 같고요. 친구랑 수영복 사진 찍으면 올리기 전에 서로 물어보시나요?",
+      "date": "2026-11-13T13:23:44+00:00",
+      "excerpt": "육아로운 [임신 출산 육아 맘카페 공동구매 체험단 생활정보] 14시간 전 지젤이랑 닝닝 사진 보니 올리기 전 확인하게 될 듯 에스파 지젤이랑 닝닝이 같이 찍은 휴양지 사진 보니까 친구랑 사진 찍을 때 생각나네요. 둘 다 잘 나온 사진이면 올리고 싶긴 한데, 공개 범위는 서로 괜찮은지 확인하는 게 마음 편할 것 같고요. 친구랑 수영복 사진 찍으면 올리기 전에 서로 물어보시나요?",
       "source": "Naver 카페"
     },
     {
       "title": "출석합니다",
       "url": "https://cafe.naver.com/320120/1438",
-      "date": "2026-11-13T13:29:22+00:00",
-      "excerpt": "에스파 (aespa) 닝닝 대표 팬카페 '하나린' 10시간 전 출석합니다 출석합니다",
+      "date": "2026-11-13T13:23:44+00:00",
+      "excerpt": "에스파 (aespa) 닝닝 대표 팬카페 '하나린' 14시간 전 출석합니다 출석합니다",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "출석합니다",
+      "url": "https://cafe.naver.com/aeriuchinaga/1341",
+      "date": "2026-11-13T13:23:44+00:00",
+      "excerpt": "에스파 (aespa) 지젤 대표 팬카페, xoxo 14시간 전 출석합니다 출석합니다",
       "source": "Naver 카페"
     },
     {
@@ -446,13 +593,6 @@
       "source": "Reddit r/aespa"
     },
     {
-      "title": "[ae:scenes] 이따가 우리 만나기로 했잖아 🫵💗 | 에스파 카리나 윈터 서울 신드롬 비하인드 (aespa KARINA WINTER SEOUL SYNDROME Behind)",
-      "url": "https://www.youtube.com/watch?v=rr39g9rl4ZU",
-      "date": "2026-11-13T13:00:11+00:00",
-      "excerpt": "",
-      "source": "YouTube · aespa"
-    },
-    {
       "title": "AESPA REIMAGINES CHRISTMAS CLASSIC ‘SANTA BABY’ WITH EARTHA KITT’S ORIGINAL VOCALS! - Verge Magazine",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNSGJTT240VW5XeEhTdWNFZmdmTUFFX3Y1d24xRmt5SkMxNDBWb2Q0S0RMLUxYaG5Tb2xzbHgwYVg0RzJSUXdhN09DN1BiUjM5TXMxZW1uZWZOZ05UdUgzVjJMT01FdTZjTDVVM25PN3ZXYTBQemM0RzFDdUhPNHRjMm11TV9OQXNTOUZrbXZQYm0xOEZjZ3RVT1dHNk00cF9FNHF0djZHMlk2MjdB?oc=5",
       "date": "2026-11-13T12:33:42+00:00",
@@ -460,51 +600,44 @@
       "source": "GNews 英"
     },
     {
-      "title": "출석합니다",
-      "url": "https://cafe.naver.com/aeriuchinaga/1341",
-      "date": "2026-11-13T12:29:22+00:00",
-      "excerpt": "에스파 (aespa) 지젤 대표 팬카페, xoxo 11시간 전 출석합니다 출석합니다",
-      "source": "Naver 카페"
-    },
-    {
       "title": "화보 찍는 에스파 카리나",
       "url": "https://cafe.naver.com/bet1x2/2124764",
-      "date": "2026-11-13T12:29:22+00:00",
-      "excerpt": "배팅월드 - 토토 프로토 스포츠 배팅 분석 카페 11시간 전 화보 찍는 에스파 카리나 2",
+      "date": "2026-11-13T12:23:44+00:00",
+      "excerpt": "배팅월드 - 토토 프로토 스포츠 배팅 분석 카페 15시간 전 화보 찍는 에스파 카리나 2",
       "source": "Naver 카페"
     },
     {
       "title": "11/13 금요일 출석",
       "url": "https://cafe.naver.com/aespawinter/12339",
-      "date": "2026-11-13T12:29:22+00:00",
-      "excerpt": "에스파 (aespa) 윈터 대표 팬카페 'FIRST SNOW' 11시간 전 11/13 금요일 출석 오늘도 출석",
+      "date": "2026-11-13T12:23:44+00:00",
+      "excerpt": "에스파 (aespa) 윈터 대표 팬카페 'FIRST SNOW' 15시간 전 11/13 금요일 출석 오늘도 출석",
       "source": "Naver 카페"
     },
     {
       "title": "(인하) 클래식LP 현악,실내악 400여장 개별판매",
       "url": "https://cafe.naver.com/tubelink/57605",
-      "date": "2026-11-13T12:29:22+00:00",
-      "excerpt": "Tubelink Audio Systems 11시간 전 (인하) 클래식LP 현악,실내악 400여장 개별판매 18 안녕하세요, 클래식 현악 LP를 ★아래 표시된 가격에서 10% 인하하여 판매합니다★ 서울 무악재에서 직거래 가능하며, 배송거래시 송료는 4000원입니다. (인하된 가격 기준 10만원 이상 구매시 송료는 제가 부담합니다.) 직거래의 경우 판매 금액과 관계 없이 가능하나, 배송거래는 인하된 가격 기준 1만원 이상부터 가능한 점 양해 부탁드립니다. 구매문의는 010-****-****로 문자 주",
+      "date": "2026-11-13T12:23:44+00:00",
+      "excerpt": "Tubelink Audio Systems 15시간 전 (인하) 클래식LP 현악,실내악 400여장 개별판매 18 안녕하세요, 클래식 현악 LP를 ★아래 표시된 가격에서 10% 인하하여 판매합니다★ 서울 무악재에서 직거래 가능하며, 배송거래시 송료는 4000원입니다. (인하된 가격 기준 10만원 이상 구매시 송료는 제가 부담합니다.) 직거래의 경우 판매 금액과 관계 없이 가능하나, 배송거래는 인하된 가격 기준 1만원 이상부터 가능한 점 양해 부탁드립니다. 구매문의는 010-****-****로 문자 주",
       "source": "Naver 카페"
     },
     {
       "title": "배그 아이브 혹평 해결법",
       "url": "https://cafe.naver.com/playbattlegrounds/6308099",
-      "date": "2026-11-13T12:29:22+00:00",
-      "excerpt": "배틀그라운드 공식카페 - PUBG: BATTLEGROUNDS 대표 11시간 전 배그 아이브 혹평 해결법 내년에 더 못생기게 내면 됨 이러면 아이브는 혜자였다는 소리 나옴 ㅋㅋ 실제로 뭔가 에스파 > 뉴진스 > GD > 아이브 점점 너프되는 거 같지 않음???? 다 이게 펍지 상술인거",
+      "date": "2026-11-13T12:23:44+00:00",
+      "excerpt": "배틀그라운드 공식카페 - PUBG: BATTLEGROUNDS 대표 15시간 전 배그 아이브 혹평 해결법 내년에 더 못생기게 내면 됨 이러면 아이브는 혜자였다는 소리 나옴 ㅋㅋ 실제로 뭔가 에스파 > 뉴진스 > GD > 아이브 점점 너프되는 거 같지 않음???? 다 이게 펍지 상술인거",
       "source": "Naver 카페"
     },
     {
       "title": "에스파 닝닝, 선글라스 넘긴 강렬 일상…빛 받은 거리 포즈",
       "url": "https://www.topstarnews.net/news/articleView.html?idxno=16276065",
-      "date": "2026-11-13T12:29:20+00:00",
+      "date": "2026-11-13T12:23:43+00:00",
       "excerpt": "그룹  에스파 (aespa) 닝닝(닝이줘, 24세)이 선글라스를 착용한 거리 사진으로 근황을 전했다. 편안한 차림에 그래픽 퍼 베스트를 더한 모습으로... 그는 2020년 11월 17일  에스파  디지털 싱글 'Black Mamba'로 정식 데뷔했다. 데뷔곡에서 브릿지와 클라이맥스 구간을 책임지며 넓은 음역과...",
       "source": "Naver 뉴스"
     },
     {
       "title": "닝닝, 비키니 샷 또 업로드…뼈말라인데 볼륨감은 난리나",
       "url": "https://m.entertain.naver.com/article/117/0004124818",
-      "date": "2026-11-13T12:29:20+00:00",
+      "date": "2026-11-13T12:23:43+00:00",
       "excerpt": "그룹  에스파 (aespa) 멤버 닝닝이 비현실적인 비키니 자태를 또 한 번 뽐냈다. 닝닝은 13일 별다른 멘트 없이 자신의 SNS 계정에 탁 트인 야외... 한편 닝닝이 속한  에스파 는 대표적인 클래식 캐럴 ‘Santa Baby’(산타 베이비)를 새롭게 선보였다. 13일 공개된  에스파 의 ‘Santa Baby’는 원곡자이자...",
       "source": "Naver 뉴스"
     },
@@ -530,41 +663,6 @@
       "source": "GNews 近一日"
     },
     {
-      "title": "픽업샌딩 + 써니요트호핑 2인",
-      "url": "https://cafe.naver.com/cheepboracay/863936",
-      "date": "2026-11-13T11:29:22+00:00",
-      "excerpt": "보자무싸-필리핀 보라카이 보홀 여행 보라카이 투어 보홀 호핑 12시간 전 픽업샌딩 + 써니요트호핑 2인 각 투어별 원하시는 날짜 1순위 : 12.20 (오후) 2순위 : 9. 마사지샵, 날짜, 시간, 종류, 마사지 시간 : 10. 과거 보자무싸 이용횟수 : 1회 (재방문시 예약환율우대 혜택을 드립니다.) 11. 기타사항 : 환전금액 바뀔수도있어요! [예약가능 시간] 보라스파 12시30분, 3시, 5시, 8시 루나스파 : 12:00 ~ 20:30(마지막 타임) 타이거 풋스파 : 13:00 ~ 22:",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "레코드 팔아요(๑>◡<๑)(2시간)",
-      "url": "https://cafe.naver.com/heartopia/313511",
-      "date": "2026-11-13T11:29:22+00:00",
-      "excerpt": "두근두근타운 12시간 전 레코드 팔아요(๑>◡<๑)(2시간) 2 아이돌 (총 17곡) 에스파 (aespa) - Forever, Thirsty, LEMONADE 아일릿(ILLIT) - 빌려온 고양이, jellyous, it's me 하투하(Hearts2Hearts) - lemong tang, Style, the chase 키키(KiiiKiii) - 404 투모로우바이투게더(TXT) - 하루에 하루만 더 블랙핑크(BLACKPINK) - Stay 리센느(RESCENE) - LOVE ATTACK, ☆백화",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "[11/13 레퍼런스] 사람을 키우는 채널은 어떻게 돈을 버는가 — 스태프가 출연자가 되는 방송국 7곳 해부",
-      "url": "https://cafe.naver.com/zansangcoding/202",
-      "date": "2026-11-13T11:29:22+00:00",
-      "excerpt": "루트라운지 12시간 전 [11/13 레퍼런스] 사람을 키우는 채널은 어떻게 돈을 버는가 — 스태프가 출연자가 되는 방송국 7곳 해부 영화 홍보팀이 음원을 내고 '1시간 반복 재생' 영상으로 밈을 노렸다 - 류승룡, 에스파 윈터 등이 챌린지에 참여하며 불이 붙었다 - 포인트: 노래 한 곡이 캐릭터를 세우고, 캐릭터가 IP가 된다. 음악이 세계관의 가장 빠른 문이 될 수 있다 9. FutureMe — 미래의 나에게 보내는 타임캡슐 - 1년, 5년, 10년 뒤의 자신에게 편지, 사진, 영상을 보내는 서",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "에스파, 팝 전설 어사 키트와 만났다... 캐롤 '산타 베이비' 발매",
-      "url": "https://www.insight.co.kr/news/581889",
-      "date": "2026-11-13T11:29:20+00:00",
-      "excerpt": "그룹  에스파 (aespa)가 미국의 전설적인 가수 어사 키트의 오리지널 보컬과 호흡을 맞춘 캐롤 '산타 베이비'를 선보였다. 13일  에스파 는 0시 각종 음악 사이트를 통해 어사 키트와의 협업 싱글 '산타 베이비'를 발매했다. 이번 신곡은 1953년 원곡을 발표한 어사 키트의 실제 녹음 음원에  에스파 의...",
-      "source": "Naver 뉴스"
-    },
-    {
-      "title": "한진, 팬덤 소비 앞세워 해외직구 시장 공략… '팬덤티켓' 정식 출시",
-      "url": "http://www.biztribune.co.kr/news/articleView.html?idxno=362473",
-      "date": "2026-11-13T11:29:20+00:00",
-      "excerpt": "적용 대상에는 BTS와 세븐틴, 플레이브,  에스파 , 엔하이픈 등 K팝 아티스트와 '주술회전', '농담곰' 등 서브컬처 콘텐츠가 포함됐다. 테슬라 부품과 전문 캠핑용품 등 특정 마니아층을 보유한 상품군도 추가해 서비스 범위를 넓혔다. 이번 개편은 팬덤티켓을 단순한 배송 할인 서비스에서 취향별...",
-      "source": "Naver 뉴스"
-    },
-    {
       "title": "261113 Winter for Harper's BAZAAR Korea x Polo Ralph Lauren (December 2026 Issue Between Takes)",
       "url": "https://www.reddit.com/r/Aespa/comments/1xv5fze/261113_winter_for_harpers_bazaar_korea_x_polo/",
       "date": "2026-11-13T11:28:38+00:00",
@@ -572,11 +670,46 @@
       "source": "Reddit r/aespa"
     },
     {
+      "title": "\"BTS·지드래곤까지 제쳤다?!\"… 'MMA 2026' 투표 판도 대이변, 플레이브·에스파·아이브·리센느·알파드라이브원 '주요 부문 1위 독주' - 메디먼트뉴스",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5kemUyeDlqYnMtUHFzdE5kU2pZU1pvTUNlTjZianZwNm5XVEdOWXhGQWc5QmZ1LTZxNzhhOHhjcV81eFd0X1B4UkNMNURyV0o4VFBDQzlMREI1cENTWmlXSU1LYWNlb1JVUkE?oc=5",
+      "date": "2026-11-13T11:25:31+00:00",
+      "excerpt": "\"BTS·지드래곤까지 제쳤다?!\"… 'MMA 2026' 투표 판도 대이변, 플레이브·에스파·아이브·리센느·알파드라이브원 '주요 부문 1위 독주' &nbsp;&nbsp; 메디먼트뉴스",
+      "source": "GNews 近一日"
+    },
+    {
       "title": "닝닝, 비키니 샷 또 업로드…뼈말라인데 볼륨감은 난리나 - 마이데일리",
       "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9GSW9HREw4R2h6UXF1alhvUlFNcmdZb0o1XzdKaVh3d2thM0NHNm5ncF9DdjlTYk1tZXp0d2JlSHZNeDR5ckRUdU1sVTBkamhNZ2lHQ2JJb3o5STROYWJ0RA?oc=5",
       "date": "2026-11-13T11:25:03+00:00",
       "excerpt": "닝닝, 비키니 샷 또 업로드…뼈말라인데 볼륨감은 난리나 &nbsp;&nbsp; 마이데일리",
       "source": "GNews 韩"
+    },
+    {
+      "title": "픽업샌딩 + 써니요트호핑 2인",
+      "url": "https://cafe.naver.com/cheepboracay/863936",
+      "date": "2026-11-13T11:23:44+00:00",
+      "excerpt": "보자무싸-필리핀 보라카이 보홀 여행 보라카이 투어 보홀 호핑 16시간 전 픽업샌딩 + 써니요트호핑 2인 각 투어별 원하시는 날짜 1순위 : 12.20 (오후) 2순위 : 9. 마사지샵, 날짜, 시간, 종류, 마사지 시간 : 10. 과거 보자무싸 이용횟수 : 1회 (재방문시 예약환율우대 혜택을 드립니다.) 11. 기타사항 : 환전금액 바뀔수도있어요! [예약가능 시간] 보라스파 12시30분, 3시, 5시, 8시 루나스파 : 12:00 ~ 20:30(마지막 타임) 타이거 풋스파 : 13:00 ~ 22:",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "레코드 팔아요(๑>◡<๑)(2시간)",
+      "url": "https://cafe.naver.com/heartopia/313511",
+      "date": "2026-11-13T11:23:44+00:00",
+      "excerpt": "두근두근타운 16시간 전 레코드 팔아요(๑>◡<๑)(2시간) 2 아이돌 (총 17곡) 에스파 (aespa) - Forever, Thirsty, LEMONADE 아일릿(ILLIT) - 빌려온 고양이, jellyous, it's me 하투하(Hearts2Hearts) - lemong tang, Style, the chase 키키(KiiiKiii) - 404 투모로우바이투게더(TXT) - 하루에 하루만 더 블랙핑크(BLACKPINK) - Stay 리센느(RESCENE) - LOVE ATTACK, ☆백화",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "[11/13 레퍼런스] 사람을 키우는 채널은 어떻게 돈을 버는가 — 스태프가 출연자가 되는 방송국 7곳 해부",
+      "url": "https://cafe.naver.com/zansangcoding/202",
+      "date": "2026-11-13T11:23:44+00:00",
+      "excerpt": "루트라운지 16시간 전 [11/13 레퍼런스] 사람을 키우는 채널은 어떻게 돈을 버는가 — 스태프가 출연자가 되는 방송국 7곳 해부 영화 홍보팀이 음원을 내고 '1시간 반복 재생' 영상으로 밈을 노렸다 - 류승룡, 에스파 윈터 등이 챌린지에 참여하며 불이 붙었다 - 포인트: 노래 한 곡이 캐릭터를 세우고, 캐릭터가 IP가 된다. 음악이 세계관의 가장 빠른 문이 될 수 있다 9. FutureMe — 미래의 나에게 보내는 타임캡슐 - 1년, 5년, 10년 뒤의 자신에게 편지, 사진, 영상을 보내는 서",
+      "source": "Naver 카페"
+    },
+    {
+      "title": "에스파, 팝 전설 어사 키트와 만났다... 캐롤 '산타 베이비' 발매",
+      "url": "https://www.insight.co.kr/news/581889",
+      "date": "2026-11-13T11:23:43+00:00",
+      "excerpt": "그룹  에스파 (aespa)가 미국의 전설적인 가수 어사 키트의 오리지널 보컬과 호흡을 맞춘 캐롤 '산타 베이비'를 선보였다. 13일  에스파 는 0시 각종 음악 사이트를 통해 어사 키트와의 협업 싱글 '산타 베이비'를 발매했다. 이번 신곡은 1953년 원곡을 발표한 어사 키트의 실제 녹음 음원에  에스파 의...",
+      "source": "Naver 뉴스"
     },
     {
       "title": "261113 Winter for Harper's BAZAAR Korea x Polo Ralph Lauren (December 2026 Issue Pictorial)",
@@ -607,20 +740,6 @@
       "source": "GNews 近一日"
     },
     {
-      "title": "에스파 'LEMONADE' 뮤비 1억뷰 달성",
-      "url": "https://cafe.naver.com/browna6if9/25635",
-      "date": "2026-11-13T10:29:22+00:00",
-      "excerpt": "렁만이네 : 독학왕 공식 팬카페 13시간 전 에스파 'LEMONADE' 뮤비 1억뷰 달성 2",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "한진, 소규모 해외직구 수요 공략…'팬덤티켓' 상시 운영",
-      "url": "https://www.m-i.kr/news/articleView.html?idxno=2018491",
-      "date": "2026-11-13T10:29:20+00:00",
-      "excerpt": "방탄소년단(BTS)·세븐틴·플레이브· 에스파 ·엔하이픈 등 K팝 아티스트를 비롯해 치이카와·주술회전·농담곰 등 캐릭터 콘텐츠가 포함됐다. 테슬라 부품, 전문 캠핑용품 등 특정 소비층의 구매가 집중되는 상품군도 대상에 추가했다. 팬덤티켓은 포토카드·엽서·캐릭터 상품 등 부피가 작고...",
-      "source": "Naver 뉴스"
-    },
-    {
       "title": "261113 Ningning Instagram Update",
       "url": "https://www.reddit.com/r/Aespa/comments/1xv4e5u/261113_ningning_instagram_update/",
       "date": "2026-11-13T10:27:21+00:00",
@@ -635,39 +754,11 @@
       "source": "GNews 日"
     },
     {
-      "title": "출석체크",
-      "url": "https://cafe.naver.com/aespawinter/12338",
-      "date": "2026-11-13T09:29:22+00:00",
-      "excerpt": "에스파 (aespa) 윈터 대표 팬카페 'FIRST SNOW' 14시간 전 출석체크 출석하고 갑니다",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "출석체크",
-      "url": "https://cafe.naver.com/aespajimin/12604",
-      "date": "2026-11-13T09:29:22+00:00",
-      "excerpt": "에스파 (aespa) 카리나 대표 팬카페 '하트 크러쉬' 14시간 전 출석체크 출석하고 갑니다",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "출석체크",
-      "url": "https://cafe.naver.com/smgirls/127899",
-      "date": "2026-11-13T09:29:22+00:00",
-      "excerpt": "에스파 (aespa) 대표 팬카페 'SPACE' 14시간 전 출석체크 출석하고 갑니다",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "웨이브, '멜론뮤직어워드 2026' OTT 독점 생중계…무료 시청 지원",
-      "url": "http://www.ftoday.co.kr/news/articleView.html?idxno=369717",
-      "date": "2026-11-13T09:29:20+00:00",
-      "excerpt": "에스파 와 라이즈, NCT DREAM, 에이티즈, NCT 127, 플레이브 등 총 26개 팀이 출연할 예정이다. 웨이브는 이번 생중계에 실시간 라이브 채팅 기능도 도입한다. 유료 이용자는 공연을 시청하며 채팅에 참여할 수 있으며 무료 이용자는 채팅 내용을 확인할 수 있다. 방송 도중에도 처음부터 다시...",
-      "source": "Naver 뉴스"
-    },
-    {
-      "title": "OTT 웨이브, 14~15일 멜론뮤직어워드 독점 생중계",
-      "url": "https://n.news.naver.com/article/092/0002445242?sid=105",
-      "date": "2026-11-13T09:29:20+00:00",
-      "excerpt": "14일엔  에스파 , 라이즈, NCT 드림, 에이티즈, 투어스 등 14팀이, 15일엔 NCT 127, NCT 위시, 플레이브 등 12팀이 나온다. 노윤서, 변요한, 이도현, 이영애, 장근석 등 시상진도 라인업에 이름을 올렸다. 주요 부문인 아티스트·앨범·베스트송 트로피를 두고 방탄소년단, 아이브, 아일릿,  에스파 ...",
-      "source": "Naver 뉴스"
+      "title": "今年のクリスマスはこれ！aespaがEartha Kittの名曲「Santa Baby」をカバー - VOCO News",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE16TWJsZkducGRCZzBaT2JlQjBwbVRxZnNjMjlsdkk5bzJ2UGtjYlZBQ25XYlotdnRONFZSY19tUjNpdHJpektxYWlndTYtdnJveHc4X1NmTkQyeGlfRklJa1MwMzMxTTNNYnBuM0lXbzViUTA2ZGlVM2Njbw?oc=5",
+      "date": "2026-11-13T08:49:55+00:00",
+      "excerpt": "今年のクリスマスはこれ！aespaがEartha Kittの名曲「Santa Baby」をカバー &nbsp;&nbsp; VOCO News",
+      "source": "GNews 日"
     },
     {
       "title": "IVEからRIIZE、I․O․Iまで注目のステージが続々！「MMA 2026」スポイラー解禁 - Kstyle",
@@ -675,20 +766,6 @@
       "date": "2026-11-13T08:42:00+00:00",
       "excerpt": "IVEからRIIZE、I․O․Iまで注目のステージが続々！「MMA 2026」スポイラー解禁 &nbsp;&nbsp; Kstyle",
       "source": "GNews 日"
-    },
-    {
-      "title": "10주년 기념 콜라보 재출시 기원 여러분들의 바램은?",
-      "url": "https://cafe.naver.com/playbattlegrounds/6308032",
-      "date": "2026-11-13T08:29:22+00:00",
-      "excerpt": "배틀그라운드 공식카페 - PUBG: BATTLEGROUNDS 대표 15시간 전 10주년 기념 콜라보 재출시 기원 여러분들의 바램은? 3 개인적으로 장인제작 로테이션 데몬바이커 출시, 에스파 콜라보 재재출시 포르쉐 콜라보 재출시 페라리 콜라보 출시 여러분들의 희망하는 재출시 콜라보를 알려주세요, 배틀그라운드 10주년 기념 공식카페에서 \"투표로 결정된 콜라보 재출시를 기원합니다\" RE 라인프렌즈, 오토마타, 스트리트파이터~ 뭐든 재 출시하면 좋을 것 같습니다. 생각만 해도 행복하네요. RE 카카오,니",
-      "source": "Naver 카페"
-    },
-    {
-      "title": "에스파랑 NCT 소식이 한꺼번에 오면",
-      "url": "https://cafe.naver.com/ohchungi/3253",
-      "date": "2026-11-13T08:29:22+00:00",
-      "excerpt": "오춘기 여자들 (갱년기/공복혈당/혈당관리/다이어트/식후혈당) 15시간 전 에스파 랑 NCT 소식이 한꺼번에 오면 SM에서 여러 팀 신보랑 투어를 준비 중이라니 반갑긴 한데, 시간도 비용도 한정돼 있어서 고민이에요. 앨범이랑 공연 중 뭘 먼저 챙기세요? 둘 다 놓치긴 아쉽네요.",
-      "source": "Naver 카페"
     },
     {
       "title": "261113 aespa x Eartha Kitt - Santa Baby",
@@ -712,18 +789,18 @@
       "source": "GNews 近一日"
     },
     {
-      "title": "aespaジゼル、黒のストラップ水着で美しいボディライン披露…水辺での休暇ショットが話題 | スマートニュース - SmartNews",
-      "url": "https://news.google.com/rss/articles/CBMixgRBVV95cUxQd0FqNlBQSGJHbHJORndsZlJTYWYzSjdxV2ZmVlItWEhBLWpBWWtPWExQTnFPZ3p1OUpjNXBBQnY5VWhDLWVyZmxZWjhjdlo4N0Q2d0h4YUFCZVBWS08wUXF2M2I4MHhSamNaSUd3RGlvRGJUcm9LbFRyVXA4bTRBbk5GWEFsNmIzc3JDOW00eHVOZmIzREI3VzZJaGp6NU16eUJ6elBnRjBwUE85TXRnSEU5MWpFLUI2ZmNiek80dE52bXhET2h2MkRBUXhWUC1mV3dYOU94Z3JYaWdFNVVrVW1ramZQYXpCOXBNV0FoUHdHUFc2ME9zbnRSN1dwc29jZE1fcmNJY0h5UGJrVmZISWFVV2xDMFZiQjhJX3M0c3lQWDNDUXlkU0syeU1CU1BqY3dyblR0TzlsSDJpNUhvVld6VUFzM2tZdjU3Z2N1NTh3Ni1LdFhQWEdZdzl0cS1vc0YwZGVLdFA5QnlZOVhZS2VqTzIyRnI5TXZwdTQyX2RITG1GUUNuS2k3d19IYjJnN2hpb3dXclNwdHlyOV9PTjB2VDJ2akxWQmtma2wtX05KMnNnNGwxSGMzMWRiU1hVWWp3cUphTG5QRkRXSWJxWnVkNlk0d21wU180OEJUVmp5bk1SSEZob2pyOGtXTlYxQlhpZVB3QURGNFJJTHhVUVZZRFNUX043d3Q0c19Fcm5fdHJXOUwycmQzWU9FOTlRcWNmYjlyaDJtMXZjX2ZQZjNneHh6ZFN3ai1Xczh0OEZBZmRSbmc?oc=5",
-      "date": "2026-11-13T07:43:00+00:00",
-      "excerpt": "aespaジゼル、黒のストラップ水着で美しいボディライン披露…水辺での休暇ショットが話題 | スマートニュース &nbsp;&nbsp; SmartNews",
-      "source": "GNews 日"
-    },
-    {
       "title": "宋雨琦在918去韩网打歌 说自己像韩国人宁艺卓跟公司协商把日本演唱会时间更改 说自己是非常中国的中国人 - 新浪网",
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBWLW5EOGZLd2wtZ3FfOWFvRTRwRU5xUGRIMnJMQlBnczl4MDZqdk02ZF9KcnFJLXk5d2tQdnYtcTMwMVNKMlhjaUVtaF9iNzRPSmVFN1NhRUt1amJpZGdGQXQ2NA?oc=5",
       "date": "2026-11-13T07:30:00+00:00",
       "excerpt": "宋雨琦在918去韩网打歌 说自己像韩国人宁艺卓跟公司协商把日本演唱会时间更改 说自己是非常中国的中国人 &nbsp;&nbsp; 新浪网",
       "source": "GNews 中"
+    },
+    {
+      "title": "에스파, 앤더슨 팩과 협업…오늘(27일) 'Keychain' 발매 - 더팩트",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBaZG5xTmg2dTNuVW9ZUGdmVGF4YlQ5OE1RZV9KaFhJLUdKN2hUcnFyN3YxNGQ5YkNoQWt6djBKT1dXVEpjUzBCZFJDbGp4eEVJQ2lrNm9sX2JXWGY5OHIxSmp4T3F6R0tzOFdoUmZn0gFsQVVfeXFMTXV4NUt6MFlXQ2N4U2Z6eHVydEFPRGt1RU1SUkRwbUEyWWNWSnRwSmFkUWpDVHd5eF9xa1RhM2FaU3VJOE5QYnJpemNmbVdIUGNKYng3MlRrNVY4TV9sUDRFdWZ4Z19UUV9BQnZ5?oc=5",
+      "date": "2026-11-13T07:27:55+00:00",
+      "excerpt": "에스파, 앤더슨 팩과 협업…오늘(27일) 'Keychain' 발매 &nbsp;&nbsp; 더팩트",
+      "source": "GNews 近一日"
     },
     {
       "title": "宁艺卓一直很爱国，根正苗红！ 不要恶意摸黑了[费解][费解][费解] ig简介包括多次主动宣传中国文化！ #宁艺卓 宋雨琦# ​ - 新浪网",
@@ -810,13 +887,6 @@
       "source": "GNews 近一日"
     },
     {
-      "title": "比起热搜上的争议，更想记住她为中国速度落泪的样子|aespa|宁艺卓|宋雨琦|国籍_新浪新闻 - 新浪网",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBNc0loazFfbTNCc0NtSWY0Zzg0bGZlU3dWQ2x6eXlhalZiWFR0QkpYa1lyaE5DNy1jc3pUb3YyOWlpNGZzRXk1U2J2Q28wX2EtQ0swSXlqVm1zeXAtdEw0ajZmYw?oc=5",
-      "date": "2026-11-13T05:59:00+00:00",
-      "excerpt": "比起热搜上的争议，更想记住她为中国速度落泪的样子|aespa|宁艺卓|宋雨琦|国籍_新浪新闻 &nbsp;&nbsp; 新浪网",
-      "source": "GNews 中"
-    },
-    {
       "title": "에스파, 레전드 캐롤 ‘산타 베이비’로 연말 장식 - 뉴스인사이드",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5BMmh6RlZlbTYtUHRYajV6RWxZQ2s2dmZTbnJ3akUwM1Q2MlFRUkxEaW9VYkk1M3RJYzNhNWJtbXlEdUM4TTVlNVk5Q2xRQmRieXdQMzdCY080YzluQWVYR19HckRpenBha1FUTGVB?oc=5",
       "date": "2026-11-13T05:54:12+00:00",
@@ -866,6 +936,13 @@
       "source": "GNews 英"
     },
     {
+      "title": "에스파, 유명 캐럴 ‘산타 베이비’ 재해석…“연말 따뜻하길” - 매일경제",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1fVUxMRFg5ZEI0Nll3V0FaUVUxelFaNlBCNk5pR2pGdjRCcmluQ2xKVWxYbkFkQzNCdFg0ZTA0WnlIa3pFdDFhaTRqRnpFY3NBNGpJ?oc=5",
+      "date": "2026-11-13T04:59:12+00:00",
+      "excerpt": "에스파, 유명 캐럴 ‘산타 베이비’ 재해석…“연말 따뜻하길” &nbsp;&nbsp; 매일경제",
+      "source": "GNews 韩"
+    },
+    {
       "title": "aespa重新演绎著名圣诞颂歌《圣诞宝贝》……“祝愿大家度过一个温暖的年末” - 매일경제",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE8zVk5UUWxTVE9FVGhnZExlSEFjTFd0Y0ZjMEljMWJjUDdrWmVyRlZfQmNPVHZ0YkFjNFhBblBXZnl6cTBGTnpwbHRnUV9yZ1oz?oc=5",
       "date": "2026-11-13T04:59:12+00:00",
@@ -878,13 +955,6 @@
       "date": "2026-11-13T04:59:12+00:00",
       "excerpt": "エスパ、有名キャロル「Santa Baby」を再解釈…「年末が温かくなりますように」 &nbsp;&nbsp; 매일경제",
       "source": "GNews 日"
-    },
-    {
-      "title": "에스파, 유명 캐럴 ‘산타 베이비’ 재해석…“연말 따뜻하길” - 매일경제",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1fVUxMRFg5ZEI0Nll3V0FaUVUxelFaNlBCNk5pR2pGdjRCcmluQ2xKVWxYbkFkQzNCdFg0ZTA0WnlIa3pFdDFhaTRqRnpFY3NBNGpJ?oc=5",
-      "date": "2026-11-13T04:59:12+00:00",
-      "excerpt": "에스파, 유명 캐럴 ‘산타 베이비’ 재해석…“연말 따뜻하길” &nbsp;&nbsp; 매일경제",
-      "source": "GNews 에스파"
     },
     {
       "title": "에스파, 유명 캐럴 ‘산타 베이비’ 재해석…“연말 따뜻하길” - 매일경제",
@@ -918,7 +988,7 @@
       "title": "aespa、ホリデーシーズンを迎えm-floの☆Taku Takahashiとのコラボ実現！「KISS N TELL」リミックスver․を11月20日リリース - Yahoo!ニュース",
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE93Nkh6anVOVGM0LVRQMEFwU0RJSkVISy1fT3JMVVR2NFBNa1VHdGlPWnR2Qm5XbjBXYV9oR0NRc1FBWl9GdzA4YzVEVXBveWwtdGYtUURuUkdRV2U0aFhlSmNQbDF2UVEwVkFFZ0d2U1BPOTZ2U2owbUs3bV9mbm8?oc=5",
       "date": "2026-11-13T04:18:18+00:00",
-      "excerpt": "aespa、ホリデーシーズンを迎えm-floの☆Taku Takahashiとのコラボ実現！「KISS N TELL」リミックスver․を11月20日リリース &nbsp;&nbsp; Yahoo!ニュース    aespa × m-flo ☆Taku Takahashiのコラボレーションが実現！「KISS N TELL」リミックスヴァージョンが11月20日(金)にリリース！リリースを記念したスペシャルイベント“KISS N TELL Happy Holiday Event”の開催も決定！さらにSetlogで楽しめるエフェクトもスタート！ &nbs",
+      "excerpt": "aespa、ホリデーシーズンを迎えm-floの☆Taku Takahashiとのコラボ実現！「KISS N TELL」リミックスver․を11月20日リリース &nbsp;&nbsp; Yahoo!ニュース    aespa、「KISS N TELL（☆Taku Takahashi Remix）」11/20リリース &nbsp;&nbsp; Billboard JAPAN    aespa The 1st Japan Mini Album『KISS N TELL』Happy Holiday イベント開催 &nbsp;&nbsp; タワーレコード オ",
       "source": "GNews 日"
     },
     {
@@ -957,11 +1027,25 @@
       "source": "Reddit r/aespa"
     },
     {
+      "title": "aespa × m-floの☆Taku Takahashiとコラボレーションが実現！ ホリデーシーズンに向け、☆Taku Takahashiによる「KISS N TELL」リミックスヴァージョンを11月20日にリリース！Setlogで楽しめるエフェクトもスタート。 | K-POP、韓国エンタメニュース、取材レポートなら",
+      "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1aejhyQWdVdko0ZFpPR28zUGZzSkFVMG1XeXJjTUwyUjBTa1FyOE9fTnU2YVMtQXZDQUJJODh3X25mRmIzWlpBZzVFaw?oc=5",
+      "date": "2026-11-13T03:31:24+00:00",
+      "excerpt": "aespa × m-floの☆Taku Takahashiとコラボレーションが実現！ ホリデーシーズンに向け、☆Taku Takahashiによる「KISS N TELL」リミックスヴァージョンを11月20日にリリース！Setlogで楽しめるエフェクトもスタート。 | K-POP、韓国エンタメニュース、取材レポートならコレポ！ &nbsp;&nbsp; korepo.com",
+      "source": "GNews 日"
+    },
+    {
       "title": "不忍韩秀娥遭粉丝攻击，aespa Karina发声护好友！ - vibes by 8world",
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE05U0NGZHVQX0M2eHRzWmdORWhFT2w2N3VkdVU5U0o2RHVOemE5ZWFxOERMZnEtcUtiMVZjeUJqMTYzUi1LWkxGWFp4anpXaGo3dF9CZ2FhamdWU21fb25vOThWTjAyVXZzSjByaE15SQ?oc=5",
       "date": "2026-11-13T03:26:07+00:00",
       "excerpt": "不忍韩秀娥遭粉丝攻击，aespa Karina发声护好友！ &nbsp;&nbsp; vibes by 8world",
       "source": "GNews 中"
+    },
+    {
+      "title": "aespa、m-flo・☆Taku Takahashiと豪華コラボ実現！『KISS N TELL』リミックスを11月20日リリースへ - スポーツソウル日本版",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE02bTgyYlRla3VvQ3dXNUJMRFVRck9VNV8teENBNm1admJ3MThiajkwcUllQUhWMDg5MERtdV9xdDFuZGhmVWcyWlJCa1Z2M2VaTlVOUFVzd0hGQQ?oc=5",
+      "date": "2026-11-13T03:17:04+00:00",
+      "excerpt": "aespa、m-flo・☆Taku Takahashiと豪華コラボ実現！『KISS N TELL』リミックスを11月20日リリースへ &nbsp;&nbsp; スポーツソウル日本版",
+      "source": "GNews 日"
     },
     {
       "title": "261113 DICON Dispatch Instagram Update - Pureness Personified ✨🪽 D-PASS. A relay interview where aespa asked & answered each other’s questions ⮂💌What kind of qu",
@@ -971,11 +1055,25 @@
       "source": "Reddit r/aespa"
     },
     {
+      "title": "aespa、m-flo・☆Taku Takahashiと豪華コラボ実現！『KISS N TELL』リミックスを11月20日リリースへ (2026年11月13日掲載) - ライブドアニュース",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1seWNhVVJabHk0clAwSGlUVm50WjU5d3RVOUNFdTdqek5LTTZmTXRBSlZ5Tml6NlM3OFdrVmtKZU1Nb3BGeE5pVFBDR013RFdBaXR1dUlVQm94Y29rc1E?oc=5",
+      "date": "2026-11-13T03:11:00+00:00",
+      "excerpt": "aespa、m-flo・☆Taku Takahashiと豪華コラボ実現！『KISS N TELL』リミックスを11月20日リリースへ (2026年11月13日掲載) &nbsp;&nbsp; ライブドアニュース",
+      "source": "GNews 日"
+    },
+    {
       "title": "261113 aespa to hold a \"KISS N TELL Happy Holiday Event\" (Fansign) in Tokyo on December 10th",
       "url": "https://www.reddit.com/r/Aespa/comments/1xuwsj7/261113_aespa_to_hold_a_kiss_n_tell_happy_holiday/",
       "date": "2026-11-13T03:05:33+00:00",
       "excerpt": "",
       "source": "Reddit r/aespa"
+    },
+    {
+      "title": "aespa × m-flo ☆Taku Takahashiのコラボレーションが実現！「KISS N TELL」リミックスヴァージョンが11月20日(金)にリリース！リリースを記念したスペシャルイベント“KISS N TELL Happy Holiday Event”の開催も決定！さらにSetlogで楽しめるエフェクトも",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1WSzRWeFE1TENWOEVYd01UblV3RnBEVFVVTzFyazVaOGlKMVlFcmlXTXYxT2ljSFUwVUptNEtkOWhaaVYxS29yRFk4ajBHZUVDUVVSOUdad3ZoV00?oc=5",
+      "date": "2026-11-13T03:03:47+00:00",
+      "excerpt": "aespa × m-flo ☆Taku Takahashiのコラボレーションが実現！「KISS N TELL」リミックスヴァージョンが11月20日(金)にリリース！リリースを記念したスペシャルイベント“KISS N TELL Happy Holiday Event”の開催も決定！さらにSetlogで楽しめるエフェクトもスタート！ &nbsp;&nbsp; aespa-official.jp",
+      "source": "GNews 日"
     },
     {
       "title": "AIより美しい！日本人ジゼル所属 K-POPガールズアイドルグループ aespa (エスパ)、☆Taku Takahashiによる｢KISS N TELL｣リミックスヴァージョンをリリース―サイン会も決定 - 韓スタ！",
@@ -992,17 +1090,17 @@
       "source": "GNews 日"
     },
     {
-      "title": "aespa The 1st Japan Mini Album『KISS N TELL』Happy Holiday イベント開催 - タワーレコード オンライン",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1vd0E4VU1sOVRRa1BBd3c1ZW9BUDU1T2VQU2xlbmJKbXpYQjdGVHMwVjlVaTdjSzU3c19ucFFVNTVEMm0yNnh2dDlDSk5GTVdZb0Z5TWVVXzZkQmJUTE15cDdsNA?oc=5",
-      "date": "2026-11-13T03:00:00+00:00",
-      "excerpt": "aespa The 1st Japan Mini Album『KISS N TELL』Happy Holiday イベント開催 &nbsp;&nbsp; タワーレコード オンライン",
-      "source": "GNews 日"
-    },
-    {
       "title": "aespa、m-flo・☆Taku Takahashiがリミックスを手掛けた「KISS N TELL」配信決定 - BARKS",
       "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE42SU5sbzFSX3hQM3NmbFBNT3dvbUtnWm5NSldERkJDUmJUXzB0Y013VXlPTEtsQ2NxRHRNNWlKald4OVk?oc=5",
       "date": "2026-11-13T03:00:00+00:00",
       "excerpt": "aespa、m-flo・☆Taku Takahashiがリミックスを手掛けた「KISS N TELL」配信決定 &nbsp;&nbsp; BARKS",
+      "source": "GNews 日"
+    },
+    {
+      "title": "aespa、m-flo・☆Taku Takahashiがリミックスを手掛けた「KISS N TELL」配信決定 - ライブドアニュース",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5WNlA4VkdmNXMtUktuZDZoZVp2Mnc1bXdvSlBILTNTTWlUYlBCUk9oVWxfT0tJcG50bFFrZmRMbzl5N212V3RFTWlkaDJsaWMwRkhzMkZ6UWFSUDhCQTc0?oc=5",
+      "date": "2026-11-13T03:00:00+00:00",
+      "excerpt": "aespa、m-flo・☆Taku Takahashiがリミックスを手掛けた「KISS N TELL」配信決定 &nbsp;&nbsp; ライブドアニュース",
       "source": "GNews 日"
     },
     {
@@ -1013,18 +1111,18 @@
       "source": "Reddit r/aespa"
     },
     {
-      "title": "에스파, '산타 베이비' 73년 만에 색다른 변신…어사 키트와 만났다 - EPN엔피나우",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBrNzVKMHFCdUNweFBVZks2RTQ2QXU1Y2kySERXVTNvSk93LW5xYzNWYUh6RjVvbEV0MFlGcVpnZVlWSk4tb2VpbldMa1BHNVhaX0ZxNFdoUHY2SF82RmxsYmRRdEFtSVdN0gFsQVVfeXFMTTRJdGFmdldXU2VnT0dpLVBRMUEyMkljcnlGYm1UTU5RN3hJWkN2R2JRN01laGFQR0NiaWhER1h1cm04enN6dE9FNXM5bkFuLXVOMU56OGNnb0VLMllhQ3I5bUJhbnV5NmlPcE9S?oc=5",
-      "date": "2026-11-13T02:06:53+00:00",
-      "excerpt": "에스파, '산타 베이비' 73년 만에 색다른 변신…어사 키트와 만났다 &nbsp;&nbsp; EPN엔피나우",
-      "source": "GNews 近一日"
-    },
-    {
       "title": "Aespa adds spin to classic carol ‘Santa Baby’ - The Korea Herald",
       "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE94T3hmT2RqNFJuVElYLVhxOVdnUGFuZm5SU1BuczNRaXZWaC1CT2l5M2Q0LV9CTFlCcjd0bHM2bkJZbENOUy1QY2ZTRkw5UDlvOTVhZTRRSQ?oc=5",
       "date": "2026-11-13T01:54:38+00:00",
       "excerpt": "Aespa adds spin to classic carol ‘Santa Baby’ &nbsp;&nbsp; The Korea Herald",
       "source": "GNews 近两日"
+    },
+    {
+      "title": "에스파 표 캐롤 개봉박두…오늘(13일) ‘Santa Baby’ 발표 - 뉴스엔",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9fSnRVY1lzQXFvV21xQ1R6c3VNQzZDWGRVYkhKdXJfNGVxOE1nU1d0QkMyZW80ZS1UaU51RHdaaC1uVFNlV2p2OERKNU9PaDNhMVVmSUxwLVR4VkV2R1VJVjVzMmctWExn?oc=5",
+      "date": "2026-11-13T01:54:23+00:00",
+      "excerpt": "에스파 표 캐롤 개봉박두…오늘(13일) ‘Santa Baby’ 발표 &nbsp;&nbsp; 뉴스엔",
+      "source": "GNews 에스파"
     },
     {
       "title": "aespa joins Eartha Kitt for new Santa Baby - Aju Press",
@@ -1039,13 +1137,6 @@
       "date": "2026-11-13T01:43:41+00:00",
       "excerpt": "에스파, '어사 키트 탄생 100주년' 캐럴 '산타 베이비' 협업 &nbsp;&nbsp; 비즈엔터",
       "source": "GNews 에스파"
-    },
-    {
-      "title": "에스파, '어사 키트 탄생 100주년' 캐럴 '산타 베이비' 협업 - 비즈엔터",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE94cWdZdUZ5UjNMbnJ2MGl4QlllQlAwVWhOQWVwTU9VUVRyd0oyNzdnNURzaENncEFjZEZCOTdaRE9RUkdUQU5sWTBYNTVaMzFoakRvUw?oc=5",
-      "date": "2026-11-13T01:43:41+00:00",
-      "excerpt": "에스파, '어사 키트 탄생 100주년' 캐럴 '산타 베이비' 협업 &nbsp;&nbsp; 비즈엔터",
-      "source": "GNews 近一日"
     },
     {
       "title": "에스파, 어사 키트 탄생 100주년 기념 캐럴 공개 - 신아일보",
@@ -1066,14 +1157,7 @@
       "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxQZ2c2NklBZ0tMRklPY3pPb1Q1dzV0aE9NRl8zd1QweVNMQnoycFBQeHZUZHRPOWFndDBuUjlsRGNjM09IUmo0UXcwUlJ3M0Q4c2pkU2l0U2xjOWpGa2JFM0Yxa0NrOWNJQ0dpSU5DVjRKazk2UGk0cXpBWGVZNFgxMlJ5UWtIV0pudW5IcXppNmw4LUF5cElWaUNHTkRJd21id3luSzgwYnNsenNZXzY2R3VoNm1nalpVWi1jUFNvamV0aVlSY1dvRDhJVlZCaDN4OXRaN2RBTXBqSHVLZDNaeTlTN1dZdXNLMTk1VzRTdFFtNkFxUk9heFZkQlA1b3RNU25jTXoyUEc4OERhQ2k5RjU3am04SEdB?oc=5",
       "date": "2026-11-13T01:27:00+00:00",
       "excerpt": "에스파, 캐럴로 여는 연말…어사 키트와 '산타 베이비' 협업 &nbsp;&nbsp; 데일리안",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "에스파, 캐럴로 여는 연말…어사 키트와 '산타 베이비' 협업 - 데일리안",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5SdjFET2RNTDNOUnE1cUxnX1FHYWlwTjJUSEdDdmNrVl9IVG81M2szRmUxUElDZ1liRlp5UmlvS2RLdTF1VmFSQ1FyNzlMQUpGWGQ4?oc=5",
-      "date": "2026-11-13T01:27:00+00:00",
-      "excerpt": "에스파, 캐럴로 여는 연말…어사 키트와 '산타 베이비' 협업 &nbsp;&nbsp; 데일리안",
-      "source": "GNews 近一日"
+      "source": "GNews 韩"
     },
     {
       "title": "aespa sing alongside Eartha Kitt's original vocals in new 'Santa Baby' single - allkpop",
@@ -1097,13 +1181,6 @@
       "source": "GNews 에스파"
     },
     {
-      "title": "에스파, 73년 전 캐럴 '산타 베이비' 재해석…어사 키트와 특별한 협업 - 더쎈뉴스",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9TbmJmZnZERVlmaGdfd2xpVklEdjJFdUhkVHViQm83bGpjSWo5S1lKNE5DNk5mTUg1SVhyT3EzbUhkelltTHZDNnYxWHZlN3FrNjIxRmJNU2F3anpwZXFEeW1fdVFBQjBx?oc=5",
-      "date": "2026-11-13T01:15:05+00:00",
-      "excerpt": "에스파, 73년 전 캐럴 '산타 베이비' 재해석…어사 키트와 특별한 협업 &nbsp;&nbsp; 더쎈뉴스",
-      "source": "GNews 近一日"
-    },
-    {
       "title": "에스파, 美 중간선거 최대 수혜자 됐나…‘밈’ 등극에 4천만 스트리밍 돌파 [스경X이슈] - 스포츠경향",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE45T3lpZnU1azJ5c20wcUpPMmlaVUs5aHZ0R3RPSmZqX1FndjVwVXF3WC1ieXFiRTNFM0NMWElha3JpUWU4bHN0cGRCa09yLU9UcWhRdjFJZEdHc2dwWGfSAWNBVV95cUxQdkNzNDVKeEVHLVhTZW1GNDl1a1EyZzRCMXpQVDZMQzR5T1k5SFo3UzdxRXpiSTlhSlNSREVGbHkzY0JWdjI5c3FycjhRR0IxYjJzc0hldzBoWFdCeFNha2JsZ00?oc=5",
       "date": "2026-11-13T01:11:00+00:00",
@@ -1118,18 +1195,11 @@
       "source": "GNews 韩"
     },
     {
-      "title": "MMA 2026 투표 오늘 마감…플레이브·에스파·아이브 선두, 리센느 102만표 돌파 - 톱스타뉴스",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5QVUVWSnREVDdHd0dvck5NMTRvb2pLbHFBNElnSzBCbmZkM1NfTW5XTlRCa1lyZjhqS2pGYk9GNlZscVVmN0o5VE9fNTBTYXg2TVU0UmVGdWxQU2ozREtKVm85SE1HMnhzQVVMajdQQ2QyUQ?oc=5",
-      "date": "2026-11-13T01:01:25+00:00",
-      "excerpt": "MMA 2026 투표 오늘 마감…플레이브·에스파·아이브 선두, 리센느 102만표 돌파 &nbsp;&nbsp; 톱스타뉴스",
-      "source": "GNews 近一日"
-    },
-    {
       "title": "에스파표 ‘쇠맛 캐럴’ 나왔다… '산타 베이비' 재해석 - 이데일리",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOTkk4SHpWZDREWXZtMW01VmxBZzBTb3VSY0N4NzVycWdSVF9OXzhtZEhqcWhINF9Xb1pZdjY3YmRiWTdNMmRzX21kOUhCaE9vTnRiblc5ckVWdEx2NnFmejRONzdiOWhoaWVXcnc0TUdxOXJ4U0dNU2ZkZTRKQ09sMw?oc=5",
       "date": "2026-11-13T00:58:01+00:00",
       "excerpt": "에스파표 ‘쇠맛 캐럴’ 나왔다… '산타 베이비' 재해석 &nbsp;&nbsp; 이데일리",
-      "source": "GNews 에스파"
+      "source": "GNews 韩"
     },
     {
       "title": "에스파, 유명 캐럴 '산타 베이비' 다시 불렀다 - 뉴시스",
@@ -1139,25 +1209,11 @@
       "source": "GNews 에스파"
     },
     {
-      "title": "에스파, 유명 캐럴 '산타 베이비' 다시 불렀다 - 뉴시스",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5LcUxXc1YwZVpRNS1yNHJFS3l6SnhxZnlIdjBQbHRBX0xHc2NBakhWVFRWdkdraFo0Q3pYY0FMT25ERHdvd2FXcWdZUlQwUXBmeXVidEd6VHZqTThNeG9ETlY1aEY3TDNXVnc5Qkd3SXhENmlBOE5EY9IBeEFVX3lxTE5LcUxXc1YwZVpRNS1yNHJFS3l6SnhxZnlIdjBQbHRBX0xHc2NBakhWVFRWdkdraFo0Q3pYY0FMT25ERHdvd2FXcWdZUlQwUXBmeXVidEd6VHZqTThNeG9ETlY1aEY3TDNXVnc5Qkd3SXhENmlBOE5EYw?oc=5",
-      "date": "2026-11-13T00:57:38+00:00",
-      "excerpt": "에스파, 유명 캐럴 '산타 베이비' 다시 불렀다 &nbsp;&nbsp; 뉴시스",
-      "source": "GNews 近一日"
-    },
-    {
       "title": "aespa Reimagines Eartha Kitt's 'Santa Baby' - 조선일보",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRnFxcUdMbS1GTEswbGFhT0tXb2VYdHFMN2F1Vk5VckRCVjRub0JMMThQcE1BVHhqSVBJRGJMaTZHWVVtbmxDYzdSb2tCNk43Nl94VkxQYi1aMTZCZl9MMHBvWmxfUmJ2LUQ1TzhTNzdDaTctR184NmFwcTJtbUJoR3dzV0pHYnlkeVlEY1ln?oc=5",
       "date": "2026-11-13T00:54:46+00:00",
       "excerpt": "aespa Reimagines Eartha Kitt's 'Santa Baby' &nbsp;&nbsp; 조선일보",
       "source": "GNews 英"
-    },
-    {
-      "title": "에스파, 어사 키트와 협업한 캐럴 ‘Santa Baby’ 공개…원곡 보컬 담았다 - 스타데일리뉴스",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nUkoxRnJFLU5mRXNxb0R5SVZjSklUbDdiT2hBMHhYazBqWXRDSHhKNnFaeW9UejZ3M2V4UTNlNU5nVW9TSXlrRFNCTTJVNVJGcU1YanA3LVB3X29TbXl2RjEwb0N1OHhWYlp5SXVrT1dGSUxv?oc=5",
-      "date": "2026-11-13T00:50:53+00:00",
-      "excerpt": "에스파, 어사 키트와 협업한 캐럴 ‘Santa Baby’ 공개…원곡 보컬 담았다 &nbsp;&nbsp; 스타데일리뉴스",
-      "source": "GNews 近一日"
     },
     {
       "title": "Aespa reinterprets classic Christmas song ′Santa Baby,′ hopes to spread joy - K-VIBE",
@@ -1181,25 +1237,11 @@
       "source": "GNews 에스파"
     },
     {
-      "title": "에스파, ‘산타 베이비’ 재해석…어사 키트 100주년 기념 - 동아일보",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9LWnlmTGM0NUdKUXBJcXBubVRDZ2U1Mi1UWnZWQ1ZULUJRTnRIT1Z0U2hTTjVMR3FZQzhiRzBNN2hFZjYtWXd0OU9WU3N3enI1Y2prT2hqY0h4dnMxLWl1dE85a2QtZ9IBZkFVX3lxTE9LWnlmTGM0NUdKUXBJcXBubVRDZ2U1Mi1UWnZWQ1ZULUJRTnRIT1Z0U2hTTjVMR3FZQzhiRzBNN2hFZjYtWXd0OU9WU3N3enI1Y2prT2hqY0h4dnMxLWl1dE85a2QtZw?oc=5",
-      "date": "2026-11-13T00:44:51+00:00",
-      "excerpt": "에스파, ‘산타 베이비’ 재해석…어사 키트 100주년 기념 &nbsp;&nbsp; 동아일보",
-      "source": "GNews 近一日"
-    },
-    {
       "title": "[공식] 에스파, 레전드 캐럴 깜짝 공개…연말 분위기 제대로 살린다 - 스포츠경향",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1kWlpWekZfSy15REs0SlNlYm9Odzc2Smp6NUE2RlllRDk2cU54U3F3T256Y1U4RVdJLVljeWdvRVpodHU4cUkxUFZubzRDLUphNlBsd1ZFbzlKSllBVkHSAWNBVV95cUxOdmNiMkRqcl9BSkMwV1c2UmRmdC10ald1NERlcjVlT1BKOWdER3ZxUDJpMTFUTDJ5cF9RejZZdzViMHpJV0VjQ1RweUNjakxvRE8wejRUdWIwZFJpM2I1ZnA3aU0?oc=5",
       "date": "2026-11-13T00:43:00+00:00",
       "excerpt": "[공식] 에스파, 레전드 캐럴 깜짝 공개…연말 분위기 제대로 살린다 &nbsp;&nbsp; 스포츠경향",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "[공식] 에스파, 레전드 캐럴 깜짝 공개…연말 분위기 제대로 살린다 - 스포츠경향",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE52Y2IyRGpyX0FKQzBXVzZSZGZ0LXRqV3U0RGVyNWVPUEo5Z0RHdnFQMmkxMVRMMnlwX1F6Nll3NWIweklXRWNDVHB5Q2NqTG9ETzB6NFR1YjBkUmkzYjVmcDdpTdIBY0FVX3lxTE52Y2IyRGpyX0FKQzBXVzZSZGZ0LXRqV3U0RGVyNWVPUEo5Z0RHdnFQMmkxMVRMMnlwX1F6Nll3NWIweklXRWNDVHB5Q2NqTG9ETzB6NFR1YjBkUmkzYjVmcDdpTQ?oc=5",
-      "date": "2026-11-13T00:43:00+00:00",
-      "excerpt": "[공식] 에스파, 레전드 캐럴 깜짝 공개…연말 분위기 제대로 살린다 &nbsp;&nbsp; 스포츠경향",
-      "source": "GNews 近一日"
+      "source": "GNews 韩"
     },
     {
       "title": "에스파, 인기 캐럴 '산타 베이비' 재해석…\"즐거움 전하길\" - 연합뉴스",
@@ -1247,15 +1289,8 @@
       "title": "에스파, 어사 키트와 협업한 캐럴 싱글 '산타 베이비' 발매 - 머니투데이 - 머니투데이",
       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5uaXlVaDdLbFdBUWlRNXRJZGIycXBQLUdCZ0NRcHd2ckFldVFCSnlTMWJhWklXR2hNR0s3S25NWk9xclJrREV1V1NwODVKMlJCa0h2WXdrOHl0c0ItOXBJT0htUU5DUkpqOG5fcXVkSVlfazdDSWfSAXtBVV95cUxQUXRnYjYwRXlSUmROM3NCd1BCcXZORS1XZVk1SUtqNWJCRkZ1dEUydkxhS1R3TkZhSDZwbGttU3BxQUZpR1VSZkVoaGhnYVdhb214SU84RnBkZGZLQk1RZG02NndxSnVhU3hEYTQ4UkozU1EtT1dVd1o2VTQ?oc=5",
       "date": "2026-11-13T00:35:19+00:00",
-      "excerpt": "에스파, 어사 키트와 협업한 캐럴 싱글 '산타 베이비' 발매 - 머니투데이 &nbsp;&nbsp; 머니투데이    에스파, 유명 캐럴 '산타 베이비' 다시 불렀다 &nbsp;&nbsp; 뉴시스    에스파, 팝 전설 어사 키트와 뭉쳤다.. 캐롤 'Santa Baby' 공개 &nbsp;&nbsp; 조선일보    에스파, 유명 캐럴 ‘산타 베이비’ 재해석…“연말 따뜻하길” &nbsp;&nbsp; 매일경제    [공식] 에스파, 레전드 캐럴 깜짝 공개…연말 분위기 제대로 살린다 &nbsp;&nbs",
+      "excerpt": "에스파, 어사 키트와 협업한 캐럴 싱글 '산타 베이비' 발매 - 머니투데이 &nbsp;&nbsp; 머니투데이    에스파, 유명 캐럴 '산타 베이비' 다시 불렀다 &nbsp;&nbsp; 뉴시스    에스파, 팝 전설 어사 키트와 뭉쳤다.. 캐롤 'Santa Baby' 공개 &nbsp;&nbsp; 조선일보",
       "source": "GNews 韩"
-    },
-    {
-      "title": "에스파, 어사 키트와 협업한 캐럴 싱글 '산타 베이비' 발매 - 머니투데이 - 머니투데이",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBZY3djQTBfTmlpVjRDdFlhbU1kM3Y1a1d5cW5MaHZnNnc4d2ZVSWpoajdjdWxxLUZ4TU1pSUtZaENvUW5qcFhnU1hySy1YTTlVTHZUak1jQ1dsU2huUXR0TWtiY1dYYlFDNVFqc3Fn0gFuQVVfeXFMUFljd2NBMF9OaWlWNEN0WWFtTWQzdjVrV3lxbkxodmc2dzh3ZlVJamhqN2N1bHEtRnhNTWlJS1loQ29RbmpwWGdTWHJLLVhNOVVMdlRqTWNDV2xTaG5RdHRNa2JjV1hiUUM1UWpzcWc?oc=5",
-      "date": "2026-11-13T00:35:19+00:00",
-      "excerpt": "에스파, 어사 키트와 협업한 캐럴 싱글 '산타 베이비' 발매 - 머니투데이 &nbsp;&nbsp; 머니투데이",
-      "source": "GNews 近一日"
     },
     {
       "title": "aespa、ポップ界の伝説アーサ・キットとコラボ…「Santa Baby」公開 - 조선일보",
@@ -1265,25 +1300,11 @@
       "source": "GNews 日"
     },
     {
-      "title": "에스파, 팝 전설 어사 키트와 뭉쳤다.. 캐롤 'Santa Baby' 공개 - 미주중앙일보",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5lWDVQbDlCRmRjSVlTa184dzBCMWk0Rl9hQ0Y2RlV3aUtOYzE2V2xpejd6OFhNTk1mWW50V29xUVh0MnlVUDE0elp5LU9zYWNEejNUbThNYW01Y1ZBWThjWWpR?oc=5",
-      "date": "2026-11-13T00:34:00+00:00",
-      "excerpt": "에스파, 팝 전설 어사 키트와 뭉쳤다.. 캐롤 'Santa Baby' 공개 &nbsp;&nbsp; 미주중앙일보",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "에스파, 팝 전설 어사 키트와 뭉쳤다.. 캐롤 'Santa Baby' 공개 - Chosunbiz",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNS1BpbHF6a0gtclJ4cXpQZzBpY3hHMTMxeldwY0dISmtRQS1XS2Jfa1VDY29hdVM3R19ibmVoY2tCOHoxSzdpaTZLMGUxa1lSM1dTaTU4N3FuRzU4bFcxZHFydFQ4VnVqaWdHbUcyOHFhdWNxRnRJd3VJaFgtYTZyWEgtSkF2Qk53MnNSSXEtNDk0V2VKZjY4eHJoamlGUTN5cXJZbHB2Y9IBpwFBVV95cUxNS1BpbHF6a0gtclJ4cXpQZzBpY3hHMTMxeldwY0dISmtRQS1XS2Jfa1VDY29hdVM3R19ibmVoY2tCOHoxSzdpaTZLMGUxa1lSM1dTaTU4N3FuRzU4bFcxZHFydFQ4VnVqaWdHbUcyOHFhdWNxRnRJd3VJaFgtYTZyWEgtSkF2Qk53MnNSSXEtNDk0V2VKZjY4eHJoamlGUTN5cXJZbHB2Yw?oc=5",
-      "date": "2026-11-13T00:34:00+00:00",
-      "excerpt": "에스파, 팝 전설 어사 키트와 뭉쳤다.. 캐롤 'Santa Baby' 공개 &nbsp;&nbsp; Chosunbiz",
-      "source": "GNews 近一日"
-    },
-    {
       "title": "에스파표 캐롤온다…‘Santa Baby’ 오늘(13일) 공개 - 스포츠동아",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBXaWVmSm12TE1GRXdQWWJCeW1KbU1lZUtvQ3hmWGpxQlEyRndKd2RwVnRwNFp4aF9VVGRkR3pCNkV5cV85YmpqQ3loMDRCX2RCdGxITGtvS3NjNEhrVVVfWmxDeUlWS3pUdEpaYTF3?oc=5",
       "date": "2026-11-13T00:32:22+00:00",
       "excerpt": "에스파표 캐롤온다…‘Santa Baby’ 오늘(13일) 공개 &nbsp;&nbsp; 스포츠동아",
-      "source": "GNews 에스파"
+      "source": "GNews 韩"
     },
     {
       "title": "에스파, 클래식 캐롤 ‘Santa Baby’ 발표… “원곡에 저희만의 색깔 더하는 과정 특별” - MHN스포츠",
@@ -1291,13 +1312,6 @@
       "date": "2026-11-13T00:28:52+00:00",
       "excerpt": "에스파, 클래식 캐롤 ‘Santa Baby’ 발표… “원곡에 저희만의 색깔 더하는 과정 특별” &nbsp;&nbsp; MHN스포츠",
       "source": "GNews 에스파"
-    },
-    {
-      "title": "에스파, Eartha Kitt와 컬래버 캐롤 ‘Santa Baby’ 오늘 공개 - 톱스타뉴스",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5IYkt6RDFsYk1pcXJ0T2N2eTkzTFAybUhmcXZCOGUyUGQwSkNUYzZhWmNKLXZBc2pzUmVTem9DRml6QVVSRV9vWm9kendOc2M2NGlhczJWSVJyV2lwalBiQTI4SkRULXd0eldleVpjTnBydw?oc=5",
-      "date": "2026-11-13T00:13:04+00:00",
-      "excerpt": "에스파, Eartha Kitt와 컬래버 캐롤 ‘Santa Baby’ 오늘 공개 &nbsp;&nbsp; 톱스타뉴스",
-      "source": "GNews 近一日"
     },
     {
       "title": "[오늘가요] 에스파, 캐롤 '산타 베이비' 공개 \"온 연말 따뜻한 즐거움 되길\" - 조이뉴스24",
@@ -1312,6 +1326,13 @@
       "date": "2026-11-13T00:05:14+00:00",
       "excerpt": "에스파X어사 키트, 콜라보 캐롤 ‘산타 베이비’ 오늘 공개 &nbsp;&nbsp; BNT뉴스",
       "source": "GNews 韩"
+    },
+    {
+      "title": "aespa アーサ・キットとのコラボシングル「Santa Baby」を公開 生誕100周年記念プロジェクト - 韓国トレンド研究所",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1FTGVZZldFT1g4R21URnNXOGJGeEs1cDR6elQ1RkV3cDhGei1KRk14cFdvbEFuTjNISi10NW53YUwtcDF2WHZ0ZXktSnQxWFM4?oc=5",
+      "date": "2026-11-13T00:00:00+00:00",
+      "excerpt": "aespa アーサ・キットとのコラボシングル「Santa Baby」を公開 生誕100周年記念プロジェクト &nbsp;&nbsp; 韓国トレンド研究所",
+      "source": "GNews 日"
     },
     {
       "title": "What aespa song would you die to?",
@@ -1349,25 +1370,11 @@
       "source": "Reddit r/aespa"
     },
     {
-      "title": "aespa→ATEEZ，出击《MMA2026》第一天 - 아시아뉴스통신",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFAtV3JFaV9VUlh1OXlvWl9yZ3VaVWJkemRfVTZ0TS1FTWsxeTBjNVRzMEU0VnNYYXB4WnBzUnZqUnp5ZHJFNUh1UkxTQVhZU1hyMUZJS0NMdTBEa2xERDZKQXRQeHlUaHBKQjdJUXJTNExNQ1Bk?oc=5",
-      "date": "2026-11-12T15:00:00+00:00",
-      "excerpt": "aespa→ATEEZ，出击《MMA2026》第一天 &nbsp;&nbsp; 아시아뉴스통신",
-      "source": "GNews 中"
-    },
-    {
       "title": "261112 aespa - ICN Airport Arrival (via Dispatch)",
       "url": "https://www.reddit.com/r/Aespa/comments/1xue46c/261112_aespa_icn_airport_arrival_via_dispatch/",
       "date": "2026-11-12T14:25:52+00:00",
       "excerpt": "",
       "source": "Reddit r/aespa"
-    },
-    {
-      "title": "aespa Giselle And NingNing’s Sexy Bikini Photos Met With Intense Backlash - Koreaboo",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNSXlvTGQ1OTBqYzlWaXNlWFBnckZ6ZU54QUt0eDVXNXRFbERvM1RWTUg0RlRPRm9nRTdjTDRhQTU5ZWQtS3hqQlNxSUluT2NsV25WQ0YzclFEUl95V3loYjVmWkJxZU9VSnEyVVU2clROU0owQUpVYmxrSGJKWGFycjRB?oc=5",
-      "date": "2026-11-12T13:10:22+00:00",
-      "excerpt": "aespa Giselle And NingNing’s Sexy Bikini Photos Met With Intense Backlash &nbsp;&nbsp; Koreaboo",
-      "source": "GNews 英"
     },
     {
       "title": "261112 Ningning at Discovery Winter in Shanghai (Pictorial #2)",
@@ -1419,11 +1426,11 @@
       "source": "GNews 日"
     },
     {
-      "title": "aespaのGISELLEとNINGNING、セクシーな水着姿を公開！スリムなスタイルに釘付け - 千葉テレビ放送株式会社",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE80SDllUGJDTE1CbnZHX2drdlBoV0s1OGNwR1UyX1JIWW1XRmNpbmFxUFFUa0FFak5tMGdPNEN1eGtzNWc5UThLVVV5V0duT0Y2YnV5SEVNQ3dBWWlDSDlB?oc=5",
-      "date": "2026-11-12T06:45:45+00:00",
-      "excerpt": "aespaのGISELLEとNINGNING、セクシーな水着姿を公開！スリムなスタイルに釘付け &nbsp;&nbsp; 千葉テレビ放送株式会社",
-      "source": "GNews 日"
+      "title": "디스커버리, 에스파 닝닝과 함께한 상하이 겨울 화보 공개 - 비욘드포스트",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBVTjdJek9ub1Fnb1pUcHFqMlBrUVd0OS1kbjFpNU1ySi1IdXZJMjNCa2VVelIwTndDbUV6aFpaT2VoTld5bXQtZXJTOEJzWTZ1eW43dEhpeERVOFhqMUY4Q1pKZVQ5ZlRibDZVdmJVVjJJS2wtSHJJWW9lb1E?oc=5",
+      "date": "2026-11-12T07:36:35+00:00",
+      "excerpt": "디스커버리, 에스파 닝닝과 함께한 상하이 겨울 화보 공개 &nbsp;&nbsp; 비욘드포스트",
+      "source": "GNews 韩"
     },
     {
       "title": "에스파 지젤, 블랙 비키니에 퍼 포인트…무대 밖 휴양지 패션 - 스타패션",
@@ -1431,6 +1438,13 @@
       "date": "2026-11-12T06:16:00+00:00",
       "excerpt": "에스파 지젤, 블랙 비키니에 퍼 포인트…무대 밖 휴양지 패션 &nbsp;&nbsp; 스타패션",
       "source": "GNews 韩"
+    },
+    {
+      "title": "디스커버리, 에스파 닝닝과 상하이 겨울 화보 공개…글로벌 패딩 시장 공략 - 나눔경제뉴스",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DdFVrWFNGYV9COHo2TTlpZURVSHRpbjJudEYzWm9PNTA0NkswX0thYlA3bmJuWlBrbU9ZLXduanFIckc3UkJWcnIyZ212TFhWNnVRNGRkN0VKV0Z0M2kwN0hiQ3R5R01Wc2pDSg?oc=5",
+      "date": "2026-11-12T06:03:08+00:00",
+      "excerpt": "디스커버리, 에스파 닝닝과 상하이 겨울 화보 공개…글로벌 패딩 시장 공략 &nbsp;&nbsp; 나눔경제뉴스",
+      "source": "GNews 에스파"
     },
     {
       "title": "실루엣만 봐도 ‘아찔’…에스파 지젤·닝닝, 美 휴양지 ‘한 줌 허리’ 자랑 [RE:스타] - TV리포트",
@@ -1444,13 +1458,6 @@
       "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBxZnlWQ0VjV3RwWVlPQjh2QlJQSUlGQWc0Wk9ZWmdmb0hkN2VLVzY4THFrUDdzZ05qTGhfT05LdXIxc2J2T0lycktuMGlTT2o1ekJBWDNn?oc=5",
       "date": "2026-11-12T03:10:00+00:00",
       "excerpt": "aespa・ジゼル、圧巻のくびれ&美脚際立つ大胆水着ショットに世界中がくぎ付け「スタイル神」「言葉を失う美しさ」 &nbsp;&nbsp; オリコンニュース",
-      "source": "GNews 日"
-    },
-    {
-      "title": "aespa・ジゼル、圧巻のくびれ＆美脚際立つ大胆水着ショットに世界中がくぎ付け「スタイル神」「言葉を失う美しさ」（オリコン） - Yahoo!ニュース",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE85azI0XzBJYkR1M1h5STctbEZlSlZ3OHBOQkUwQVk4R3hUQWNJUldjaVN3cWxIWExCT3QzTktaTVFiR1hSSVBZa1BFQWhuVWJjYjJuaHFYYXdmanVjc2twa2lsQ29rdW5oNmFHOTdRRzVXSXhCMElYUnVLaWtzcEE?oc=5",
-      "date": "2026-11-12T03:10:00+00:00",
-      "excerpt": "aespa・ジゼル、圧巻のくびれ＆美脚際立つ大胆水着ショットに世界中がくぎ付け「スタイル神」「言葉を失う美しさ」（オリコン） &nbsp;&nbsp; Yahoo!ニュース",
       "source": "GNews 日"
     },
     {
@@ -1489,6 +1496,13 @@
       "source": "Reddit r/aespa"
     },
     {
+      "title": "디스커버리 익스페디션, 상하이 저격! 에스파 닝닝과 함께 ‘윈터 인 상하이’ 캠페인 공개 - 패션엔",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1sZ3JkN2t6OHBnTWFXSmRDSGFTRHA4TERLa2dPS3lpQzVYMl8wWDYwdTUwU3llTTZCbno1clpPYkZaUTN5dTBsdFdXaTBNOVV0eTEyQk50RDRkS21tUEt5Q0FtdkVGbExaVXJqLVRUd21UXzNUWXRR?oc=5",
+      "date": "2026-11-12T02:11:27+00:00",
+      "excerpt": "디스커버리 익스페디션, 상하이 저격! 에스파 닝닝과 함께 ‘윈터 인 상하이’ 캠페인 공개 &nbsp;&nbsp; 패션엔",
+      "source": "GNews 에스파·成员"
+    },
+    {
       "title": "에스파 닝닝 X 변우석이 선보인 감각적인 다운 스타일링 - 패션서울",
       "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE5Yc3N6ODByWTRDS2d3RVpmSzBKVXR6N08zX3A4b2s1OWhHcXhzdWx5V1o3bDN5T1hSdWJRRGxZNUZsR3JnZEE?oc=5",
       "date": "2026-11-12T01:20:58+00:00",
@@ -1496,32 +1510,25 @@
       "source": "GNews 에스파·成员"
     },
     {
+      "title": "디스커버리, 에스파 닝닝과 함께 한 '윈터 인 상하이' - 한국섬유신문",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1KOEQ2dlJsWVRQbDV5QzJGelYxd0V2dEhWU09HbGE0eFJEYVA5X00wa1hqbmNkeWR1aVJwdjljcllfeDEzR1pCTHk4ejJ0Y3dZWkwxb2lIeDcycU5oQUpxYnRoa21ud3Rh?oc=5",
+      "date": "2026-11-12T00:37:23+00:00",
+      "excerpt": "디스커버리, 에스파 닝닝과 함께 한 '윈터 인 상하이' &nbsp;&nbsp; 한국섬유신문",
+      "source": "GNews 에스파"
+    },
+    {
+      "title": "디스커버리 익스페디션, 닝닝과 상하이서 겨울 화보 촬영…글로벌 시장 공략 - 스마트경제",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE55bjU5Q3d3bC1JWW1MNXdVT21zZVc0b2NLdVZLaGt4YmxBMDhHN21uWVdhUEVjdXc1ZF9iN2dSV2hEMFZBbWNtM3gtSnJvZkJyRTRjaUNNaEZXUzJkbFh6RXJJMnpZOS1pU2ZLclBxYw?oc=5",
+      "date": "2026-11-12T00:18:39+00:00",
+      "excerpt": "디스커버리 익스페디션, 닝닝과 상하이서 겨울 화보 촬영…글로벌 시장 공략 &nbsp;&nbsp; 스마트경제",
+      "source": "GNews 韩"
+    },
+    {
       "title": "아이오아이·에스파→NCT DREAM·에이티즈…MMA 첫날 출격 - 매일경제",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1oZmY3R21DMlY5QW4tNmFvZXdyQUFJT0x6eUUyd09ORzZySTVaMmVjUUh4OXhWbEZ0TFVGUmRxc3ZkZURGak1KNEc1QlllbUtpdEJR?oc=5",
       "date": "2026-11-12T00:12:26+00:00",
       "excerpt": "아이오아이·에스파→NCT DREAM·에이티즈…MMA 첫날 출격 &nbsp;&nbsp; 매일경제",
       "source": "GNews 韩"
-    },
-    {
-      "title": "IOI · Aespa → NCT DREAM · ATEEZ … 亮相MMA首日 - 매일경제",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5LandORG5IcFJkM2Vrc0hxUWU5T2VMQlU4eW1WX3lHZHVjdmJ0ekJ2cktmYU5JejVYU2xRbzkxaGRwRXFWVld0OW82NjlHWTEx?oc=5",
-      "date": "2026-11-12T00:12:26+00:00",
-      "excerpt": "IOI · Aespa → NCT DREAM · ATEEZ … 亮相MMA首日 &nbsp;&nbsp; 매일경제",
-      "source": "GNews 中"
-    },
-    {
-      "title": "From I.O.I and aespa to NCT Dream and ATEEZ: Acts set to take the stage on MMA’s opening day - 매일경제",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5wdkpxQk9iQ0Z2V19telFyejk5eXNPNmVucGpTQUlzeFhNWHlwZFREMXFxeTNFZjlaZTc2VkNKOVgtRmI1bXBxMm9rSlUzT3dB?oc=5",
-      "date": "2026-11-12T00:12:26+00:00",
-      "excerpt": "From I.O.I and aespa to NCT Dream and ATEEZ: Acts set to take the stage on MMA’s opening day &nbsp;&nbsp; 매일경제",
-      "source": "GNews 近两日"
-    },
-    {
-      "title": "Jang Yoon Jeong lets daughter apply aespa-style makeup but says she wants to remove it quickly - Chosunbiz",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOR2ctTGVVLXlLV2p3R1FSd3BsSzFlYnhrQzFPVzdHRkwtbUIxM2h0WTIxX1h4N3NmOEhzUktaSWFpSDFlWEl1QXNxdXlkeFg3eEpFblNObWthUWdLNHlnSjRZUXh1RVhFMEsyT2hBZUt5ekxSUnFrVUNBUnBxaHhoWTIwWHJBeUU30gGcAUFVX3lxTFBybWd6aXRyS0pOMGRqUWJkblgzR3F0LXRyUWZIOWlBTTZodGo5SWprYTZJS2NVTDNjVXFRNGRMUGtiT3Qya25HMVE4eW1ja05MTzVBcElFMEE0Tjk5LVlmYzZtUGdlLWpKZnhRVUxjdXBOMVhkZFg1bDhLSF9CQVFFNkZYZXBiLWNSVnlXWVN4STFkN0VjY0tNMjhqQw?oc=5",
-      "date": "2026-11-12T00:11:00+00:00",
-      "excerpt": "Jang Yoon Jeong lets daughter apply aespa-style makeup but says she wants to remove it quickly &nbsp;&nbsp; Chosunbiz",
-      "source": "GNews 近两日"
     },
     {
       "title": "장윤정, 에스파 화장 받더니 “빨리 지우고 싶다”…딸은 “너무 예쁜데?” - OSEN",
@@ -1538,10 +1545,10 @@
       "source": "GNews 日"
     },
     {
-      "title": "‘MMA2026’ 아이오아이, 10년 만에 귀환 - www.bntnews.co.kr",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFAybzhaTlhMVGwtQmhNbFJfOXFFUENoS1lEVnpRZzY1cTVENVpYV2FPMHI5SEo1Y2VKR0lfSUZtVjg4ekkzQ04tUll5Y0VMaXk1TE13eE5nc3FELWxlNUNDLUk4eUs?oc=5",
-      "date": "2026-11-11T23:40:30+00:00",
-      "excerpt": "‘MMA2026’ 아이오아이, 10년 만에 귀환 &nbsp;&nbsp; www.bntnews.co.kr",
+      "title": "“닝닝의 상하이 겨울여행”…디스커버리, AIRWELL 다운 스타일 공개 - 더게이트",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE04bTZNZUxWbmMxRXZndENRV2o3RXIwTU1ybzRENTJwUkh3c1p5RW5xZVNqNGNaWDEzLUdBUzZUNFdEVnRoc21nNGxySm9TMnJwM2sySWM1Z1ZrbWZERmpkWEVJRnNSOGpP0gFsQVVfeXFMUGZmZHJLaGJraU1kcGVMa2tXa2lsRHY5dW9OTWlaVjNoenEzNFNWNWcxRmlMU0hPUHRvMGFmbTZuSENqUjV3Y1d6LWxxV0I0dGQxUzI0ak14U1ZPOHozcGJXZDVfNzN0WjVXTG5R?oc=5",
+      "date": "2026-11-11T23:46:24+00:00",
+      "excerpt": "“닝닝의 상하이 겨울여행”…디스커버리, AIRWELL 다운 스타일 공개 &nbsp;&nbsp; 더게이트",
       "source": "GNews 에스파"
     },
     {
@@ -1615,11 +1622,11 @@
       "source": "GNews 韩"
     },
     {
-      "title": "aespa ジゼル・ニングニン、ドキッとする片手ビキニ姿..プールで見せた「ホットガールケミ」 - 스타뉴스",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4xdk5ZSDBUUUlRT0JJdEVuYjB2NmFHZGRUR0hraEtDM0J4bElMTHYzRFkwbEJkLXpZTDIyVmtERmFreTFQN1lwU25vZVp4dGtrdF9OTTB2c0pVSlN0NHBjbGlVX3RyR2JucklqUWRqUkNkUEx6Wi1J?oc=5",
+      "title": "aespa成员Giselle、Ningning，惊艳的一寸比基尼 - 스타뉴스",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFB4eEc4cGVTRktzc05hb0t6WjctRUZ3RWcxb3VndEg2NGE1aTVzV1l5cUc4SXZwS1BNUWc1bGhSQTJzSHpuQ0pKYlYxZTRNMF9ib21RbUVsQmFld0NLVXB0cW5tWGdKa0ROSVp0YTNTamZtLUY5MDdv?oc=5",
       "date": "2026-11-11T15:55:59+00:00",
-      "excerpt": "aespa ジゼル・ニングニン、ドキッとする片手ビキニ姿..プールで見せた「ホットガールケミ」 &nbsp;&nbsp; 스타뉴스",
-      "source": "GNews 日"
+      "excerpt": "aespa成员Giselle、Ningning，惊艳的一寸比基尼 &nbsp;&nbsp; 스타뉴스",
+      "source": "GNews 中"
     },
     {
       "title": "\"이렇게 과감했나\"…지젤·닝닝, 플로리다서 비키니 자태 - 파이낸셜뉴스",
@@ -1685,13 +1692,6 @@
       "source": "GNews 英"
     },
     {
-      "title": "\"카리나 팔이\" 한수아, 절친 과시했다가 역풍?..에스파 카리나 직접 나섰다 [스타이슈] - 스타뉴스",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9wN21GZ2NPMU5FcjNVOERVLUlBSTlGcFY1dXJ6MWhTeHo4OW9iZWYxQkxEUEZWQ0loaVpUZ0VubXRKQmtIN3hBenlZVW5fMkNQbmYyWXJLU3Z6aHUxenNxbTY2NjBSc0hrM2JtVTNrWjZrWUE?oc=5",
-      "date": "2026-11-11T11:39:37+00:00",
-      "excerpt": "\"카리나 팔이\" 한수아, 절친 과시했다가 역풍?..에스파 카리나 직접 나섰다 [스타이슈] &nbsp;&nbsp; 스타뉴스",
-      "source": "GNews 韩"
-    },
-    {
       "title": "\"卡莉娜的手臂\"韩秀雅，炫耀闺蜜关系却遭反噬？..aespa卡莉娜亲自出面 [Star Issue] - 스타뉴스",
       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBrNmh0UzBGUk9MbnpEeFJwUVpFdWk2Ym9FdEVGRDllNzlBdGtZY0UtdU5OX1hwTEUtT3VkUm1aQnFFNno1ZWpDS1M4UWJ4a1ZHT0ZIV1hYdV9FMVU4czlRaHhCNXppczJVemZ3YUt3bDI1NEtzaDJ3?oc=5",
       "date": "2026-11-11T11:39:37+00:00",
@@ -1706,10 +1706,17 @@
       "source": "GNews 日"
     },
     {
-      "title": "aespaジゼル、美スタイル際立つ水着ショット公開「抜群のプロポーション」「美しすぎて見惚れる」と反響 - モデルプレス",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE4yamVJdmoyQ3lzdW5vREJEOFJWVFpYMVR1MXR2VHNBQWF5Z2RVQ1FZR0d6bnpPQWJZRlIwNEZmaW0yRDdoR0EyTDVjaWxMZ9IBSkFVX3lxTE1ILWxsY3dCWjJObUlKNHRWNDNhZlhWdUpYdVNQMDJrc09rS3h0bmZuRHRzWWh3NHRRVWgteXgybTJJTDAxVHVYNVRB?oc=5",
-      "date": "2026-11-11T11:15:13+00:00",
-      "excerpt": "aespaジゼル、美スタイル際立つ水着ショット公開「抜群のプロポーション」「美しすぎて見惚れる」と反響 &nbsp;&nbsp; モデルプレス",
+      "title": "“一緒にシャワーも”…女優ハン・スア、「aespa」KARINAとの親交アピールで論争まで？…賛否両論の“ゴタゴタ” - wowKorea",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFA2UjM0cno0bmwxUjI0QTlkVUhzVnpYSEo3NzVrU1FnbXBvRFVDckFWdnlieGNmZjU1QkZwVEdSVlFRR0ZGeTVmUXJPWU9jOUZPTEhYbTkwME0?oc=5",
+      "date": "2026-11-11T11:29:00+00:00",
+      "excerpt": "“一緒にシャワーも”…女優ハン・スア、「aespa」KARINAとの親交アピールで論争まで？…賛否両論の“ゴタゴタ” &nbsp;&nbsp; wowKorea",
+      "source": "GNews 日"
+    },
+    {
+      "title": "aespaジゼル、美スタイル際立つ水着ショット公開「抜群のプロポーション」「美しすぎて見惚れる」と反響 - ｄメニューニュース",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE16MGVrbnBsV3ZjbVRHNFpFRnN1S2d6S0tOY1V2aXJtZnFSUmNPdDNVbldkYllwZmtxZzZfVUN0WDFmdlFuTEtmeEllS3hCOVljQk5rNEdEY3lYU1hyT2V3emhUQTExa2JCUGlDemV4OUlFWFFWMmdta2RDONIBgAFBVV95cUxQVGItLW95T1VSSGUxY3F2ZnZaT2NNUmMxNkQwQzhzajZPX0pfNTFDaXdQOHNIa25HWGx1Z2c5YVBjcTJVVENMQ2VJVFB0Q2NGMUREU2p5TV9QdHRlbW9vWVA0ZDBveTl6YUVTWS1ySWE4c0FxMjlzNWxiMTdKQUMwZg?oc=5",
+      "date": "2026-11-11T11:15:00+00:00",
+      "excerpt": "aespaジゼル、美スタイル際立つ水着ショット公開「抜群のプロポーション」「美しすぎて見惚れる」と反響 &nbsp;&nbsp; ｄメニューニュース",
       "source": "GNews 日"
     },
     {
@@ -1738,6 +1745,20 @@
       "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE05THFNT2o1bG9qa29TUnZ0bzRqQUhnUXJYejZRQUpKRGJqSWdDdnhJc1FCdzVuWlNZc29R?oc=5",
       "date": "2026-11-11T10:10:37+00:00",
       "excerpt": "まいぶ🐰👿 (@nanaware55) on X &nbsp;&nbsp; Howl.Link",
+      "source": "GNews 日"
+    },
+    {
+      "title": "张允贞，为aespa的宁艺卓和Giselle化完妆后……\"太漂亮了？\" - 스타뉴스",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFA3amtyMlcwN0VBZVZteW8wUEZuWGxmWE1UbG5zc3N0VW5qLTBkNjRmUjk2QzdQLTItcVY0ZTRhbGc3S0tmY3dxNEVhOVdKVUlzTTFkV2RhMS1XR1h4Uk9zOEZUa3R5anl0bzZ6SlAyRkhUUnNwOWZR?oc=5",
+      "date": "2026-11-11T10:03:11+00:00",
+      "excerpt": "张允贞，为aespa的宁艺卓和Giselle化完妆后……\"太漂亮了？\" &nbsp;&nbsp; 스타뉴스",
+      "source": "GNews 中"
+    },
+    {
+      "title": "「TXT」＆「aespa」＆「ENHYPEN」＆「IVE」＆「RIIZE」、「D'ICON」D'FESTA THE ORIGIN EDITIONの第2弾ラインナップ - K-POP、韓国エンタメニュース、取材レポートならコレポ！",
+      "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE80RHFfNDdsUWFnMXVSa2ttRmJDajdjbUFKQzExcTdCdXJjV1lNblpsNGw5SHBtZ01QUmNTYVE0NFdrSGVDY2hVVjNqTQ?oc=5",
+      "date": "2026-11-11T09:32:49+00:00",
+      "excerpt": "「TXT」＆「aespa」＆「ENHYPEN」＆「IVE」＆「RIIZE」、「D'ICON」D'FESTA THE ORIGIN EDITIONの第2弾ラインナップ &nbsp;&nbsp; K-POP、韓国エンタメニュース、取材レポートならコレポ！",
       "source": "GNews 日"
     },
     {
@@ -1801,7 +1822,7 @@
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE01bUNZS1A1YmQ4cUYwQjYtZW9JSEd5QUl5a083YWFnbXVmMEQ4X0tTSFlmbElBZnNkMWU0bnNPWVJ6alVQTEp3eEp5OG8ycnptR1Uydl8taW0yMlpxWnFhZkNUX1FuUQ?oc=5",
       "date": "2026-11-11T08:00:00+00:00",
       "excerpt": "에스파, 어사 키트와 'Santa Baby' 협업…\"특별한 연말 경험 기뻐\" &nbsp;&nbsp; 싱글리스트",
-      "source": "GNews 에스파"
+      "source": "GNews 韩"
     },
     {
       "title": "「D'FESTA THE ORIGIN」写真集『DICON D'FESTA THE ORIGIN』第2弾TXT・aespa・ENHYPEN・IVE・RIIZEの受注予約販売を開始 - Infoseek",
@@ -1965,6 +1986,13 @@
       "source": "GNews 韩"
     },
     {
+      "title": "“一緒にシャワーを浴びる仲”aespa・カリナの親友女優、友情エピソード披露も「知名度を利用するな」と批判相次ぐ - ライブドアニュース",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1HdG9iVWZmSDlBaFZ4aGpNM2ZPNDZHNjRnMFNVeldlUnZVdEJqYUNtazQ0bG4xaVptaFp6MGhIb3BUTG4zQURaZW91T2xFY3Z6eE1adEZ3elJIUl82UFhN?oc=5",
+      "date": "2026-11-11T02:37:00+00:00",
+      "excerpt": "“一緒にシャワーを浴びる仲”aespa・カリナの親友女優、友情エピソード披露も「知名度を利用するな」と批判相次ぐ &nbsp;&nbsp; ライブドアニュース",
+      "source": "GNews 日"
+    },
+    {
       "title": "261111 aespa - DICON x D'FESTA THE ORIGIN (Cover)",
       "url": "https://www.reddit.com/r/Aespa/comments/1xt67as/261111_aespa_dicon_x_dfesta_the_origin_cover/",
       "date": "2026-11-11T02:35:51+00:00",
@@ -2007,10 +2035,10 @@
       "source": "GNews 韩"
     },
     {
-      "title": "【MARK & LONA × KARINA】2026 AUTUMN / WINTER KARINA Ambassador Selection | Style.04 - Mantan Web",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9nal9WVlpLUG5CSlFTcS04WENlcDRqOVFHbEJHRF9aNUUzUXB3WC1IQ3hKTmhlN0cwV0dlSHRJU1AyY1NSQ3E0c0ktQVhCSWRVRmtRWFFrdnFiaFU4dWRXdXdyNktkMlRrY2FpaE9ROXBac2tWX3c?oc=5",
-      "date": "2026-11-11T02:00:00+00:00",
-      "excerpt": "【MARK & LONA × KARINA】2026 AUTUMN / WINTER KARINA Ambassador Selection | Style.04 &nbsp;&nbsp; Mantan Web",
+      "title": "【MARK & LONA × KARINA】2026 AUTUMN / WINTER KARINA Ambassador Selection | Style.04 - PR TIMES",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBFLWFxVTNKYkVjQWJENmVSbmpwMjRlNEY4eWtsMG9EZjhVbHFOVDBoeU02ejRLVkVzRWEwQnM0bUlsUWgzeUdEYVY0c0NDSXQ2N3NsRk4tTXBCNGphN1ZVMkdBaU5tUFVPM0E?oc=5",
+      "date": "2026-11-11T02:00:02+00:00",
+      "excerpt": "【MARK & LONA × KARINA】2026 AUTUMN / WINTER KARINA Ambassador Selection | Style.04 &nbsp;&nbsp; PR TIMES",
       "source": "GNews 日"
     },
     {
@@ -2077,6 +2105,13 @@
       "source": "GNews 韩"
     },
     {
+      "title": "aespa成员WINTER分享素颜吃披萨日常 - 미디어파인",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPaXhCUWROWEhCSGtuRGwtcGp5cG9MbWt0eVdoMWd1bW5Kb1AxR0NWR1ZrcC1qR3dXd0RzM3VmWm5GZk5FcUFxamZRS2NMUC1LMkZ2RkV0aFdjc2V5Nk1pM05zeEljcHlkQUpXV0JKYTRPQ1hCMk5INXdmNng3SVhXOA?oc=5",
+      "date": "2026-11-10T23:22:00+00:00",
+      "excerpt": "aespa成员WINTER分享素颜吃披萨日常 &nbsp;&nbsp; 미디어파인",
+      "source": "GNews 中"
+    },
+    {
       "title": "Actress Han Soo-ah faces backlash after discussing friendship with aespa's KARINA - 미디어파인",
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5ORFNJSlh5Z1VDNlZkUl9jd1lzbXhPRjZVbEtreE9FUnpDMmFoa0N2QjZVVHl5ZFZLWnBtM21nNDNjOVVNS0p5V2hnTDR0OGNlSThQVTFKLWtLWmdCZUxrT1hCX2NlR01QVW1PVXNmMHBnTmRxNzNxc2lHdGg?oc=5",
       "date": "2026-11-10T22:40:00+00:00",
@@ -2140,6 +2175,13 @@
       "source": "GNews 英"
     },
     {
+      "title": "에스파 닝닝, 디스커버리 '상하이의 겨울' 공개 - 싱글리스트",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9nNjJxRUZkVm4wR19FRnR3THpnYUF4Y0xXbHJIT2FYWXFCQVkwQzRDcEo3TmhZRV9pOTN2NDVRNzc3MDUybnlZWGdGLVhRQWNzY28xVFA4TzVFMld1S2dweG9mb3NYdw?oc=5",
+      "date": "2026-11-10T08:00:00+00:00",
+      "excerpt": "에스파 닝닝, 디스커버리 '상하이의 겨울' 공개 &nbsp;&nbsp; 싱글리스트",
+      "source": "GNews 에스파"
+    },
+    {
       "title": "「亡くなった歌手をAIで再現した？」aespaの新曲ティーザーに海外ファンが猛反発　“仮想世界”コンセプトの皮肉 - ｄメニューニュース",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNaDI2QVBmbzBRMEVMOVUtZGhJSGlaODFFSEd1RmpHUlVrQTJnRVJlTHBZVi1KdXpqajRUR1JGNll4YklZU09WMncxYkFYU2tydWhfak1tYnZ4Z3pkUlk0YktqQzZ6M2dSSThHU1JzeG1hN2M2bEJkcXpiMndwa1hpWk5uSUlHVEh3aXFvNXl0dDhjZmJB0gGaAUFVX3lxTE03UDVFdWo2SWFrbmlQaEtPdUEyOHZkWFFDRjk2Z1JqYWJmbnZudlBxeFl6OWpraDNmVGp1bXd3NXl5V1F6aDFXOU5DUVNWaEdiVzRUUl9lbTdLLVdvN0RuWG1HSG4wLUFPS1phaFNwaUFVQk5IYUtmLXZZdDJZOUx4aWJWMzNoR1NUTl9qWEhvVDZIS0Q5Ri1ZVmc?oc=5",
       "date": "2026-11-10T06:56:00+00:00",
@@ -2175,10 +2217,10 @@
       "source": "GNews 韩"
     },
     {
-      "title": "aespaのNINGNING、大胆露出のドレス姿を公開…完璧なスタイルで話題に - Kstyle",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFAxUjk5NEQwSFc0M0haSEw4ckJ3QVBxVjl4MWI2R2d5eG5JbGg0bGVNbU1KT1hvME1iVU5lMGM1R0sxTUpwYkNoODlsd2FKcG5jcWRtMldHWlhRb2Fh?oc=5",
-      "date": "2026-11-10T01:46:00+00:00",
-      "excerpt": "aespaのNINGNING、大胆露出のドレス姿を公開…完璧なスタイルで話題に &nbsp;&nbsp; Kstyle",
+      "title": "aespaのNINGNING、大胆露出のドレス姿を公開…完璧なスタイルで話題に（Kstyle） - Yahoo!ニュース",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBPRTZwenhkelYzVEdpUlRLSEl4QlV5QUlkSHdvUi13QV9kRGEyMC1sVXFFck5OYkZIaWlrZy1BeHo3XzIzc0JrLXhQd0FpN2JvXzdRU3pRQUx1azdDR2xuQzRIN1ctTXN6ODdVdFNIWlhpSC1fLW9WR1pWY05RVDQ?oc=5",
+      "date": "2026-11-10T01:51:18+00:00",
+      "excerpt": "aespaのNINGNING、大胆露出のドレス姿を公開…完璧なスタイルで話題に（Kstyle） &nbsp;&nbsp; Yahoo!ニュース",
       "source": "GNews 日"
     },
     {
@@ -2259,6 +2301,13 @@
       "source": "GNews 韩"
     },
     {
+      "title": "「aespa」NINGNING、デビュー以来最大の露出…ブラトップ姿のグラマー - ｄメニューニュース",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPR1RScDl3cGtsVnVYSjd1SkpVNXBOeEdWU09nbE9NNWpLb09sS1R3aHk3eGN2RUREaGdOdHpROHVJMDNrbVBTbWd2bUpPSTh2amRCckNleEI0a0RUdmNRUmhJdjRkSU50VlZaYVhRS3lHbzNIY000YXF2NFNEZVFKWVFsQ1JEQ0l4dm9xTGdmWdIBlAFBVV95cUxNd0gtaXpISTlISndWd19FUTVrYU9PZi1sMmN3OGEyV2lQU25MS1BJSzc3blFvdlp1ZkNGTkRvcU5xY1l6ZzNNbDBUOGlFcEt3MGJ1SmppNWRnVVRLSTgxM2pQUnR5SEJWa3BnU29welNpRGJkdVpxU2tDeHhmWjE1MmxVMU5KLXJvQkNBaVQ5OE1zN1dL?oc=5",
+      "date": "2026-11-09T05:21:00+00:00",
+      "excerpt": "「aespa」NINGNING、デビュー以来最大の露出…ブラトップ姿のグラマー &nbsp;&nbsp; ｄメニューニュース",
+      "source": "GNews 日"
+    },
+    {
       "title": "LACMAアート＋フィルム・ガラ2026が開催。レッドカーペットを飾ったベストルック - Vogue Japan",
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMU5yRk1ua2kxazl1bmVrUDM0NDZMblJvTWN1N3g2TUYxM1YydFBJc3hYUFpmQVBJWjd4anpqRFZQVFNzZHZBSExXUGJoNVlmSjhhR0JjMGpQa0lNSU1GX2pZS0JpZFhmdm81cTJOWXBjc3Y3QlFBRGNjeERfZlpSTTQ1a2I?oc=5",
       "date": "2026-11-09T04:00:15+00:00",
@@ -2280,13 +2329,6 @@
       "source": "GNews 韩"
     },
     {
-      "title": "「これは見せすぎ…」aespa・ニンニン、大胆なブラトップ姿で魅了 グラマラスな肉体に視線集中 - RBB TODAY",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBUVGVYVXg1UE9IbkdVUGRsWE13UTZSZUFMbHRqbEZRYmI5N2E5N092UFJPWGlJXzJYenZieTVTcHhKY3dCVDNadVRQaFBTZDctWW8xSkJ0UmdfWHpjVVFSaVZ0Nmh5UQ?oc=5",
-      "date": "2026-11-09T03:17:15+00:00",
-      "excerpt": "「これは見せすぎ…」aespa・ニンニン、大胆なブラトップ姿で魅了 グラマラスな肉体に視線集中 &nbsp;&nbsp; RBB TODAY",
-      "source": "GNews 日"
-    },
-    {
       "title": "에스파 닝닝, 과감한 노출에 더 과감한 포즈…파격 패션 - 뉴스엔",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5XcHpPaGlHckZoRWQ4Q2tNb05WUXhYRE9ua1FLUXl5dkRmcTA3YU45WGJEVG91TEc4LW1QZzU0UnFHY3FScnhMWkhJVWtXWGg4T2VEamY5YjNSektJU0ZtRXhZU08zVmJF?oc=5",
       "date": "2026-11-09T02:44:37+00:00",
@@ -2294,25 +2336,11 @@
       "source": "GNews 韩"
     },
     {
-      "title": "宁艺卓现身2026 LACMA Art+Film Gala盛典 - 미디어파인",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9mVDJ5eUV4RlRkWDcxdVE0enVBTUI5ZDlJOUhVY1FfajdUYk0xOUZTRV9YQ1NTdXhDZTRaQXE0WTlxZlhuel9FazFsNnRpTEYxYUR0LUc0d0NjQVVKVGRvY2dFTThiSHlvaXMzV0tRd3ExdHdnY3NqM2x3bzFKZw?oc=5",
-      "date": "2026-11-09T02:27:59+00:00",
-      "excerpt": "宁艺卓现身2026 LACMA Art+Film Gala盛典 &nbsp;&nbsp; 미디어파인",
-      "source": "GNews 中"
-    },
-    {
       "title": "에스파 닝닝, 점점 과감해지네…파격 노출 패션에 숨길 수 없는 볼륨감 - 매일경제",
       "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE01THB0SVBtLURucWtuUENac0dxRFU2S0hjWEF6ZmVCYmZYeXNSUVpvQVF3UExRVm5UdGF5R2FIYUhVQkRqUXpSWllwVWtGUkYyTUNBQ21GZw?oc=5",
       "date": "2026-11-09T01:04:44+00:00",
       "excerpt": "에스파 닝닝, 점점 과감해지네…파격 노출 패션에 숨길 수 없는 볼륨감 &nbsp;&nbsp; 매일경제",
       "source": "GNews 韩"
-    },
-    {
-      "title": "에스파 닝닝, 점점 과감해지네…파격 노출 패션에 숨길 수 없는 볼륨감 - m.mksports.co.kr",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE8tbHB0a2VpdjJhTkxaMkFrQWZSVHkzenpDNEhjanFFME13SWtPN3o2dW1LWTNueklXaDktTU9URWFXVXJUcHE3VFJRUmg5REw2aVBDN3pBalNnTkxMaUNicjZsekw?oc=5",
-      "date": "2026-11-09T01:04:44+00:00",
-      "excerpt": "에스파 닝닝, 점점 과감해지네…파격 노출 패션에 숨길 수 없는 볼륨감 &nbsp;&nbsp; m.mksports.co.kr",
-      "source": "GNews 에스파·成员"
     },
     {
       "title": "에스파 닝닝, 노을 배경 폴라로이드…섬세한 눈빛으로 남긴 순간 - 톱스타뉴스",
@@ -2336,11 +2364,11 @@
       "source": "GNews 에스파·成员"
     },
     {
-      "title": "aespa カリナ「行ってきます' [★フォト] - 스타뉴스",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE11WVh2dEptS2k0dVVrRHctNzc1ZjRYcjBxNUIzTE1PVFQ1WGdDNGxrVms3UHhwdXM0amxxYktIb1JyTmEya0M2ZWZibi1qekw1UEtfX3FFM3BVNVNab1daUkNRdWZURlktNjNZTk1lOEZyZnRDcFpVOQ?oc=5",
+      "title": "aespa's Karina: \"I'll be back soon\" [★Photo] - 스타뉴스",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE0yanl6Uk1laWtvMktlLUZPZXN4RE9tS2oxdEliMFZfQm81YlhfOVVTUjhXeHk1dkRXOXVmMDRYMWlnUUs0dndrVHo4YTFmbmxXLWZDRkhGVllLVTh2b1g0MjdsdWloeDNKQ0tRQmt3VW9ON2xFNGh2Sw?oc=5",
       "date": "2026-11-08T22:42:58+00:00",
-      "excerpt": "aespa カリナ「行ってきます' [★フォト] &nbsp;&nbsp; 스타뉴스",
-      "source": "GNews 日"
+      "excerpt": "aespa's Karina: \"I'll be back soon\" [★Photo] &nbsp;&nbsp; 스타뉴스",
+      "source": "GNews 英"
     },
     {
       "title": "aespa Karina《闪闪发光》[★照片] - 스타뉴스",
@@ -2385,13 +2413,6 @@
       "source": "GNews 韩"
     },
     {
-      "title": "aespaのメンバーであるニンニンは、その容姿について厳しい批判に直面している。 - Vietnam.vn",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPMlpVQXdvSGlyenlZbFFPVzZXeUNjT0xmVGtRNEZNalMyUlBYWURHWXRkNUhjamxGMUx4OC1HcmRkX2o5MVhibzdQYmtUYmhIUU1NZWNGaV84VlpSQzNSQnh0VG1CTjFfWFhxQkNVdElGcS1zSEwzeDRrM1M4aEN3OEVFVW9nT1dSenR6QQ?oc=5",
-      "date": "2026-11-08T17:19:14+00:00",
-      "excerpt": "aespaのメンバーであるニンニンは、その容姿について厳しい批判に直面している。 &nbsp;&nbsp; Vietnam.vn",
-      "source": "GNews 日"
-    },
-    {
       "title": "SM 家谁最赚钱？评论区吵翻了：巡演规模还是台历销量？|NCT DREAM|aespa|SM_新浪新闻 - 新浪网",
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9EQUlWVllVLWl3QVEzMGRiWFZtQ04zQ042T3JjdWgySmtnOWdxTWJwcXlVN0xSVWlMaWVwekVQUXdEZjlRSVd0SlE1ZUlxWkJHc2lsZTQ3bjRISW85eGd0OThmbw?oc=5",
       "date": "2026-11-08T14:51:00+00:00",
@@ -2413,20 +2434,6 @@
       "source": "GNews 英"
     },
     {
-      "title": "BTS V’s Recent Actions Directly Linked To Dating Rumors With BLACKPINK’s Jennie - Koreaboo",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOWTk0ZTYzM2FzZTlZQWFqZ3VKZWlZQVNjN0UxVlE1SnliVEVjNzJrNzlWRmhFLXhQVThJbW5HbkNlbElubXR4ajBqWGVEYmM4cGhBemxFUjNYTXE5bTBWTU44RnhEam4tUFdsc0UyTVh5ajEtNEFTNVdjbHh2bFpJdFRPMEZHQy1XWTN1bDFIS1J4Z2VnbkZQZg?oc=5",
-      "date": "2026-11-08T13:45:53+00:00",
-      "excerpt": "BTS V’s Recent Actions Directly Linked To Dating Rumors With BLACKPINK’s Jennie &nbsp;&nbsp; Koreaboo",
-      "source": "GNews 成员"
-    },
-    {
-      "title": "aespa Ningning’s Changed Visuals Trigger Scathing Plastic Surgery Accusations - Koreaboo",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNc1dVX3RMZnVRR1FDbENYQmNZcjQ0UDU0ckt0LVhuOXkxaXgxRkhpY3lwLXJsUzJHbndBa1oxdkdtRHJZV0xQS1l5RkpOX0JwbnUzU0J2b0xRLTk4dE02dG8tVGFvNnhkVjFKWUJNUkU0MDJ6Q3lveW5iQ3JadDdpUC1sQWdFNmxBUDJfdlhQVUZhbEwtblY1SE1yZkNNakZnU19feno0SXJEUQ?oc=5",
-      "date": "2026-11-08T13:36:15+00:00",
-      "excerpt": "aespa Ningning’s Changed Visuals Trigger Scathing Plastic Surgery Accusations &nbsp;&nbsp; Koreaboo",
-      "source": "GNews 成员"
-    },
-    {
       "title": "저메추 🙏 - Weverse",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YNWtZd0daWG9iay1jVUVsSWJpQmdWck9yTlVhT2dQYnBjaHFnNFJCWVBCYWFTSjBsdWJyd1RhWG1UYkFWM2Q0c0xRSWtXUjlqZFk5a1hXVzlzU3c?oc=5",
       "date": "2026-11-08T12:24:57+00:00",
@@ -2439,13 +2446,6 @@
       "date": "2026-11-08T09:56:06+00:00",
       "excerpt": "에스파 카리나 미모가 열일...인형 비주얼 &nbsp;&nbsp; 매일경제",
       "source": "GNews 韩"
-    },
-    {
-      "title": "aespaニンニン、ビバリーヒルズで美脚際立つガウン姿公開「まさしく美の女神」「スタイル異次元」と反響 - モデルプレス",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBBd29wd2tNaUVxTy1GdHNSUVQyMC12M0daZGtMTUZjQ0lDWG9PbjNPQnRkU085d09BdkRfUWlhU0ZHTmZKU2lvM0Ztbllxd9IBSkFVX3lxTE92Yk12bUw2VHhHVDh6b3ZPSmpUQ2ItR293dWNGNWgxMjhxSmVRajEzTFhBcXN2U0xMQTlkTXZCLTViZzQwdUlfcW53?oc=5",
-      "date": "2026-11-08T09:22:57+00:00",
-      "excerpt": "aespaニンニン、ビバリーヒルズで美脚際立つガウン姿公開「まさしく美の女神」「スタイル異次元」と反響 &nbsp;&nbsp; モデルプレス",
-      "source": "GNews 日"
     },
     {
       "title": "'2026 KGMA' 아이브·에스파→투어스·하츠투하츠, '뮤직 데이' 사전 수상 - iMBC 연예",
@@ -2483,13 +2483,6 @@
       "source": "GNews 韩"
     },
     {
-      "title": "리센느 11월 걸그룹 브랜드평판 1위 등극 아이브 블랙핑크 아일릿 에스파 순 - 지피코리아",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB0VGJVTDE5WjZsWXdjeGlfbElvWFMyQU56aVQxYnNPbkx5ODhoM25WdVRUN252SWhadnlfOVRER1dpR1FfWVF2VEJXc21nVnd6QTJLYTg1ZWxZcFU3MDhPNW1hX2ttUld4RXfSAW5BVV95cUxOaWZmRVp5ek1NX2ZWU3BxaDhjSXhIeFQ4RnpJNUEyX1lScHZQVzRrRUxwdVZvZkdiM2kzdTg2cFl4RXhZOUR4RWJndS1rNHc4SzRtQXB2SWFoLWFybUJuWTh1eEpqemtybVRfX2NYQQ?oc=5",
-      "date": "2026-11-08T04:02:12+00:00",
-      "excerpt": "리센느 11월 걸그룹 브랜드평판 1위 등극 아이브 블랙핑크 아일릿 에스파 순 &nbsp;&nbsp; 지피코리아",
-      "source": "GNews 에스파"
-    },
-    {
       "title": "에스파 닝닝, 베벌리힐스 사진 공개…28~29일 고려대서 팬미팅 - 스페셜타임스",
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBuamlfQ1kyS1JZNXBkMGdHakNJTFA0RWZ5al9PMWFCdFJTNEZ1eERYUzYzcnAyZ2JObHczVGx5eERzUWRTUV9XWDVmbDg2bzcxb3NuS29rTlI3UTEtVU4teXJabkZQSmtqUUZnQ2FwVnVyQ2s?oc=5",
       "date": "2026-11-08T02:10:26+00:00",
@@ -2518,24 +2511,10 @@
       "source": "GNews 韩"
     },
     {
-      "title": "aespaのニンニン、大胆なビキニ姿…余分な肉のないボディ - 매일경제",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1jT1ZlYmZxeG5HX19TNDBtM2VLYXVYS1ZIeXFURXlIVnctWFlxUGhGc1RzeDNsSEszMU5oZTdpWXBRRHEtdWlEcnpwSGV6QUNRMzdQem9R?oc=5",
-      "date": "2026-11-08T01:08:27+00:00",
-      "excerpt": "aespaのニンニン、大胆なビキニ姿…余分な肉のないボディ &nbsp;&nbsp; 매일경제",
-      "source": "GNews 日"
-    },
-    {
       "title": "에스파 닝닝, 과감 블랙 비키니로 반전 글래머 몸매 과시 - 파이낸셜뉴스",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBqRzFFSG9Pb3VEMUw0TkpBNHpFZXZkY0x3TTQtSFJLbUV1bUVfS1Fxc0lrbmgxVWtNU3Q0LXBvRkZUMmxFTWY5R0o1UG8wTkpWcllYdEhhc18tdw?oc=5",
       "date": "2026-11-08T00:52:10+00:00",
       "excerpt": "에스파 닝닝, 과감 블랙 비키니로 반전 글래머 몸매 과시 &nbsp;&nbsp; 파이낸셜뉴스",
-      "source": "GNews 에스파·成员"
-    },
-    {
-      "title": "에스파 닝닝, 과감 블랙 비키니로 반전 글래머 몸매 과시…섹시미 발산 [N샷] - 뉴스1",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE05aENqck1ZanpFNG1FU1FERVBKOTl2UlRkNDNSMVVMZmgwSzFYdGk0cFlsa3l1dWlNN09LUkhkSUFodW9tbmt6WnMxVzN4QXk4ejdIVGswWXVIQldrekY5UjBOdWE?oc=5",
-      "date": "2026-11-08T00:51:10+00:00",
-      "excerpt": "에스파 닝닝, 과감 블랙 비키니로 반전 글래머 몸매 과시…섹시미 발산 [N샷] &nbsp;&nbsp; 뉴스1",
       "source": "GNews 에스파"
     },
     {
@@ -2581,13 +2560,6 @@
       "source": "GNews 에스파"
     },
     {
-      "title": "[2026 KGMA] 에스파, ‘베스트 뮤직’ 트로피 품에 안았다 - 일간스포츠",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE96T0RBd1F1Vm5NU0dKay13aHhqZ0thUWgzQWxXbUVlSkZpTVl0NFZqYlRrVkxsaXFJU0R6MEZUSmxEbkNwR3UyeDVnM2JfN2RyVFRpTy1FMV9WV0U?oc=5",
-      "date": "2026-11-07T23:00:00+00:00",
-      "excerpt": "[2026 KGMA] 에스파, ‘베스트 뮤직’ 트로피 품에 안았다 &nbsp;&nbsp; 일간스포츠",
-      "source": "GNews 에스파"
-    },
-    {
       "title": "에스파 닝닝, 매운맛 '비키니' 노출…눈 둘 곳을 모르겠네 - 네이트",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBUejZYX0N3d1RHWnFGSTBFVmN2Nk4tb0RHQmNYbUZmZERSTmFqX2t2cHRCcDVialdha0FjV3VZWVlNYkJzcXNyTXQ4MEtiMXI0M2U4?oc=5",
       "date": "2026-11-07T22:51:00+00:00",
@@ -2623,6 +2595,13 @@
       "source": "GNews 韩"
     },
     {
+      "title": "【多图】aespa Karina 人气太惊人！现身 MLB 活动吸引大批民众围观，蓝白冬日穿搭配猫耳帽俏皮又可爱 - KSD 韓星網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB2V3BhSjdqQnMtY1BGUXE4aHRlZTRXaTRuTmVUOWN5QkQtMk42T1hRSXYxcDNsZTJsM3BwTG1oSEMxRWpYeGRJOTExaEVSVW1vX0lpWlRwbnfSAVdBVV95cUxNdXpjeHF2dkxZSzBlQWhnQjhQOFVnV1Q1MXdLcnBmWThxTlBXS3lsc3FHZTM5QVBNcXQtTXdjcG9IRjVWTXN1UEZCR29XLW9NRkNDZzhtSjA?oc=5",
+      "date": "2026-11-07T05:50:00+00:00",
+      "excerpt": "【多图】aespa Karina 人气太惊人！现身 MLB 活动吸引大批民众围观，蓝白冬日穿搭配猫耳帽俏皮又可爱 &nbsp;&nbsp; KSD 韓星網",
+      "source": "GNews 中"
+    },
+    {
       "title": "kpop部分女团反向呈现 aespa、(G)I-DLE、LE SSERAFIM、IVE、ILLIT - 微博",
       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1aTlh4WFZ2TWx4MDZsYzZITUFubF9uNXhhNG1reFhOQW5FdFpBclgyYWlIZ3FFUV9YNFd0UUVDYkktbEJxbU9tVnRhb2t4aWJuR0FETVA4ZUpROWowZlFvcHRZWDZuWFFYVHZv?oc=5",
       "date": "2026-11-07T02:11:21+00:00",
@@ -2644,39 +2623,11 @@
       "source": "GNews 韩"
     },
     {
-      "title": "[영상] 에스파 카리나 '겨울 여신' - 뉴데일리",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBLSlhZeGN3SnhaQ1ZwOHBLNDhzYlR0S3c1VEhDWE13aWpFTG96Yld4czhzMWdRQnZUcmQwYXc1Q3Q3WHhiOUEtdS1QNjA4d3JaMUVGVnVaNGZ4dkdXYkF5NkNrNGVmTTVqYU5nMVhyOElnVWpCaWZ6Sk5UTdIBgAFBVV95cUxNOFFpODNkSmNPVFJFYlZCWnYzWmpqSGxiNXFYRi1FcHRUX1RwNm55QnRpdWVrSDBnSHJ6VExnVEJnc3QzelBubURUWGU2WFBWWDBjdGdieEY4c0FsMUt5YXVJRmJZeEcyMkwtVk5WVFpzRFFSNkRQUzczcFBZc1o4Zw?oc=5",
-      "date": "2026-11-06T09:10:00+00:00",
-      "excerpt": "[영상] 에스파 카리나 '겨울 여신' &nbsp;&nbsp; 뉴데일리",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "[영상] 에스파 카리나 '추위 녹이는 하트' - 뉴데일리",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5RQkUyUmpjTVBaaG12V1BNTERjVTBROG93bWdSNFdlLWl4R2ZTRnY0b05aMXZ2d3ctMWY0MHZfdGI5dWlRWUpZSlE3MmRvQy1lcUtEN05Fc3VjQXBJTXN2M2Z4SW56RzVuM1pQTFJBQUhqUXJ5MmFwZ1RURdIBgAFBVV95cUxNOF81NGVFbGxTQnh1UXotamhvWk1kYlFqSmREdG1nMDdWTmpaLXNYV3lpMXFmcmxab2RlQ1QyS0o3Ml9KZUNEXzBaNFpCdk9tQ2xNR3RZOGNoWkZEeVNrT005S21TOGdETXN0cnNRUDQ0a2FzYWo4Rm42Mkl5Vk9MVg?oc=5",
-      "date": "2026-11-06T09:09:00+00:00",
-      "excerpt": "[영상] 에스파 카리나 '추위 녹이는 하트' &nbsp;&nbsp; 뉴데일리",
-      "source": "GNews 에스파"
-    },
-    {
       "title": "[HD포토] 에스파 카리나, ‘숨숨냥’ (MLB 포토콜) - 톱스타뉴스",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBHTUV6MXhxVGQtUVNmUkpua3NvNl9YdW5HeWRmVV9sNFhOYWFtbXViUVhtZW5pc3dJdi1Id0stV192dHZBYy1tRUhCZTVLVmdkc2gxRGNGbjI2WW44YVdOaDBWRVM2RWhRdTBYRndQaXdyQQ?oc=5",
       "date": "2026-11-06T08:35:00+00:00",
       "excerpt": "[HD포토] 에스파 카리나, ‘숨숨냥’ (MLB 포토콜) &nbsp;&nbsp; 톱스타뉴스",
       "source": "GNews 韩"
-    },
-    {
-      "title": "에스파 카리나, 햇살 볼 하트 - 뉴스1",
-      "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE01cWFMT1A3NXVSV3F3SjlaYllqZTdBa1Nzc204VHVNdWJHcjE2M2Jxejg1V0tNdUxqc0F4aFhvcmVNRkZmX3MzZm5XMA?oc=5",
-      "date": "2026-11-06T08:32:25+00:00",
-      "excerpt": "에스파 카리나, 햇살 볼 하트 &nbsp;&nbsp; 뉴스1",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "에스파 카리나 '하트 발사' - 뉴스핌",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE54aXNrNlBjVFdjcGFZM0RLcW5wR2FWLThQM3dWM3RIenlXbFpFS25tVDhfZUFrX3Fkbk9NSmp0NmZwRjJQRjhJQUpVOWZiY0lhMVBvd1ljZXh5akFo?oc=5",
-      "date": "2026-11-06T08:21:00+00:00",
-      "excerpt": "에스파 카리나 '하트 발사' &nbsp;&nbsp; 뉴스핌",
-      "source": "GNews 에스파"
     },
     {
       "title": "에스파 카리나 '하트 뿅' - 뉴스핌",
@@ -2686,81 +2637,11 @@
       "source": "GNews 韩"
     },
     {
-      "title": "에스파 카리나 '볼콕' - 뉴스핌",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB4SnFGZ29qbmRaemdkWHVsMHp3NGJMVEFxaVN5NjNJYW5YNEQzMERzQ1R3Q2xVSHRLYWk5OUpKdkE3OXplUFVKbm93dWctc09aU2NVb1R3ck83bUlW?oc=5",
-      "date": "2026-11-06T08:20:00+00:00",
-      "excerpt": "에스파 카리나 '볼콕' &nbsp;&nbsp; 뉴스핌",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "MAMA Awards 2026 Nominations: BTS, SEVENTEEN & aespa Face a November Showdown - Dojeon Media",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOMkh0WG1vbVZHRV9RU2VycG9BNkdCOFVTSU5UeDhscGFZYnpId3pSVmJTNVRueVRIbEhnbWJyNHAyek96endGNXhSb1pDTkMweEpPZGhHNmtZVGgyQXpkaWl2dnNkVU5aNlU3eGNlaWpoSGtNWDBlMi1mQUpVcVFmVXFEUlZBczFmRFFEZ1g3UkFKRVFnbW5TdW92UnR3UHk1WTRZRlV6YXRmQQ?oc=5",
-      "date": "2026-11-06T05:42:59+00:00",
-      "excerpt": "MAMA Awards 2026 Nominations: BTS, SEVENTEEN & aespa Face a November Showdown &nbsp;&nbsp; Dojeon Media",
-      "source": "GNews 英"
-    },
-    {
-      "title": "IVE’s Wonyoung Clarifies Controversy Over Behavior Toward Male Executive - Koreaboo",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNS0ZEYXlDSkpNaWpDX2R5SnRXaGExcXU3RnN1NkFjcExxVW9IOFk5LWNTYWR5ejMwcEN3UDE4ekVEUFNhYXNJaG9jclppbjZHVWRYdjhkZERiQmNWWGNyd1pHS09ZUFNjOTRINTktbFd6U25UWkZUN3RHNlBLQ2M2RVhFd2RIQ2tLX192UFE5OUV2RjBhX1JfM1dn?oc=5",
-      "date": "2026-11-04T08:00:00+00:00",
-      "excerpt": "IVE’s Wonyoung Clarifies Controversy Over Behavior Toward Male Executive &nbsp;&nbsp; Koreaboo",
-      "source": "GNews 英"
-    },
-    {
       "title": "NCT ジェノ＆ジェミンの日本デビューからaespaのツアーまで！SM、多彩なカムバック・ツアー計画を発表（Kstyle） - Yahoo!ニュース",
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE56a2hLMnotTHRORndkWkM0UF93a1d5X3FEdkRuUUVPbGRIT3MxSjUzU0tmdGphMUc4NFlNcHk1Q2tOS1FkOTJ2aXVmb3JFNVFOc09hS093RWNKczNYMHZwdDVDUEdaV0hIMTRraS1aZHVJM2oxSnRqNDJYdzYtdms?oc=5",
       "date": "2026-11-04T08:00:00+00:00",
       "excerpt": "NCT ジェノ＆ジェミンの日本デビューからaespaのツアーまで！SM、多彩なカムバック・ツアー計画を発表（Kstyle） &nbsp;&nbsp; Yahoo!ニュース",
       "source": "GNews 日"
-    },
-    {
-      "title": "aespaのKARINA、クールな雰囲気のグラビア公開…抜群の着こなし（Kstyle） - Yahoo!ニュース",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9CZ21VVXV6amhCZVRFZWhHTzZjbVNpM1JpTHlSVnFPRVRqVVBmTUNqV2E2eVM1MWF6bUNJNXBpX2dqQ2NzUm50cFlnSGFaUlp6SXhGbW9UMmV3N3M0ZGJ4a0Y5dHJwZFdtQkx6czdmZERUQ1lHSzE1Zy1aX0NXY2s?oc=5",
-      "date": "2026-11-04T08:00:00+00:00",
-      "excerpt": "aespaのKARINA、クールな雰囲気のグラビア公開…抜群の着こなし（Kstyle） &nbsp;&nbsp; Yahoo!ニュース",
-      "source": "GNews 日"
-    },
-    {
-      "title": "aespaニンニン、ダウンジャケットから美ウエストチラリ「美しすぎる」「透明感半端ない」の声（モデルプレス） - Yahoo!ニュース",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBaYVJmMkxGS3ZVZU1jdnBJMDJWa2ZHODVHdko5MUdxSzNPX19aeHpVMUZrT1J6NFJjR2ZaTm1IWDZPcVlWVlQ4UjZJNDN5UkxEWUJ3X1FwZklLbkZqZDhCOXhqSTZSZWk0alYtZGgtSXZzNHB0WTZ1elZLLWtmRlk?oc=5",
-      "date": "2026-11-04T08:00:00+00:00",
-      "excerpt": "aespaニンニン、ダウンジャケットから美ウエストチラリ「美しすぎる」「透明感半端ない」の声（モデルプレス） &nbsp;&nbsp; Yahoo!ニュース",
-      "source": "GNews 日"
-    },
-    {
-      "title": "aespa・GISELLEさん「幼い頃の自分が今の私を見たら『何やってんの！？』ってびっくりすると思います（笑）」｜CLASSY. - Yahoo!ニュース",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1HRFJoNXhpRHBfRTZTbW9Xdlhqal9hVERpX2hfb3UzMU1KVVJRQzZyTmN4UENMUTlPVUJPemZ2ZkV0OGFSbzdRRjZuMXdSMzQyR2tSVVVWMUc1dkk2N0lRMHJMVjBoU3NwQjlSb3JtMUNGMVNHSmtqYlIxVlVZTVE?oc=5",
-      "date": "2026-11-03T08:00:00+00:00",
-      "excerpt": "aespa・GISELLEさん「幼い頃の自分が今の私を見たら『何やってんの！？』ってびっくりすると思います（笑）」｜CLASSY. &nbsp;&nbsp; Yahoo!ニュース",
-      "source": "GNews 日"
-    },
-    {
-      "title": "going to meet... #aespa #æspa #에스파 #GISELLE #지젤",
-      "url": "https://www.youtube.com/shorts/e7RWRJ5_hes",
-      "date": "2026-11-01T05:02:02+00:00",
-      "excerpt": "",
-      "source": "YouTube · aespa"
-    },
-    {
-      "title": "내가 신기한 거 보여줄게 얍 #aespa #æspa #에스파 #WINTER #윈터",
-      "url": "https://www.youtube.com/shorts/rBbeglcBK7Q",
-      "date": "2026-10-31T14:02:38+00:00",
-      "excerpt": "",
-      "source": "YouTube · aespa"
-    },
-    {
-      "title": "In this love riot #aespa #æspa #에스파 #GISELLE #지젤 #LoveRiot",
-      "url": "https://www.youtube.com/shorts/Pmz4pz4H7x4",
-      "date": "2026-10-31T05:01:34+00:00",
-      "excerpt": "",
-      "source": "YouTube · aespa"
-    },
-    {
-      "title": "apparently i'm 27 in korea #aespa #æspa #에스파 #GISELLE #지젤",
-      "url": "https://www.youtube.com/shorts/uYPhLC3mXnM",
-      "date": "2026-10-30T12:56:10+00:00",
-      "excerpt": "",
-      "source": "YouTube · aespa"
     },
     {
       "title": "［韓流］aespa デビュー6周年記念ファンミ開催へ - 聯合ニュース",
@@ -2777,17 +2658,17 @@
       "source": "GNews 日"
     },
     {
+      "title": "‘데뷔 6주년’ 에스파, 11월 팬미팅 개최 - JTBC",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBnb2NvZlNGVVJRN2xxWjJhb0NZeDZnT2dYWkVvcjNsSi01S0xfZ0daMHFrRlA4MUFHQjJCbHB4b2lRWENndU5nWVctTnZIaGZOZ0RCSg?oc=5",
+      "date": "2026-10-23T07:00:00+00:00",
+      "excerpt": "‘데뷔 6주년’ 에스파, 11월 팬미팅 개최 &nbsp;&nbsp; JTBC",
+      "source": "GNews 에스파"
+    },
+    {
       "title": "에스파 닝닝, 생일 무대서 빛난 화이트 드레스…24번째 생일 소감 - 톱스타뉴스",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1GZlIwelRUQTcxWExhMnEwVzBMczYwa0ZRZmk5NU14WmpObkF4ZGhZV1dzRVpCMGhublM2QjlmcnRreDRNV2k0TkU4aGs0OHBsalU0bWc0cHpiZGUwbXJiZXY0b196eDEtWUNPNnBNSWpmdw?oc=5",
       "date": "2026-10-23T07:00:00+00:00",
       "excerpt": "에스파 닝닝, 생일 무대서 빛난 화이트 드레스…24번째 생일 소감 &nbsp;&nbsp; 톱스타뉴스",
-      "source": "GNews 에스파"
-    },
-    {
-      "title": "‘데뷔 6주년’ 에스파, 11월 팬미팅 개최 - JTBC",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBnb2NvZlNGVVJRN2xxWjJhb0NZeDZnT2dYWkVvcjNsSi01S0xfZ0daMHFrRlA4MUFHQjJCbHB4b2lRWENndU5nWVctTnZIaGZOZ0RCSg?oc=5",
-      "date": "2026-10-22T15:36:17+00:00",
-      "excerpt": "‘데뷔 6주년’ 에스파, 11월 팬미팅 개최 &nbsp;&nbsp; JTBC",
       "source": "GNews 에스파"
     },
     {
@@ -2928,6 +2809,13 @@
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxObEZnYmJ2S3BsdWVuQ1BQNjdVZDM5QnAzcGJuMVFUbE5YOU9PY0Z5UVMxVUJWMllNamdmYzQyV294RGh4ajUwMG9OaTRzZUFXT3FXWlVoVVRjTDJPUEJVaF9jel9TVlhWSEFoNDI0YmUtMTRqYjZVN25YUDlwWlRtZ0FuYi1BUnJaeDlWSFlB?oc=5",
       "date": "2026-09-22T07:00:00+00:00",
       "excerpt": "aespa's Winter Reveals Driver's License, 'Real Adult' &nbsp;&nbsp; 조선일보",
+      "source": "GNews 成员"
+    },
+    {
+      "title": "Former 4th Gen Female Idol Sparks Shock By Revealing Girlfriend On Social Media - Koreaboo",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPRDNnb2tSczdjeFBia1Fremk0YXN6aWFtSlBlaXR0U0Q3YmVweUtocGN5TDhQd2VpZDRNbFJIMk93NHBkLWRYb3BMTUZEMHNkY1FxaTlhZkZmeEIzejRrMk9IdnhkUVpKQVFDdGtBRThqWkVVaHpySWJ1b1duRm5vSGFYdzFOVDRZRmhDUE5BQnF3Y3o4M0tzU0tHZw?oc=5",
+      "date": "2026-09-22T07:00:00+00:00",
+      "excerpt": "Former 4th Gen Female Idol Sparks Shock By Revealing Girlfriend On Social Media &nbsp;&nbsp; Koreaboo",
       "source": "GNews 成员"
     },
     {
@@ -3113,13 +3001,6 @@
       "source": "GNews 日"
     },
     {
-      "title": "에스파 카리나·윈터, 먹방으로 전한 소소한 일상…팬심 흔든 친근한 매력 - 진일보 | 전남일보",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5WeHBKaERhd2hpUWpUQUl4RjVaTEJSYTVIaGZObEhTQVlfQlFzemFkQWpwWW9LNXo3ZGJNYTFmenNhbl9DTmE3dmZ0OWJzbTRKN2ZjZ1M2amdnTVlBVEFJdEMzMmlkZFFJOHFwUXBwcw?oc=5",
-      "date": "2026-08-05T07:00:00+00:00",
-      "excerpt": "에스파 카리나·윈터, 먹방으로 전한 소소한 일상…팬심 흔든 친근한 매력 &nbsp;&nbsp; 진일보 | 전남일보",
-      "source": "GNews 에스파·成员"
-    },
-    {
       "title": "Song Review: aespa – Switchblade (ft. Ty Dolla $ign) - https://thebiaslist.com/",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPc2gtRVd3Q01CRE1jUUZlVWx6dzRFc01uTmN6eXJDa2JGM3IxbTBQRGtzdmNTblZxa0ZVaHhWdmI3ZmZLN2ppb1NISGp6UnB3Tnpya3NnWGtPWlRVbTQzZlFNaWJuZU1ua1cwbUU0STZuc1FKUGQ4bGlITEphRGU4STFoMkJkMDB5?oc=5",
       "date": "2026-08-04T07:00:00+00:00",
@@ -3190,13 +3071,6 @@
       "source": "GNews 英"
     },
     {
-      "title": "Weverse aespa Image - aespa 에스파 'KISS N TELL' MV Teaser Image 2 - Weverse",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5TektMV0ZRencxVmtpOEYxd3hSVVpOZUhrd2EzTEUwNFBUblpLaXJuV3VCc25xTTlWSW5YUjE5emxKckl5Xzc1am4xOEVFTEJoTTMtNA?oc=5",
-      "date": "2026-07-22T15:41:19+00:00",
-      "excerpt": "Weverse aespa Image - aespa 에스파 'KISS N TELL' MV Teaser Image 2 &nbsp;&nbsp; Weverse",
-      "source": "GNews 韩"
-    },
-    {
       "title": "aespa社区帖子 - 🍋 Single cd Winter - Weverse",
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9rQ2JXaDN2ODdaZkZhWWdLZGhKbHN4Z0g3Y2FVV2tPWUdkN0RpNXVydmVBanVuTmdLNDFUakpDYk5ydnBlcjNsdDRzT29MbTgxbEtiWGt5OTNUVGp0UFJSUHF6WQ?oc=5",
       "date": "2026-07-22T07:00:00+00:00",
@@ -3243,13 +3117,6 @@
       "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQSlVBVE5WU2hZNXQzMGVBSFFGT2VwdGdnX3lza19xNGJhSDE4ajhjZkxmb2ZBSFhtd0JQeHFTQ3hLbkpvaTdfbk44cWI4ZmZpajVsZFNEZ0RKMEtxWnRhT0F0UDdoTk1yc05nRV9sOW1ZV2htcE9MMUlTSGR1YVd2MEFia1NZM0E5LVNiR0NvSWNkY0tGbmROR3hIY9IBrwFBVV95cUxOd0ZlV0lpLU13Y2U1Q2haSm5zcVh1R3A4MTBTbGxQVVJvZUZldk5vd3hkVlRWMDVHWDg0ZlBGa3k2TGtldmM3T0RCT3JTZkxpM3QyUGkyUGt1R1JFZ3o1Q093U0U5R0hRZ0kxNUJsMDJwQ1FnUjJqeFdHR19YcGZyel9nT0dOOU91Y0ViOHhDek55UmlhNU9rZUxEMlR5UFdoT2drSEdKYjZhSDNMYnZR?oc=5",
       "date": "2026-07-16T07:00:00+00:00",
       "excerpt": "[사진]에스파 카리나, 미모가 극강 &nbsp;&nbsp; Chosunbiz",
-      "source": "GNews 에스파·成员"
-    },
-    {
-      "title": "에스파 지젤 뼈말라 복근에 배꼽 피어싱까지…\"생각보다 안 아팠다\" - 뉴시스",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE94Rm14OUo2ZG1vbFRHOVVLQ0JLZGQ3WFJEeDhXMThEZTk2Ql9heDRuLUR6bTNBZU9Fc0s5WjBDRG5NaXVnUngxdjZLT2hKY0YyeTNVNEJIOVN0d0NDMndRY1hwZkdTb2k4RzJQMEd1Uzd2NUtLVHZEeNIBeEFVX3lxTE94Rm14OUo2ZG1vbFRHOVVLQ0JLZGQ3WFJEeDhXMThEZTk2Ql9heDRuLUR6bTNBZU9Fc0s5WjBDRG5NaXVnUngxdjZLT2hKY0YyeTNVNEJIOVN0d0NDMndRY1hwZkdTb2k4RzJQMEd1Uzd2NUtLVHZEeA?oc=5",
-      "date": "2026-07-12T07:00:00+00:00",
-      "excerpt": "에스파 지젤 뼈말라 복근에 배꼽 피어싱까지…\"생각보다 안 아팠다\" &nbsp;&nbsp; 뉴시스",
       "source": "GNews 에스파·成员"
     },
     {
@@ -3470,6 +3337,13 @@
       "source": "GNews 英"
     },
     {
+      "title": "Aespa returns with broader sound, global collaborations on second LP 'Lemonade' - The Star",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNcXY3QXowTTA2NFRIQWg4cVp3alN6MHY2ckY5Y0ZRZy1namhPWDc3UUpvU2ZuWlphZ19TbHNXNzFDXzh1RHdLUkZGb25TSWptWHE5X0xJaTB6THRxM0Z6MmtNeWtaSmtLRnN6TXpDa3dpTTJKRENNeGNfTVVvanpkVDlETnBIRXBZdGY1S1dUWGY4QTJEbkFTYjNQeVNyU0QxOG02S2JZOEtJUE5vb0p2NDNGdWU1WXpvbW1DSzBsam5tQ2M0VG95ckdQajFzYmV3OE53WFNYejZKWU1t?oc=5",
+      "date": "2026-05-31T07:00:00+00:00",
+      "excerpt": "Aespa returns with broader sound, global collaborations on second LP 'Lemonade' &nbsp;&nbsp; The Star",
+      "source": "GNews 英"
+    },
+    {
       "title": "aespa新歌〈LEMONADE〉全球粉丝都被洗脑了！横扫19国冠军、MV不到24小时破千万观看 - KSD 韓星網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1MMERUZTdXem1hSXNJcGVaRHVMbjRybVJGNnNDS2RXcXE2SVpBc3h1b2Y1aFozekNHNWZBQk8tWjd2LVlVQ3ZiamRJdV9QZTRZNndHQXZuamTSAVdBVV95cUxNd19zeEtpZWJTbnFDZHp0M29rUUozSnV5NFFJbE1qdDRWOW0zSkFVT3B6SlNFQ0F5c0NXS2hKTFNoLWtHTU9SSWtpOVFWMU5LZVl4TW1URkE?oc=5",
       "date": "2026-05-30T07:00:00+00:00",
@@ -3537,6 +3411,13 @@
       "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9UMkYxdWx6d2hIZUkycDF6bkVHcDdIMndpY0xVeVZvOUZVcWxCaHZnR19FeG1lS2NadV8zdXc1MkZSd0tELWJ3ZGtpSlhIUQ?oc=5",
       "date": "2026-05-28T07:00:00+00:00",
       "excerpt": "[ET포토] 에스파 카리나, '매번 새로운 매력' &nbsp;&nbsp; 전자신문",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "[ET포토] 에스파 카리나, '레몬 향기나는 미모' - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9UdlNveGlLT3AwYTF3S0VuYzRiVHNpX1JsQlRRTTl5SmN1aTJ2d1dXbW41Z0xJMnV1SWpGRlhKeFJ1VEJiWjNWUlJGb2NXQQ?oc=5",
+      "date": "2026-05-28T07:00:00+00:00",
+      "excerpt": "[ET포토] 에스파 카리나, '레몬 향기나는 미모' &nbsp;&nbsp; 전자신문",
       "source": "GNews 에스파·成员"
     },
     {
@@ -3685,6 +3566,125 @@
       "date": "2026-04-30T07:00:00+00:00",
       "excerpt": "aespa’s NINGNING named Gucci global brand ambassador &nbsp;&nbsp; Bandwagon",
       "source": "GNews 成员"
+    },
+    {
+      "title": "NINGNING of aespa Named Global Ambassador of a Luxury Fashion Brand She ‘Grew Up Fascinated By’ - Billboard",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOOE5fOTA2OGRjWE8tQWFHM25GRUFrczJGZDItcHlHQXEtTlZWVkJadXJiMWZweWZqZTBvc1RtWDc3N2xPbVpzT3hzek9WQl9tWnQ2SWQ1WUJXQVRGa1c3b0ZxaGdSVWlxUDl0MXZ1ZmxCcW1zZ21EeWh3MFhUd2NaaXF4UWxTcEliTF9TVXhGU284MzNHc2sw?oc=5",
+      "date": "2026-04-29T07:00:00+00:00",
+      "excerpt": "NINGNING of aespa Named Global Ambassador of a Luxury Fashion Brand She ‘Grew Up Fascinated By’ &nbsp;&nbsp; Billboard",
+      "source": "GNews 成员"
+    },
+    {
+      "title": "'Just a hair change?' aespa’s Winter goes viral for ‘younger-than-ever’ airport look - The Korea Times",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNR1hNdzhxZWQ4cVdHbnQ4azJ3c0t3NmRNVGstekUwc1lDWVcxUF9VSmM2clMxUzNlRWl3R05tcV95YTBKTWpfNlZaRUpxR0lvbEJkWms2SXhxOVFMdC0wcjNESFllUGRHWkpqblFrSHR2QVNLdzd2N1NtREdqQjkzRWNsdm14YTdIbWhjU3hadWlzSlI0cHlOQXl5YzVYN3I1R2ZRVmw2dTg3bDl1TDdkdFVXWG1mbEM1LU1TZ1FpOVBVYjVncF9VcVRUWGxlQdIB0wFBVV95cUxNYkpWTFBiQlN5MzVBT253SFRXSWE1TVVfY1RfZC1GVHlSeTBNUzhJSEVISFlEeWhIY2ZTc3JTTks0Y0tqUW15cVQ4SlFSOHNIMTdnUTRIcUlQX3VXM1ozZ3Btb3dDN0dYb2FkYnlDb1VJc1hWZnlvREoydGswMWp0TGFCNVN6RmRhVFVFNk5sRlNHODU1Z1pKcG5WWFMwZFpqMHNZbkFYRDExVmNyRHNGTEctRnZsYUdNLU84RGhOTlMyWGFaQVFtMFpzazExSHpMSzlR?oc=5",
+      "date": "2026-04-25T07:00:00+00:00",
+      "excerpt": "'Just a hair change?' aespa’s Winter goes viral for ‘younger-than-ever’ airport look &nbsp;&nbsp; The Korea Times",
+      "source": "GNews 成员"
+    },
+    {
+      "title": "aespa Announces Second Studio Album ‘LEMONADE’ & Sets 2026–27 World Tour - Billboard",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPVDFLanBLcTdGQW53WmNuUXJYOWM2YjkwX2NHU0gzV1RfcHl1M1BHS1NiYWc1c2Z3NnZjdWxJQVVIc1UySzEzMTFnU2NzMVF1b2V1OUNxaUI3STRwcE5ZUXRDYUxYS3VpZlBWanBfT043Mm5RSFlHaGVBeUtSYmhBNmJCNzEtN1FjSlMxX1FKd0dMWFBHUVRWNHAwNE8?oc=5",
+      "date": "2026-04-21T07:00:00+00:00",
+      "excerpt": "aespa Announces Second Studio Album ‘LEMONADE’ & Sets 2026–27 World Tour &nbsp;&nbsp; Billboard",
+      "source": "GNews 英"
+    },
+    {
+      "title": "[공지] 2026-27 aespa LIVE TOUR 일정 안내 - Weverse",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1BajV1WFZCVWUxdWxXQnBIV0hmNmlEanUzdWhxS1NYZDJOREU2ZERwbXVCZEYzU3VqeFFyVUxTVjdvZXhoVXRCRml5eWFkSVJ3UVVJX3F3?oc=5",
+      "date": "2026-04-21T03:53:20+00:00",
+      "excerpt": "[공지] 2026-27 aespa LIVE TOUR 일정 안내 &nbsp;&nbsp; Weverse",
+      "source": "GNews 韩"
+    },
+    {
+      "title": "【aespa（エスパ）解説】メンバー詳細プロフィールやコンセプト、人気曲紹介から注目を集める理由に迫る。本人たちへのミニインタビューも - THE FIRST TIMES",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5KTlhnMDRaMFFqcHRMN3NxV0xjeVVYV0pYdjVVbHhnWHd4TGFpT29sNV9PY2xiam0zaW16QnljMktZNldwUExMWlhRVTdwOEhRY2pydUpvMHNkZUU?oc=5",
+      "date": "2026-04-16T07:00:00+00:00",
+      "excerpt": "【aespa（エスパ）解説】メンバー詳細プロフィールやコンセプト、人気曲紹介から注目を集める理由に迫る。本人たちへのミニインタビューも &nbsp;&nbsp; THE FIRST TIMES",
+      "source": "GNews 日"
+    },
+    {
+      "title": "에스파 카리나, 줄 이어폰 감성 [사진] - Daum",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFA3aUlhUHJlZVhieTZPQmtEQ1BUUDRnN001ZGpRUDdpNjNHZEd1dmtFTEFwMWg2NXF4YkV0RHNZcV9CenBsUDhoc25pZlM1TzA?oc=5",
+      "date": "2026-04-09T07:00:00+00:00",
+      "excerpt": "에스파 카리나, 줄 이어폰 감성 [사진] &nbsp;&nbsp; Daum",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "2026年4月商店公告 - PUBG: BATTLEGROUNDS",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5fS0JUQS1QX1hqRXh3LUFiVDhkNHhNaUQxTFVoZWtqMF8tR0lMcjltSThmSy04T3psNHF5UVZ0YW1DSWx5bGZtRUJuSDc?oc=5",
+      "date": "2026-04-07T09:28:32+00:00",
+      "excerpt": "2026年4月商店公告 &nbsp;&nbsp; PUBG: BATTLEGROUNDS",
+      "source": "GNews 中"
+    },
+    {
+      "title": "April Store Update 2026 - PUBG: BATTLEGROUNDS",
+      "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTFA1R3JOblQ1bG5MZXlmVFc0WG1wdWF0ai03anBndEhkeWxEdlU5LWpkc1BwN2FkaHFEQWhybG9wT2tOeEU?oc=5",
+      "date": "2026-04-06T07:00:00+00:00",
+      "excerpt": "April Store Update 2026 &nbsp;&nbsp; PUBG: BATTLEGROUNDS",
+      "source": "GNews 英"
+    },
+    {
+      "title": "『2026 aespa LIVE TOUR – SYNK : aeXIS LINE – in JAPAN [SPECIAL EDITION DOME TOUR]』オンラインくじ販売決定！ - aespa-official.jp",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1CUHVSTkNpM2VLcFE2TU82Y2Y1MXNLSjRNZXJLMTdFV3I5QlQtaFVUQmFFNXQxTWNuQmdkTFBPWGNad2RyVGg0eUhUc2pjemRMRnRqSmU5dGhJd0JSY0RpRlBtSExfZFBobV9abzlGZDhpZGJfaktF?oc=5",
+      "date": "2026-04-02T07:00:00+00:00",
+      "excerpt": "『2026 aespa LIVE TOUR – SYNK : aeXIS LINE – in JAPAN [SPECIAL EDITION DOME TOUR]』オンラインくじ販売決定！ &nbsp;&nbsp; aespa-official.jp",
+      "source": "GNews 日"
+    },
+    {
+      "title": "aespa初のドームツアー開催記念 ミニアルバム『Rich Man』ご予約・ご購入者様対象のラッキードローイベント開催決定！ - aespa-official.jp",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE4wMng2NHpJZzBEdTBsd1A1b0V1V0Q5Vm9DQ09IMGR6ZVpxYUNSMF9CTFBybUx2SVd2RXhfYWd2R2xEUnVqbTVlekdnODRCR2NqVzYtUnVmZnc1dWpVS2RhVU1LdDZoRmJMbmc?oc=5",
+      "date": "2026-03-25T07:00:00+00:00",
+      "excerpt": "aespa初のドームツアー開催記念 ミニアルバム『Rich Man』ご予約・ご購入者様対象のラッキードローイベント開催決定！ &nbsp;&nbsp; aespa-official.jp",
+      "source": "GNews 日"
+    },
+    {
+      "title": "[문화연예 플러스] 에스파 윈터, 유니세프·삼성서울병원에 2억 원 기부 - MBC 뉴스",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE04ZHNMdGpYT2EyelJ3Tjd3QmFuWDM5b2tKcDBzZ2hBUWl3YXRMV2c3cEFPRTRsdzJ4bndVNmltOFk5VUNka2dUTGlfTWlFRDBTUFlzaVhMdlZZRk5tT2hBeHp3LXN5LXVsRThrMHRacjBEaTd0UXl4cnpB?oc=5",
+      "date": "2026-03-20T07:00:00+00:00",
+      "excerpt": "[문화연예 플러스] 에스파 윈터, 유니세프·삼성서울병원에 2억 원 기부 &nbsp;&nbsp; MBC 뉴스",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "에스파 윈터, 삼성서울병원에 1억원 기부…\"일상 되찾을 수 있길\" - 연합뉴스TV",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE43MWNPSk4tVHNST1gtNmxTcExPYXItNXBnMDlndGJ6aUdvcHRwRHZfZktENW5pdmU1WW1tMklGaGlENGtaMm9yS3pqMzVrTmRGVzBKYThKVkM5NUpXOW9JN293bDFVemM?oc=5",
+      "date": "2026-03-19T07:00:00+00:00",
+      "excerpt": "에스파 윈터, 삼성서울병원에 1억원 기부…\"일상 되찾을 수 있길\" &nbsp;&nbsp; 연합뉴스TV",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "에스파 윈터, 삼성서울병원에 1억원 기부…\"조금이나마 힘 되길\" - 연합뉴스",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5BWFJ0eFdVOVZmQU81dGlUaUhUSUg3VWhSYkFnbTdIWU9uX2hJT1BMYkdUVnlHa1lacUtHQWVpZ1pmd3E1X1lZakY1STFsY0N6X2ppVS1MNnoxaEnSAWBBVV95cUxNUUoyc2lOcnJBR1psbUtRLWY3ZDdaT1ByUkgxM1VDZU8ybjFkaTN1NzlmOXJpb0ZwWHhtNzlZNExNeEdsczVtVHlWNXROZV9HWVVTNVY0ZjZWczJwNVJkU3Y?oc=5",
+      "date": "2026-03-19T07:00:00+00:00",
+      "excerpt": "에스파 윈터, 삼성서울병원에 1억원 기부…\"조금이나마 힘 되길\" &nbsp;&nbsp; 연합뉴스",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "에스파 닝닝이 가장 먼저 꺼낸 봄 아우터는 '바람막이'였습니다 - 엘르 코리아 │ ELLE KOREA",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE95NHRmOXY1czIwYkJQM2NIUk9YQmlZSk0taS1wZzR0WU4wbk1qS3pCS3lMbnFlRXRLVzNSRkh5dUVVUDIyTWFOWWtCX1NKVVU?oc=5",
+      "date": "2026-03-11T07:00:00+00:00",
+      "excerpt": "에스파 닝닝이 가장 먼저 꺼낸 봄 아우터는 '바람막이'였습니다 &nbsp;&nbsp; 엘르 코리아 │ ELLE KOREA",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "乐天免税店再次启用 aespa 为全球代言人！携手KICKFLIP、HEARTS2HEARTS完成最强 K-pop 代言阵容 - KSD 韓星網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9mNkdKR011NWdQbVozanEwWVRNZUtrZzhGOGJEcDFaN0pZMzJqUHpYYzZ3RHNwVU9MMVhwR203Um1tSF81MTlLNGdyYnBYVUZhNTFlaHRnZHrSAVdBVV95cUxOeGpraVF5RXJmRTBzVTVYM0FnU2dJdDlkVFQwaEpOWXFoanU5cmtrUEtqNUpuemhFamt5SHhOYWZWeFdBOEtkQmVlaTVEYUFjWndRNG12cDg?oc=5",
+      "date": "2026-03-09T07:00:00+00:00",
+      "excerpt": "乐天免税店再次启用 aespa 为全球代言人！携手KICKFLIP、HEARTS2HEARTS完成最强 K-pop 代言阵容 &nbsp;&nbsp; KSD 韓星網",
+      "source": "GNews 中"
+    },
+    {
+      "title": "[사진]에스파 윈터,'비현실적인 미모' - 조선일보",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOQy13eUhlam83ZmxDb0FRV2xySDBFd1hIaTctVlQzamg0ZU4yeUFzRHJBOE1TZXQ1b1NiVVZyRV9GTi1RMlVuM3ZUZnJMU3d0S0tpNnVJZjZyS1FPVW1oUzNQNTFKb2gxTWtmYnEtYUJxaF91UURMakdQekozSURlT0JMS0UzRWVRVkNzVlh5dC1QS1BGOFpZ?oc=5",
+      "date": "2026-03-06T08:00:00+00:00",
+      "excerpt": "[사진]에스파 윈터,'비현실적인 미모' &nbsp;&nbsp; 조선일보",
+      "source": "GNews 에스파·成员"
+    },
+    {
+      "title": "[사진]에스파 윈터,'눈부신 아름다움' - 조선일보",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPalBad1p6eXBrc1k0Mk1ZQVVEdWZvRVNJazV6QkRvUS1vNlhNSm9RdTV4RmlkWUtXZngzYVFKaWt5UmJleGdRYW9tVm9xakdlX2ktZ29hUkZrQ1pIV3RwYmhvaU02NExuRlo0UjdLTHpMczdPNHR2d25nck5wcWR3SGdaYjRwOV9FYUxOSER6dGVGbW9MV3B3?oc=5",
+      "date": "2026-03-06T08:00:00+00:00",
+      "excerpt": "[사진]에스파 윈터,'눈부신 아름다움' &nbsp;&nbsp; 조선일보",
+      "source": "GNews 에스파·成员"
     }
   ]
 }
